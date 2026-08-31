@@ -13,23 +13,23 @@ navbar:
     - text: "Lab journal"
       menu:
       - text: "Week 1"
-        href: week1.Rmd
+        href: week1.html
       - text: "Week 2"
-        href: week2.Rmd
+        href: week2.html
       - text: "Week 3"
-        href: week3.Rmd
+        href: week3.html
       - text: "Week 4"
-        href: week4.Rmd
+        href: week4.html
       - text: "Week 5"
-        href: week5.Rmd
+        href: week5.html
       - text: "Week 6"
-        href: week6.Rmd
+        href: week6.html
       - text: "Week 7"
-        href: week7.Rmd
+        href: week7.html
     - text: "Final assignment"
       menu:
       - text: "Introduction"
-        href: introduction.Rmd
+        href: introduction.html
 
 
   right:
