@@ -10,12 +10,26 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "My journal"
+    - text: "Lab journal"
       menu:
       - text: "Week 1"
         href: week1.Rmd
-        
-        # here, other .Rmds can be added
+      - text: "Week 2"
+        href: week2.Rmd
+      - text: "Week 3"
+        href: week3.Rmd
+      - text: "Week 4"
+        href: week4.Rmd
+      - text: "Week 5"
+        href: week5.Rmd
+      - text: "Week 6"
+        href: week6.Rmd
+      - text: "Week 7"
+        href: week7.Rmd
+    - text: "Final assignment"
+      menu:
+      - text: "Introduction"
+        href: introduction.Rmd
 
 
   right:
