@@ -5,3 +5,91 @@ bibliography: references.bib
 ---
 
 # Week 1
+## Tutorial SNASS book
+Setting up
+```{r}
+rm(list = ls())
+
+#install.packages("installr")
+require(installr) 
+#install.packages("foreign")
+require(foreign)
+require(tidyverse)
+updateR()
+
+setwd("C:/Users/laure/OneDrive/Radboud/Social networks")
+getwd()
+```
+
+Loading datasets
+``` {r}
+cv08 <- foreign::read.spss("Cultural_Changes_2008.sav", use.value.labels = T, to.data.frame = T)
+cv10 <- foreign::read.spss("Cultural_Changes_2010.sav", use.value.labels = T, to.data.frame = T)
+
+cv08_nolab <- foreign::read.spss("Cultural_Changes_2008.sav", use.value.labels = F, to.data.frame = T)
+cv10_nolab <- foreign::read.spss("Cultural_Changes_2010.sav", use.value.labels = F, to.data.frame = T)
+
+cv08_haven <- haven::read_spss("Cultural_Changes_2008.sav")
+cv10_haven <- haven::read_spss("Cultural_Changes_2010.sav")
+```
+
+Inspect the data
+```{r}
+str(cv08)
+str(cv08_nolab)
+str(cv08_haven)
+
+str(cv08$lftop)
+str(cv08_haven$lftop)
+
+attributes(cv08$lftop)
+attributes(cv08_nolab$lftop)
+attributes(cv08_haven$lftop)
+
+names(cv08_haven)
+summary(cv08_haven)
+head(cv08_haven)
+fix(cv08)
+View(cv08_haven)
+```
+
+Assign missing values (in base)
+```{r}
+str(cv08_haven$lftop)
+summary(cv08_haven$lftop)
+attr(cv08_haven$lftop, "labels")
+table(cv08_haven$lftop, useNA = "always")
+
+cv08$lftop_new <- cv08$lftop
+cv08$lftop_new[cv08$lftop_new == "Onbekend"] <- NA
+
+table(cv08$lftop_new, useNA = "always")
+levels(cv08$lftop_new)
+
+cv08$agen <- as.numeric(as.character(cv08$lftop_new))
+table(cv08$agen, useNA = "always")
+
+str(cv08$agen)
+```
+
+Assign missing values (in tidy)
+```{r}
+#cv08_haven <- mutate(cv08_haven, lftop_new = lftop)
+#cv08_haven$lftop_new <- na_if(cv08_haven$lftop_new, 99)
+
+#OR (more quickly)
+
+cv08_haven <- mutate(cv08_haven, lftop_new = na_if(lftop, 99))
+
+table(cv08_haven$lftop_new, useNA = "always")
+```
+Recoding variables (in base)
+```{r}
+levels(cv08$var006n)
+table(cv08$var006n, useNA = "always")
+
+cv08$educn <- as.numeric(cv08$var006n)
+table(cv08$educn, useNA = "always")
+
+cv08$educ3 <- NA
+```
