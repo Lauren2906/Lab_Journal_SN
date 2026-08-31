@@ -1,0 +1,7 @@
+---
+title: "Lab journal social networks"
+author: "Lauren Dirix"
+bibliography: references.bib
+---
+
+# Week 3 - XXX
