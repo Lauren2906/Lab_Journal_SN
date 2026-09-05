@@ -17,8 +17,8 @@ require(tidyverse)
 #updateR()
 ```
 
-Loading datasets
-``` {r}
+Loading data sets
+``` {r, warning = FALSE}
 cv08 <- foreign::read.spss("Cultural_Changes_2008.sav", use.value.labels = T, to.data.frame = T)
 cv10 <- foreign::read.spss("Cultural_Changes_2010.sav", use.value.labels = T, to.data.frame = T)
 
@@ -30,11 +30,13 @@ cv10_haven <- haven::read_spss("Cultural_Changes_2010.sav")
 ```
 
 Inspect the data
-```{r}
+```{r, include = FALSE}
 str(cv08)
 str(cv08_nolab)
 str(cv08_haven)
+```
 
+```{r}
 str(cv08$lftop)
 str(cv08_haven$lftop)
 
@@ -80,6 +82,8 @@ cv08_haven <- mutate(cv08_haven, lftop_new = na_if(lftop, 99))
 
 table(cv08_haven$lftop_new, useNA = "always")
 ```
+
+
 ## A8 - Recoding variables 
 ### In base
 ```{r}
