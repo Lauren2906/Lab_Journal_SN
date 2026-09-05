@@ -1,6 +1,6 @@
 name: "Example Lab Journal"
 author: 
-  - 'Your Name'
+  - 'Lauren Dirix'
 output_dir: "docs"
 exclude: 
   - "data"

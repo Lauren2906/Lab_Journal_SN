@@ -1,5 +1,5 @@
 ---
-title: "Lab journal social networks"
+title: "Appendix A SNASS"
 author: "Lauren Dirix"
 bibliography: references.bib
 ---
@@ -14,7 +14,7 @@ require(installr)
 #install.packages("foreign")
 require(foreign)
 require(tidyverse)
-updateR()
+#updateR()
 ```
 
 Loading datasets
@@ -198,5 +198,283 @@ cv08_haven <- cv08_haven %>%
   dplyr:: select(-int_mean_temp, -nmis)
 ```
 
-## Merging data files
+## A10 - Merging data files
 ### In base
+1. Selecting the variables we want to keep
+```{r}
+cv08_sel <- cv08[, c("we_id", "lftop", "geslacht", "var006n", "v401", "landd")]
+cv10_sel <- cv10[, c("Sleutel", "var002", "var001", "Vltoplop", "V401", "Landd")]
+```
+
+2. Make variables consistent
+```{r}
+names(cv08_sel) <- names(cv10_sel) <- c("id", "age", "sex", "educ", "health", "region")
+summary(cv08_sel)
+summary(cv10_sel)
+
+#ID
+cv08_sel$id <- as.numeric(as.character(cv08_sel$id))
+cv10_sel$id <- as.numeric(as.character(cv10_sel$id))
+
+#Age
+cv08_sel$age <- as.numeric(as.character(cv08_sel$age))
+cv10_sel$age <- as.numeric(as.character(cv10_sel$age))
+
+#Sex
+table(cv08_sel$sex, useNA = "always")
+table(cv10_sel$sex, useNA = "always")
+
+cv08_sel$sexn <- as.numeric(cv08_sel$sex)
+table(cv08_sel$sexn, useNA = "always")
+cv08_sel$men <- ifelse(cv08_sel$sexn == 2, 1, 0)
+cv08_sel$men <- ifelse(cv08_sel$sexn == 1, NA, cv08_sel$men)
+table(cv08_sel$men, useNA = "always")
+
+cv10_sel$sexn <- as.numeric(cv10_sel$sex)
+table(cv10_sel$sexn, useNA = "always")
+cv10_sel$men <- ifelse(cv10_sel$sexn == 2, 1, 0)
+table(cv10_sel$men, useNA = "always")
+
+#Education
+levels(cv08_sel$educ)
+levels(cv10_sel$educ)
+table(cv08_sel$educ, useNA= "always")
+table(cv10_sel$educ, useNA= "always")
+
+cv08_sel$educn <- as.numeric(cv08_sel$educ)
+table(cv08_sel$educn)
+
+cv08_sel$educ3 <- NA
+cv08_sel$educ3[cv08_sel$educn == 2 | cv08_sel$educn == 3] <- 1
+cv08_sel$educ3[cv08_sel$educn > 3 & cv08_sel$educn < 8] <- 2
+cv08_sel$educ3[cv08_sel$educn > 7 & cv08_sel$educn < 11] <- 3
+table(cv08_sel$educ3, useNA = "always")
+
+cv10_sel$educn <- as.numeric(cv10_sel$educ)
+table(cv10_sel$educn)
+
+cv10_sel$educ3 <- NA
+cv10_sel$educ3[cv10_sel$educn < 3] <- 1
+cv10_sel$educ3[cv10_sel$educn > 2 & cv10_sel$educn < 6] <- 2
+cv10_sel$educ3[cv10_sel$educn == 6] <- 3
+table(cv10_sel$educ3, useNA = "always")
+```
+3. Merge
+```{r}
+cv08_sel$wave <- 2008
+cv10_sel$wave <- 2010
+
+cv08_sel$id2 <- rank(cv08_sel$id)
+cv10_sel$id2 <- rank(cv10_sel$id)
+
+#clean up data sets
+cv08_sel <- cv08_sel[, c("id", "id2", "age", "men", "educ3", "health", "region", "wave")]
+cv10_sel <- cv10_sel[, c("id", "id2", "age", "men", "educ3", "health", "region", "wave")]
+
+summary(cv08_sel)
+summary(cv10_sel)
+
+#Long format
+cv_tot <- rbind(cv08_sel, cv10_sel)
+summary(cv_tot)
+
+#Wide format
+cv_tot_panel <- merge(cv08_sel, cv10_sel, all = TRUE, by = "id2")
+head(cv_tot_panel)
+```
+
+### In tidy
+```{r}
+cv08_sel <- cv08_haven %>%
+  dplyr:: select(c("we_id", "lftop", "geslacht", "var006n", "v401", "landd"))
+cv10_sel <- cv10_haven %>%
+  dplyr:: select(c("Sleutel", "var002", "var001", "Vltoplop", "V401", "Landd"))
+
+names(cv08_sel) <- names(cv10_sel) <- c("id", "age", "sex", "educ", "health", "region")
+
+cv08_sel <- cv08_sel %>%
+    mutate(age = na_if(age, 99))
+cv10_sel <- cv10_sel %>%
+    mutate(age = na_if(age, 99))
+
+cv08_sel <- cv08_sel %>%
+    mutate(men = recode(sex, `9` = -9, M = 1, V = 0, .keep_value_labels = FALSE), 
+      men = na_if(men, -9), men = labelled(men, c(man = 1, vrouw = 0)))
+cv10_sel <- cv10_sel %>%
+    mutate(men = recode(sex, `2` = 0, .keep_value_labels = FALSE), men = labelled(men, 
+      c(man = 1, vrouw = 0)))
+
+cv08_sel <- cv08_sel %>%
+    mutate(educ3 = recode(educ, `-3` = -9, `-1` = 1, `1` = 1, `2` = 2, `3` = 2, `4` = 2, `5` = 2, 
+      `6` = 3, `7` = 3, `8` = 3, `10` = -9, .keep_value_labels = FALSE), educ3 = na_if(educ3, -9), 
+      educ3 = factor(educ3, levels = c(1, 2, 3), labels = c("primary", "secondary", "tertiary")))
+
+cv10_sel <- cv10_sel %>%
+    mutate(educ3 = recode(educ, `-1` = 1, `1` = 1, `2` = 2, `3` = 2, `4` = 2, `5` = 3, `10` = -9, 
+      .keep_value_labels = FALSE), educ3 = na_if(educ3, -9), educ3 = factor(educ3, levels = c(1, 2,
+      3), labels = c("primary", "secondary", "tertiary")))
+
+cv08_sel$wave <- 2008
+cv10_sel$wave <- 2010
+
+cv08_sel$id2 <- rank(cv08_sel$id)
+cv10_sel$id2 <- rank(cv10_sel$id)
+
+cv08_sel <- cv08_sel %>%
+    dplyr::select(c("id", "id2", "age", "men", "educ3", "health", "region", "wave"))
+
+cv10_sel <- cv10_sel %>%
+    dplyr::select(c("id", "id2", "age", "men", "educ3", "health", "region", "wave"))
+
+#Merge long
+cv_tot_tidy <- cv08_sel %>%
+    add_row(cv10_sel)
+
+summary(cv_tot_tidy)
+
+#Merge wide
+cv_tot_panel_tidy <- full_join(cv08_sel, cv10_sel, by = "id2", suffix = c(".2008", ".2010"))
+```
+
+## A11 - Aggregate data
+### In base
+```{r}
+age_region <- aggregate(cv_tot$age, by = list(cv_tot$region), FUN = mean)
+head(age_region)
+
+age_region <- aggregate(cv_tot$age, by = list(cv_tot$region), FUN = mean, na.rm = TRUE)
+head(age_region)
+names(age_region) <- c("region", "age_region")
+age_region
+
+cv_total <- merge(cv_tot, age_region, by = "region", all.x = TRUE)
+```
+
+### In tidy
+```{r}
+age_region <- group_by(cv_tot_tidy, region)
+age_region <- mutate(age_region, mean = mean(age, na.rm = TRUE))
+
+# Or shorter:
+cv_total_tidy <- cv_tot_tidy %>%
+    group_by(region) %>%
+    mutate(age_region = mean(age, na.rm = TRUE)) %>%
+    ungroup()
+```
+
+## A12 - Missing values
+### In base
+```{r}
+cv_total$health[cv_total$health == "Weigert"] <- NA
+cv_total$healthn <- as.numeric(cv_total$health) - 4
+table(cv_total$health, useNA = "always")
+table(cv_total$healthn, useNA = "always")
+```
+Listwise deletion
+```{r}
+summary(cv_total)
+model2 <- lm(as.numeric(healthn) ~ men + age + as.factor(educ3) + as.factor(region), data = cv_total)
+summary(model2)
+```
+Replacing missing values
+```{r}
+# Categorical variables (add NA category)
+cv_total$men2 <- ifelse(is.na(cv_total$men), 2, cv_total$men)
+summary(cv_total$men2)
+
+cv_total$educ3b <- ifelse(is.na(cv_total$educ3), 4, cv_total$educ3)
+summary(cv_total$educ3b)
+
+# Continuous variables (input the mean)
+cv_total$age2 <- ifelse(is.na(cv_total$age), mean(cv_total$age, na.rm = TRUE), cv_total$age)
+cv_total$age_mis <- ifelse(is.na(cv_total$age), 1, 0)
+summary(cv_total$age2)
+table(cv_total$age_mis)
+
+model3 <- lm(healthn ~ as.factor(men2) + age2 + age_mis + as.factor(educ3b) + as.factor(region), data = cv_total)
+summary(model3)
+```
+Imputing missing values
+```{r}
+# Reset data set
+cv_total <- cv_total[, c("id", "id2", "age", "men", "educ3", "health", "region", "wave")]
+cv_total$health[cv_total$health == "Weigert"] <- NA
+cv_total$health <- as.numeric(cv_total$health) - 4
+
+cv_total$men <- as.factor(cv_total$men)
+cv_total$educ3 <- as.factor(cv_total$educ3)
+
+# install.packages("mice")
+require(mice)
+mice:: md.pattern(cv_total)
+
+imp <- mice(data = cv_total, method = c("", "", "cart", "logreg", "polr", "cart", "", ""))
+attributes(imp)
+pred <- imp$pred
+pred[, "id"] <- 0
+pred[, "id2"] <- 0
+pred[, "wave"] <- 0
+pred
+
+imp <- mice(data = cv_total, method = c("", "", "cart", "logreg", "polr", "cart", "", ""), pred = pred, seed = 45622)
+
+summary(cv_total)
+summary(complete(imp))
+
+plot(imp)
+
+model_imp <- with(imp, lm(as.numeric(health) ~ men + age + educ3 + region))
+pool_model_imp <- pool(model_imp)
+summary(pool_model_imp)
+```
+### In tidy
+```{r}
+cv_total_tidy <- cv_total_tidy %>%
+    mutate(health = na_if(health, -2), healthn = as.numeric(health) - 4)
+```
+
+Listwise deletion
+```{r}
+model2 <- cv_total_tidy %>%
+    mutate(across(c(educ3, region), as.factor)) %>%
+    lm(formula = healthn ~ men + age + educ3 + region) %>%
+    summary()
+
+model2
+```
+Replacing missing values
+```{r}
+cv_total_tidy2 <- cv_total_tidy %>%
+    mutate(across(everything(), as.numeric), men2 = replace_na(men, 2), educ3b = replace_na(educ3,
+    4), age2 = replace_na(age, mean(age, na.rm = TRUE)), age_mis = ifelse(is.na(age), 1, 0))
+
+model3 <- cv_total_tidy2 %>%
+    mutate_at(c("men2", "educ3b", "region"), as.factor) %>%
+    lm(formula = healthn ~ men2 + age2 + age_mis + educ3b + region) %>%
+    summary()
+
+model3
+```
+Imputing missing values
+```{r}
+pred <- cv_total_tidy %>%
+  dplyr::select(c("id", "id2", "age", "men", "educ3", "health", "region", "wave")) %>%
+  mutate_all(as.numeric) %>%
+  mutate_at(c("men", "educ3"), as.factor) %>%
+  mice(method = c("", "", "cart", "logreg", "polr", "cart", "", "")) %>%
+  unclass() %>% 
+  pluck("predictorMatrix") %>%
+  as.data.frame() %>% 
+  mutate_at(c("id", "id2", "age"), funs(recode(1, 0))) %>% 
+  as.matrix()
+
+model_imp <- cv_total_tidy %>%
+  dplyr::select(c("id", "id2", "age", "men", "educ3", "health", "region", "wave")) %>%
+  mutate_all(as.numeric) %>%
+  mutate_at(c("men", "educ3"), as.factor) %>%
+  mice(method = c("", "", "cart", "logreg", "polr", "cart", "", ""), pred = pred, seed = 45622) %>%
+  with(lm(as.numeric(health) ~ men + age + educ3 + region)) %>%
+  pool()
+
+summary(model_imp)
+```
