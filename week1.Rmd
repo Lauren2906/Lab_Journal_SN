@@ -1,10 +1,10 @@
 ---
-title: "Appendix A SNASS"
+title: "Week 1"
 author: "Lauren Dirix"
 bibliography: references.bib
 ---
 
-# Tutorial SNASS book
+# SNASS Appendix A
 ## A1 through A6 - Setting up
 ```{r}
 rm(list = ls())
