@@ -9,84 +9,82 @@ editor_options:
 
 # Preparation before class
 
+Today I will be talking about two papers utilising a social network
+perspective with regards to civic participation, and afterwards I have a
+short section on my own ideas for research questions.
+
+While both papers are on very similar topics, they operationalise civic
+action differently. They also measure networks in different ways.
+
 ## Article 1
 
 **Service, activism and friendships in high school: A longitudinal
 social network analysis of peer influence and critical beliefs – Wegemer
 (2022)**
 
-[Main question]{.underline}: To what extent do peer influence and
-perceptions of inequities promote civic behaviour at a predominantly
-low-income Latinx high school?
+The first paper I chose is “service, activism and friendships in high
+school: A longitudinal social network analysis of peer influence and
+critical beliefs” by Wegemer (2022). This paper tries to answer the
+question whether peer influence and perceptions of inequities promote
+civic behaviour at a predominantly low-income Latinx high school.
+Especially the first part of this question is interesting in light of
+this course, as for the other one the author does not explicitly use a
+social network perspective. But before we get into the methodology,
+first a quick explanation of how the author measures civic behaviour.
 
-[Main concepts]{.underline}:
+The author distinguishes between two aspects of civic behaviour: Service
+and activism. Service is measured by asking how often the respondents
+volunteer or organise charitable events. These are activities that are
+explicitly meant to help and build the community. The second aspect is
+activism, which is more politically oriented. This is measured by asking
+how often the respondents, for example, campaign for specific issues.
+The author analyses these two aspects separately.
 
-\- Service: Volunteering, organising charitable events and participating
-in the student government
+![](images/clipboard-1385273335.png)
 
-\- Activism: Participating in direct actions, campaigning for issues,
-and involvement in social justice groups
+As for the data, for this paper they collected longitudinal social
+network data. The respondents were asked to fill out a survey on two
+time points: March 2019 and March 2020. In the end 72% of the students
+enrolled at both time points also filled out the survey both times, and
+were thus used for this research. In order to collect the network data,
+the researcher asked every respondent to give the first and last names
+of up to the five closest friends. This way the author created a
+socionet of all friendship ties in the school.
 
-\- Perceptions of inequities: Whether students believe that members of
-certain ethnic groups, people in poverty, women or LGBTQIA+ people have
-fewer chances to get ahead in society
+For the analysis the author used a stochastic actor based model,
+employing RSiena. This was not really explained any further, so I do not
+know what this means exactly. But I think that that is what this course
+is for.
 
-[Hypotheses:]{.underline}
+![](images/clipboard-2655073561.png)
 
-1\. Students’ service, activism and perceptions of inequities become
-more similar to the average level of their friends (socialisation
-effect)
+For this paper I struggled to find the ‘theoretical consequences’ of
+using a social network perspective. The paper did not have a very
+extensive theory section, and was mostly reporting on previous empirical
+findings. While the authors do mention some theory, it is not completely
+clear how they deduced the specific hypotheses from this theory.
+Nonetheless, in the hypotheses concerning peer influence, there is a
+clear social network perspective. The first hypothesis the author tested
+was whether students’ become more similar in both their behaviour
+(service and activism) and attitudes (perceptions of inequities) to
+their peers. Interestingly, only ego’s service behaviour was affected by
+a students’ network. The author argues that this is potentially because
+of the opportunities that the school offers with regards to service
+behaviour, where it is facilitated to start for example volunteering.
+This facilitation is not happening for activism behaviour.
 
-2\. This socialisation effect is greater for service than for activism
-and perceptions of inequities
+This explanation of facilitation by the school is also why the second
+hypothesis expected for the socialisation effect to be greater for
+service than for activism and perceptions of inequities. As there is no
+effect of activism or perceptions, and there is an effect of service,
+this is kind of inherently found.
 
-3\. Students’ perceptions of inequities predict increased participation
-in activism over time, and vice versa (participation in activism predict
-increased perceptions of inequities)
+The last two hypotheses don’t take a specific social network
+perspective, so I’ll just quickly go through them, as they’re not as
+relevant for this course. So I put them, and the results, up on the
+screen, but I’ll skip them for now.
 
-4\. There is no relation between perceptions of inequities and service
-behaviour
-
-[Data:]{.underline}
-
-\- A survey of all students enrolled at a southern Californian high
-school (socionet), at two time points: March 2019 and March 2020
-
-\- Sample: All students who were enrolled (N = 354) and completed the
-survey in both years (N = 272, 72%)
-
-\- Network data: o Each respondent was asked to provide the first and
-last names of their five closest friends at the high school
-
-[Analysis method:]{.underline}
-
-\- A stochastic actor based model (SABM), using RSiena
-
-[Results]{.underline}:
-
-1\. Students’ service, activism and perceptions of inequities become
-more similar to the average level of their friends (socialisation
-effect)
-
-\- Evidence for civic socialisation for service actions, but not for
-activism and perceptions of inequities
-
-2\. This socialisation effect is greater for service than for activism
-and perceptions of inequities
-
-\- There is no effect of activism and perceptions of inequities
-
-3\. Students’ perceptions of inequities predict increased participation
-in activism over time, and vice versa (participation in activism predict
-increased perceptions of inequities)
-
-\- Perceptions of inequities do increase participation in activism, the
-effect the other way around is not found
-
-4\. There is no relation between perceptions of inequities and service
-behaviour
-
-\- Service and activism do not predict each other
+![](images/clipboard-2681998945.png)
 
 ## Article 2
 
@@ -94,111 +92,97 @@ behaviour
 adolescent social connectedness and civic engagement – Oosterhoff et al
 (2021)**
 
-[Main question]{.underline}: How is social connectedness associated with
-civic engagement among early adolescents? How does this relationship
-differ across gender and grade?
+The second article I want to talk about is “civic development within the
+peer context: Associations between early adolescent social connectedness
+and civic engagement” by Oosterhoff et al (2021). This paper tries to
+answer how social connectedness is associated with civic engagement in
+early adolescents, and whether this relationship differs across gender
+and grade (age). Again, I’ll start by explaining what these authors mean
+by civic engagement. They measured and analysed five separate aspects of
+civic engagements: (1) volunteering, (2) political engagement, (3)
+environmentalism, (4) civic efficacy, and (5) social responsibility
+values. Here we can see that there is a slight difference with the
+previous paper, where for example volunteering was part of the measure
+for service, it is its own category in this paper.
 
-[Main concepts]{.underline}:
+As for social connectedness, the authors again use five measures: (1)
+popularity, or how many in coming ties someone has, (2) activeness, or
+how many out going ties someone has, (3) reciprocity, or how often an
+outgoing tie is met with an in coming tie, (4) betweenness, or with how
+many separate peer groups someone is connected and (5) eigenvector, or
+how popular your friends are.
 
-\- Different elements of civic engagement are measured separately:
+![](images/clipboard-4285275461.png)
 
-- Volunteering
+As for the data, this paper again looks at school-level data. This time
+the authors used a cross-sectional design, where they looked at all
+6^th^ through 8^th^ grade students. 85% of all sampled students
+responded. The authors provided the respondents with a list of all
+students in 6^th^ through 8^th^ grade, and asked them to pick up to
+seven people with whom they spend the most time. After that the
+respondents were asked to rate how much they like spending time with
+that person. Thus, this paper is able to take the kind of relationship
+into account, although they only utilise the positive ties with other
+people, mirroring the previous article where only friends were seen as
+ties.
 
-- Political engagement
+For the analysis this paper used regression analyses, using suite in R,
+which again, I don’t know what that means.
 
-- Environmentalism
+![](images/clipboard-3893724558.png)
 
-- Civic efficacy
+The results of this paper are, as the authors themselves say, quite
+‘nuanced’. Because the authors analysed all aspects of social
+connectedness and civil engagement separately, there are a lot of
+different relations, some of which do have significant results, some of
+which don’t. I put the results up on the slides, but I’ll mention the
+most important ones.
 
-- Social responsibility values
+Youth who mentioned having more ties (active), have a higher civic
+efficacy. This was not found for any of the other measures of social
+connectedness. Due to the cross-sectional design, it is impossible to
+determine whether having more out-going ties leads to higher efficacy,
+or the other way around. Interestingly, and contrary to the expectation,
+youth who have lower betweenness and eigenvector were more engaged in
+political behaviour. As the relationship between any measure of social
+connectedness and volunteering/ social responsibility was not found, the
+moderation hypothesis that this would be stronger for girls was also not
+found. And as you can see there are some measures of social
+connectedness that are more strongly related to some measures of civic
+engagement for boys than for girls and for younger people than for older
+people, but it is only on very specific relationships.
 
-\- Social connectedness:
+![](images/clipboard-2459023051.png)
 
-- Popularity, active, reciprocity, connections to multiple peer groups,
-  more popular friends
-
-[Hypotheses:]{.underline}
-
-1\. Youth who are more socially connected, have higher levels of civic
-engagement
-
-2\. Social connectedness is more strongly associated with volunteering
-and social responsibility for girls than for boys
-
-3\. Social connectedness is more strongly associated with political
-engagement for boys than for girls
-
-4\. Social connectedness is more strongly associated with civic
-engagement for older youth than for younger youth
-
-[Data]{.underline}:
-
-\- A survey of all students in 6th through 8th grade from a middle
-school in the northwestern US
-
-\- Sample: All 250 students, of which 213 (85%) actually participated
-
-\- Network data:
-
-- Each respondent could identify up to 7 people with whom they spend the
-  most time by selecting the names from a pre-set list
-
-- After selecting, for each person they were asked to rate how much they
-  like spending time with that person
-
-[Analysis]{.underline}:
-
-\- Regression analyses, using the package suite in R
-
-[Results]{.underline}:
-
-1\. Youth who are more socially connected, have higher levels of civic
-engagement
-
-- Active youths have a higher civic efficacy; Popularity, reciprocity,
-  betweenness and eigenvector were not related to civic efficacy
-
-- No measure of social connectedness is related to volunteering,
-  environmentalism or social responsibility values
-
-- Youths with lower betweenness and eigenvector are more engaged in
-  political behaviour
-
-2\. Social connectedness is more strongly associated with volunteering
-and social responsibility for girls than for boys
-
-- Is not found
-
-3\. Social connectedness is more strongly associated with political
-engagement for boys than for girls
-
-- Greater popularity is associated with higher political engagement for
-  boys, but not for girls
-
-4\. Social connectedness is more strongly associated with civic
-engagement for older youth than for younger youth
-
-- The association between betweenness and environmentalism is stronger
-  for grade 6th than for grade 7 and 8
+![](images/clipboard-731510198.png)
 
 ## My own topic
 
-[Macro, descriptive question:]{.underline}
+Lastly, I will quickly talk about my own topic. I struggled a little bit
+with what I wanted to do, and how I wanted to measure, especially
+because I don’t really know what is or isn’t possible with social
+network analysis/ within this course. But this is a rough first idea of
+what I find interesting.
 
-Does positive peer influence affect youths’ political participation
-behaviour?
+As an outcome I would be interested to look into political
+participation, but I have not yet decided what kind specifically. I
+think this depends partly on the dataset, as for example the age matters
+a lot for whether you can measure things like voting. At first I wanted
+to do something like participation in protests, but I am afraid that
+this is too niche for it to really show up in (relatively small-N)
+network data. On the macro level, I would thus like to answer how
+positive peer influence affects youths’ political participation.
 
-![](images/clipboard-2372154716.png)
+![](images/clipboard-860101292.png)
 
-[Micro, explanatory question:]{.underline}
+For the micro explanatory question I would like to answer *why* positive
+peer influence would affect political participation. Specifically I
+would like to see whether youth becomes more similar to each other, if
+they are connected. I would especially like to see whether people become
+more similar, or whether one person becomes more like the other person.
 
-Why does positive peer influence affect youths’ political participation
-/ is there positive influence in friendship groups, where peers become
-more similar to each other with regards to the degree of political
-participation?
+![](images/clipboard-4172293093.png)
 
-![](images/clipboard-1125137935.png)
+So this would end up with a conceptual model like this
 
-Put together:
-
-![](images/clipboard-2047913143.png)
+![](images/clipboard-634570693.png)
