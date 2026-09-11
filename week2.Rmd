@@ -186,3 +186,59 @@ more similar, or whether one person becomes more like the other person.
 So this would end up with a conceptual model like this
 
 ![](images/clipboard-634570693.png)
+
+# During class
+```{r}
+#install.packages("RSiena")
+#install.packages("igraph")
+require(RSiena)
+require(igraph)
+```
+
+Trying to figure out the descriptive statistics of a network data set
+```{r}
+s501
+view(s501)
+
+graph <- graph_from_data_frame(s501)
+plot(graph)
+
+graph2 <- graph_from_adjacency_matrix(s501, mode = "undirected")
+plot(graph2)
+
+graph3 <- graph_from_adjacency_matrix(s501, mode = "directed")
+plot(graph3)
+
+graph4 <- graph_from_adjacency_matrix(s501)
+plot(graph4)
+```
+What we can tell from this, is that there are both directed and undirected ties in this network, visually it seems like there are more undirected ties. 
+
+```{r}
+between <- betweenness(
+  graph4,
+  v = V(graph4),
+  directed = TRUE,
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+)
+
+between
+plot(between)
+```
+
+Looking at macro segregation on drinking behaviour
+```{r}
+friend.data.w1 <- s501
+drink <- s50a
+
+# install.packages("sna")
+library("sna")
+
+net1 <- network::as.network(friend.data.w1)
+snam1 <- sna::nacf(net1, drink[, 1], type = "moran", neighborhood.type = "out", demean = TRUE)
+
+snam1[2]
+view(drink)
+```

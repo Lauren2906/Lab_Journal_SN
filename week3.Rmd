@@ -1,7 +1,66 @@
 ---
-title: "Lab journal social networks"
+title: "Week 3"
 author: "Lauren Dirix"
 bibliography: references.bib
 ---
 
-# Week 3 - XXX
+# Preparation before class
+
+## Adjusting my research questions
+
+My descriptive, macro, question was: "Does positive peer influence affect youths' political participation?" After our discussion in class, I realise that this isn't really a descriptive question, as it is about a relationship between two variables. So I will adjust my research question to be *actually* descriptive, at least I hope so. Also, with an eye on the available data, I have decided to slightly adjust my topic. Rather than looking at political participation, I will look at civic engagement. My adjusted research question is: *Are students who are connected to each other more similar with regards to civic engagement, than students who are not connected to each other?*
+
+It may be interesting here to look at both strong and weak ties, as in the data there is a measure for 'friends' and 'people you study with.' However, I don't know whether that will be too complicated for this course yet.
+
+My explanatory, micro, question was: "Do peers become more similar to each other with regards to the degree of political participation?" I think I will keep this question relatively similar to what it was, except, of course, adjusting the topic to fit with my new macro question. I am still interested in seeing whether potential similarity can be explained through selection effects or through influence effects. So my 'new' research question is: *Do students become more similar to each other with regards to civic engagement, when they are connected in a network?*
+
+Here again, it could be really interesting to look at the difference between strong and weak ties, as you could expect there to be a bigger effect of strong ties, if there is an influence effect.
+
+## What data do I need?
+
+I think I will use the MRCS data, as this is a very extensive dataset, which covers the topic that I am interested in.
+
+**Civic engagement**
+
+For civic engagement they asked questions about both beliefs and behaviour. About beliefs they asked:
+
+- SXceng01: I feel responsible for my local community.
+
+- SXceng02: I believe I should make a difference in my local community.
+
+- SXceng03: I am committed to serve in my local community.
+
+- SXceng04: I know how to give back to my local community
+
+About behaviour they asked:
+
+- SXceng05: I am involved in structured volunteer position(s) in my local community.
+
+- SXceng06: When working with others, I make positive changes in my local community.
+
+- SXceng07: I help members of my local community.
+
+- SXceng08: I stay informed of events in my local community.
+
+- SXceng09: I participate in discussions that raise issues of social responsibility.
+
+- SXceng10: I contribute to charitable organizations within the local community
+
+I am most interested in the actual behaviour, however, I don't know whether this behaviour is salient enough in the data to see any patterns.
+
+**Strong/ weak ties** 
+
+To map the social network within the learning communities, the researchers asked multiple questions. Firstly, for what I will consider weak ties, the respondents were asked to write down who they tend to study with.
+
+Who do you study with in your MLC? Please write their names in the box below. If you do not know their
+last names, please include as much as you can remember. (If you can’t think of anyone, please skip this question)
+
+- SXncst01-10: Write in the first and last name
+
+And for the measure of strong ties, I will be relying on the following question:
+
+Which students in your MLC do you hang around with and talk to the most? Please write their names
+in the box below. Again, if you do not know their last names, please include as much as you can
+remember. (If you can't think of anyone, please skip this question)
+
+- SXnhng01-10: Write in the first and last name

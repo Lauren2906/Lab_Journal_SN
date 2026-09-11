@@ -422,35 +422,11 @@ Setting up</h2>
 <pre class="r"><code>rm(list = ls())
 
 #install.packages(&quot;installr&quot;)
-require(installr)</code></pre>
-<pre><code>## Loading required package: installr</code></pre>
-<pre><code>## 
-## Welcome to installr version 0.23.4
-## 
-## More information is available on the installr project website:
-## https://github.com/talgalili/installr/
-## 
-## Contact: &lt;tal.galili@gmail.com&gt;
-## Suggestions and bug-reports can be submitted at: https://github.com/talgalili/installr/issues
-## 
-##          To suppress this message use:
-##          suppressPackageStartupMessages(library(installr))</code></pre>
-<pre class="r"><code>#install.packages(&quot;foreign&quot;)
-require(foreign)</code></pre>
-<pre><code>## Loading required package: foreign</code></pre>
-<pre class="r"><code>require(tidyverse)</code></pre>
-<pre><code>## Loading required package: tidyverse</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ───────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.2.1     ✔ readr     2.2.0
-## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-## ✔ purrr     1.2.2     
-## ── Conflicts ─────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>#updateR()</code></pre>
+require(installr)
+#install.packages(&quot;foreign&quot;)
+require(foreign)
+require(tidyverse)
+#updateR()</code></pre>
 <p>Loading data sets</p>
 <pre class="r"><code>cv08 &lt;- foreign::read.spss(&quot;Cultural_Changes_2008.sav&quot;, use.value.labels = T, to.data.frame = T)</code></pre>
 <pre><code>## re-encoding from CP1252</code></pre>
@@ -2015,10 +1991,8 @@ model3</code></pre>
 ## 
 ## # Auto named with `tibble::lst()`: tibble::lst(mean, median)
 ## 
-## # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm =
-##   TRUE))
-## Call `lifecycle::last_lifecycle_warnings()` to see where this
-## warning was generated.</code></pre>
+## # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
 <pre class="r"><code>model_imp &lt;- cv_total_tidy %&gt;%
   dplyr::select(c(&quot;id&quot;, &quot;id2&quot;, &quot;age&quot;, &quot;men&quot;, &quot;educ3&quot;, &quot;health&quot;, &quot;region&quot;, &quot;wave&quot;)) %&gt;%
   mutate_all(as.numeric) %&gt;%
