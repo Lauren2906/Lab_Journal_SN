@@ -1987,13 +1987,14 @@ model3</code></pre>
 <pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
 ## ℹ Please use a list of either functions or lambdas:
 ## 
-## # Simple named list: list(mean = mean, median = median)
-## 
-## # Auto named with `tibble::lst()`: tibble::lst(mean,
+## # Simple named list: list(mean = mean, median =
 ##   median)
 ## 
-## # Using lambdas list(~ mean(., trim = .2), ~ median(.,
-##   na.rm = TRUE))
+## # Auto named with `tibble::lst()`:
+##   tibble::lst(mean, median)
+## 
+## # Using lambdas list(~ mean(., trim = .2), ~
+##   median(., na.rm = TRUE))
 ## Call `lifecycle::last_lifecycle_warnings()` to see
 ## where this warning was generated.</code></pre>
 <pre class="r"><code>model_imp &lt;- cv_total_tidy %&gt;%

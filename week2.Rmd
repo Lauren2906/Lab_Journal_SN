@@ -20,7 +20,7 @@ action differently. They also measure networks in different ways.
 
 **Service, activism and friendships in high school: A longitudinal
 social network analysis of peer influence and critical beliefs – Wegemer
-(2022)**
+(2022)** @Wegemer_2021
 
 The first paper I chose is “service, activism and friendships in high
 school: A longitudinal social network analysis of peer influence and
@@ -90,7 +90,7 @@ screen, but I’ll skip them for now.
 
 **Civic development within the peer context: Associations between early
 adolescent social connectedness and civic engagement – Oosterhoff et al
-(2021)**
+(2021) @Oosterhoff_Alvis_Deutchman_Poppler_Palmer_2021**
 
 The second article I want to talk about is “civic development within the
 peer context: Associations between early adolescent social connectedness
@@ -188,6 +188,7 @@ So this would end up with a conceptual model like this
 ![](images/clipboard-634570693.png)
 
 # During class
+
 ```{r}
 #install.packages("RSiena")
 #install.packages("igraph")
@@ -196,6 +197,7 @@ require(igraph)
 ```
 
 Trying to figure out the descriptive statistics of a network data set
+
 ```{r}
 s501
 view(s501)
@@ -212,7 +214,10 @@ plot(graph3)
 graph4 <- graph_from_adjacency_matrix(s501)
 plot(graph4)
 ```
-What we can tell from this, is that there are both directed and undirected ties in this network, visually it seems like there are more undirected ties. 
+
+What we can tell from this, is that there are both directed and
+undirected ties in this network, visually it seems like there are more
+undirected ties.
 
 ```{r}
 between <- betweenness(
@@ -229,6 +234,7 @@ plot(between)
 ```
 
 Looking at macro segregation on drinking behaviour
+
 ```{r}
 friend.data.w1 <- s501
 drink <- s50a
