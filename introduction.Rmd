@@ -1,0 +1,20 @@
+---
+title: "Introduction"
+author: "Lauren"
+date: "2026-09-11"
+output: html_document
+---
+
+# Introduction
+
+[Hook] -\> Being civically engaged is important, because XXX. However, youth is more often (and more than other groups) a 'spectator' who discusses socially important topics privately, rather than being active in the community (<https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/>). Youth is thus (seemingly) changing how they are engaging with social issues. However, physical engagement still important, e.g. volunteering.
+
+[Network perspective] -\> So civic behaviour is important, but why do people behave civically, and how can we thus reverse the trend of youth less physically civic behaviour? Important to know: Is our civic behaviour related to who we interact with. If so, potential clustering of behaviour, leaving civic behaviour only to certain people in society, rather than as a universal thing.
+
+[scientific relevance] -\> Civic behaviour already studied by XXX. Also in network perspective already studied, however XXX. This paper will do it differently by looking at a different context, and at older youth, who are more able to shape their own decisions as to what participation they do (less restricted individuals, but also less steered opportunities) –\> more accurate reflection of later life, which may be interesting to look at. Thus, in this paper I will firstly answer the following question:
+
+Are students who are connected to each other more similar with regards to civic engagement, than students who are not connected to each other?
+
+[Why?] The potential of clustering is really interesting, but just the fact that it is there doesnt tell us much; we need to know why people cluster. Either, people choose similar people to connect with, or they become more similar over time. Mostly more similar over time is interesting, as that may have the potential to reverse the trend of youth increasingly doing 'private participation', by learning how to do public participation from their peers. Thus leading to the following question:
+
+Do students become more similar to each other with regards to civic engagement, when they are connected in a network?

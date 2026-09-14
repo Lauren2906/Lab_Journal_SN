@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Lauren Dirix" />
+<meta name="author" content="Lauren" />
 
+<meta name="date" content="2026-09-11" />
 
-<title>Lab journal social networks</title>
+<title>Introduction</title>
 
 <script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -38,10 +39,6 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -74,28 +71,6 @@ if (window.hljs) {
 }
 </style>
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -433,102 +408,54 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab journal social networks</h1>
-<h4 class="author">Lauren Dirix</h4>
+<h1 class="title toc-ignore">Introduction</h1>
+<h4 class="author">Lauren</h4>
+<h4 class="date">2026-09-11</h4>
 
 </div>
 
 
-<pre class="r"><code>library(knitr)
-library(styler)
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ───────────────────
-## ✔ dplyr     1.2.1     ✔ readr     2.2.0
-## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-## ✔ purrr     1.2.2     
-## ── Conflicts ────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(installr)</code></pre>
-<pre><code>## 
-## Welcome to installr version 0.23.4
-## 
-## More information is available on the installr project website:
-## https://github.com/talgalili/installr/
-## 
-## Contact: &lt;tal.galili@gmail.com&gt;
-## Suggestions and bug-reports can be submitted at: https://github.com/talgalili/installr/issues
-## 
-##          To suppress this message use:
-##          suppressPackageStartupMessages(library(installr))</code></pre>
-<pre class="r"><code>library(foreign)
-library(network)</code></pre>
-<pre><code>## 
-## &#39;network&#39; 1.20.0 (2026-02-06), part of the Statnet Project
-## * &#39;news(package=&quot;network&quot;)&#39; for changes since last version
-## * &#39;citation(&quot;network&quot;)&#39; for citation information
-## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<hr />
-<!--- This is the best way to write a comment. 
-It also demonstrate, you can add html directly in your rmarkdown file. See: https://www.w3schools.com/html/html_comments.asp --->
-<!--- to use a multi column page we use Pandoc's fenced Div. 
-see here: https://bookdown.org/yihui/rmarkdown-cookbook/multi-column.html 
-But please note, we are not here to make a beautiful website, our intention is just to have a quick lab journal up and running --->
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="my-lab-journal" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> My Lab Journal</h1>
-<p>Last compiled on september, 2026</p>
-<p><em>Describe lab journal here.</em></p>
-<p><br></p>
-<hr />
-<div id="open-science" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Open Science</h2>
-<p>Everyone can fork this repository. Use this example to journal your
-lab work and assignments.</p>
-<p>We, Jochem Tolsma and Bas Hofstra, use this repository for our Social
-Network Analysis For Social Scientists course <span
-class="citation">(Tolsma and Hofstra 2022)</span>.
-<!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><img src="images/cover.jpg" /></p>
-</div>
-</div>
-<div id="how-to-use" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> How to use</h2>
-<ol style="list-style-type: decimal">
-<li><p>Fork the repository for this website and follow instructions on
-<code>README</code> to get started <a
-href="https://github.com/JochemTolsma/labjournal">here</a>.</p></li>
-<li><p>Journal your work, by editing the .Rmd-files</p></li>
-<li><p>…</p></li>
-<li><p>Change everything to make it your own!</p></li>
-</ol>
-<p><br></p>
-<p>Use the top menu to navigate through the journal.</p>
-<hr />
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-SNASS" class="csl-entry">
-Tolsma, Jochem, and Bas Hofstra. 2022. <em>Social Network Analysis for
-Social Scientists</em>. <a
-href="https://jtolsma.nl/SNASS/">https://jtolsma.nl/SNASS/</a>.
-</div>
-</div>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>[Hook] -&gt; Being civically engaged is important, because XXX.
+However, youth is more often (and more than other groups) a ‘spectator’
+who discusses socially important topics privately, rather than being
+active in the community (<a
+href="https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/"
+class="uri">https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/</a>).
+Youth is thus (seemingly) changing how they are engaging with social
+issues. However, physical engagement still important,
+e.g. volunteering.</p>
+<p>[Network perspective] -&gt; So civic behaviour is important, but why
+do people behave civically, and how can we thus reverse the trend of
+youth less physically civic behaviour? Important to know: Is our civic
+behaviour related to who we interact with. If so, potential clustering
+of behaviour, leaving civic behaviour only to certain people in society,
+rather than as a universal thing.</p>
+<p>[scientific relevance] -&gt; Civic behaviour already studied by XXX.
+Also in network perspective already studied, however XXX. This paper
+will do it differently by looking at a different context, and at older
+youth, who are more able to shape their own decisions as to what
+participation they do (less restricted individuals, but also less
+steered opportunities) –&gt; more accurate reflection of later life,
+which may be interesting to look at. Thus, in this paper I will firstly
+answer the following question:</p>
+<p>Are students who are connected to each other more similar with
+regards to civic engagement, than students who are not connected to each
+other?</p>
+<p>[Why?] The potential of clustering is really interesting, but just
+the fact that it is there doesnt tell us much; we need to know why
+people cluster. Either, people choose similar people to connect with, or
+they become more similar over time. Mostly more similar over time is
+interesting, as that may have the potential to reverse the trend of
+youth increasingly doing ‘private participation’, by learning how to do
+public participation from their peers. Thus leading to the following
+question:</p>
+<p>Do students become more similar to each other with regards to civic
+engagement, when they are connected in a network?</p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQpgYGB7ciwgaW5zdGFsbCByZW1vdGVseSwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KI2luc3RhbGwucGFja2FnZXMoInJlbW90ZXMiKQ0KI3JlbW90ZXM6Omluc3RhbGxfZ2l0aHViKCJybGVzdXIva2xpcHB5IikNCmBgYA0KDQpgYGB7cn0NCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KHN0eWxlcikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShpbnN0YWxscikNCmxpYnJhcnkoZm9yZWlnbikNCmxpYnJhcnkobmV0d29yaykNCmBgYA0KDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KYGBgDQoNCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQ0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkNCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykNCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykNCmBgYA0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KYGBgez1odG1sfQ0KPCEtLS0gVGhpcyBpcyB0aGUgYmVzdCB3YXkgdG8gd3JpdGUgYSBjb21tZW50LiANCkl0IGFsc28gZGVtb25zdHJhdGUsIHlvdSBjYW4gYWRkIGh0bWwgZGlyZWN0bHkgaW4geW91ciBybWFya2Rvd24gZmlsZS4gU2VlOiBodHRwczovL3d3dy53M3NjaG9vbHMuY29tL2h0bWwvaHRtbF9jb21tZW50cy5hc3AgLS0tPg0KYGBgDQoNCmBgYHs9aHRtbH0NCjwhLS0tIHRvIHVzZSBhIG11bHRpIGNvbHVtbiBwYWdlIHdlIHVzZSBQYW5kb2MncyBmZW5jZWQgRGl2LiANCnNlZSBoZXJlOiBodHRwczovL2Jvb2tkb3duLm9yZy95aWh1aS9ybWFya2Rvd24tY29va2Jvb2svbXVsdGktY29sdW1uLmh0bWwgDQpCdXQgcGxlYXNlIG5vdGUsIHdlIGFyZSBub3QgaGVyZSB0byBtYWtlIGEgYmVhdXRpZnVsIHdlYnNpdGUsIG91ciBpbnRlbnRpb24gaXMganVzdCB0byBoYXZlIGEgcXVpY2sgbGFiIGpvdXJuYWwgdXAgYW5kIHJ1bm5pbmcgLS0tPg0KYGBgDQoNCjo6Ojo6IGNvbHVtbnMNCjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0NCiMgTXkgTGFiIEpvdXJuYWwNCg0KTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYA0KDQoqRGVzY3JpYmUgbGFiIGpvdXJuYWwgaGVyZS4qDQoNCjxicj4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMjIE9wZW4gU2NpZW5jZQ0KDQpFdmVyeW9uZSBjYW4gZm9yayB0aGlzIHJlcG9zaXRvcnkuIFVzZSB0aGlzIGV4YW1wbGUgdG8gam91cm5hbCB5b3VyIGxhYiB3b3JrIGFuZCBhc3NpZ25tZW50cy4NCg0KV2UsIEpvY2hlbSBUb2xzbWEgYW5kIEJhcyBIb2ZzdHJhLCB1c2UgdGhpcyByZXBvc2l0b3J5IGZvciBvdXIgU29jaWFsIE5ldHdvcmsgQW5hbHlzaXMgRm9yIFNvY2lhbCBTY2llbnRpc3RzIGNvdXJzZSBbQFNOQVNTXS4gPCEtLS0gdGhpcyBpcyBhIHJlZmVyZW5jZSwgc3RvcmVkIGluIHJlZmVyZW5jZXMuYmliLiBJdCB3aWxsIGJlIGF1dG9tYXRpY2FsbHkgYWRkZWQgYXQgdGhlIGJvdHRvbSBvZiB0aGUgcGFnZSAtLS0+DQo6OjoNCg0KOjo6IHsuY29sdW1uIHdpZHRoPSI1MCUifQ0KIVtdKGltYWdlcy9jb3Zlci5qcGcpDQo6OjoNCjo6Ojo6DQoNCiMjIEhvdyB0byB1c2UNCg0KMS4gIEZvcmsgdGhlIHJlcG9zaXRvcnkgZm9yIHRoaXMgd2Vic2l0ZSBhbmQgZm9sbG93IGluc3RydWN0aW9ucyBvbiBgUkVBRE1FYCB0byBnZXQgc3RhcnRlZCBbaGVyZV0oaHR0cHM6Ly9naXRodWIuY29tL0pvY2hlbVRvbHNtYS9sYWJqb3VybmFsKS4NCg0KMi4gIEpvdXJuYWwgeW91ciB3b3JrLCBieSBlZGl0aW5nIHRoZSAuUm1kLWZpbGVzDQoNCjMuICAuLi4NCg0KNC4gIENoYW5nZSBldmVyeXRoaW5nIHRvIG1ha2UgaXQgeW91ciBvd24hDQoNCjxicj4NCg0KVXNlIHRoZSB0b3AgbWVudSB0byBuYXZpZ2F0ZSB0aHJvdWdoIHRoZSBqb3VybmFsLg0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KIyBSZWZlcmVuY2VzDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkludHJvZHVjdGlvbiINCmF1dGhvcjogIkxhdXJlbiINCmRhdGU6ICIyMDI2LTA5LTExIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KIyBJbnRyb2R1Y3Rpb24NCg0KW0hvb2tdIC1cPiBCZWluZyBjaXZpY2FsbHkgZW5nYWdlZCBpcyBpbXBvcnRhbnQsIGJlY2F1c2UgWFhYLiBIb3dldmVyLCB5b3V0aCBpcyBtb3JlIG9mdGVuIChhbmQgbW9yZSB0aGFuIG90aGVyIGdyb3VwcykgYSAnc3BlY3RhdG9yJyB3aG8gZGlzY3Vzc2VzIHNvY2lhbGx5IGltcG9ydGFudCB0b3BpY3MgcHJpdmF0ZWx5LCByYXRoZXIgdGhhbiBiZWluZyBhY3RpdmUgaW4gdGhlIGNvbW11bml0eSAoPGh0dHBzOi8vd3d3LnBld3Jlc2VhcmNoLm9yZy9qb3VybmFsaXNtLzIwMjYvMDcvMTYveW91bmdlci1hbmQtb2xkZXItYW1lcmljYW5zLWVuZ2FnZS1pbi1wdWJsaWMtbGlmZS1pbi1kaWZmZXJlbnQtd2F5cy8+KS4gWW91dGggaXMgdGh1cyAoc2VlbWluZ2x5KSBjaGFuZ2luZyBob3cgdGhleSBhcmUgZW5nYWdpbmcgd2l0aCBzb2NpYWwgaXNzdWVzLiBIb3dldmVyLCBwaHlzaWNhbCBlbmdhZ2VtZW50IHN0aWxsIGltcG9ydGFudCwgZS5nLiB2b2x1bnRlZXJpbmcuDQoNCltOZXR3b3JrIHBlcnNwZWN0aXZlXSAtXD4gU28gY2l2aWMgYmVoYXZpb3VyIGlzIGltcG9ydGFudCwgYnV0IHdoeSBkbyBwZW9wbGUgYmVoYXZlIGNpdmljYWxseSwgYW5kIGhvdyBjYW4gd2UgdGh1cyByZXZlcnNlIHRoZSB0cmVuZCBvZiB5b3V0aCBsZXNzIHBoeXNpY2FsbHkgY2l2aWMgYmVoYXZpb3VyPyBJbXBvcnRhbnQgdG8ga25vdzogSXMgb3VyIGNpdmljIGJlaGF2aW91ciByZWxhdGVkIHRvIHdobyB3ZSBpbnRlcmFjdCB3aXRoLiBJZiBzbywgcG90ZW50aWFsIGNsdXN0ZXJpbmcgb2YgYmVoYXZpb3VyLCBsZWF2aW5nIGNpdmljIGJlaGF2aW91ciBvbmx5IHRvIGNlcnRhaW4gcGVvcGxlIGluIHNvY2lldHksIHJhdGhlciB0aGFuIGFzIGEgdW5pdmVyc2FsIHRoaW5nLg0KDQpbc2NpZW50aWZpYyByZWxldmFuY2VdIC1cPiBDaXZpYyBiZWhhdmlvdXIgYWxyZWFkeSBzdHVkaWVkIGJ5IFhYWC4gQWxzbyBpbiBuZXR3b3JrIHBlcnNwZWN0aXZlIGFscmVhZHkgc3R1ZGllZCwgaG93ZXZlciBYWFguIFRoaXMgcGFwZXIgd2lsbCBkbyBpdCBkaWZmZXJlbnRseSBieSBsb29raW5nIGF0IGEgZGlmZmVyZW50IGNvbnRleHQsIGFuZCBhdCBvbGRlciB5b3V0aCwgd2hvIGFyZSBtb3JlIGFibGUgdG8gc2hhcGUgdGhlaXIgb3duIGRlY2lzaW9ucyBhcyB0byB3aGF0IHBhcnRpY2lwYXRpb24gdGhleSBkbyAobGVzcyByZXN0cmljdGVkIGluZGl2aWR1YWxzLCBidXQgYWxzbyBsZXNzIHN0ZWVyZWQgb3Bwb3J0dW5pdGllcykg4oCTXD4gbW9yZSBhY2N1cmF0ZSByZWZsZWN0aW9uIG9mIGxhdGVyIGxpZmUsIHdoaWNoIG1heSBiZSBpbnRlcmVzdGluZyB0byBsb29rIGF0LiBUaHVzLCBpbiB0aGlzIHBhcGVyIEkgd2lsbCBmaXJzdGx5IGFuc3dlciB0aGUgZm9sbG93aW5nIHF1ZXN0aW9uOg0KDQpBcmUgc3R1ZGVudHMgd2hvIGFyZSBjb25uZWN0ZWQgdG8gZWFjaCBvdGhlciBtb3JlIHNpbWlsYXIgd2l0aCByZWdhcmRzIHRvIGNpdmljIGVuZ2FnZW1lbnQsIHRoYW4gc3R1ZGVudHMgd2hvIGFyZSBub3QgY29ubmVjdGVkIHRvIGVhY2ggb3RoZXI/DQoNCltXaHk/XSBUaGUgcG90ZW50aWFsIG9mIGNsdXN0ZXJpbmcgaXMgcmVhbGx5IGludGVyZXN0aW5nLCBidXQganVzdCB0aGUgZmFjdCB0aGF0IGl0IGlzIHRoZXJlIGRvZXNudCB0ZWxsIHVzIG11Y2g7IHdlIG5lZWQgdG8ga25vdyB3aHkgcGVvcGxlIGNsdXN0ZXIuIEVpdGhlciwgcGVvcGxlIGNob29zZSBzaW1pbGFyIHBlb3BsZSB0byBjb25uZWN0IHdpdGgsIG9yIHRoZXkgYmVjb21lIG1vcmUgc2ltaWxhciBvdmVyIHRpbWUuIE1vc3RseSBtb3JlIHNpbWlsYXIgb3ZlciB0aW1lIGlzIGludGVyZXN0aW5nLCBhcyB0aGF0IG1heSBoYXZlIHRoZSBwb3RlbnRpYWwgdG8gcmV2ZXJzZSB0aGUgdHJlbmQgb2YgeW91dGggaW5jcmVhc2luZ2x5IGRvaW5nICdwcml2YXRlIHBhcnRpY2lwYXRpb24nLCBieSBsZWFybmluZyBob3cgdG8gZG8gcHVibGljIHBhcnRpY2lwYXRpb24gZnJvbSB0aGVpciBwZWVycy4gVGh1cyBsZWFkaW5nIHRvIHRoZSBmb2xsb3dpbmcgcXVlc3Rpb246DQoNCkRvIHN0dWRlbnRzIGJlY29tZSBtb3JlIHNpbWlsYXIgdG8gZWFjaCBvdGhlciB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMgZW5nYWdlbWVudCwgd2hlbiB0aGV5IGFyZSBjb25uZWN0ZWQgaW4gYSBuZXR3b3JrPw0K</div>
 
 
 </div>
@@ -566,7 +493,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("index.Rmd");
+  window.initializeSourceEmbed("introduction.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
