@@ -18,3 +18,7 @@ Are students who are connected to each other more similar with regards to civic 
 [Why?] The potential of clustering is really interesting, but just the fact that it is there doesnt tell us much; we need to know why people cluster. Either, people choose similar people to connect with, or they become more similar over time. Mostly more similar over time is interesting, as that may have the potential to reverse the trend of youth increasingly doing 'private participation', by learning how to do public participation from their peers. Thus leading to the following question:
 
 Do students become more similar to each other with regards to civic engagement, when they are connected in a network?
+
+------------------------------------------------------------------------
+
+# References

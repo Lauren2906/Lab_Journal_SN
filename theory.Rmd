@@ -1,0 +1,14 @@
+---
+title: "Theory"
+author: "Lauren"
+date: "2026-09-11"
+output: html_document
+---
+
+# Theory
+
+XXX
+
+------------------------------------------------------------------------
+
+# References

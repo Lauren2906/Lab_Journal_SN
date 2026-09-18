@@ -404,6 +404,18 @@ div.tocify {
     <li>
       <a href="introduction.html">Introduction</a>
     </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="data.html">Data</a>
+    </li>
+    <li>
+      <a href="methods.html">Methods</a>
+    </li>
+    <li>
+      <a href="conclusion_discussion.html">Conclusion and discussion</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -439,38 +451,6 @@ div.tocify {
 </div>
 
 
-<pre class="r"><code>library(knitr)
-library(styler)
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ───────────────
-## ✔ dplyr     1.2.1     ✔ readr     2.2.0
-## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-## ✔ purrr     1.2.2     
-## ── Conflicts ────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(installr)</code></pre>
-<pre><code>## 
-## Welcome to installr version 0.23.4
-## 
-## More information is available on the installr project website:
-## https://github.com/talgalili/installr/
-## 
-## Contact: &lt;tal.galili@gmail.com&gt;
-## Suggestions and bug-reports can be submitted at: https://github.com/talgalili/installr/issues
-## 
-##          To suppress this message use:
-##          suppressPackageStartupMessages(library(installr))</code></pre>
-<pre class="r"><code>library(foreign)
-library(network)</code></pre>
-<pre><code>## 
-## &#39;network&#39; 1.20.0 (2026-02-06), part of the Statnet Project
-## * &#39;news(package=&quot;network&quot;)&#39; for changes since last version
-## * &#39;citation(&quot;network&quot;)&#39; for citation information
-## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
 <script>
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
@@ -486,37 +466,23 @@ But please note, we are not here to make a beautiful website, our intention is j
 <div id="my-lab-journal" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> My Lab Journal</h1>
 <p>Last compiled on september, 2026</p>
-<p><em>Describe lab journal here.</em></p>
+<p>This website was made as part of the course Social Networks
+(SOW-SCS211), and showcases both my progress (under tab “Lab journal”)
+and my final assignment (under tab “Final assignment”)</p>
 <p><br></p>
 <hr />
-<div id="open-science" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Open Science</h2>
-<p>Everyone can fork this repository. Use this example to journal your
-lab work and assignments.</p>
-<p>We, Jochem Tolsma and Bas Hofstra, use this repository for our Social
-Network Analysis For Social Scientists course <span
-class="citation">(Tolsma and Hofstra 2022)</span>.
-<!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---></p>
 </div>
+<div id="open-science" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Open Science</h1>
+<p>This website and web journal was created by forking the repository
+from Jochem Tolsma and Bas Hofstra <span class="citation">(Tolsma and
+Hofstra 2022)</span>.</p>
 </div>
 </div><div class="column" style="width:50%;">
 <p><img src="images/cover.jpg" /></p>
 </div>
 </div>
-<div id="how-to-use" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> How to use</h2>
-<ol style="list-style-type: decimal">
-<li><p>Fork the repository for this website and follow instructions on
-<code>README</code> to get started <a
-href="https://github.com/JochemTolsma/labjournal">here</a>.</p></li>
-<li><p>Journal your work, by editing the .Rmd-files</p></li>
-<li><p>…</p></li>
-<li><p>Change everything to make it your own!</p></li>
-</ol>
-<p><br></p>
-<p>Use the top menu to navigate through the journal.</p>
 <hr />
-</div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
@@ -528,7 +494,7 @@ href="https://jtolsma.nl/SNASS/">https://jtolsma.nl/SNASS/</a>.
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQpgYGB7ciwgaW5zdGFsbCByZW1vdGVseSwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KI2luc3RhbGwucGFja2FnZXMoInJlbW90ZXMiKQ0KI3JlbW90ZXM6Omluc3RhbGxfZ2l0aHViKCJybGVzdXIva2xpcHB5IikNCmBgYA0KDQpgYGB7cn0NCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KHN0eWxlcikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShpbnN0YWxscikNCmxpYnJhcnkoZm9yZWlnbikNCmxpYnJhcnkobmV0d29yaykNCmBgYA0KDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KYGBgDQoNCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQ0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkNCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykNCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykNCmBgYA0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KYGBgez1odG1sfQ0KPCEtLS0gVGhpcyBpcyB0aGUgYmVzdCB3YXkgdG8gd3JpdGUgYSBjb21tZW50LiANCkl0IGFsc28gZGVtb25zdHJhdGUsIHlvdSBjYW4gYWRkIGh0bWwgZGlyZWN0bHkgaW4geW91ciBybWFya2Rvd24gZmlsZS4gU2VlOiBodHRwczovL3d3dy53M3NjaG9vbHMuY29tL2h0bWwvaHRtbF9jb21tZW50cy5hc3AgLS0tPg0KYGBgDQoNCmBgYHs9aHRtbH0NCjwhLS0tIHRvIHVzZSBhIG11bHRpIGNvbHVtbiBwYWdlIHdlIHVzZSBQYW5kb2MncyBmZW5jZWQgRGl2LiANCnNlZSBoZXJlOiBodHRwczovL2Jvb2tkb3duLm9yZy95aWh1aS9ybWFya2Rvd24tY29va2Jvb2svbXVsdGktY29sdW1uLmh0bWwgDQpCdXQgcGxlYXNlIG5vdGUsIHdlIGFyZSBub3QgaGVyZSB0byBtYWtlIGEgYmVhdXRpZnVsIHdlYnNpdGUsIG91ciBpbnRlbnRpb24gaXMganVzdCB0byBoYXZlIGEgcXVpY2sgbGFiIGpvdXJuYWwgdXAgYW5kIHJ1bm5pbmcgLS0tPg0KYGBgDQoNCjo6Ojo6IGNvbHVtbnMNCjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0NCiMgTXkgTGFiIEpvdXJuYWwNCg0KTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYA0KDQoqRGVzY3JpYmUgbGFiIGpvdXJuYWwgaGVyZS4qDQoNCjxicj4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMjIE9wZW4gU2NpZW5jZQ0KDQpFdmVyeW9uZSBjYW4gZm9yayB0aGlzIHJlcG9zaXRvcnkuIFVzZSB0aGlzIGV4YW1wbGUgdG8gam91cm5hbCB5b3VyIGxhYiB3b3JrIGFuZCBhc3NpZ25tZW50cy4NCg0KV2UsIEpvY2hlbSBUb2xzbWEgYW5kIEJhcyBIb2ZzdHJhLCB1c2UgdGhpcyByZXBvc2l0b3J5IGZvciBvdXIgU29jaWFsIE5ldHdvcmsgQW5hbHlzaXMgRm9yIFNvY2lhbCBTY2llbnRpc3RzIGNvdXJzZSBbQFNOQVNTXS4gPCEtLS0gdGhpcyBpcyBhIHJlZmVyZW5jZSwgc3RvcmVkIGluIHJlZmVyZW5jZXMuYmliLiBJdCB3aWxsIGJlIGF1dG9tYXRpY2FsbHkgYWRkZWQgYXQgdGhlIGJvdHRvbSBvZiB0aGUgcGFnZSAtLS0+DQo6OjoNCg0KOjo6IHsuY29sdW1uIHdpZHRoPSI1MCUifQ0KIVtdKGltYWdlcy9jb3Zlci5qcGcpDQo6OjoNCjo6Ojo6DQoNCiMjIEhvdyB0byB1c2UNCg0KMS4gIEZvcmsgdGhlIHJlcG9zaXRvcnkgZm9yIHRoaXMgd2Vic2l0ZSBhbmQgZm9sbG93IGluc3RydWN0aW9ucyBvbiBgUkVBRE1FYCB0byBnZXQgc3RhcnRlZCBbaGVyZV0oaHR0cHM6Ly9naXRodWIuY29tL0pvY2hlbVRvbHNtYS9sYWJqb3VybmFsKS4NCg0KMi4gIEpvdXJuYWwgeW91ciB3b3JrLCBieSBlZGl0aW5nIHRoZSAuUm1kLWZpbGVzDQoNCjMuICAuLi4NCg0KNC4gIENoYW5nZSBldmVyeXRoaW5nIHRvIG1ha2UgaXQgeW91ciBvd24hDQoNCjxicj4NCg0KVXNlIHRoZSB0b3AgbWVudSB0byBuYXZpZ2F0ZSB0aHJvdWdoIHRoZSBqb3VybmFsLg0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KIyBSZWZlcmVuY2VzDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQpgYGB7ciwgaW5zdGFsbCByZW1vdGVseSwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KI2luc3RhbGwucGFja2FnZXMoInJlbW90ZXMiKQ0KI3JlbW90ZXM6Omluc3RhbGxfZ2l0aHViKCJybGVzdXIva2xpcHB5IikNCmBgYA0KDQpgYGB7ciwgaW5jbHVkZSA9IEZBTFNFfQ0KbGlicmFyeShrbml0cikNCmxpYnJhcnkoc3R5bGVyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGluc3RhbGxyKQ0KbGlicmFyeShmb3JlaWduKQ0KbGlicmFyeShuZXR3b3JrKQ0KYGBgDQoNCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQoNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPVRSVUUsIGNsYXNzLnNvdXJjZT1jKCJ0ZXN0IiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQ0Kb3B0aW9ucyh3aWR0aCA9IDEwMCkNCnJnbDo6c2V0dXBLbml0cigpDQpgYGANCg0KYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9DQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQ0KI2tsaXBweTo6a2xpcHB5KGNvbG9yID0gJ2RhcmtyZWQnKQ0KI2tsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQ0KYGBgDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQpgYGB7PWh0bWx9DQo8IS0tLSBUaGlzIGlzIHRoZSBiZXN0IHdheSB0byB3cml0ZSBhIGNvbW1lbnQuIA0KSXQgYWxzbyBkZW1vbnN0cmF0ZSwgeW91IGNhbiBhZGQgaHRtbCBkaXJlY3RseSBpbiB5b3VyIHJtYXJrZG93biBmaWxlLiBTZWU6IGh0dHBzOi8vd3d3Lnczc2Nob29scy5jb20vaHRtbC9odG1sX2NvbW1lbnRzLmFzcCAtLS0+DQpgYGANCg0KYGBgez1odG1sfQ0KPCEtLS0gdG8gdXNlIGEgbXVsdGkgY29sdW1uIHBhZ2Ugd2UgdXNlIFBhbmRvYydzIGZlbmNlZCBEaXYuIA0Kc2VlIGhlcmU6IGh0dHBzOi8vYm9va2Rvd24ub3JnL3lpaHVpL3JtYXJrZG93bi1jb29rYm9vay9tdWx0aS1jb2x1bW4uaHRtbCANCkJ1dCBwbGVhc2Ugbm90ZSwgd2UgYXJlIG5vdCBoZXJlIHRvIG1ha2UgYSBiZWF1dGlmdWwgd2Vic2l0ZSwgb3VyIGludGVudGlvbiBpcyBqdXN0IHRvIGhhdmUgYSBxdWljayBsYWIgam91cm5hbCB1cCBhbmQgcnVubmluZyAtLS0+DQpgYGANCg0KOjo6OjogY29sdW1ucw0KOjo6IHsuY29sdW1uIHdpZHRoPSI1MCUifQ0KIyBNeSBMYWIgSm91cm5hbA0KDQpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgDQoNClRoaXMgd2Vic2l0ZSB3YXMgbWFkZSBhcyBwYXJ0IG9mIHRoZSBjb3Vyc2UgU29jaWFsIE5ldHdvcmtzIChTT1ctU0NTMjExKSwgYW5kIHNob3djYXNlcyBib3RoIG15IHByb2dyZXNzICh1bmRlciB0YWIgIkxhYiBqb3VybmFsIikgYW5kIG15IGZpbmFsIGFzc2lnbm1lbnQgKHVuZGVyIHRhYiAiRmluYWwgYXNzaWdubWVudCIpDQoNCjxicj4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMgT3BlbiBTY2llbmNlDQoNClRoaXMgd2Vic2l0ZSBhbmQgd2ViIGpvdXJuYWwgd2FzIGNyZWF0ZWQgYnkgZm9ya2luZyB0aGUgcmVwb3NpdG9yeSBmcm9tIEpvY2hlbSBUb2xzbWEgYW5kIEJhcyBIb2ZzdHJhIFtAU05BU1NdLg0KOjo6DQoNCjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0NCiFbXShpbWFnZXMvY292ZXIuanBnKQ0KOjo6DQo6Ojo6Og0KDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQojIFJlZmVyZW5jZXMNCg==</div>
 
 
 </div>

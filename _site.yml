@@ -30,6 +30,14 @@ navbar:
       menu:
       - text: "Introduction"
         href: introduction.html
+      - text: "Theory"
+        href: theory.html
+      - text: "Data"
+        href: data.html
+      - text: "Methods"
+        href: methods.html
+      - text: "Conclusion and discussion"
+        href: conclusion_discussion.html
 
 
   right:

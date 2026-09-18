@@ -16,6 +16,8 @@ short section on my own ideas for research questions.
 While both papers are on very similar topics, they operationalise civic
 action differently. They also measure networks in different ways.
 
+<br>
+
 ## Article 1
 
 **Service, activism and friendships in high school: A longitudinal
@@ -85,6 +87,8 @@ relevant for this course. So I put them, and the results, up on the
 screen, but I’ll skip them for now.
 
 ![](images/clipboard-2681998945.png)
+
+<br>
 
 ## Article 2
 
@@ -156,6 +160,8 @@ people, but it is only on very specific relationships.
 
 ![](images/clipboard-731510198.png)
 
+<br>
+
 ## My own topic
 
 Lastly, I will quickly talk about my own topic. I struggled a little bit
@@ -186,6 +192,8 @@ more similar, or whether one person becomes more like the other person.
 So this would end up with a conceptual model like this
 
 ![](images/clipboard-634570693.png)
+
+------------------------------------------------------------------------
 
 # During class
 
@@ -248,3 +256,7 @@ snam1 <- sna::nacf(net1, drink[, 1], type = "moran", neighborhood.type = "out", 
 snam1[2]
 view(drink)
 ```
+
+------------------------------------------------------------------------
+
+# References

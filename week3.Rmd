@@ -16,6 +16,8 @@ My explanatory, micro, question was: "Do peers become more similar to each other
 
 Here again, it could be really interesting to look at the difference between strong and weak ties, as you could expect there to be a bigger effect of strong ties, if there is an influence effect.
 
+<br>
+
 ## What data do I need?
 
 I think I will use the MRCS data, as this is a very extensive dataset, which covers the topic that I am interested in.
@@ -64,6 +66,8 @@ in the box below. Again, if you do not know their last names, please include as 
 remember. (If you can't think of anyone, please skip this question)
 
 - SXnhng01-10: Write in the first and last name
+
+------------------------------------------------------------------------
 
 # RSiena workshop
 ## Logic
@@ -467,9 +471,9 @@ Using RSiena as an ABM/ making the micro macro link
 
 ```
 
-# Working in class
-Retrying a network analysis, but with trying different things, than just copying the website
+<br>
 
+# On own data
 Getting started
 ```{r}
 rm(list = ls())
@@ -584,13 +588,6 @@ Install/ load packages
 packages = c("RSiena", "tidyverse", "stringdist", "stringi")
 
 fpackage.check(packages)
-```
-Load data
-```{r}
-#df_ind <- load(".data/All-ListedData_MRCP_Wave12_Ind.RData")
-#df_network <- load(".data/All-ListedData_MRCP_Wave12_Net.RData")
-
-#view(df_ind)
 ```
 
 

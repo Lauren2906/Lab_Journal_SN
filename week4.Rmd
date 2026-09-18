@@ -1,7 +1,60 @@
 ---
-title: "Lab journal social networks"
+title: "Week 4"
 author: "Lauren Dirix"
 bibliography: references.bib
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-# Week 4 - XXX
+# Preparation before class
+
+## Adjusting my research questions
+
+Based on the discussions last week, I think I will keep my research
+questions the same. Thus my research questions are: 1. Are students who
+are connected to each other more similar with regards to civic
+engagement, than students who are not connected to each other? 2. Do
+students become more similar to each other with regards to civic
+engagement, when they are connected in a network?
+
+<br>
+
+## What data do I need?
+
+Here I will further describe the data that I need to answer my research
+questions. THe items I chose last week, still seem like the best choice
+to me for measuring the concepts, I will just go into them a bit more
+deeply this week, answering what level data the items measure.
+
+**Civic engagement** 
+
+For civic engagement, the questionnaire measures
+both beliefs and behaviour. I am most interested in behaviour, so I will
+be using that scale from now on. This scale consists of six items, each
+measuring a different civic behaviour. This is a measure on an
+individual, actor level. This is a dynamic measure, it can change over
+time, which is why it is interesting whether it changes because of the
+ties people have.
+
+**Strong/ weak ties** 
+
+The measure for both strong and weak ties, are
+inherently dyadic data, as you cannot have a tie on your own. The
+questions asked in the MRCS dataset ask for directed ties, as the
+question is about whether actor A friends (or study partners) with actor
+B, however, it is possible that actor B does not nominate actor A,
+leading to a directed tie.
+
+**Covariates** 
+
+Last week I did not look into covariates that should be
+considered, but the dataset contains all the 'standard' covariates, that
+would be important to control for: - Gender (RXge) - Ethnicity
+(RXreth) - What year of college (Rfrstyr) These are all variables
+measured at the individual level, with the first two being stable
+characteristics, and the last one being dynamic.
+
+------------------------------------------------------------------------
+
+# In class

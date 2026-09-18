@@ -9,7 +9,7 @@ bibliography: references.bib
 #remotes::install_github("rlesur/klippy")
 ```
 
-```{r}
+```{r, include = FALSE}
 library(knitr)
 library(styler)
 library(tidyverse)
@@ -51,17 +51,15 @@ But please note, we are not here to make a beautiful website, our intention is j
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 
-*Describe lab journal here.*
+This website was made as part of the course Social Networks (SOW-SCS211), and showcases both my progress (under tab "Lab journal") and my final assignment (under tab "Final assignment")
 
 <br>
 
 ------------------------------------------------------------------------
 
-## Open Science
+# Open Science
 
-Everyone can fork this repository. Use this example to journal your lab work and assignments.
-
-We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page --->
+This website and web journal was created by forking the repository from Jochem Tolsma and Bas Hofstra [@SNASS].
 :::
 
 ::: {.column width="50%"}
@@ -69,19 +67,6 @@ We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network An
 :::
 :::::
 
-## How to use
-
-1.  Fork the repository for this website and follow instructions on `README` to get started [here](https://github.com/JochemTolsma/labjournal).
-
-2.  Journal your work, by editing the .Rmd-files
-
-3.  ...
-
-4.  Change everything to make it your own!
-
-<br>
-
-Use the top menu to navigate through the journal.
 
 ------------------------------------------------------------------------
 
