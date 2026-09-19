@@ -589,5 +589,55 @@ packages = c("RSiena", "tidyverse", "stringdist", "stringi")
 
 fpackage.check(packages)
 ```
+Load in data
+```{r}
+packages = c("stringdist", "stringi", "tidyverse")
+fpackage.check(packages)
 
+#was unfortunately unsuccessful :/
+```
+Because I cannot figure out how to load the data into R, I did it manually, but that means that it won't run when I try to build it, so I deleted all the "```" from the chuncks underneath, in order to still be able to upload my work. It doesn't look that pretty though.
+<br>
 
+## Variables of interest
+### Network matrix (weak ties)
+Create a matrix, that can be used within RSiena. I set all values 9 to NA, as these respondents have not filled out the survey
+
+```
+# view(studying[[1]])
+studying_df_t1 <- as.data.frame(studying[[1]][1])
+class(studying_df_t1)
+# view(studying_df_t1)
+weak_netw_t1 <- data.matrix(studying_df_t1)
+weak_netw_t1[weak_netw_t1==9]<-NA
+class(weak_netw_t1)
+# view(weak_netw_t1)
+
+studying_df_t2 <- as.data.frame(studying[[1]][2])
+class(studying_df_t2)
+# view(studying_df_t2)
+weak_netw_t2 <- data.matrix(studying_df_t2)
+weak_netw_t2[weak_netw_t2==9]<-NA
+class(weak_netw_t2)
+# view(weak_netw_t2)
+```
+
+### Network matrix (strong ties)
+```
+# view(hanging[[1]])
+hanging_df_t1 <- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)
+# view(hanging_df_t1)
+strong_netw_t1 <- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]<-NA
+class(strong_netw_t1)
+# view(strong_netw_t1)
+
+hanging_df_t2 <- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)
+# view(hanging_df_t2)
+strong_netw_t2 <- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]<-NA
+class(strong_netw_t2)
+# view(strong_netw_t2)
+```

@@ -758,14 +758,12 @@ graph &lt;- graph_from_data_frame(s501)
 plot(graph)</code></pre>
 <p><img src="week2_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 <pre class="r"><code>graph2 &lt;- graph_from_adjacency_matrix(s501, mode = &quot;undirected&quot;)</code></pre>
-<pre><code>## Warning: The `adjmatrix` argument of
-## `graph_from_adjacency_matrix()` must be symmetric
+<pre><code>## Warning: The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric
 ## with mode = &quot;undirected&quot; as of igraph 1.6.0.
-## ℹ Use mode = &quot;max&quot; to achieve the original
-##   behavior.
+## ℹ Use mode = &quot;max&quot; to achieve the original behavior.
 ## This warning is displayed once per session.
-## Call `lifecycle::last_lifecycle_warnings()` to see
-## where this warning was generated.</code></pre>
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <pre class="r"><code>plot(graph2)</code></pre>
 <p><img src="week2_files/figure-html/unnamed-chunk-2-2.png" alt="" width="672" /></p>
 <pre class="r"><code>graph3 &lt;- graph_from_adjacency_matrix(s501, mode = &quot;directed&quot;)

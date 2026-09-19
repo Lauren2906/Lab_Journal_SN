@@ -19,7 +19,6 @@ library(network)
 ```
 
 ```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
-
 knitr::opts_chunk$set(echo = TRUE)
 opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
 options(width = 100)
