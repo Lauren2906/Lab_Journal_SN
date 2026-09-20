@@ -254,7 +254,7 @@ net1 <- network::as.network(friend.data.w1)
 snam1 <- sna::nacf(net1, drink[, 1], type = "moran", neighborhood.type = "out", demean = TRUE)
 
 snam1[2]
-view(drink)
+# view(drink)
 ```
 
 ------------------------------------------------------------------------

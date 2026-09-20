@@ -16,6 +16,10 @@ library(tidyverse)
 library(installr)
 library(foreign)
 library(network)
+library(RSiena)
+library(RsienaTwoStep)
+library(igraph)
+library(devtools)
 ```
 
 ```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}

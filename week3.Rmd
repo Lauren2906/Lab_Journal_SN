@@ -594,16 +594,19 @@ Load in data
 packages = c("stringdist", "stringi", "tidyverse")
 fpackage.check(packages)
 
+load("./data/IndividualCharacteristics.RData")
+load("./data/NetworkCharacteristics.RData")
+
 #was unfortunately unsuccessful :/
 ```
-Because I cannot figure out how to load the data into R, I did it manually, but that means that it won't run when I try to build it, so I deleted all the "```" from the chuncks underneath, in order to still be able to upload my work. It doesn't look that pretty though.
+
 <br>
 
 ## Variables of interest
 ### Network matrix (weak ties)
 Create a matrix, that can be used within RSiena. I set all values 9 to NA, as these respondents have not filled out the survey
 
-```
+```{r}
 # view(studying[[1]])
 studying_df_t1 <- as.data.frame(studying[[1]][1])
 class(studying_df_t1)
@@ -623,7 +626,7 @@ class(weak_netw_t2)
 ```
 
 ### Network matrix (strong ties)
-```
+```{r}
 # view(hanging[[1]])
 hanging_df_t1 <- as.data.frame(hanging[[1]][1])
 class(hanging_df_t1)
@@ -640,4 +643,36 @@ strong_netw_t2 <- data.matrix(hanging_df_t2)
 strong_netw_t2[strong_netw_t2==9]<-NA
 class(strong_netw_t2)
 # view(strong_netw_t2)
+```
+
+### Covariates (gender, ethnicity)
+```{r}
+gender_df <- as.data.frame(gender)
+ethnicity_df <- as.data.frame(ethnic)
+ind_mat <- data.matrix(cbind(gender_df, ethnicity_df))
+class(ind_mat)
+# view(ind_mat)
+```
+
+As both gender and ethnicity are stable characteristics, we only need one variable for each (not both T1 and T2).
+
+```{r}
+#I do not know how to do that yet
+```
+
+## Descriptive statistics on network data
+Macro segregation
+```{r}
+net_t1 <- network::as.network(strong_netw_t1)
+# snam_t1 <- sna::nacf(net_t1, gender[[1]][1], type = "moran", neighborhood.type = "out", demean = TRUE)
+# snam_t1[2]
+# Does not work :(
+```
+
+## RSiena tryout
+```{r}
+strongnetw_RS_T1 <- as_dependent_rsiena(strong_netw_t1)
+strongnetw_RS_T2 <- as_dependent_rsiena(strong_netw_t2)
+rsiena_try <- make_data_rsiena(strongnetw_RS_T1, strongnetw_RS_T2)
+write_report(rsiena_try)
 ```
