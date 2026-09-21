@@ -59,8 +59,6 @@ the last one being dynamic.
 
 ## SNASS tutorial
 
-### 9.1. Getting to know the data
-
 ```{r}
 require("igraph")
 g <- make_graph("Zachary")
@@ -83,7 +81,7 @@ Based on the matrix, there are undirected ties, because it is symmetric.
 You can also check this with isSymemetric, if that is true, there is an
 undirected network.
 
-#### Descriptive statistics
+### Descriptive statistics
 
 Transitivity
 
@@ -116,7 +114,7 @@ How can we plot that?
 
 - Layout broader --\> No overlapping nodes
 
-#### Dyad census
+### Dyad census
 
 ```{r}
 igraph::dyad_census(g)
@@ -124,7 +122,7 @@ igraph::dyad_census(g)
 
 Because it is an undirected graph, the asymmetry is always 0
 
-#### Triad census
+### Triad census
 
 ```{r}
 igraph::triad_census(g)
@@ -163,7 +161,7 @@ transitivity_g <- (3 * triad_g$X300)/(triad_g$X201 + 3 * triad_g$X300)
 transitivity_g
 ```
 
-#### Network visualisation
+### Network visualisation
 
 ```{r}
 # changing V
@@ -196,3 +194,254 @@ plot(g, layout = l)
 ```
 This is the same network, but the second one looks/ feels a lot different (seems to suggest way more polarisation, where 1 and 34 are polar opposites)
 For the second one, we manipulated the graph manually, if you do this, be honest about it!!! BUT this is the same as the algorithm does, which is something that is generally accepted, which is kind of odd. Solution: Maybe mention what algorithm you used (and why?) --> graphs aren't neutral
+
+# Trying on my own
+Load in data
+```{r}
+packages = c("stringdist", "stringi", "tidyverse")
+fpackage.check(packages)
+
+load("./data/IndividualCharacteristics.RData")
+load("./data/NetworkCharacteristics.RData")
+```
+
+<br>
+
+## Variables of interest
+### Network matrix (weak ties)
+Create a matrix, that can be used within RSiena. I set all values 9 to NA, as these respondents have not filled out the survey
+
+```{r}
+# view(studying[[1]])
+studying_df_t1 <- as.data.frame(studying[[1]][1])
+class(studying_df_t1)
+# view(studying_df_t1)
+weak_netw_t1 <- data.matrix(studying_df_t1)
+weak_netw_t1[weak_netw_t1==9]<-NA
+class(weak_netw_t1)
+# view(weak_netw_t1)
+
+studying_df_t2 <- as.data.frame(studying[[1]][2])
+class(studying_df_t2)
+# view(studying_df_t2)
+weak_netw_t2 <- data.matrix(studying_df_t2)
+weak_netw_t2[weak_netw_t2==9]<-NA
+class(weak_netw_t2)
+# view(weak_netw_t2)
+```
+
+### Network matrix (strong ties)
+```{r}
+# view(hanging[[1]])
+hanging_df_t1 <- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)
+# view(hanging_df_t1)
+strong_netw_t1 <- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]<-NA
+class(strong_netw_t1)
+# view(strong_netw_t1)
+
+hanging_df_t2 <- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)
+# view(hanging_df_t2)
+strong_netw_t2 <- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]<-NA
+class(strong_netw_t2)
+# view(strong_netw_t2)
+```
+
+### Covariates (gender, ethnicity)
+```{r}
+gender_df <- as.data.frame(gender)
+ethnicity_df <- as.data.frame(ethnic)
+ind_mat <- data.matrix(cbind(gender_df, ethnicity_df))
+class(ind_mat)
+# view(ind_mat)
+```
+
+As both gender and ethnicity are stable characteristics, we only need one variable for each (not both T1 and T2).
+
+```{r}
+copy_ind_mat <- ind_mat
+for(i in 1:nrow(copy_ind_mat)){
+  if (is.na(copy_ind_mat[i])) {
+    copy_ind_mat[i] <- copy_ind_mat[i, 2]
+  }
+}
+
+print(ind_mat)
+# View(ind_mat)
+# view(copy_ind_mat)
+```
+
+## Visualisation
+```{r}
+require(igraph)
+
+copy_strong_netw_t2 <- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] <- 0 
+
+g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
+plot(g_strong_t2)
+```
+
+## Explanation of NA's with fake data
+```{r}
+test_m <- matrix(NA, nrow = 4, ncol = 4)
+test_m[1,1] <- 0
+test_m[1,2] <- 1
+test_m[1,4] <- 1
+test_m[3,1] <- 0
+test_m[3,2] <- 1
+test_m[3,4] <- 1
+test_m[4,1] <- 0
+test_m[4,2] <- 1
+test_m[4,4] <- 0
+
+view(test_m)
+```
+
+For plotting what you do with missing data differs from how you deal with NA's than for RSiena
+
+If someone isnt there in both the row and the column, you want them gone from your data
+```{r}
+misrow <- rowSums(is.na(test_m)) == nrow(test_m)
+miscol <- colSums(is.na(test_m)) == nrow(test_m)
+
+miss <- which(misrow & miscol) #Checken waar zowel de collumn als de rows missings zijn
+miss
+
+which(misrow) #Tells you which row has missing values
+
+test_m[which(misrow), ] <- 0
+```
+
+# Webscraping
+```{r}
+install.packages("xml2")
+require(xml2)
+install.packages("rvest")
+require(rvest)
+```
+Trying to save data from a nos article
+Saving the href
+```{r}
+url <- "https://nos.nl/zoeken?q=Jochem+Tolsma&page=1"
+
+nos <- read_html(url)
+nos # It is a html document
+
+lijst <- nos %>% html_elements("main") %>%
+  html_elements("ul") %>%
+  html_elements("li")
+
+lijst[1] #shows that you can select just one of the loaded lists
+# Keep digging deeper into these lists, until you reach the desired depth/ information (in this case the date)
+
+# The href should be in the object under lijst 1
+lijst[1] %>% html_children %>% html_attr(name = "href")
+
+#Copy x-path, to lead R to the right place, on the right page
+# //*[@id="content"]/div[2]
+
+#Copy full x-path
+# /html/body/div/main/div[2]
+```
+Saving the date
+```{r}
+# By myself
+time_num <- lijst[1] %>% html_children %>% html_children %>% .[2] %>% html_children %>% .[2] %>% html_children %>% html_children %>% html_attr(name = "datetime")
+time_num
+
+#.[2] --> selects the second list in the objects that are under the object that are under lijst 1
+
+time_char <- lijst[1] %>% html_children %>% html_children %>% .[2] %>% html_children %>% .[2] %>% html_children %>% html_children %>% html_text 
+time_char
+
+# In class
+lijst[1] %>% html_element("time") %>% html_attr(name = "datetime")
+lijst[1] %>% html_element("time") %>% html_text
+```
+
+```{
+url <- "https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document(7a9b77f1-d230-4a00-9856-2f0f8e967e62)"
+
+test <- read_html(url)
+html_text(test)
+
+library(jsonlite)
+test <- fromJSON(url)
+test$Soort
+```
+
+# Trying on my own (again)
+## Descriptive statistics
+```{r}
+vcount(g_strong_t2)
+ecount(g_strong_t2)
+
+pretty_graph <- simplify(g_strong_t2)
+plot(pretty_graph)
+
+plot(pretty_graph,
+     vertex.color = "pink", # nice color for the vertices
+     vertex.size = 10,  # we'll vertices a bit smaller
+     vertex.frame.color = "gray",  # we'll put a gray frame around vertices
+     vertex.label.color = "black",  # not that ugly blue color for the labels (names)
+     vertex.label.family = "Helvetica", # not a fan of times new roman in figures
+     vertex.label.cex = 0.3,  # make the label a bit smaller too
+     vertex.label.dist = 0.5,  # we'll pull the labels a bit away from the vertices
+     edge.curved = 0.2, # curved edges is always a nice touch
+     edge.arrow.size = 0.075, # make arrow size (direction of edge) smaller
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))
+```
+Trying (and being unsuccesful) to give gender different colours
+```{}
+in_network <- data.frame(as_ids(V(pretty_graph)))
+names(in_network)[1] <- "name"
+
+ind_df <- as.data.frame(ind_mat)
+names(ind_df)[1] <- "name"
+ind_df$name <- as.character(ind_df$name)
+
+in_network <- left_join(in_network, ind_df, by = c("name" = "name"))
+
+in_network$vcol <- ifelse()
+
+```
+
+Trying to change node size based on degree?
+```{r}
+V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = T) * 1000 + 50
+
+plot(pretty_graph,
+     vertex.color = "pink",
+     vertex.frame.color = "gray",
+     vertex.label.color = "black",
+     vertex.label.family = "Helvetica",
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))
+
+```
+
+```{r}
+V(pretty_graph)$color = betweenness(pretty_graph, normalized = T, directed = T) * 1000 + 50
+
+plot(pretty_graph,
+     vertex.size = 100,
+     vertex.frame.color = "gray",
+     vertex.label.color = "black",
+     vertex.label.family = "Helvetica",
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))
+```
+

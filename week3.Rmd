@@ -628,7 +628,7 @@ class(weak_netw_t2)
 # view(hanging[[1]])
 hanging_df_t1 <- as.data.frame(hanging[[1]][1])
 class(hanging_df_t1)
-view(hanging_df_t1)
+# view(hanging_df_t1)
 strong_netw_t1 <- data.matrix(hanging_df_t1)
 strong_netw_t1[strong_netw_t1==9]<-NA
 class(strong_netw_t1)
@@ -649,7 +649,7 @@ gender_df <- as.data.frame(gender)
 ethnicity_df <- as.data.frame(ethnic)
 ind_mat <- data.matrix(cbind(gender_df, ethnicity_df))
 class(ind_mat)
-# view(ind_mat)
+view(ind_mat)
 ```
 
 As both gender and ethnicity are stable characteristics, we only need one variable for each (not both T1 and T2).

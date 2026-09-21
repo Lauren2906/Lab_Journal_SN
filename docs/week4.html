@@ -475,9 +475,589 @@ the last one being dynamic.</p>
 </div>
 <div id="in-class" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> In class</h1>
+<div id="snass-tutorial" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> SNASS tutorial</h2>
+<pre class="r"><code>require(&quot;igraph&quot;)
+g &lt;- make_graph(&quot;Zachary&quot;)
+plot(g)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" /></p>
+<p>Visually, this isn’t the same graph as in the tutorial, but the ties
+are the same, and the centre is relatively the same. Apparently, the
+figure is made to put the ‘popular’ people in the centre. Based on this,
+we can say something about network size, the fact that the ties are
+undirected (but is that igraph, or the data that is undirected –&gt;
+check matrix).</p>
+<pre class="r"><code>gmat &lt;- as_adjacency_matrix(g, type = &quot;both&quot;, sparse = FALSE)
+# gmat
+isSymmetric(gmat)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Based on the matrix, there are undirected ties, because it is
+symmetric. You can also check this with isSymemetric, if that is true,
+there is an undirected network.</p>
+<div id="descriptive-statistics" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Descriptive
+statistics</h3>
+<p>Transitivity</p>
+<pre class="r"><code># be aware that directed graphs are considered as undirected. but g is undirected.
+igraph::transitivity(g, type = c(&quot;localundirected&quot;), isolates = c(&quot;NaN&quot;, &quot;zero&quot;))</code></pre>
+<pre><code>##  [1] 0.1500000 0.3333333 0.2444444 0.6666667 0.6666667 0.5000000 0.5000000 1.0000000 0.5000000
+## [10] 0.0000000 0.6666667       NaN 1.0000000 0.6000000 1.0000000 1.0000000 1.0000000 1.0000000
+## [19] 1.0000000 0.3333333 1.0000000 1.0000000 1.0000000 0.4000000 0.3333333 0.3333333 1.0000000
+## [28] 0.1666667 0.3333333 0.6666667 0.5000000 0.2000000 0.1969697 0.1102941</code></pre>
+<p>There is not one actor who is specifically very unique in their
+amount of transitive ties, thus doesnt seem to be that interesting of a
+statistic</p>
+<p>Betweenness</p>
+<pre class="r"><code>igraph::betweenness(g, directed = FALSE)</code></pre>
+<pre><code>##  [1] 231.0714286  28.4785714  75.8507937   6.2880952   0.3333333  15.8333333  15.8333333   0.0000000
+##  [9]  29.5293651   0.4476190   0.3333333   0.0000000   0.0000000  24.2158730   0.0000000   0.0000000
+## [17]   0.0000000   0.0000000   0.0000000  17.1468254   0.0000000   0.0000000   0.0000000   9.3000000
+## [25]   1.1666667   2.0277778   0.0000000  11.7920635   0.9476190   1.5428571   7.6095238  73.0095238
+## [33]  76.6904762 160.5515873</code></pre>
+<p>This shows that number 1 and number 34 have very high number, in the
+plot you do not see that (big) difference between 33 and 34, thus we
+need to recreate the plot. It seems like 1, 3, 32, 33, and 34 are
+interesting, as they have large numbers.</p>
+<p>How can we plot that?</p>
+<ul>
+<li><p>Colour code –&gt; upalate to show the brighter the colour the
+more betweenness</p></li>
+<li><p>Size increase –&gt; Size nodes dependent on betweenness</p></li>
+<li><p>Layout broader –&gt; No overlapping nodes</p></li>
+</ul>
+</div>
+<div id="dyad-census" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Dyad census</h3>
+<pre class="r"><code>igraph::dyad_census(g)</code></pre>
+<pre><code>## Warning: `dyad_census()` requires a directed graph.</code></pre>
+<pre><code>## $mut
+## [1] 78
+## 
+## $asym
+## [1] 0
+## 
+## $null
+## [1] 483</code></pre>
+<p>Because it is an undirected graph, the asymmetry is always 0</p>
+</div>
+<div id="triad-census" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Triad census</h3>
+<pre class="r"><code>igraph::triad_census(g)</code></pre>
+<pre><code>## Warning in triad_census_impl(graph = graph): Triad census called on an undirected graph. All connections will be treated as mutual.
+## Source: misc/motifs.c:1157</code></pre>
+<pre><code>##  [1] 3971    0 1575    0    0    0    0    0    0    0  393    0    0    0    0   45</code></pre>
+<pre class="r"><code># I will use sna because it shows the names of the triads as well.
+sna::triad.census(gmat)</code></pre>
+<pre><code>##       003 012  102 021D 021U 021C 111D 111U 030T 030C 201 120D 120U 120C 210 300
+## [1,] 3971   0 1575    0    0    0    0    0    0    0 393    0    0    0   0  45</code></pre>
+<pre class="r"><code>unloadNamespace(&quot;sna&quot;)  #I will detach this package again, otherwise it will interfere with all kind of functions from igraph, and my students will hate me for that.</code></pre>
+<p>This shows per sort of triad, how many times it is existent in the
+network</p>
+<p>How many ways there are to close a triad, is calculated through an
+actor perspective –&gt; If there is a triad, there are three ways to be
+a triad, from each actor one</p>
+<p>Transitivity: How many triads are closed divided by the amount of
+triads that are closed or can be closed OR how many 300 networks are
+there, divided by 300 + 201 networks (because only 201 can be closed)
+This same goes for reciprocity (on dyad level), which cannot be done on
+this network, because it has undirected ties</p>
+<p>Local transitivity: The transitivity of one ego –&gt; shows you how
+many transitive ties one ego has Can tell you something about how two
+people with the same amount of ties, differ in their network
+structure</p>
+<pre class="r"><code># Caluclating transitivity in an r-function
+igraph::transitivity(g, type = &quot;global&quot;)</code></pre>
+<pre><code>## [1] 0.2556818</code></pre>
+<pre class="r"><code># Or
+sna::gtrans(gmat)</code></pre>
+<pre><code>## [1] 0.2556818</code></pre>
+<pre class="r"><code># Calculating transitivity manually
+triad_g &lt;- data.frame(sna::triad.census(gmat))
+
+transitivity_g &lt;- (3 * triad_g$X300)/(triad_g$X201 + 3 * triad_g$X300)
+transitivity_g</code></pre>
+<pre><code>## [1] 0.2556818</code></pre>
+</div>
+<div id="network-visualisation" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Network
+visualisation</h3>
+<pre class="r"><code># changing V
+V(g)$size = betweenness(g, normalized = T, directed = FALSE) * 60 + 10  #after some trial and error
+plot(g, mode = &quot;undirected&quot;)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" /></p>
+<p>Meaning of the different parts of the codes:</p>
+<ul>
+<li><p>V = virtuses (the nodes)</p></li>
+<li><p>E = edges</p></li>
+<li><p>*60 = betweenness score is between 0 and 1, needs to be more
+heavily taken into account</p></li>
+<li><p>+10 = if you don’t do that, nodes with a betweenness of 0 will
+also be visualised with 0, which would be undesirable</p></li>
+</ul>
+<pre class="r"><code>set.seed(2345)
+l &lt;- layout_with_mds(g)  #https://igraph.org/r/doc/layout_with_mds.html
+plot(g, layout = l)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
+<pre class="r"><code>l  #let us take a look at the coordinates</code></pre>
+<pre><code>##               [,1]         [,2]
+##  [1,]  1.070931935 -0.172458113
+##  [2,]  0.732844464  0.754023309
+##  [3,]  0.100582299  0.397693607
+##  [4,]  0.708246655  0.570205545
+##  [5,]  1.816293170 -0.120778206
+##  [6,]  1.881329566 -0.135518854
+##  [7,]  1.881329566 -0.135518854
+##  [8,]  0.812606714  0.472619437
+##  [9,] -0.003769996  0.615513628
+## [10,] -0.685680315  0.621065149
+## [11,]  1.816293170 -0.120778206
+## [12,]  1.621247830 -0.065820692
+## [13,]  1.637845123  0.001789972
+## [14,]  0.067317230  0.681421148
+## [15,] -1.796316404  0.351417630
+## [16,] -1.796316404  0.351417630
+## [17,]  2.775260452 -0.124317652
+## [18,]  1.616210024  0.182510197
+## [19,] -1.796316404  0.351417630
+## [20,]  0.048362858  0.566654982
+## [21,] -1.796316404  0.351417630
+## [22,]  1.616210024  0.182510197
+## [23,] -1.796316404  0.351417630
+## [24,] -1.891240567 -0.799574907
+## [25,] -0.258345165 -2.006346563
+## [26,] -0.360530857 -2.131642875
+## [27,] -1.865177401  0.128596564
+## [28,] -0.760226022 -0.529392331
+## [29,] -0.710979936 -0.299960128
+## [30,] -1.898426916 -0.149398746
+## [31,] -0.568691923  0.804189411
+## [32,] -0.048136037 -0.870967614
+## [33,] -1.023681000 -0.035802363
+## [34,] -1.146442924 -0.037605192</code></pre>
+<pre class="r"><code>l[1, 1] &lt;- 4
+l[34, 1] &lt;- -3.5
+plot(g, layout = l)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" />
+This is the same network, but the second one looks/ feels a lot
+different (seems to suggest way more polarisation, where 1 and 34 are
+polar opposites) For the second one, we manipulated the graph manually,
+if you do this, be honest about it!!! BUT this is the same as the
+algorithm does, which is something that is generally accepted, which is
+kind of odd. Solution: Maybe mention what algorithm you used (and why?)
+–&gt; graphs aren’t neutral</p>
+</div>
+</div>
+</div>
+<div id="trying-on-my-own" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Trying on my own</h1>
+<p>Load in data</p>
+<pre class="r"><code>packages = c(&quot;stringdist&quot;, &quot;stringi&quot;, &quot;tidyverse&quot;)
+fpackage.check(packages)</code></pre>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL</code></pre>
+<pre class="r"><code>load(&quot;./data/IndividualCharacteristics.RData&quot;)
+load(&quot;./data/NetworkCharacteristics.RData&quot;)</code></pre>
+<p><br></p>
+<div id="variables-of-interest" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Variables of
+interest</h2>
+<div id="network-matrix-weak-ties" class="section level3"
+number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Network matrix
+(weak ties)</h3>
+<p>Create a matrix, that can be used within RSiena. I set all values 9
+to NA, as these respondents have not filled out the survey</p>
+<pre class="r"><code># view(studying[[1]])
+studying_df_t1 &lt;- as.data.frame(studying[[1]][1])
+class(studying_df_t1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(studying_df_t1)
+weak_netw_t1 &lt;- data.matrix(studying_df_t1)
+weak_netw_t1[weak_netw_t1==9]&lt;-NA
+class(weak_netw_t1)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(weak_netw_t1)
+
+studying_df_t2 &lt;- as.data.frame(studying[[1]][2])
+class(studying_df_t2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(studying_df_t2)
+weak_netw_t2 &lt;- data.matrix(studying_df_t2)
+weak_netw_t2[weak_netw_t2==9]&lt;-NA
+class(weak_netw_t2)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(weak_netw_t2)</code></pre>
+</div>
+<div id="network-matrix-strong-ties" class="section level3"
+number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Network matrix
+(strong ties)</h3>
+<pre class="r"><code># view(hanging[[1]])
+hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t1)
+strong_netw_t1 &lt;- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]&lt;-NA
+class(strong_netw_t1)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t1)
+
+hanging_df_t2 &lt;- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t2)
+strong_netw_t2 &lt;- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]&lt;-NA
+class(strong_netw_t2)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t2)</code></pre>
+</div>
+<div id="covariates-gender-ethnicity" class="section level3"
+number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Covariates (gender,
+ethnicity)</h3>
+<pre class="r"><code>gender_df &lt;- as.data.frame(gender)
+ethnicity_df &lt;- as.data.frame(ethnic)
+ind_mat &lt;- data.matrix(cbind(gender_df, ethnicity_df))
+class(ind_mat)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(ind_mat)</code></pre>
+<p>As both gender and ethnicity are stable characteristics, we only need
+one variable for each (not both T1 and T2).</p>
+<pre class="r"><code>copy_ind_mat &lt;- ind_mat
+for(i in 1:nrow(copy_ind_mat)){
+  if (is.na(copy_ind_mat[i])) {
+    copy_ind_mat[i] &lt;- copy_ind_mat[i, 2]
+  }
+}
+
+print(ind_mat)</code></pre>
+<pre><code>##       T1GENDER T2GENDER T1ETHNICITY T2ETHNICITY
+## 30001        2        2           1           1
+## 30002        2        2           3           3
+## 30003        1       NA           4          NA
+## 30004        2        2           2           2
+## 30005        1        1           1           1
+## 30006        2        2           4           4
+## 30007       NA        1          NA           1
+## 30008        2        2           4           4
+## 30009        2        2           1           1
+## 30010        1       NA           1          NA
+## 30011        2        2           1           1
+## 30012        1        1           1           1
+## 30013        2        2           1           1
+## 30014        2        2           1           1
+## 30015        2        2           5           5
+## 30016        2        2           5           5
+## 30017        2        2           4           4
+## 30018        2        2           1           1
+## 30019        2        2           4           4
+## 30020        2        2           2           2
+## 30021        2        2           2           2
+## 30022        1        1           3           3
+## 30023        2        2           3           3
+## 30025        1        1           4           4
+## 30026        1        1           1           1
+## 30027        1        1           5           5
+## 30028        2        2           2           2
+## 30029        1        1           4           4
+## 30030        2        2           4           4
+## 30031        2        2           4           4
+## 30032        2       NA           1          NA
+## 30033        2        2           4           4
+## 30034        2        2           4           4
+## 30035        2        2           4           4
+## 30036        2        2           4           4
+## 30037        2        2           1           1
+## 30038        1        1           1           1
+## 30039       NA        2          NA           1
+## 30040       NA        1          NA           1
+## 30041        2        2           2           2
+## 30042       NA        2          NA           2
+## 30043        2        2           1           1
+## 30044        2        2           1           1
+## 30045        2        2           1           1
+## 30046        1        1           4           4
+## 30047        2        2           1           1
+## 30048        1        1           4           4
+## 30049        2        2           1           1
+## 30050        2        2           1           1
+## 30051        1        1           1           1
+## 30052       NA        1          NA           4
+## 30053        1        1           4           4
+## 30054        2        2           4           4
+## 30055        2        2           1           1
+## 30056       NA        2          NA           3
+## 30057        2        2           5           5
+## 30058        2        2           1           1
+## 30059        1        1           1           1
+## 30060       NA        1          NA           1
+## 30061        2        2           1           1
+## 30062        2        2           4           4
+## 30063        2        2           4           4
+## 30064        2        2           1           1
+## 30065        1        1           4           4
+## 30066        1        1           4           4
+## 30067        2        2           1           1
+## 30068        1       NA           1          NA
+## 30069        1        1           4           4
+## 30070        2        2           2           2
+## 30071        2        2           3           3
+## 30072        1        1           1           1
+## 30073        1        1           3           3
+## 30074        1        1           3           3
+## 30075        1        1           2           2
+## 30076        1        1           1           1
+## 30077        1       NA           2          NA
+## 30078        1        1           3           3
+## 30079        2        2           4           4
+## 30080        2        2           4           4
+## 30081        2        2           1           1
+## 30082        2        2           1           1
+## 30083        1        1           1           1
+## 30084        1        1           1           1
+## 30085        2        2           1           1
+## 30086        1        1           4           4
+## 30087        2        2           4           4
+## 30088        2        2           2           2
+## 30089        2        2           1           1
+## 30090        2       NA           3          NA
+## 30091        1        1           2           2
+## 30092        2        2           3           3
+## 30093        1       NA           4          NA
+## 30094        2        2           4           4
+## 30095       NA        1          NA           3
+## 30096        2        2           1           1
+## 30097        2        2           1           1
+## 30098        2        2           5           5
+## 30099        1        1           1           1
+## 30100        2        2           4           4
+## 30101        2        2           2           2
+## 30102        2        2           1           1
+## 30103        2        2           1           1
+## 30104        2        2           4           4
+## 30105        2        2           1           1
+## 30106        2        2           3           3
+## 30107        2        2           1           1
+## 30108       NA        2          NA           2
+## 30109        1        1           1           1
+## 30110        1        1           1           1
+## 30111        1        1           4           4
+## 30112        2        2           3           3
+## 30113        2        2           5           5
+## 30114        2        2           6           6
+## 30115       NA        2          NA           2
+## 30116        1        1           4           4
+## 30117        2        2           2           2
+## 30118        2        2           1           1
+## 30119        2        2           1           1
+## 30120        2        2           4           4
+## 30121        2        2           4           4
+## 30122        1        1           4           4</code></pre>
+<pre class="r"><code># View(ind_mat)
+# view(copy_ind_mat)</code></pre>
+</div>
+</div>
+<div id="visualisation" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Visualisation</h2>
+<pre class="r"><code>require(igraph)
+
+copy_strong_netw_t2 &lt;- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] &lt;- 0 
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = &quot;directed&quot;)
+plot(g_strong_t2)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-16-1.png" alt="" width="672" /></p>
+</div>
+<div id="explanation-of-nas-with-fake-data" class="section level2"
+number="3.3">
+<h2><span class="header-section-number">3.3</span> Explanation of NA’s
+with fake data</h2>
+<pre class="r"><code>test_m &lt;- matrix(NA, nrow = 4, ncol = 4)
+test_m[1,1] &lt;- 0
+test_m[1,2] &lt;- 1
+test_m[1,4] &lt;- 1
+test_m[3,1] &lt;- 0
+test_m[3,2] &lt;- 1
+test_m[3,4] &lt;- 1
+test_m[4,1] &lt;- 0
+test_m[4,2] &lt;- 1
+test_m[4,4] &lt;- 0
+
+view(test_m)</code></pre>
+<p>For plotting what you do with missing data differs from how you deal
+with NA’s than for RSiena</p>
+<p>If someone isnt there in both the row and the column, you want them
+gone from your data</p>
+<pre class="r"><code>misrow &lt;- rowSums(is.na(test_m)) == nrow(test_m)
+miscol &lt;- colSums(is.na(test_m)) == nrow(test_m)
+
+miss &lt;- which(misrow &amp; miscol) #Checken waar zowel de collumn als de rows missings zijn
+miss</code></pre>
+<pre><code>## integer(0)</code></pre>
+<pre class="r"><code>which(misrow) #Tells you which row has missing values</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>test_m[which(misrow), ] &lt;- 0</code></pre>
+</div>
+</div>
+<div id="webscraping" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Webscraping</h1>
+<pre class="r"><code>install.packages(&quot;xml2&quot;)</code></pre>
+<pre><code>## Installing package into &#39;C:/Users/laure/AppData/Local/R/win-library/4.6&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## package &#39;xml2&#39; successfully unpacked and MD5 sums checked</code></pre>
+<pre><code>## Warning: cannot remove prior installation of package &#39;xml2&#39;</code></pre>
+<pre><code>## Warning in file.copy(savedcopy, lib, recursive = TRUE): problem copying
+## C:\Users\laure\AppData\Local\R\win-library\4.6\00LOCK\xml2\libs\x64\xml2.dll to
+## C:\Users\laure\AppData\Local\R\win-library\4.6\xml2\libs\x64\xml2.dll: Permission denied</code></pre>
+<pre><code>## Warning: restored &#39;xml2&#39;</code></pre>
+<pre><code>## 
+## The downloaded binary packages are in
+##  C:\Users\laure\AppData\Local\Temp\RtmpiyH4g2\downloaded_packages</code></pre>
+<pre class="r"><code>require(xml2)</code></pre>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre class="r"><code>install.packages(&quot;rvest&quot;)</code></pre>
+<pre><code>## Installing package into &#39;C:/Users/laure/AppData/Local/R/win-library/4.6&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## package &#39;rvest&#39; successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+##  C:\Users\laure\AppData\Local\Temp\RtmpiyH4g2\downloaded_packages</code></pre>
+<pre class="r"><code>require(rvest)</code></pre>
+<pre><code>## Loading required package: rvest</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<p>Trying to save data from a nos article Saving the href</p>
+<pre class="r"><code>url &lt;- &quot;https://nos.nl/zoeken?q=Jochem+Tolsma&amp;page=1&quot;
+
+nos &lt;- read_html(url)
+nos # It is a html document</code></pre>
+<pre><code>## {html_document}
+## &lt;html data-theme=&quot;light&quot; lang=&quot;nl&quot;&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;\n&lt;meta charset=&quot;u ...
+## [2] &lt;body&gt;\n&lt;div id=&quot;__next&quot;&gt;\n&lt;nav data-tracking=&quot;nestType1=header&quot; aria-label=&quot;Hoofdnavigatie&quot;  ...</code></pre>
+<pre class="r"><code>lijst &lt;- nos %&gt;% html_elements(&quot;main&quot;) %&gt;%
+  html_elements(&quot;ul&quot;) %&gt;%
+  html_elements(&quot;li&quot;)
+
+lijst[1] #shows that you can select just one of the loaded lists</code></pre>
+<pre><code>## {xml_nodeset (1)}
+## [1] &lt;li&gt;&lt;a data-tracking=&quot;eventType=navigation|eventName=open|elementId=2448644|elementType=artic ...</code></pre>
+<pre class="r"><code># Keep digging deeper into these lists, until you reach the desired depth/ information (in this case the date)
+
+# The href should be in the object under lijst 1
+lijst[1] %&gt;% html_children %&gt;% html_attr(name = &quot;href&quot;)</code></pre>
+<pre><code>## [1] &quot;/artikel/2448644-camperbewoners-ontmoeten-elkaar-dezelfde-levensstijl-en-je-leert-van-elkaar&quot;</code></pre>
+<pre class="r"><code>#Copy x-path, to lead R to the right place, on the right page
+# //*[@id=&quot;content&quot;]/div[2]
+
+#Copy full x-path
+# /html/body/div/main/div[2]</code></pre>
+<p>Saving the date</p>
+<pre class="r"><code># By myself
+time_num &lt;- lijst[1] %&gt;% html_children %&gt;% html_children %&gt;% .[2] %&gt;% html_children %&gt;% .[2] %&gt;% html_children %&gt;% html_children %&gt;% html_attr(name = &quot;datetime&quot;)
+time_num</code></pre>
+<pre><code>## [1] &quot;2022-10-16T19:36:52+0200&quot;</code></pre>
+<pre class="r"><code>#.[2] --&gt; selects the second list in the objects that are under the object that are under lijst 1
+
+time_char &lt;- lijst[1] %&gt;% html_children %&gt;% html_children %&gt;% .[2] %&gt;% html_children %&gt;% .[2] %&gt;% html_children %&gt;% html_children %&gt;% html_text 
+time_char</code></pre>
+<pre><code>## [1] &quot;zondag 16 oktober 2022, 19:36&quot;</code></pre>
+<pre class="r"><code># In class
+lijst[1] %&gt;% html_element(&quot;time&quot;) %&gt;% html_attr(name = &quot;datetime&quot;)</code></pre>
+<pre><code>## [1] &quot;2022-10-16T19:36:52+0200&quot;</code></pre>
+<pre class="r"><code>lijst[1] %&gt;% html_element(&quot;time&quot;) %&gt;% html_text</code></pre>
+<pre><code>## [1] &quot;zondag 16 oktober 2022, 19:36&quot;</code></pre>
+<p>```{ url &lt;- “<a
+href="https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document(7a9b77f1-d230-4a00-9856-2f0f8e967e62)"
+class="uri">https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document(7a9b77f1-d230-4a00-9856-2f0f8e967e62)</a>”</p>
+<p>test &lt;- read_html(url) html_text(test)</p>
+<p>library(jsonlite) test &lt;- fromJSON(url) test$Soort</p>
+<pre><code>
+# Trying on my own (again)
+## Descriptive statistics
+
+``` r
+vcount(g_strong_t2)</code></pre>
+<pre><code>## [1] 121</code></pre>
+<pre class="r"><code>ecount(g_strong_t2)</code></pre>
+<pre><code>## [1] 270</code></pre>
+<pre class="r"><code>pretty_graph &lt;- simplify(g_strong_t2)
+plot(pretty_graph)</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" /></p>
+<pre class="r"><code>plot(pretty_graph,
+     vertex.color = &quot;pink&quot;, # nice color for the vertices
+     vertex.size = 10,  # we&#39;ll vertices a bit smaller
+     vertex.frame.color = &quot;gray&quot;,  # we&#39;ll put a gray frame around vertices
+     vertex.label.color = &quot;black&quot;,  # not that ugly blue color for the labels (names)
+     vertex.label.family = &quot;Helvetica&quot;, # not a fan of times new roman in figures
+     vertex.label.cex = 0.3,  # make the label a bit smaller too
+     vertex.label.dist = 0.5,  # we&#39;ll pull the labels a bit away from the vertices
+     edge.curved = 0.2, # curved edges is always a nice touch
+     edge.arrow.size = 0.075, # make arrow size (direction of edge) smaller
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))</code></pre>
+<pre><code>## Warning in text.default(x0, y0, labels = lbl, col = col, family = fam, font = fnt, : font family
+## not found in Windows font database</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-22-2.png" alt="" width="672" />
+Trying (and being unsuccesful) to give gender different colours</p>
+<pre><code>in_network &lt;- data.frame(as_ids(V(pretty_graph)))
+names(in_network)[1] &lt;- &quot;name&quot;
+
+ind_df &lt;- as.data.frame(ind_mat)
+names(ind_df)[1] &lt;- &quot;name&quot;
+ind_df$name &lt;- as.character(ind_df$name)
+
+in_network &lt;- left_join(in_network, ind_df, by = c(&quot;name&quot; = &quot;name&quot;))
+
+in_network$vcol &lt;- ifelse()
+</code></pre>
+<p>Trying to change node size based on degree?</p>
+<pre class="r"><code>V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = T) * 1000 + 50
+
+plot(pretty_graph,
+     vertex.color = &quot;pink&quot;,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label.color = &quot;black&quot;,
+     vertex.label.family = &quot;Helvetica&quot;,
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))</code></pre>
+<pre><code>## Warning in text.default(x0, y0, labels = lbl, col = col, family = fam, font = fnt, : font family
+## not found in Windows font database</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-23-1.png" alt="" width="672" /></p>
+<pre class="r"><code>V(pretty_graph)$color = betweenness(pretty_graph, normalized = T, directed = T) * 1000 + 50
+
+plot(pretty_graph,
+     vertex.size = 100,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label.color = &quot;black&quot;,
+     vertex.label.family = &quot;Helvetica&quot;,
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))</code></pre>
+<pre><code>## Warning in text.default(x0, y0, labels = lbl, col = col, family = fam, font = fnt, : font family
+## not found in Windows font database</code></pre>
+<p><img src="week4_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" /></p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgNCINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IDcyDQotLS0NCg0KIyBQcmVwYXJhdGlvbiBiZWZvcmUgY2xhc3MNCg0KIyMgQWRqdXN0aW5nIG15IHJlc2VhcmNoIHF1ZXN0aW9ucw0KDQpCYXNlZCBvbiB0aGUgZGlzY3Vzc2lvbnMgbGFzdCB3ZWVrLCBJIHRoaW5rIEkgd2lsbCBrZWVwIG15IHJlc2VhcmNoDQpxdWVzdGlvbnMgdGhlIHNhbWUuIFRodXMgbXkgcmVzZWFyY2ggcXVlc3Rpb25zIGFyZTogMS4gQXJlIHN0dWRlbnRzIHdobw0KYXJlIGNvbm5lY3RlZCB0byBlYWNoIG90aGVyIG1vcmUgc2ltaWxhciB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMNCmVuZ2FnZW1lbnQsIHRoYW4gc3R1ZGVudHMgd2hvIGFyZSBub3QgY29ubmVjdGVkIHRvIGVhY2ggb3RoZXI/IDIuIERvDQpzdHVkZW50cyBiZWNvbWUgbW9yZSBzaW1pbGFyIHRvIGVhY2ggb3RoZXIgd2l0aCByZWdhcmRzIHRvIGNpdmljDQplbmdhZ2VtZW50LCB3aGVuIHRoZXkgYXJlIGNvbm5lY3RlZCBpbiBhIG5ldHdvcms/DQoNCjxicj4NCg0KIyMgV2hhdCBkYXRhIGRvIEkgbmVlZD8NCg0KSGVyZSBJIHdpbGwgZnVydGhlciBkZXNjcmliZSB0aGUgZGF0YSB0aGF0IEkgbmVlZCB0byBhbnN3ZXIgbXkgcmVzZWFyY2gNCnF1ZXN0aW9ucy4gVGhlIGl0ZW1zIEkgY2hvc2UgbGFzdCB3ZWVrLCBzdGlsbCBzZWVtIGxpa2UgdGhlIGJlc3QgY2hvaWNlDQp0byBtZSBmb3IgbWVhc3VyaW5nIHRoZSBjb25jZXB0cywgSSB3aWxsIGp1c3QgZ28gaW50byB0aGVtIGEgYml0IG1vcmUNCmRlZXBseSB0aGlzIHdlZWssIGFuc3dlcmluZyB3aGF0IGxldmVsIGRhdGEgdGhlIGl0ZW1zIG1lYXN1cmUuDQoNCioqQ2l2aWMgZW5nYWdlbWVudCoqIA0KDQpGb3IgY2l2aWMgZW5nYWdlbWVudCwgdGhlIHF1ZXN0aW9ubmFpcmUgbWVhc3VyZXMNCmJvdGggYmVsaWVmcyBhbmQgYmVoYXZpb3VyLiBJIGFtIG1vc3QgaW50ZXJlc3RlZCBpbiBiZWhhdmlvdXIsIHNvIEkgd2lsbA0KYmUgdXNpbmcgdGhhdCBzY2FsZSBmcm9tIG5vdyBvbi4gVGhpcyBzY2FsZSBjb25zaXN0cyBvZiBzaXggaXRlbXMsIGVhY2gNCm1lYXN1cmluZyBhIGRpZmZlcmVudCBjaXZpYyBiZWhhdmlvdXIuIFRoaXMgaXMgYSBtZWFzdXJlIG9uIGFuDQppbmRpdmlkdWFsLCBhY3RvciBsZXZlbC4gVGhpcyBpcyBhIGR5bmFtaWMgbWVhc3VyZSwgaXQgY2FuIGNoYW5nZSBvdmVyDQp0aW1lLCB3aGljaCBpcyB3aHkgaXQgaXMgaW50ZXJlc3Rpbmcgd2hldGhlciBpdCBjaGFuZ2VzIGJlY2F1c2Ugb2YgdGhlDQp0aWVzIHBlb3BsZSBoYXZlLg0KDQoqKlN0cm9uZy8gd2VhayB0aWVzKiogDQoNClRoZSBtZWFzdXJlIGZvciBib3RoIHN0cm9uZyBhbmQgd2VhayB0aWVzLCBhcmUNCmluaGVyZW50bHkgZHlhZGljIGRhdGEsIGFzIHlvdSBjYW5ub3QgaGF2ZSBhIHRpZSBvbiB5b3VyIG93bi4gVGhlDQpxdWVzdGlvbnMgYXNrZWQgaW4gdGhlIE1SQ1MgZGF0YXNldCBhc2sgZm9yIGRpcmVjdGVkIHRpZXMsIGFzIHRoZQ0KcXVlc3Rpb24gaXMgYWJvdXQgd2hldGhlciBhY3RvciBBIGZyaWVuZHMgKG9yIHN0dWR5IHBhcnRuZXJzKSB3aXRoIGFjdG9yDQpCLCBob3dldmVyLCBpdCBpcyBwb3NzaWJsZSB0aGF0IGFjdG9yIEIgZG9lcyBub3Qgbm9taW5hdGUgYWN0b3IgQSwNCmxlYWRpbmcgdG8gYSBkaXJlY3RlZCB0aWUuDQoNCioqQ292YXJpYXRlcyoqIA0KDQpMYXN0IHdlZWsgSSBkaWQgbm90IGxvb2sgaW50byBjb3ZhcmlhdGVzIHRoYXQgc2hvdWxkIGJlDQpjb25zaWRlcmVkLCBidXQgdGhlIGRhdGFzZXQgY29udGFpbnMgYWxsIHRoZSAnc3RhbmRhcmQnIGNvdmFyaWF0ZXMsIHRoYXQNCndvdWxkIGJlIGltcG9ydGFudCB0byBjb250cm9sIGZvcjogLSBHZW5kZXIgKFJYZ2UpIC0gRXRobmljaXR5DQooUlhyZXRoKSAtIFdoYXQgeWVhciBvZiBjb2xsZWdlIChSZnJzdHlyKSBUaGVzZSBhcmUgYWxsIHZhcmlhYmxlcw0KbWVhc3VyZWQgYXQgdGhlIGluZGl2aWR1YWwgbGV2ZWwsIHdpdGggdGhlIGZpcnN0IHR3byBiZWluZyBzdGFibGUNCmNoYXJhY3RlcmlzdGljcywgYW5kIHRoZSBsYXN0IG9uZSBiZWluZyBkeW5hbWljLg0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KIyBJbiBjbGFzcw0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgNCINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IDcyDQotLS0NCg0KIyBQcmVwYXJhdGlvbiBiZWZvcmUgY2xhc3MNCg0KIyMgQWRqdXN0aW5nIG15IHJlc2VhcmNoIHF1ZXN0aW9ucw0KDQpCYXNlZCBvbiB0aGUgZGlzY3Vzc2lvbnMgbGFzdCB3ZWVrLCBJIHRoaW5rIEkgd2lsbCBrZWVwIG15IHJlc2VhcmNoDQpxdWVzdGlvbnMgdGhlIHNhbWUuIFRodXMgbXkgcmVzZWFyY2ggcXVlc3Rpb25zIGFyZTogMS4gQXJlIHN0dWRlbnRzIHdobw0KYXJlIGNvbm5lY3RlZCB0byBlYWNoIG90aGVyIG1vcmUgc2ltaWxhciB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMNCmVuZ2FnZW1lbnQsIHRoYW4gc3R1ZGVudHMgd2hvIGFyZSBub3QgY29ubmVjdGVkIHRvIGVhY2ggb3RoZXI/IDIuIERvDQpzdHVkZW50cyBiZWNvbWUgbW9yZSBzaW1pbGFyIHRvIGVhY2ggb3RoZXIgd2l0aCByZWdhcmRzIHRvIGNpdmljDQplbmdhZ2VtZW50LCB3aGVuIHRoZXkgYXJlIGNvbm5lY3RlZCBpbiBhIG5ldHdvcms/DQoNCjxicj4NCg0KIyMgV2hhdCBkYXRhIGRvIEkgbmVlZD8NCg0KSGVyZSBJIHdpbGwgZnVydGhlciBkZXNjcmliZSB0aGUgZGF0YSB0aGF0IEkgbmVlZCB0byBhbnN3ZXIgbXkgcmVzZWFyY2gNCnF1ZXN0aW9ucy4gVGhlIGl0ZW1zIEkgY2hvc2UgbGFzdCB3ZWVrLCBzdGlsbCBzZWVtIGxpa2UgdGhlIGJlc3QgY2hvaWNlDQp0byBtZSBmb3IgbWVhc3VyaW5nIHRoZSBjb25jZXB0cywgSSB3aWxsIGp1c3QgZ28gaW50byB0aGVtIGEgYml0IG1vcmUNCmRlZXBseSB0aGlzIHdlZWssIGFuc3dlcmluZyB3aGF0IGxldmVsIGRhdGEgdGhlIGl0ZW1zIG1lYXN1cmUuDQoNCioqQ2l2aWMgZW5nYWdlbWVudCoqDQoNCkZvciBjaXZpYyBlbmdhZ2VtZW50LCB0aGUgcXVlc3Rpb25uYWlyZSBtZWFzdXJlcyBib3RoIGJlbGllZnMgYW5kDQpiZWhhdmlvdXIuIEkgYW0gbW9zdCBpbnRlcmVzdGVkIGluIGJlaGF2aW91ciwgc28gSSB3aWxsIGJlIHVzaW5nIHRoYXQNCnNjYWxlIGZyb20gbm93IG9uLiBUaGlzIHNjYWxlIGNvbnNpc3RzIG9mIHNpeCBpdGVtcywgZWFjaCBtZWFzdXJpbmcgYQ0KZGlmZmVyZW50IGNpdmljIGJlaGF2aW91ci4gVGhpcyBpcyBhIG1lYXN1cmUgb24gYW4gaW5kaXZpZHVhbCwgYWN0b3INCmxldmVsLiBUaGlzIGlzIGEgZHluYW1pYyBtZWFzdXJlLCBpdCBjYW4gY2hhbmdlIG92ZXIgdGltZSwgd2hpY2ggaXMgd2h5DQppdCBpcyBpbnRlcmVzdGluZyB3aGV0aGVyIGl0IGNoYW5nZXMgYmVjYXVzZSBvZiB0aGUgdGllcyBwZW9wbGUgaGF2ZS4NCg0KKipTdHJvbmcvIHdlYWsgdGllcyoqDQoNClRoZSBtZWFzdXJlIGZvciBib3RoIHN0cm9uZyBhbmQgd2VhayB0aWVzLCBhcmUgaW5oZXJlbnRseSBkeWFkaWMgZGF0YSwNCmFzIHlvdSBjYW5ub3QgaGF2ZSBhIHRpZSBvbiB5b3VyIG93bi4gVGhlIHF1ZXN0aW9ucyBhc2tlZCBpbiB0aGUgTVJDUw0KZGF0YXNldCBhc2sgZm9yIGRpcmVjdGVkIHRpZXMsIGFzIHRoZSBxdWVzdGlvbiBpcyBhYm91dCB3aGV0aGVyIGFjdG9yIEENCmZyaWVuZHMgKG9yIHN0dWR5IHBhcnRuZXJzKSB3aXRoIGFjdG9yIEIsIGhvd2V2ZXIsIGl0IGlzIHBvc3NpYmxlIHRoYXQNCmFjdG9yIEIgZG9lcyBub3Qgbm9taW5hdGUgYWN0b3IgQSwgbGVhZGluZyB0byBhIGRpcmVjdGVkIHRpZS4NCg0KKipDb3ZhcmlhdGVzKioNCg0KTGFzdCB3ZWVrIEkgZGlkIG5vdCBsb29rIGludG8gY292YXJpYXRlcyB0aGF0IHNob3VsZCBiZSBjb25zaWRlcmVkLCBidXQNCnRoZSBkYXRhc2V0IGNvbnRhaW5zIGFsbCB0aGUgJ3N0YW5kYXJkJyBjb3ZhcmlhdGVzLCB0aGF0IHdvdWxkIGJlDQppbXBvcnRhbnQgdG8gY29udHJvbCBmb3I6IC0gR2VuZGVyIChSWGdlKSAtIEV0aG5pY2l0eSAoUlhyZXRoKSAtIFdoYXQNCnllYXIgb2YgY29sbGVnZSAoUmZyc3R5cikgVGhlc2UgYXJlIGFsbCB2YXJpYWJsZXMgbWVhc3VyZWQgYXQgdGhlDQppbmRpdmlkdWFsIGxldmVsLCB3aXRoIHRoZSBmaXJzdCB0d28gYmVpbmcgc3RhYmxlIGNoYXJhY3RlcmlzdGljcywgYW5kDQp0aGUgbGFzdCBvbmUgYmVpbmcgZHluYW1pYy4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMgSW4gY2xhc3MNCg0KIyMgU05BU1MgdHV0b3JpYWwNCg0KYGBge3J9DQpyZXF1aXJlKCJpZ3JhcGgiKQ0KZyA8LSBtYWtlX2dyYXBoKCJaYWNoYXJ5IikNCnBsb3QoZykNCmBgYA0KDQpWaXN1YWxseSwgdGhpcyBpc24ndCB0aGUgc2FtZSBncmFwaCBhcyBpbiB0aGUgdHV0b3JpYWwsIGJ1dCB0aGUgdGllcyBhcmUNCnRoZSBzYW1lLCBhbmQgdGhlIGNlbnRyZSBpcyByZWxhdGl2ZWx5IHRoZSBzYW1lLiBBcHBhcmVudGx5LCB0aGUgZmlndXJlDQppcyBtYWRlIHRvIHB1dCB0aGUgJ3BvcHVsYXInIHBlb3BsZSBpbiB0aGUgY2VudHJlLiBCYXNlZCBvbiB0aGlzLCB3ZSBjYW4NCnNheSBzb21ldGhpbmcgYWJvdXQgbmV0d29yayBzaXplLCB0aGUgZmFjdCB0aGF0IHRoZSB0aWVzIGFyZSB1bmRpcmVjdGVkDQooYnV0IGlzIHRoYXQgaWdyYXBoLCBvciB0aGUgZGF0YSB0aGF0IGlzIHVuZGlyZWN0ZWQgLS1cPiBjaGVjayBtYXRyaXgpLg0KDQpgYGB7cn0NCmdtYXQgPC0gYXNfYWRqYWNlbmN5X21hdHJpeChnLCB0eXBlID0gImJvdGgiLCBzcGFyc2UgPSBGQUxTRSkNCiMgZ21hdA0KaXNTeW1tZXRyaWMoZ21hdCkNCmBgYA0KDQpCYXNlZCBvbiB0aGUgbWF0cml4LCB0aGVyZSBhcmUgdW5kaXJlY3RlZCB0aWVzLCBiZWNhdXNlIGl0IGlzIHN5bW1ldHJpYy4NCllvdSBjYW4gYWxzbyBjaGVjayB0aGlzIHdpdGggaXNTeW1lbWV0cmljLCBpZiB0aGF0IGlzIHRydWUsIHRoZXJlIGlzIGFuDQp1bmRpcmVjdGVkIG5ldHdvcmsuDQoNCiMjIyBEZXNjcmlwdGl2ZSBzdGF0aXN0aWNzDQoNClRyYW5zaXRpdml0eQ0KDQpgYGB7cn0NCiMgYmUgYXdhcmUgdGhhdCBkaXJlY3RlZCBncmFwaHMgYXJlIGNvbnNpZGVyZWQgYXMgdW5kaXJlY3RlZC4gYnV0IGcgaXMgdW5kaXJlY3RlZC4NCmlncmFwaDo6dHJhbnNpdGl2aXR5KGcsIHR5cGUgPSBjKCJsb2NhbHVuZGlyZWN0ZWQiKSwgaXNvbGF0ZXMgPSBjKCJOYU4iLCAiemVybyIpKQ0KYGBgDQoNClRoZXJlIGlzIG5vdCBvbmUgYWN0b3Igd2hvIGlzIHNwZWNpZmljYWxseSB2ZXJ5IHVuaXF1ZSBpbiB0aGVpciBhbW91bnQNCm9mIHRyYW5zaXRpdmUgdGllcywgdGh1cyBkb2VzbnQgc2VlbSB0byBiZSB0aGF0IGludGVyZXN0aW5nIG9mIGENCnN0YXRpc3RpYw0KDQpCZXR3ZWVubmVzcw0KDQpgYGB7cn0NCmlncmFwaDo6YmV0d2Vlbm5lc3MoZywgZGlyZWN0ZWQgPSBGQUxTRSkNCmBgYA0KDQpUaGlzIHNob3dzIHRoYXQgbnVtYmVyIDEgYW5kIG51bWJlciAzNCBoYXZlIHZlcnkgaGlnaCBudW1iZXIsIGluIHRoZQ0KcGxvdCB5b3UgZG8gbm90IHNlZSB0aGF0IChiaWcpIGRpZmZlcmVuY2UgYmV0d2VlbiAzMyBhbmQgMzQsIHRodXMgd2UNCm5lZWQgdG8gcmVjcmVhdGUgdGhlIHBsb3QuIEl0IHNlZW1zIGxpa2UgMSwgMywgMzIsIDMzLCBhbmQgMzQgYXJlDQppbnRlcmVzdGluZywgYXMgdGhleSBoYXZlIGxhcmdlIG51bWJlcnMuDQoNCkhvdyBjYW4gd2UgcGxvdCB0aGF0Pw0KDQotIENvbG91ciBjb2RlIC0tXD4gdXBhbGF0ZSB0byBzaG93IHRoZSBicmlnaHRlciB0aGUgY29sb3VyIHRoZSBtb3JlDQogIGJldHdlZW5uZXNzDQoNCi0gU2l6ZSBpbmNyZWFzZSAtLVw+IFNpemUgbm9kZXMgZGVwZW5kZW50IG9uIGJldHdlZW5uZXNzDQoNCi0gTGF5b3V0IGJyb2FkZXIgLS1cPiBObyBvdmVybGFwcGluZyBub2Rlcw0KDQojIyMgRHlhZCBjZW5zdXMNCg0KYGBge3J9DQppZ3JhcGg6OmR5YWRfY2Vuc3VzKGcpDQpgYGANCg0KQmVjYXVzZSBpdCBpcyBhbiB1bmRpcmVjdGVkIGdyYXBoLCB0aGUgYXN5bW1ldHJ5IGlzIGFsd2F5cyAwDQoNCiMjIyBUcmlhZCBjZW5zdXMNCg0KYGBge3J9DQppZ3JhcGg6OnRyaWFkX2NlbnN1cyhnKQ0KIyBJIHdpbGwgdXNlIHNuYSBiZWNhdXNlIGl0IHNob3dzIHRoZSBuYW1lcyBvZiB0aGUgdHJpYWRzIGFzIHdlbGwuDQpzbmE6OnRyaWFkLmNlbnN1cyhnbWF0KQ0KdW5sb2FkTmFtZXNwYWNlKCJzbmEiKSAgI0kgd2lsbCBkZXRhY2ggdGhpcyBwYWNrYWdlIGFnYWluLCBvdGhlcndpc2UgaXQgd2lsbCBpbnRlcmZlcmUgd2l0aCBhbGwga2luZCBvZiBmdW5jdGlvbnMgZnJvbSBpZ3JhcGgsIGFuZCBteSBzdHVkZW50cyB3aWxsIGhhdGUgbWUgZm9yIHRoYXQuDQpgYGANCg0KVGhpcyBzaG93cyBwZXIgc29ydCBvZiB0cmlhZCwgaG93IG1hbnkgdGltZXMgaXQgaXMgZXhpc3RlbnQgaW4gdGhlDQpuZXR3b3JrDQoNCkhvdyBtYW55IHdheXMgdGhlcmUgYXJlIHRvIGNsb3NlIGEgdHJpYWQsIGlzIGNhbGN1bGF0ZWQgdGhyb3VnaCBhbiBhY3Rvcg0KcGVyc3BlY3RpdmUgLS1cPiBJZiB0aGVyZSBpcyBhIHRyaWFkLCB0aGVyZSBhcmUgdGhyZWUgd2F5cyB0byBiZSBhDQp0cmlhZCwgZnJvbSBlYWNoIGFjdG9yIG9uZQ0KDQpUcmFuc2l0aXZpdHk6IEhvdyBtYW55IHRyaWFkcyBhcmUgY2xvc2VkIGRpdmlkZWQgYnkgdGhlIGFtb3VudCBvZiB0cmlhZHMNCnRoYXQgYXJlIGNsb3NlZCBvciBjYW4gYmUgY2xvc2VkIE9SIGhvdyBtYW55IDMwMCBuZXR3b3JrcyBhcmUgdGhlcmUsDQpkaXZpZGVkIGJ5IDMwMCArIDIwMSBuZXR3b3JrcyAoYmVjYXVzZSBvbmx5IDIwMSBjYW4gYmUgY2xvc2VkKSBUaGlzIHNhbWUNCmdvZXMgZm9yIHJlY2lwcm9jaXR5IChvbiBkeWFkIGxldmVsKSwgd2hpY2ggY2Fubm90IGJlIGRvbmUgb24gdGhpcw0KbmV0d29yaywgYmVjYXVzZSBpdCBoYXMgdW5kaXJlY3RlZCB0aWVzDQoNCkxvY2FsIHRyYW5zaXRpdml0eTogVGhlIHRyYW5zaXRpdml0eSBvZiBvbmUgZWdvIC0tXD4gc2hvd3MgeW91IGhvdyBtYW55DQp0cmFuc2l0aXZlIHRpZXMgb25lIGVnbyBoYXMgQ2FuIHRlbGwgeW91IHNvbWV0aGluZyBhYm91dCBob3cgdHdvIHBlb3BsZQ0Kd2l0aCB0aGUgc2FtZSBhbW91bnQgb2YgdGllcywgZGlmZmVyIGluIHRoZWlyIG5ldHdvcmsgc3RydWN0dXJlDQoNCmBgYHtyfQ0KIyBDYWx1Y2xhdGluZyB0cmFuc2l0aXZpdHkgaW4gYW4gci1mdW5jdGlvbg0KaWdyYXBoOjp0cmFuc2l0aXZpdHkoZywgdHlwZSA9ICJnbG9iYWwiKQ0KIyBPcg0Kc25hOjpndHJhbnMoZ21hdCkNCg0KIyBDYWxjdWxhdGluZyB0cmFuc2l0aXZpdHkgbWFudWFsbHkNCnRyaWFkX2cgPC0gZGF0YS5mcmFtZShzbmE6OnRyaWFkLmNlbnN1cyhnbWF0KSkNCg0KdHJhbnNpdGl2aXR5X2cgPC0gKDMgKiB0cmlhZF9nJFgzMDApLyh0cmlhZF9nJFgyMDEgKyAzICogdHJpYWRfZyRYMzAwKQ0KdHJhbnNpdGl2aXR5X2cNCmBgYA0KDQojIyMgTmV0d29yayB2aXN1YWxpc2F0aW9uDQoNCmBgYHtyfQ0KIyBjaGFuZ2luZyBWDQpWKGcpJHNpemUgPSBiZXR3ZWVubmVzcyhnLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBGQUxTRSkgKiA2MCArIDEwICAjYWZ0ZXIgc29tZSB0cmlhbCBhbmQgZXJyb3INCnBsb3QoZywgbW9kZSA9ICJ1bmRpcmVjdGVkIikNCmBgYA0KDQpNZWFuaW5nIG9mIHRoZSBkaWZmZXJlbnQgcGFydHMgb2YgdGhlIGNvZGVzOg0KDQotIFYgPSB2aXJ0dXNlcyAodGhlIG5vZGVzKQ0KDQotIEUgPSBlZGdlcw0KDQotIFwqNjAgPSBiZXR3ZWVubmVzcyBzY29yZSBpcyBiZXR3ZWVuIDAgYW5kIDEsIG5lZWRzIHRvIGJlIG1vcmUgaGVhdmlseQ0KICB0YWtlbiBpbnRvIGFjY291bnQNCg0KLSBcKzEwID0gaWYgeW91IGRvbid0IGRvIHRoYXQsIG5vZGVzIHdpdGggYSBiZXR3ZWVubmVzcyBvZiAwIHdpbGwgYWxzbw0KICBiZSB2aXN1YWxpc2VkIHdpdGggMCwgd2hpY2ggd291bGQgYmUgdW5kZXNpcmFibGUNCg0KYGBge3J9DQpzZXQuc2VlZCgyMzQ1KQ0KbCA8LSBsYXlvdXRfd2l0aF9tZHMoZykgICNodHRwczovL2lncmFwaC5vcmcvci9kb2MvbGF5b3V0X3dpdGhfbWRzLmh0bWwNCnBsb3QoZywgbGF5b3V0ID0gbCkNCmBgYA0KYGBge3J9DQpsICAjbGV0IHVzIHRha2UgYSBsb29rIGF0IHRoZSBjb29yZGluYXRlcw0KbFsxLCAxXSA8LSA0DQpsWzM0LCAxXSA8LSAtMy41DQpwbG90KGcsIGxheW91dCA9IGwpDQpgYGANClRoaXMgaXMgdGhlIHNhbWUgbmV0d29yaywgYnV0IHRoZSBzZWNvbmQgb25lIGxvb2tzLyBmZWVscyBhIGxvdCBkaWZmZXJlbnQgKHNlZW1zIHRvIHN1Z2dlc3Qgd2F5IG1vcmUgcG9sYXJpc2F0aW9uLCB3aGVyZSAxIGFuZCAzNCBhcmUgcG9sYXIgb3Bwb3NpdGVzKQ0KRm9yIHRoZSBzZWNvbmQgb25lLCB3ZSBtYW5pcHVsYXRlZCB0aGUgZ3JhcGggbWFudWFsbHksIGlmIHlvdSBkbyB0aGlzLCBiZSBob25lc3QgYWJvdXQgaXQhISEgQlVUIHRoaXMgaXMgdGhlIHNhbWUgYXMgdGhlIGFsZ29yaXRobSBkb2VzLCB3aGljaCBpcyBzb21ldGhpbmcgdGhhdCBpcyBnZW5lcmFsbHkgYWNjZXB0ZWQsIHdoaWNoIGlzIGtpbmQgb2Ygb2RkLiBTb2x1dGlvbjogTWF5YmUgbWVudGlvbiB3aGF0IGFsZ29yaXRobSB5b3UgdXNlZCAoYW5kIHdoeT8pIC0tPiBncmFwaHMgYXJlbid0IG5ldXRyYWwNCg0KIyBUcnlpbmcgb24gbXkgb3duDQpMb2FkIGluIGRhdGENCmBgYHtyfQ0KcGFja2FnZXMgPSBjKCJzdHJpbmdkaXN0IiwgInN0cmluZ2kiLCAidGlkeXZlcnNlIikNCmZwYWNrYWdlLmNoZWNrKHBhY2thZ2VzKQ0KDQpsb2FkKCIuL2RhdGEvSW5kaXZpZHVhbENoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvTmV0d29ya0NoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpgYGANCg0KPGJyPg0KDQojIyBWYXJpYWJsZXMgb2YgaW50ZXJlc3QNCiMjIyBOZXR3b3JrIG1hdHJpeCAod2VhayB0aWVzKQ0KQ3JlYXRlIGEgbWF0cml4LCB0aGF0IGNhbiBiZSB1c2VkIHdpdGhpbiBSU2llbmEuIEkgc2V0IGFsbCB2YWx1ZXMgOSB0byBOQSwgYXMgdGhlc2UgcmVzcG9uZGVudHMgaGF2ZSBub3QgZmlsbGVkIG91dCB0aGUgc3VydmV5DQoNCmBgYHtyfQ0KIyB2aWV3KHN0dWR5aW5nW1sxXV0pDQpzdHVkeWluZ19kZl90MSA8LSBhcy5kYXRhLmZyYW1lKHN0dWR5aW5nW1sxXV1bMV0pDQpjbGFzcyhzdHVkeWluZ19kZl90MSkNCiMgdmlldyhzdHVkeWluZ19kZl90MSkNCndlYWtfbmV0d190MSA8LSBkYXRhLm1hdHJpeChzdHVkeWluZ19kZl90MSkNCndlYWtfbmV0d190MVt3ZWFrX25ldHdfdDE9PTldPC1OQQ0KY2xhc3Mod2Vha19uZXR3X3QxKQ0KIyB2aWV3KHdlYWtfbmV0d190MSkNCg0Kc3R1ZHlpbmdfZGZfdDIgPC0gYXMuZGF0YS5mcmFtZShzdHVkeWluZ1tbMV1dWzJdKQ0KY2xhc3Moc3R1ZHlpbmdfZGZfdDIpDQojIHZpZXcoc3R1ZHlpbmdfZGZfdDIpDQp3ZWFrX25ldHdfdDIgPC0gZGF0YS5tYXRyaXgoc3R1ZHlpbmdfZGZfdDIpDQp3ZWFrX25ldHdfdDJbd2Vha19uZXR3X3QyPT05XTwtTkENCmNsYXNzKHdlYWtfbmV0d190MikNCiMgdmlldyh3ZWFrX25ldHdfdDIpDQpgYGANCg0KIyMjIE5ldHdvcmsgbWF0cml4IChzdHJvbmcgdGllcykNCmBgYHtyfQ0KIyB2aWV3KGhhbmdpbmdbWzFdXSkNCmhhbmdpbmdfZGZfdDEgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMV0pDQpjbGFzcyhoYW5naW5nX2RmX3QxKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDEpDQpzdHJvbmdfbmV0d190MSA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QxKQ0Kc3Ryb25nX25ldHdfdDFbc3Ryb25nX25ldHdfdDE9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDEpDQojIHZpZXcoc3Ryb25nX25ldHdfdDEpDQoNCmhhbmdpbmdfZGZfdDIgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMl0pDQpjbGFzcyhoYW5naW5nX2RmX3QyKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MiA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QyKQ0Kc3Ryb25nX25ldHdfdDJbc3Ryb25nX25ldHdfdDI9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDIpDQojIHZpZXcoc3Ryb25nX25ldHdfdDIpDQpgYGANCg0KIyMjIENvdmFyaWF0ZXMgKGdlbmRlciwgZXRobmljaXR5KQ0KYGBge3J9DQpnZW5kZXJfZGYgPC0gYXMuZGF0YS5mcmFtZShnZW5kZXIpDQpldGhuaWNpdHlfZGYgPC0gYXMuZGF0YS5mcmFtZShldGhuaWMpDQppbmRfbWF0IDwtIGRhdGEubWF0cml4KGNiaW5kKGdlbmRlcl9kZiwgZXRobmljaXR5X2RmKSkNCmNsYXNzKGluZF9tYXQpDQojIHZpZXcoaW5kX21hdCkNCmBgYA0KDQpBcyBib3RoIGdlbmRlciBhbmQgZXRobmljaXR5IGFyZSBzdGFibGUgY2hhcmFjdGVyaXN0aWNzLCB3ZSBvbmx5IG5lZWQgb25lIHZhcmlhYmxlIGZvciBlYWNoIChub3QgYm90aCBUMSBhbmQgVDIpLg0KDQpgYGB7cn0NCmNvcHlfaW5kX21hdCA8LSBpbmRfbWF0DQpmb3IoaSBpbiAxOm5yb3coY29weV9pbmRfbWF0KSl7DQogIGlmIChpcy5uYShjb3B5X2luZF9tYXRbaV0pKSB7DQogICAgY29weV9pbmRfbWF0W2ldIDwtIGNvcHlfaW5kX21hdFtpLCAyXQ0KICB9DQp9DQoNCnByaW50KGluZF9tYXQpDQojIFZpZXcoaW5kX21hdCkNCiMgdmlldyhjb3B5X2luZF9tYXQpDQpgYGANCg0KIyMgVmlzdWFsaXNhdGlvbg0KYGBge3J9DQpyZXF1aXJlKGlncmFwaCkNCg0KY29weV9zdHJvbmdfbmV0d190MiA8LSBzdHJvbmdfbmV0d190Mg0KY29weV9zdHJvbmdfbmV0d190Mltpcy5uYShjb3B5X3N0cm9uZ19uZXR3X3QyKV0gPC0gMCANCg0KZ19zdHJvbmdfdDIgPC0gaWdyYXBoOjogZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGNvcHlfc3Ryb25nX25ldHdfdDIsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KcGxvdChnX3N0cm9uZ190MikNCmBgYA0KDQojIyBFeHBsYW5hdGlvbiBvZiBOQSdzIHdpdGggZmFrZSBkYXRhDQpgYGB7cn0NCnRlc3RfbSA8LSBtYXRyaXgoTkEsIG5yb3cgPSA0LCBuY29sID0gNCkNCnRlc3RfbVsxLDFdIDwtIDANCnRlc3RfbVsxLDJdIDwtIDENCnRlc3RfbVsxLDRdIDwtIDENCnRlc3RfbVszLDFdIDwtIDANCnRlc3RfbVszLDJdIDwtIDENCnRlc3RfbVszLDRdIDwtIDENCnRlc3RfbVs0LDFdIDwtIDANCnRlc3RfbVs0LDJdIDwtIDENCnRlc3RfbVs0LDRdIDwtIDANCg0Kdmlldyh0ZXN0X20pDQpgYGANCg0KRm9yIHBsb3R0aW5nIHdoYXQgeW91IGRvIHdpdGggbWlzc2luZyBkYXRhIGRpZmZlcnMgZnJvbSBob3cgeW91IGRlYWwgd2l0aCBOQSdzIHRoYW4gZm9yIFJTaWVuYQ0KDQpJZiBzb21lb25lIGlzbnQgdGhlcmUgaW4gYm90aCB0aGUgcm93IGFuZCB0aGUgY29sdW1uLCB5b3Ugd2FudCB0aGVtIGdvbmUgZnJvbSB5b3VyIGRhdGENCmBgYHtyfQ0KbWlzcm93IDwtIHJvd1N1bXMoaXMubmEodGVzdF9tKSkgPT0gbnJvdyh0ZXN0X20pDQptaXNjb2wgPC0gY29sU3Vtcyhpcy5uYSh0ZXN0X20pKSA9PSBucm93KHRlc3RfbSkNCg0KbWlzcyA8LSB3aGljaChtaXNyb3cgJiBtaXNjb2wpICNDaGVja2VuIHdhYXIgem93ZWwgZGUgY29sbHVtbiBhbHMgZGUgcm93cyBtaXNzaW5ncyB6aWpuDQptaXNzDQoNCndoaWNoKG1pc3JvdykgI1RlbGxzIHlvdSB3aGljaCByb3cgaGFzIG1pc3NpbmcgdmFsdWVzDQoNCnRlc3RfbVt3aGljaChtaXNyb3cpLCBdIDwtIDANCmBgYA0KDQojIFdlYnNjcmFwaW5nDQpgYGB7cn0NCmluc3RhbGwucGFja2FnZXMoInhtbDIiKQ0KcmVxdWlyZSh4bWwyKQ0KaW5zdGFsbC5wYWNrYWdlcygicnZlc3QiKQ0KcmVxdWlyZShydmVzdCkNCmBgYA0KVHJ5aW5nIHRvIHNhdmUgZGF0YSBmcm9tIGEgbm9zIGFydGljbGUNClNhdmluZyB0aGUgaHJlZg0KYGBge3J9DQp1cmwgPC0gImh0dHBzOi8vbm9zLm5sL3pvZWtlbj9xPUpvY2hlbStUb2xzbWEmcGFnZT0xIg0KDQpub3MgPC0gcmVhZF9odG1sKHVybCkNCm5vcyAjIEl0IGlzIGEgaHRtbCBkb2N1bWVudA0KDQpsaWpzdCA8LSBub3MgJT4lIGh0bWxfZWxlbWVudHMoIm1haW4iKSAlPiUNCiAgaHRtbF9lbGVtZW50cygidWwiKSAlPiUNCiAgaHRtbF9lbGVtZW50cygibGkiKQ0KDQpsaWpzdFsxXSAjc2hvd3MgdGhhdCB5b3UgY2FuIHNlbGVjdCBqdXN0IG9uZSBvZiB0aGUgbG9hZGVkIGxpc3RzDQojIEtlZXAgZGlnZ2luZyBkZWVwZXIgaW50byB0aGVzZSBsaXN0cywgdW50aWwgeW91IHJlYWNoIHRoZSBkZXNpcmVkIGRlcHRoLyBpbmZvcm1hdGlvbiAoaW4gdGhpcyBjYXNlIHRoZSBkYXRlKQ0KDQojIFRoZSBocmVmIHNob3VsZCBiZSBpbiB0aGUgb2JqZWN0IHVuZGVyIGxpanN0IDENCmxpanN0WzFdICU+JSBodG1sX2NoaWxkcmVuICU+JSBodG1sX2F0dHIobmFtZSA9ICJocmVmIikNCg0KI0NvcHkgeC1wYXRoLCB0byBsZWFkIFIgdG8gdGhlIHJpZ2h0IHBsYWNlLCBvbiB0aGUgcmlnaHQgcGFnZQ0KIyAvLypbQGlkPSJjb250ZW50Il0vZGl2WzJdDQoNCiNDb3B5IGZ1bGwgeC1wYXRoDQojIC9odG1sL2JvZHkvZGl2L21haW4vZGl2WzJdDQpgYGANClNhdmluZyB0aGUgZGF0ZQ0KYGBge3J9DQojIEJ5IG15c2VsZg0KdGltZV9udW0gPC0gbGlqc3RbMV0gJT4lIGh0bWxfY2hpbGRyZW4gJT4lIGh0bWxfY2hpbGRyZW4gJT4lIC5bMl0gJT4lIGh0bWxfY2hpbGRyZW4gJT4lIC5bMl0gJT4lIGh0bWxfY2hpbGRyZW4gJT4lIGh0bWxfY2hpbGRyZW4gJT4lIGh0bWxfYXR0cihuYW1lID0gImRhdGV0aW1lIikNCnRpbWVfbnVtDQoNCiMuWzJdIC0tPiBzZWxlY3RzIHRoZSBzZWNvbmQgbGlzdCBpbiB0aGUgb2JqZWN0cyB0aGF0IGFyZSB1bmRlciB0aGUgb2JqZWN0IHRoYXQgYXJlIHVuZGVyIGxpanN0IDENCg0KdGltZV9jaGFyIDwtIGxpanN0WzFdICU+JSBodG1sX2NoaWxkcmVuICU+JSBodG1sX2NoaWxkcmVuICU+JSAuWzJdICU+JSBodG1sX2NoaWxkcmVuICU+JSAuWzJdICU+JSBodG1sX2NoaWxkcmVuICU+JSBodG1sX2NoaWxkcmVuICU+JSBodG1sX3RleHQgDQp0aW1lX2NoYXINCg0KIyBJbiBjbGFzcw0KbGlqc3RbMV0gJT4lIGh0bWxfZWxlbWVudCgidGltZSIpICU+JSBodG1sX2F0dHIobmFtZSA9ICJkYXRldGltZSIpDQpsaWpzdFsxXSAlPiUgaHRtbF9lbGVtZW50KCJ0aW1lIikgJT4lIGh0bWxfdGV4dA0KYGBgDQoNCmBgYHsNCnVybCA8LSAiaHR0cHM6Ly9nZWdldmVuc21hZ2F6aWpuLnR3ZWVkZWthbWVyLm5sL09EYXRhL3Y0LzIuMC9Eb2N1bWVudCg3YTliNzdmMS1kMjMwLTRhMDAtOTg1Ni0yZjBmOGU5NjdlNjIpIg0KDQp0ZXN0IDwtIHJlYWRfaHRtbCh1cmwpDQpodG1sX3RleHQodGVzdCkNCg0KbGlicmFyeShqc29ubGl0ZSkNCnRlc3QgPC0gZnJvbUpTT04odXJsKQ0KdGVzdCRTb29ydA0KYGBgDQoNCiMgVHJ5aW5nIG9uIG15IG93biAoYWdhaW4pDQojIyBEZXNjcmlwdGl2ZSBzdGF0aXN0aWNzDQpgYGB7cn0NCnZjb3VudChnX3N0cm9uZ190MikNCmVjb3VudChnX3N0cm9uZ190MikNCg0KcHJldHR5X2dyYXBoIDwtIHNpbXBsaWZ5KGdfc3Ryb25nX3QyKQ0KcGxvdChwcmV0dHlfZ3JhcGgpDQoNCnBsb3QocHJldHR5X2dyYXBoLA0KICAgICB2ZXJ0ZXguY29sb3IgPSAicGluayIsICMgbmljZSBjb2xvciBmb3IgdGhlIHZlcnRpY2VzDQogICAgIHZlcnRleC5zaXplID0gMTAsICAjIHdlJ2xsIHZlcnRpY2VzIGEgYml0IHNtYWxsZXINCiAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImdyYXkiLCAgIyB3ZSdsbCBwdXQgYSBncmF5IGZyYW1lIGFyb3VuZCB2ZXJ0aWNlcw0KICAgICB2ZXJ0ZXgubGFiZWwuY29sb3IgPSAiYmxhY2siLCAgIyBub3QgdGhhdCB1Z2x5IGJsdWUgY29sb3IgZm9yIHRoZSBsYWJlbHMgKG5hbWVzKQ0KICAgICB2ZXJ0ZXgubGFiZWwuZmFtaWx5ID0gIkhlbHZldGljYSIsICMgbm90IGEgZmFuIG9mIHRpbWVzIG5ldyByb21hbiBpbiBmaWd1cmVzDQogICAgIHZlcnRleC5sYWJlbC5jZXggPSAwLjMsICAjIG1ha2UgdGhlIGxhYmVsIGEgYml0IHNtYWxsZXIgdG9vDQogICAgIHZlcnRleC5sYWJlbC5kaXN0ID0gMC41LCAgIyB3ZSdsbCBwdWxsIHRoZSBsYWJlbHMgYSBiaXQgYXdheSBmcm9tIHRoZSB2ZXJ0aWNlcw0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwgIyBjdXJ2ZWQgZWRnZXMgaXMgYWx3YXlzIGEgbmljZSB0b3VjaA0KICAgICBlZGdlLmFycm93LnNpemUgPSAwLjA3NSwgIyBtYWtlIGFycm93IHNpemUgKGRpcmVjdGlvbiBvZiBlZGdlKSBzbWFsbGVyDQogICAgIG1hcmdpbiA9IDAuMDEsDQogICAgIHJlc2NhbGUgPSBGQUxTRSwgeWxpbSA9IGMoLTksOSkpDQpgYGANClRyeWluZyAoYW5kIGJlaW5nIHVuc3VjY2VzZnVsKSB0byBnaXZlIGdlbmRlciBkaWZmZXJlbnQgY29sb3Vycw0KYGBge30NCmluX25ldHdvcmsgPC0gZGF0YS5mcmFtZShhc19pZHMoVihwcmV0dHlfZ3JhcGgpKSkNCm5hbWVzKGluX25ldHdvcmspWzFdIDwtICJuYW1lIg0KDQppbmRfZGYgPC0gYXMuZGF0YS5mcmFtZShpbmRfbWF0KQ0KbmFtZXMoaW5kX2RmKVsxXSA8LSAibmFtZSINCmluZF9kZiRuYW1lIDwtIGFzLmNoYXJhY3RlcihpbmRfZGYkbmFtZSkNCg0KaW5fbmV0d29yayA8LSBsZWZ0X2pvaW4oaW5fbmV0d29yaywgaW5kX2RmLCBieSA9IGMoIm5hbWUiID0gIm5hbWUiKSkNCg0KaW5fbmV0d29yayR2Y29sIDwtIGlmZWxzZSgpDQoNCmBgYA0KDQpUcnlpbmcgdG8gY2hhbmdlIG5vZGUgc2l6ZSBiYXNlZCBvbiBkZWdyZWU/DQpgYGB7cn0NClYocHJldHR5X2dyYXBoKSRzaXplID0gYmV0d2Vlbm5lc3MocHJldHR5X2dyYXBoLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDEwMDAgKyA1MA0KDQpwbG90KHByZXR0eV9ncmFwaCwNCiAgICAgdmVydGV4LmNvbG9yID0gInBpbmsiLA0KICAgICB2ZXJ0ZXguZnJhbWUuY29sb3IgPSAiZ3JheSIsDQogICAgIHZlcnRleC5sYWJlbC5jb2xvciA9ICJibGFjayIsDQogICAgIHZlcnRleC5sYWJlbC5mYW1pbHkgPSAiSGVsdmV0aWNhIiwNCiAgICAgdmVydGV4LmxhYmVsLmNleCA9IDAuMywNCiAgICAgdmVydGV4LmxhYmVsLmRpc3QgPSAwLjUsIA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4wNzUsDQogICAgIG1hcmdpbiA9IDAuMDEsDQogICAgIHJlc2NhbGUgPSBGQUxTRSwgeWxpbSA9IGMoLTksOSkpDQoNCmBgYA0KDQpgYGB7cn0NClYocHJldHR5X2dyYXBoKSRjb2xvciA9IGJldHdlZW5uZXNzKHByZXR0eV9ncmFwaCwgbm9ybWFsaXplZCA9IFQsIGRpcmVjdGVkID0gVCkgKiAxMDAwICsgNTANCg0KcGxvdChwcmV0dHlfZ3JhcGgsDQogICAgIHZlcnRleC5zaXplID0gMTAwLA0KICAgICB2ZXJ0ZXguZnJhbWUuY29sb3IgPSAiZ3JheSIsDQogICAgIHZlcnRleC5sYWJlbC5jb2xvciA9ICJibGFjayIsDQogICAgIHZlcnRleC5sYWJlbC5mYW1pbHkgPSAiSGVsdmV0aWNhIiwNCiAgICAgdmVydGV4LmxhYmVsLmNleCA9IDAuMywNCiAgICAgdmVydGV4LmxhYmVsLmRpc3QgPSAwLjUsIA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4wNzUsDQogICAgIG1hcmdpbiA9IDAuMDEsDQogICAgIHJlc2NhbGUgPSBGQUxTRSwgeWxpbSA9IGMoLTksOSkpDQpgYGANCg0K</div>
 
 
 </div>

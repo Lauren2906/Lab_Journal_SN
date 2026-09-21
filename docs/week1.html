@@ -1997,15 +1997,19 @@ model3</code></pre>
 ##   5   4  age  men  educ3  health
 ##   5   5  age  men  educ3  health</code></pre>
 <pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
-## ℹ Please use a list of either functions or lambdas:
+## ℹ Please use a list of either functions or
+##   lambdas:
 ## 
-## # Simple named list: list(mean = mean, median = median)
+## # Simple named list: list(mean = mean, median =
+##   median)
 ## 
-## # Auto named with `tibble::lst()`: tibble::lst(mean, median)
+## # Auto named with `tibble::lst()`:
+##   tibble::lst(mean, median)
 ## 
-## # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
+## # Using lambdas list(~ mean(., trim = .2), ~
+##   median(., na.rm = TRUE))
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre class="r"><code>model_imp &lt;- cv_total_tidy %&gt;%
   dplyr::select(c(&quot;id&quot;, &quot;id2&quot;, &quot;age&quot;, &quot;men&quot;, &quot;educ3&quot;, &quot;health&quot;, &quot;region&quot;, &quot;wave&quot;)) %&gt;%
   mutate_all(as.numeric) %&gt;%
