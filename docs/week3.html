@@ -893,24 +893,24 @@ whatever, but here just the basic</p>
 ##                                                Error      t-ratio   
 ## 
 ## Rate parameters: 
-##   0        Rate parameter          4.0538  ( 0.9958   )             
+##   0        Rate parameter          4.0653  ( 0.9926   )             
 ## 
 ## Other parameters: 
-##    1. eval outdegree (density)    -2.4390  ( 0.8199   )    0.0139   
-##    2. eval reciprocity             2.3736  ( 0.7127   )   -0.0351   
-##    3. eval transitive triplets     0.8134  ( 0.4298   )   -0.0362   
-##    4. eval indegree - popularity   0.2190  ( 0.0542   )   -0.0133   
-##    5. eval outdegree - activity    0.0124  ( 0.1079   )    0.0157   
-##    6. eval indegree - activity(1) -0.4429  ( 0.3276   )   -0.0365   
-##    7. eval network-isolate         2.4449  ( 1.4820   )   -0.0743   
-##    8. eval gender alter           -0.4006  ( 0.3040   )    0.0156   
-##    9. eval gender ego              0.1529  ( 0.3437   )    0.0462   
-##   10. eval same gender             0.1706  ( 0.2665   )    0.0402   
+##    1. eval outdegree (density)    -2.4515  ( 0.8525   )    0.0126   
+##    2. eval reciprocity             2.3296  ( 0.5236   )    0.0107   
+##    3. eval transitive triplets     0.7739  ( 0.3815   )    0.0197   
+##    4. eval indegree - popularity   0.2213  ( 0.0569   )    0.0480   
+##    5. eval outdegree - activity    0.0149  ( 0.1156   )    0.0013   
+##    6. eval indegree - activity(1) -0.4127  ( 0.2737   )    0.0142   
+##    7. eval network-isolate         2.4594  ( 1.3591   )   -0.0199   
+##    8. eval gender alter           -0.3929  ( 0.3068   )    0.0055   
+##    9. eval gender ego              0.1514  ( 0.3339   )   -0.0326   
+##   10. eval same gender             0.1551  ( 0.2789   )    0.0134   
 ## 
-## Overall maximum convergence ratio:    0.1291 
+## Overall maximum convergence ratio:    0.1034 
 ## 
 ## 
-## Total of 2367 iteration steps.</code></pre>
+## Total of 2526 iteration steps.</code></pre>
 <pre class="r"><code># (the outer parentheses lead to printing the obtained result on the screen) if necessary, estimate
 # further
 (ans &lt;- siena07(myAlgorithm, data = mydata, effects = myeff, prevAns = ans, returnDeps = TRUE))</code></pre>
@@ -920,24 +920,24 @@ whatever, but here just the basic</p>
 ##                                                Error      t-ratio   
 ## 
 ## Rate parameters: 
-##   0        Rate parameter          4.0226  ( 0.9380   )             
+##   0        Rate parameter          4.0477  ( 1.0285   )             
 ## 
 ## Other parameters: 
-##    1. eval outdegree (density)    -2.4434  ( 0.8007   )    0.0031   
-##    2. eval reciprocity             2.3365  ( 0.6645   )    0.0673   
-##    3. eval transitive triplets     0.8065  ( 0.3943   )    0.0182   
-##    4. eval indegree - popularity   0.2165  ( 0.0584   )   -0.0450   
-##    5. eval outdegree - activity    0.0140  ( 0.1157   )   -0.0058   
-##    6. eval indegree - activity(1) -0.4129  ( 0.3243   )    0.0303   
-##    7. eval network-isolate         2.4077  ( 1.3458   )   -0.0211   
-##    8. eval gender alter           -0.3963  ( 0.3012   )    0.0710   
-##    9. eval gender ego              0.1474  ( 0.3620   )    0.0295   
-##   10. eval same gender             0.1481  ( 0.2899   )   -0.0500   
+##    1. eval outdegree (density)    -2.4908  ( 0.7320   )    0.0185   
+##    2. eval reciprocity             2.3379  ( 0.6639   )    0.0014   
+##    3. eval transitive triplets     0.7831  ( 0.4002   )    0.0479   
+##    4. eval indegree - popularity   0.2213  ( 0.0622   )    0.0305   
+##    5. eval outdegree - activity    0.0190  ( 0.1023   )    0.0186   
+##    6. eval indegree - activity(1) -0.4056  ( 0.2802   )    0.0725   
+##    7. eval network-isolate         2.4407  ( 1.1787   )    0.0292   
+##    8. eval gender alter           -0.4092  ( 0.3090   )   -0.0387   
+##    9. eval gender ego              0.1628  ( 0.3198   )   -0.0192   
+##   10. eval same gender             0.1606  ( 0.3087   )    0.0372   
 ## 
-## Overall maximum convergence ratio:    0.1688 
+## Overall maximum convergence ratio:    0.1348 
 ## 
 ## 
-## Total of 2683 iteration steps.</code></pre>
+## Total of 2690 iteration steps.</code></pre>
 <p>What does this mean: Rate parameter: On average every agent has made
 4 ministeps Outdegree (density): Very strongly negative Network isolate
 effect: There are probably a lot of people who do not have any ties

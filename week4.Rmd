@@ -195,6 +195,8 @@ plot(g, layout = l)
 This is the same network, but the second one looks/ feels a lot different (seems to suggest way more polarisation, where 1 and 34 are polar opposites)
 For the second one, we manipulated the graph manually, if you do this, be honest about it!!! BUT this is the same as the algorithm does, which is something that is generally accepted, which is kind of odd. Solution: Maybe mention what algorithm you used (and why?) --> graphs aren't neutral
 
+<br>
+
 # Trying on my own
 Load in data
 ```{r}
@@ -316,8 +318,10 @@ which(misrow) #Tells you which row has missing values
 test_m[which(misrow), ] <- 0
 ```
 
+<br>
+
 # Webscraping
-```{r}
+```
 install.packages("xml2")
 require(xml2)
 install.packages("rvest")
@@ -325,7 +329,8 @@ require(rvest)
 ```
 Trying to save data from a nos article
 Saving the href
-```{r}
+
+```
 url <- "https://nos.nl/zoeken?q=Jochem+Tolsma&page=1"
 
 nos <- read_html(url)
@@ -348,7 +353,7 @@ lijst[1] %>% html_children %>% html_attr(name = "href")
 # /html/body/div/main/div[2]
 ```
 Saving the date
-```{r}
+```
 # By myself
 time_num <- lijst[1] %>% html_children %>% html_children %>% .[2] %>% html_children %>% .[2] %>% html_children %>% html_children %>% html_attr(name = "datetime")
 time_num
@@ -363,16 +368,7 @@ lijst[1] %>% html_element("time") %>% html_attr(name = "datetime")
 lijst[1] %>% html_element("time") %>% html_text
 ```
 
-```{
-url <- "https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document(7a9b77f1-d230-4a00-9856-2f0f8e967e62)"
-
-test <- read_html(url)
-html_text(test)
-
-library(jsonlite)
-test <- fromJSON(url)
-test$Soort
-```
+<br>
 
 # Trying on my own (again)
 ## Descriptive statistics
@@ -396,6 +392,8 @@ plot(pretty_graph,
      margin = 0.01,
      rescale = FALSE, ylim = c(-9,9))
 ```
+<br>
+
 Trying (and being unsuccesful) to give gender different colours
 ```{}
 in_network <- data.frame(as_ids(V(pretty_graph)))
@@ -411,7 +409,7 @@ in_network$vcol <- ifelse()
 
 ```
 
-Trying to change node size based on degree?
+Trying to change node size based on degree
 ```{r}
 V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = T) * 1000 + 50
 
