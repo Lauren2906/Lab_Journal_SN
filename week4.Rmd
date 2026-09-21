@@ -27,34 +27,172 @@ questions. The items I chose last week, still seem like the best choice
 to me for measuring the concepts, I will just go into them a bit more
 deeply this week, answering what level data the items measure.
 
-**Civic engagement** 
+**Civic engagement**
 
-For civic engagement, the questionnaire measures
-both beliefs and behaviour. I am most interested in behaviour, so I will
-be using that scale from now on. This scale consists of six items, each
-measuring a different civic behaviour. This is a measure on an
-individual, actor level. This is a dynamic measure, it can change over
-time, which is why it is interesting whether it changes because of the
-ties people have.
+For civic engagement, the questionnaire measures both beliefs and
+behaviour. I am most interested in behaviour, so I will be using that
+scale from now on. This scale consists of six items, each measuring a
+different civic behaviour. This is a measure on an individual, actor
+level. This is a dynamic measure, it can change over time, which is why
+it is interesting whether it changes because of the ties people have.
 
-**Strong/ weak ties** 
+**Strong/ weak ties**
 
-The measure for both strong and weak ties, are
-inherently dyadic data, as you cannot have a tie on your own. The
-questions asked in the MRCS dataset ask for directed ties, as the
-question is about whether actor A friends (or study partners) with actor
-B, however, it is possible that actor B does not nominate actor A,
-leading to a directed tie.
+The measure for both strong and weak ties, are inherently dyadic data,
+as you cannot have a tie on your own. The questions asked in the MRCS
+dataset ask for directed ties, as the question is about whether actor A
+friends (or study partners) with actor B, however, it is possible that
+actor B does not nominate actor A, leading to a directed tie.
 
-**Covariates** 
+**Covariates**
 
-Last week I did not look into covariates that should be
-considered, but the dataset contains all the 'standard' covariates, that
-would be important to control for: - Gender (RXge) - Ethnicity
-(RXreth) - What year of college (Rfrstyr) These are all variables
-measured at the individual level, with the first two being stable
-characteristics, and the last one being dynamic.
+Last week I did not look into covariates that should be considered, but
+the dataset contains all the 'standard' covariates, that would be
+important to control for: - Gender (RXge) - Ethnicity (RXreth) - What
+year of college (Rfrstyr) These are all variables measured at the
+individual level, with the first two being stable characteristics, and
+the last one being dynamic.
 
 ------------------------------------------------------------------------
 
 # In class
+
+## SNASS tutorial
+
+### 9.1. Getting to know the data
+
+```{r}
+require("igraph")
+g <- make_graph("Zachary")
+plot(g)
+```
+
+Visually, this isn't the same graph as in the tutorial, but the ties are
+the same, and the centre is relatively the same. Apparently, the figure
+is made to put the 'popular' people in the centre. Based on this, we can
+say something about network size, the fact that the ties are undirected
+(but is that igraph, or the data that is undirected --\> check matrix).
+
+```{r}
+gmat <- as_adjacency_matrix(g, type = "both", sparse = FALSE)
+# gmat
+isSymmetric(gmat)
+```
+
+Based on the matrix, there are undirected ties, because it is symmetric.
+You can also check this with isSymemetric, if that is true, there is an
+undirected network.
+
+#### Descriptive statistics
+
+Transitivity
+
+```{r}
+# be aware that directed graphs are considered as undirected. but g is undirected.
+igraph::transitivity(g, type = c("localundirected"), isolates = c("NaN", "zero"))
+```
+
+There is not one actor who is specifically very unique in their amount
+of transitive ties, thus doesnt seem to be that interesting of a
+statistic
+
+Betweenness
+
+```{r}
+igraph::betweenness(g, directed = FALSE)
+```
+
+This shows that number 1 and number 34 have very high number, in the
+plot you do not see that (big) difference between 33 and 34, thus we
+need to recreate the plot. It seems like 1, 3, 32, 33, and 34 are
+interesting, as they have large numbers.
+
+How can we plot that?
+
+- Colour code --\> upalate to show the brighter the colour the more
+  betweenness
+
+- Size increase --\> Size nodes dependent on betweenness
+
+- Layout broader --\> No overlapping nodes
+
+#### Dyad census
+
+```{r}
+igraph::dyad_census(g)
+```
+
+Because it is an undirected graph, the asymmetry is always 0
+
+#### Triad census
+
+```{r}
+igraph::triad_census(g)
+# I will use sna because it shows the names of the triads as well.
+sna::triad.census(gmat)
+unloadNamespace("sna")  #I will detach this package again, otherwise it will interfere with all kind of functions from igraph, and my students will hate me for that.
+```
+
+This shows per sort of triad, how many times it is existent in the
+network
+
+How many ways there are to close a triad, is calculated through an actor
+perspective --\> If there is a triad, there are three ways to be a
+triad, from each actor one
+
+Transitivity: How many triads are closed divided by the amount of triads
+that are closed or can be closed OR how many 300 networks are there,
+divided by 300 + 201 networks (because only 201 can be closed) This same
+goes for reciprocity (on dyad level), which cannot be done on this
+network, because it has undirected ties
+
+Local transitivity: The transitivity of one ego --\> shows you how many
+transitive ties one ego has Can tell you something about how two people
+with the same amount of ties, differ in their network structure
+
+```{r}
+# Caluclating transitivity in an r-function
+igraph::transitivity(g, type = "global")
+# Or
+sna::gtrans(gmat)
+
+# Calculating transitivity manually
+triad_g <- data.frame(sna::triad.census(gmat))
+
+transitivity_g <- (3 * triad_g$X300)/(triad_g$X201 + 3 * triad_g$X300)
+transitivity_g
+```
+
+#### Network visualisation
+
+```{r}
+# changing V
+V(g)$size = betweenness(g, normalized = T, directed = FALSE) * 60 + 10  #after some trial and error
+plot(g, mode = "undirected")
+```
+
+Meaning of the different parts of the codes:
+
+- V = virtuses (the nodes)
+
+- E = edges
+
+- \*60 = betweenness score is between 0 and 1, needs to be more heavily
+  taken into account
+
+- \+10 = if you don't do that, nodes with a betweenness of 0 will also
+  be visualised with 0, which would be undesirable
+
+```{r}
+set.seed(2345)
+l <- layout_with_mds(g)  #https://igraph.org/r/doc/layout_with_mds.html
+plot(g, layout = l)
+```
+```{r}
+l  #let us take a look at the coordinates
+l[1, 1] <- 4
+l[34, 1] <- -3.5
+plot(g, layout = l)
+```
+This is the same network, but the second one looks/ feels a lot different (seems to suggest way more polarisation, where 1 and 34 are polar opposites)
+For the second one, we manipulated the graph manually, if you do this, be honest about it!!! BUT this is the same as the algorithm does, which is something that is generally accepted, which is kind of odd. Solution: Maybe mention what algorithm you used (and why?) --> graphs aren't neutral

@@ -54,7 +54,7 @@ But please note, we are not here to make a beautiful website, our intention is j
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 
-This website was made as part of the course Social Networks (SOW-SCS211), and showcases both my progress (under tab "Lab journal") and my final assignment (under tab "Final assignment")
+This website was made by Lauren Dirix, as part of the course Social Networks (SOW-SCS211), and showcases both my progress (under tab "Lab journal") and my final assignment (under tab "Final assignment")
 
 <br>
 

@@ -596,8 +596,6 @@ fpackage.check(packages)
 
 load("./data/IndividualCharacteristics.RData")
 load("./data/NetworkCharacteristics.RData")
-
-#was unfortunately unsuccessful :/
 ```
 
 <br>
@@ -630,7 +628,7 @@ class(weak_netw_t2)
 # view(hanging[[1]])
 hanging_df_t1 <- as.data.frame(hanging[[1]][1])
 class(hanging_df_t1)
-# view(hanging_df_t1)
+view(hanging_df_t1)
 strong_netw_t1 <- data.matrix(hanging_df_t1)
 strong_netw_t1[strong_netw_t1==9]<-NA
 class(strong_netw_t1)
