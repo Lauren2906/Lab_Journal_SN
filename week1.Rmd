@@ -30,7 +30,7 @@ cv10_haven <- haven::read_spss("Cultural_Changes_2010.sav")
 ```
 
 Inspect the data
-```{r, include = FALSE}
+```{}
 str(cv08)
 str(cv08_nolab)
 str(cv08_haven)
@@ -38,7 +38,7 @@ str(cv08$lftop)
 str(cv08_haven$lftop)
 ```
 
-```{r}
+```{}
 attributes(cv08$lftop)
 attributes(cv08_nolab$lftop)
 attributes(cv08_haven$lftop)
@@ -46,9 +46,11 @@ attributes(cv08_haven$lftop)
 names(cv08_haven)
 summary(cv08_haven)
 head(cv08_haven)
-#fix(cv08)
-#View(cv08_haven)
+fix(cv08)
+View(cv08_haven)
 ```
+
+<br>
 
 ## A7 - Assign missing values
 ### In base
@@ -82,6 +84,7 @@ cv08_haven <- mutate(cv08_haven, lftop_new = na_if(lftop, 99))
 table(cv08_haven$lftop_new, useNA = "always")
 ```
 
+<br>
 
 ## A8 - Recoding variables 
 ### In base
@@ -132,6 +135,8 @@ cv08_haven <- cv08_haven %>%
   mutate(educ3 = na_if(educ3, -9)) %>%
   mutate(educ3 = factor(educ3, levels = c(1, 2, 3), labels = c("primary", "secondary", "tertiary")))
 ```
+
+<br>
 
 ## A9 - Means and counting
 ### In base
@@ -200,6 +205,7 @@ cv08_haven <- cv08_haven %>%
     NA)) %>% 
   dplyr:: select(-int_mean_temp, -nmis)
 ```
+<br>
 
 ## A10 - Merging data files
 ### In base
@@ -339,6 +345,8 @@ summary(cv_tot_tidy)
 cv_tot_panel_tidy <- full_join(cv08_sel, cv10_sel, by = "id2", suffix = c(".2008", ".2010"))
 ```
 
+<br> 
+
 ## A11 - Aggregate data
 ### In base
 ```{r}
@@ -364,6 +372,8 @@ cv_total_tidy <- cv_tot_tidy %>%
     mutate(age_region = mean(age, na.rm = TRUE)) %>%
     ungroup()
 ```
+
+<br>
 
 ## A12 - Missing values
 ### In base
@@ -410,7 +420,10 @@ cv_total$educ3 <- as.factor(cv_total$educ3)
 # install.packages("mice")
 require(mice)
 mice:: md.pattern(cv_total)
+```
 
+The following chunck took quite long to run every time when building my website, so I made it visible on my website, but not calculate anything.
+```{}
 imp <- mice(data = cv_total, method = c("", "", "cart", "logreg", "polr", "cart", "", ""))
 attributes(imp)
 pred <- imp$pred
@@ -430,6 +443,7 @@ model_imp <- with(imp, lm(as.numeric(health) ~ men + age + educ3 + region))
 pool_model_imp <- pool(model_imp)
 summary(pool_model_imp)
 ```
+
 ### In tidy
 ```{r}
 cv_total_tidy <- cv_total_tidy %>%
@@ -459,7 +473,8 @@ model3 <- cv_total_tidy2 %>%
 model3
 ```
 Imputing missing values
-```{r}
+Same as above, this chunck took quite a bit of time to run, thus I made sure that R doesn't run it every time I want to build my website.
+```{}
 pred <- cv_total_tidy %>%
   dplyr::select(c("id", "id2", "age", "men", "educ3", "health", "region", "wave")) %>%
   mutate_all(as.numeric) %>%

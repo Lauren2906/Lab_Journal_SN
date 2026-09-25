@@ -392,6 +392,9 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li>
+  <a href="code_final.html">Code final assignment</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -451,531 +454,21 @@ require(tidyverse)
 <pre class="r"><code>cv08_haven &lt;- haven::read_spss(&quot;Cultural_Changes_2008.sav&quot;)
 cv10_haven &lt;- haven::read_spss(&quot;Cultural_Changes_2010.sav&quot;)</code></pre>
 <p>Inspect the data</p>
-<pre class="r"><code>attributes(cv08$lftop)</code></pre>
-<pre><code>## $levels
-##  [1] &quot;&lt; één jaar&quot; &quot;één jaar&quot;   &quot;125 jaar&quot;   &quot;16&quot;         &quot;17&quot;         &quot;18&quot;         &quot;19&quot;        
-##  [8] &quot;twee jaar&quot;  &quot;20&quot;         &quot;21&quot;         &quot;22&quot;         &quot;23&quot;         &quot;24&quot;         &quot;25&quot;        
-## [15] &quot;26&quot;         &quot;27&quot;         &quot;28&quot;         &quot;29&quot;         &quot;30&quot;         &quot;31&quot;         &quot;32&quot;        
-## [22] &quot;33&quot;         &quot;34&quot;         &quot;35&quot;         &quot;36&quot;         &quot;37&quot;         &quot;38&quot;         &quot;39&quot;        
-## [29] &quot;40&quot;         &quot;41&quot;         &quot;42&quot;         &quot;43&quot;         &quot;44&quot;         &quot;45&quot;         &quot;46&quot;        
-## [36] &quot;47&quot;         &quot;48&quot;         &quot;49&quot;         &quot;50&quot;         &quot;51&quot;         &quot;52&quot;         &quot;53&quot;        
-## [43] &quot;54&quot;         &quot;55&quot;         &quot;56&quot;         &quot;57&quot;         &quot;58&quot;         &quot;59&quot;         &quot;60&quot;        
-## [50] &quot;61&quot;         &quot;62&quot;         &quot;63&quot;         &quot;64&quot;         &quot;65&quot;         &quot;66&quot;         &quot;67&quot;        
-## [57] &quot;68&quot;         &quot;69&quot;         &quot;70&quot;         &quot;71&quot;         &quot;72&quot;         &quot;73&quot;         &quot;74&quot;        
-## [64] &quot;75&quot;         &quot;76&quot;         &quot;77&quot;         &quot;78&quot;         &quot;79&quot;         &quot;80&quot;         &quot;81&quot;        
-## [71] &quot;82&quot;         &quot;83&quot;         &quot;84&quot;         &quot;85&quot;         &quot;86&quot;         &quot;87&quot;         &quot;88&quot;        
-## [78] &quot;89&quot;         &quot;90&quot;         &quot;91&quot;         &quot;Onbekend&quot;  
-## 
-## $class
-## [1] &quot;factor&quot;</code></pre>
-<pre class="r"><code>attributes(cv08_nolab$lftop)</code></pre>
-<pre><code>## $value.labels
-##   125 jaar   Onbekend  twee jaar   één jaar &lt; één jaar 
-##      &quot;125&quot;       &quot;99&quot;        &quot;2&quot;        &quot;1&quot;        &quot;0&quot;</code></pre>
-<pre class="r"><code>attributes(cv08_haven$lftop)</code></pre>
-<pre><code>## $label
-## [1] &quot;Leeftijd OP op datum interview&quot;
-## 
-## $format.spss
-## [1] &quot;F10.0&quot;
-## 
-## $display_width
-## [1] 12
-## 
-## $class
-## [1] &quot;haven_labelled&quot; &quot;vctrs_vctr&quot;     &quot;double&quot;        
-## 
-## $labels
-## &lt; één jaar   één jaar  twee jaar   Onbekend   125 jaar 
-##          0          1          2         99        125</code></pre>
-<pre class="r"><code>names(cv08_haven)</code></pre>
-<pre><code>##   [1] &quot;we_id&quot;    &quot;veilignr&quot; &quot;lft1&quot;     &quot;geslacht&quot; &quot;allochtn&quot; &quot;lft01&quot;    &quot;lftop&quot;    &quot;gewicht&quot; 
-##   [9] &quot;var006n&quot;  &quot;v040&quot;     &quot;var723&quot;   &quot;var723a&quot;  &quot;v202n&quot;    &quot;var1061a&quot; &quot;var1061b&quot; &quot;var1062a&quot;
-##  [17] &quot;var1062b&quot; &quot;int137n&quot;  &quot;int138n&quot;  &quot;int139n&quot;  &quot;int140n&quot;  &quot;int141n&quot;  &quot;v401&quot;     &quot;var1343&quot; 
-##  [25] &quot;var648&quot;   &quot;var149&quot;   &quot;var058&quot;   &quot;var059&quot;   &quot;var064&quot;   &quot;var365&quot;   &quot;var065&quot;   &quot;var092&quot;  
-##  [33] &quot;var096&quot;   &quot;int054&quot;   &quot;int055&quot;   &quot;int056&quot;   &quot;int057&quot;   &quot;int058&quot;   &quot;int059&quot;   &quot;int059a&quot; 
-##  [41] &quot;var571&quot;   &quot;var572&quot;   &quot;var573&quot;   &quot;var574&quot;   &quot;var576&quot;   &quot;var153&quot;   &quot;var154&quot;   &quot;var155&quot;  
-##  [49] &quot;var156&quot;   &quot;var157&quot;   &quot;var157a&quot;  &quot;var154a&quot;  &quot;var164&quot;   &quot;var165&quot;   &quot;var166&quot;   &quot;var179&quot;  
-##  [57] &quot;var180&quot;   &quot;var184&quot;   &quot;var185&quot;   &quot;var198a&quot;  &quot;var198&quot;   &quot;var201a&quot;  &quot;var201b&quot;  &quot;var204&quot;  
-##  [65] &quot;int257&quot;   &quot;var211&quot;   &quot;var223&quot;   &quot;var1320&quot;  &quot;var1321&quot;  &quot;var1322&quot;  &quot;var1323&quot;  &quot;var1324&quot; 
-##  [73] &quot;var1325&quot;  &quot;var1326&quot;  &quot;var1327&quot;  &quot;var1328&quot;  &quot;var229&quot;   &quot;int218&quot;   &quot;int219&quot;   &quot;int221&quot;  
-##  [81] &quot;int222&quot;   &quot;int223&quot;   &quot;int710&quot;   &quot;int711&quot;   &quot;int712&quot;   &quot;int713&quot;   &quot;int714&quot;   &quot;int715&quot;  
-##  [89] &quot;int716&quot;   &quot;var433&quot;   &quot;var439&quot;   &quot;var1329&quot;  &quot;var1330&quot;  &quot;var445&quot;   &quot;var446&quot;   &quot;var447&quot;  
-##  [97] &quot;var451&quot;   &quot;var452&quot;   &quot;var1316&quot;  &quot;var1317&quot;  &quot;var1331&quot;  &quot;vw065&quot;    &quot;var491&quot;   &quot;var040&quot;  
-## [105] &quot;var1304&quot;  &quot;var274&quot;   &quot;var275&quot;   &quot;var1196&quot;  &quot;var1197&quot;  &quot;var461&quot;   &quot;var273&quot;   &quot;var1262&quot; 
-## [113] &quot;var239&quot;   &quot;var318&quot;   &quot;var319&quot;   &quot;var320&quot;   &quot;var1209&quot;  &quot;var1210&quot;  &quot;var599&quot;   &quot;var600&quot;  
-## [121] &quot;var408&quot;   &quot;var409&quot;   &quot;var10401&quot; &quot;var10402&quot; &quot;var10403&quot; &quot;var10404&quot; &quot;var10405&quot; &quot;var10406&quot;
-## [129] &quot;var10407&quot; &quot;var10408&quot; &quot;var10409&quot; &quot;var10410&quot; &quot;var10411&quot; &quot;var10412&quot; &quot;var10413&quot; &quot;var10414&quot;
-## [137] &quot;var10415&quot; &quot;var10416&quot; &quot;var1046a&quot; &quot;var1046b&quot; &quot;var1046c&quot; &quot;var1046d&quot; &quot;var1046e&quot; &quot;var1046f&quot;
-## [145] &quot;var1046g&quot; &quot;var1046h&quot; &quot;var1046i&quot; &quot;var1046j&quot; &quot;var1046k&quot; &quot;var1046l&quot; &quot;var1046m&quot; &quot;var1046n&quot;
-## [153] &quot;var1046o&quot; &quot;var1046p&quot; &quot;var687&quot;   &quot;var688&quot;   &quot;var689&quot;   &quot;var953&quot;   &quot;var1265&quot;  &quot;var351&quot;  
-## [161] &quot;var402&quot;   &quot;var595&quot;   &quot;var972b&quot;  &quot;var972d&quot;  &quot;var972e&quot;  &quot;var972f&quot;  &quot;var972h&quot;  &quot;var972i&quot; 
-## [169] &quot;var972k&quot;  &quot;var1039b&quot; &quot;var1039c&quot; &quot;var1039d&quot; &quot;var1039e&quot; &quot;var1039f&quot; &quot;var1039g&quot; &quot;var1039h&quot;
-## [177] &quot;var1039i&quot; &quot;var1039j&quot; &quot;var1039l&quot; &quot;var1039m&quot; &quot;var1145a&quot; &quot;var1145b&quot; &quot;var1145c&quot; &quot;var1145d&quot;
-## [185] &quot;var1145e&quot; &quot;var1145f&quot; &quot;var1145g&quot; &quot;var1145h&quot; &quot;var1145i&quot; &quot;var1145j&quot; &quot;var1145k&quot; &quot;var1145l&quot;
-## [193] &quot;var1145m&quot; &quot;var1145n&quot; &quot;var1145o&quot; &quot;var1145p&quot; &quot;var1146&quot;  &quot;var1163&quot;  &quot;var1335&quot;  &quot;var1336&quot; 
-## [201] &quot;var1337&quot;  &quot;var347&quot;   &quot;var544&quot;   &quot;var757bm&quot; &quot;var1318&quot;  &quot;var1332&quot;  &quot;var1333&quot;  &quot;var1334&quot; 
-## [209] &quot;var763&quot;   &quot;var766&quot;   &quot;var767&quot;   &quot;var1319&quot;  &quot;var844&quot;   &quot;var846&quot;   &quot;var847&quot;   &quot;var594&quot;  
-## [217] &quot;var1017&quot;  &quot;var357&quot;   &quot;var1307&quot;  &quot;var1338&quot;  &quot;var1339&quot;  &quot;var1340&quot;  &quot;var1341&quot;  &quot;var1342&quot; 
-## [225] &quot;var516&quot;   &quot;var683b&quot;  &quot;var728b&quot;  &quot;var729b&quot;  &quot;var546&quot;   &quot;var758&quot;   &quot;var759&quot;   &quot;var1031&quot; 
-## [233] &quot;var1103&quot;  &quot;var1104&quot;  &quot;var1106&quot;  &quot;var1315a&quot; &quot;var1310&quot;  &quot;var1311&quot;  &quot;var1312&quot;  &quot;var1313&quot; 
-## [241] &quot;var1314&quot;  &quot;var900k&quot;  &quot;var900l&quot;  &quot;var548&quot;   &quot;var5504&quot;  &quot;var462b&quot;  &quot;soorthhn&quot; &quot;plaatsin&quot;
-## [249] &quot;lft2&quot;     &quot;lft3&quot;     &quot;lft4&quot;     &quot;lft5&quot;     &quot;lft6&quot;     &quot;lft7&quot;     &quot;lft8&quot;     &quot;lft9&quot;    
-## [257] &quot;lft10&quot;    &quot;geslac_1&quot; &quot;geslac_2&quot; &quot;geslac_3&quot; &quot;geslac_4&quot; &quot;geslac_5&quot; &quot;geslac_6&quot; &quot;geslac_7&quot;
-## [265] &quot;geslac_8&quot; &quot;geslac_9&quot; &quot;lftcatjo&quot; &quot;soortbew&quot; &quot;soi98dop&quot; &quot;isco_op&quot;  &quot;gemgrjj&quot;  &quot;landd&quot;   
-## [273] &quot;stede&quot;    &quot;generat&quot;  &quot;typehh&quot;   &quot;plaatshh&quot; &quot;plhh17&quot;   &quot;wperiode&quot;</code></pre>
-<pre class="r"><code>summary(cv08_haven)</code></pre>
-<pre><code>##      we_id             veilignr              lft1            geslacht       allochtn     
-##  Min.   :36775330   Min.   :811000004   Min.   : 0.00   Length   :1963   Min.   :0.0000  
-##  1st Qu.:37604540   1st Qu.:812003955   1st Qu.:33.00   N.unique :   3   1st Qu.:0.0000  
-##  Median :38724230   Median :902002867   Median :46.00   N.blank  :   0   Median :0.0000  
-##  Mean   :38830177   Mean   :875088135   Mean   :46.56   Min.nchar:   1   Mean   :0.1793  
-##  3rd Qu.:40598965   3rd Qu.:904000134   3rd Qu.:60.00   Max.nchar:   1   3rd Qu.:0.0000  
-##  Max.   :41199300   Max.   :905010166   Max.   :99.00                    Max.   :9.0000  
-##                                                                                          
-##      lft01           lftop          gewicht           var006n            v040           var723     
-##  Min.   :15.00   Min.   :16.00   Min.   :  955.1   Min.   :-3.000   Min.   :1.000   Min.   :-5.00  
-##  1st Qu.:32.00   1st Qu.:33.00   1st Qu.: 5137.2   1st Qu.: 2.000   1st Qu.:1.000   1st Qu.:-5.00  
-##  Median :46.00   Median :46.00   Median : 6473.4   Median : 5.000   Median :1.000   Median :20.00  
-##  Mean   :46.37   Mean   :46.78   Mean   : 6676.3   Mean   : 3.999   Mean   :1.352   Mean   :18.69  
-##  3rd Qu.:60.00   3rd Qu.:61.00   3rd Qu.: 7981.1   3rd Qu.: 6.000   3rd Qu.:2.000   3rd Qu.:38.00  
-##  Max.   :99.00   Max.   :99.00   Max.   :20501.2   Max.   : 8.000   Max.   :2.000   Max.   :90.00  
-##                                                                                                    
-##     var723a           v202n           var1061a        var1061b          var1062a    
-##  Min.   :-5.000   Min.   :-3.000   Min.   :1.000   Min.   : -5.000   Min.   :1.000  
-##  1st Qu.:-5.000   1st Qu.: 1.000   1st Qu.:1.000   1st Qu.: -5.000   1st Qu.:2.000  
-##  Median :-5.000   Median : 1.000   Median :2.000   Median : -5.000   Median :2.000  
-##  Mean   :-4.978   Mean   : 2.695   Mean   :1.721   Mean   : -2.074   Mean   :1.773  
-##  3rd Qu.:-5.000   3rd Qu.: 5.000   3rd Qu.:2.000   3rd Qu.:  1.000   3rd Qu.:2.000  
-##  Max.   : 4.000   Max.   :10.000   Max.   :2.000   Max.   :168.000   Max.   :2.000  
-##                                                                                     
-##     var1062b          int137n           int138n          int139n           int140n      
-##  Min.   : -5.000   Min.   :-5.0000   Min.   :-5.000   Min.   :-5.0000   Min.   :-5.000  
-##  1st Qu.: -5.000   1st Qu.: 1.0000   1st Qu.: 2.000   1st Qu.: 1.0000   1st Qu.: 1.000  
-##  Median : -5.000   Median : 2.0000   Median : 3.000   Median : 1.0000   Median : 2.000  
-##  Mean   : -2.531   Mean   : 0.5797   Mean   : 2.232   Mean   : 0.9103   Mean   : 1.911  
-##  3rd Qu.: -5.000   3rd Qu.: 3.0000   3rd Qu.: 3.000   3rd Qu.: 3.0000   3rd Qu.: 3.000  
-##  Max.   :168.000   Max.   : 3.0000   Max.   : 3.000   Max.   : 3.0000   Max.   : 3.000  
-##                                                                                         
-##     int141n            v401          var1343          var648         var149           var058      
-##  Min.   :-5.000   Min.   :1.000   Min.   :-3.00   Min.   :1.00   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.:1.000   1st Qu.: 3.00   1st Qu.:2.00   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median : 1.000   Median :2.000   Median : 3.00   Median :3.00   Median : 1.000   Median : 1.000  
-##  Mean   : 1.887   Mean   :1.993   Mean   : 2.86   Mean   :2.58   Mean   : 1.442   Mean   : 1.149  
-##  3rd Qu.: 3.000   3rd Qu.:2.000   3rd Qu.: 3.00   3rd Qu.:3.00   3rd Qu.: 2.000   3rd Qu.: 1.000  
-##  Max.   : 3.000   Max.   :5.000   Max.   : 3.00   Max.   :5.00   Max.   : 3.000   Max.   : 2.000  
-##                                                                                                   
-##      var059           var064           var365            var065           var092      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.0000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.0000   1st Qu.: 1.000   1st Qu.: 3.000  
-##  Median : 1.000   Median : 1.000   Median : 1.0000   Median : 1.000   Median : 4.000  
-##  Mean   : 1.083   Mean   : 1.149   Mean   : 0.9409   Mean   : 1.148   Mean   : 3.295  
-##  3rd Qu.: 1.000   3rd Qu.: 2.000   3rd Qu.: 2.0000   3rd Qu.: 2.000   3rd Qu.: 4.000  
-##  Max.   : 2.000   Max.   : 2.000   Max.   : 2.0000   Max.   : 2.000   Max.   : 4.000  
-##                                                                                       
-##      var096           int054           int055          int056           int057      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.: 2.00   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 2.000   Median : 2.000   Median : 3.00   Median : 2.000   Median : 2.000  
-##  Mean   : 2.008   Mean   : 1.948   Mean   : 2.43   Mean   : 1.888   Mean   : 1.954  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.00   3rd Qu.: 3.000   3rd Qu.: 3.000  
-##  Max.   : 5.000   Max.   : 4.000   Max.   : 4.00   Max.   : 4.000   Max.   : 4.000  
-##                                                                                     
-##      int058           int059          int059a           var571           var572      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-5.000  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.:-5.000  
-##  Median : 2.000   Median : 2.000   Median : 2.000   Median : 2.000   Median : 1.000  
-##  Mean   : 2.065   Mean   : 2.141   Mean   : 1.851   Mean   : 2.326   Mean   :-0.864  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 2.000  
-##  Max.   : 4.000   Max.   : 4.000   Max.   : 4.000   Max.   : 3.000   Max.   : 3.000  
-##                                                                                      
-##      var573           var574           var576           var153           var154      
-##  Min.   :-3.000   Min.   :-5.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.:-5.000   1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 2.000  
-##  Median : 2.000   Median :-5.000   Median : 3.000   Median : 1.000   Median : 2.000  
-##  Mean   : 1.615   Mean   :-2.002   Mean   : 2.985   Mean   : 1.319   Mean   : 1.889  
-##  3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 4.000   3rd Qu.: 2.000   3rd Qu.: 3.000  
-##  Max.   : 3.000   Max.   : 3.000   Max.   : 5.000   Max.   : 3.000   Max.   : 3.000  
-##                                                                                      
-##      var155           var156           var157          var157a          var154a     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.00  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.:-3.000   1st Qu.: 2.000   1st Qu.: 2.00  
-##  Median : 2.000   Median : 2.000   Median : 2.000   Median : 2.000   Median : 2.00  
-##  Mean   : 1.339   Mean   : 1.415   Mean   : 0.566   Mean   : 1.506   Mean   : 1.56  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 2.00  
-##  Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.00  
-##                                                                                     
-##      var164           var165           var166           var179           var180      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median : 1.000   Median : 4.000   Median : 3.000   Median : 1.000   Median : 1.000  
-##  Mean   : 1.271   Mean   : 3.752   Mean   : 3.148   Mean   : 1.061   Mean   : 1.207  
-##  3rd Qu.: 2.000   3rd Qu.: 5.000   3rd Qu.: 4.000   3rd Qu.: 1.000   3rd Qu.: 1.000  
-##  Max.   : 3.000   Max.   : 5.000   Max.   : 5.000   Max.   : 2.000   Max.   : 2.000  
-##                                                                                      
-##      var184           var185          var198a          var198           var201a      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :1.000   Min.   :-5.0000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.:1.000   1st Qu.:-5.0000   1st Qu.: 1.000  
-##  Median : 1.000   Median : 1.000   Median :1.000   Median : 1.0000   Median : 2.000  
-##  Mean   : 1.233   Mean   : 1.232   Mean   :1.314   Mean   :-0.2165   Mean   : 1.661  
-##  3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.:2.000   3rd Qu.: 2.0000   3rd Qu.: 2.000  
-##  Max.   : 2.000   Max.   : 2.000   Max.   :2.000   Max.   : 7.0000   Max.   : 2.000  
-##                                                                                      
-##     var201b           var204           int257           var211           var223      
-##  Min.   :-5.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.:-5.000   1st Qu.: 4.000   1st Qu.: 3.000   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median :-5.000   Median : 5.000   Median : 3.000   Median : 3.000   Median : 1.000  
-##  Mean   :-2.512   Mean   : 4.118   Mean   : 3.881   Mean   : 2.235   Mean   : 1.258  
-##  3rd Qu.: 1.000   3rd Qu.: 5.000   3rd Qu.: 5.000   3rd Qu.: 3.000   3rd Qu.: 1.000  
-##  Max.   : 6.000   Max.   : 5.000   Max.   : 7.000   Max.   : 3.000   Max.   : 3.000  
-##                                                                                      
-##     var1320          var1321         var1322         var1323          var1324          var1325     
-##  Min.   :-3.000   Min.   :-3.00   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000   Min.   :-3.00  
-##  1st Qu.: 1.000   1st Qu.: 2.00   1st Qu.: 2.00   1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 3.00  
-##  Median : 2.000   Median : 2.00   Median : 2.00   Median : 3.000   Median : 3.000   Median : 3.00  
-##  Mean   : 1.658   Mean   : 2.61   Mean   : 2.13   Mean   : 2.669   Mean   : 2.821   Mean   : 2.79  
-##  3rd Qu.: 2.000   3rd Qu.: 4.00   3rd Qu.: 3.00   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.00  
-##  Max.   : 5.000   Max.   : 5.00   Max.   : 3.00   Max.   : 3.000   Max.   : 3.000   Max.   : 3.00  
-##                                                                                                    
-##     var1326          var1327          var1328           var229           int218      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 3.000  
-##  Median : 3.000   Median : 3.000   Median : 3.000   Median : 3.000   Median : 3.000  
-##  Mean   : 2.924   Mean   : 2.683   Mean   : 2.909   Mean   : 3.319   Mean   : 2.967  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000  
-##  Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 8.000   Max.   : 5.000  
-##                                                                                      
-##      int219           int221           int222           int223           int710      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 3.000   Median : 3.000   Median : 3.000   Median : 3.000   Median : 3.000  
-##  Mean   : 2.574   Mean   : 3.034   Mean   : 2.685   Mean   : 2.501   Mean   : 2.608  
-##  3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##      int711           int712          int713           int714           int715      
-##  Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 2.00   1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 2.000  
-##  Median : 3.000   Median : 3.00   Median : 3.000   Median : 3.000   Median : 3.000  
-##  Mean   : 2.827   Mean   : 2.76   Mean   : 2.737   Mean   : 2.829   Mean   : 2.575  
-##  3rd Qu.: 4.000   3rd Qu.: 3.00   3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 4.000  
-##  Max.   : 5.000   Max.   : 5.00   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                     
-##      int716           var433           var439          var1329          var1330      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 2.000  
-##  Median : 3.000   Median : 4.000   Median : 2.000   Median : 2.000   Median : 3.000  
-##  Mean   : 2.322   Mean   : 3.331   Mean   : 2.407   Mean   : 2.114   Mean   : 3.163  
-##  3rd Qu.: 3.000   3rd Qu.: 5.000   3rd Qu.: 4.000   3rd Qu.: 3.000   3rd Qu.: 5.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##      var445           var446           var447           var451           var452      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 2.000  
-##  Median : 4.000   Median : 3.000   Median : 3.000   Median : 4.000   Median : 3.000  
-##  Mean   : 3.746   Mean   : 2.706   Mean   : 3.003   Mean   : 3.779   Mean   : 2.788  
-##  3rd Qu.: 5.000   3rd Qu.: 4.000   3rd Qu.: 4.000   3rd Qu.: 5.000   3rd Qu.: 4.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##     var1316          var1317          var1331           vw065            var491      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 2.000  
-##  Median : 3.000   Median : 3.000   Median : 2.000   Median : 1.000   Median : 2.000  
-##  Mean   : 2.952   Mean   : 2.862   Mean   : 1.735   Mean   : 1.185   Mean   : 2.665  
-##  3rd Qu.: 4.000   3rd Qu.: 4.000   3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 3.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 4.000   Max.   : 2.000   Max.   : 5.000  
-##                                                                                      
-##      var040          var1304           var274           var275          var1196      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-5.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median : 1.000   Median : 2.000   Median : 1.000   Median : 3.000   Median : 1.000  
-##  Mean   : 1.803   Mean   : 1.964   Mean   : 1.322   Mean   : 4.462   Mean   : 1.489  
-##  3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 1.000   3rd Qu.: 8.000   3rd Qu.: 2.000  
-##  Max.   : 4.000   Max.   : 4.000   Max.   : 4.000   Max.   :14.000   Max.   : 3.000  
-##                                                                                      
-##     var1197            var461          var273          var1262           var239      
-##  Min.   :-3.0000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.0000   1st Qu.: 2.00   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 1.000  
-##  Median : 1.0000   Median : 3.00   Median : 2.000   Median : 3.000   Median : 2.000  
-##  Mean   : 0.8197   Mean   : 2.33   Mean   : 2.065   Mean   : 2.863   Mean   : 1.614  
-##  3rd Qu.: 1.0000   3rd Qu.: 4.00   3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 2.000  
-##  Max.   : 2.0000   Max.   : 5.00   Max.   : 5.000   Max.   : 5.000   Max.   : 2.000  
-##                                                                                      
-##      var318           var319           var320          var1209          var1210      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median : 1.000   Median : 2.000   Median : 1.000   Median : 2.000   Median : 2.000  
-##  Mean   : 1.435   Mean   : 1.485   Mean   : 1.194   Mean   : 1.952   Mean   : 1.785  
-##  3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 2.000  
-##  Max.   : 2.000   Max.   : 2.000   Max.   : 2.000   Max.   : 4.000   Max.   : 4.000  
-##                                                                                      
-##      var599           var600           var408           var409            var10401   
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Length   :1963  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 1.000   N.unique :  18  
-##  Median : 2.000   Median : 2.000   Median : 2.000   Median : 1.000   N.blank  :   0  
-##  Mean   : 1.908   Mean   : 1.759   Mean   : 2.231   Mean   : 1.485   Min.nchar:   1  
-##  3rd Qu.: 2.000   3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 2.000   Max.nchar:   1  
-##  Max.   : 2.000   Max.   : 2.000   Max.   : 3.000   Max.   : 3.000                   
-##                                                                                      
-##       var10402         var10403         var10404         var10405         var10406   
-##  Length   :1963   Length   :1963   Length   :1963   Length   :1963   Length   :1963  
-##  N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18  
-##  N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0  
-##  Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1  
-##  Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1  
-##                                                                                      
-##                                                                                      
-##       var10407         var10408         var10409         var10410         var10411   
-##  Length   :1963   Length   :1963   Length   :1963   Length   :1963   Length   :1963  
-##  N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18  
-##  N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0  
-##  Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1  
-##  Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1  
-##                                                                                      
-##                                                                                      
-##       var10412         var10413         var10414         var10415         var10416   
-##  Length   :1963   Length   :1963   Length   :1963   Length   :1963   Length   :1963  
-##  N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18   N.unique :  18  
-##  N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0   N.blank  :   0  
-##  Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Min.nchar:   1  
-##  Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1  
-##                                                                                      
-##                                                                                      
-##     var1046a         var1046b         var1046c         var1046d         var1046e     
-##  Min.   :-4.000   Min.   :-4.000   Min.   :-4.000   Min.   :-4.000   Min.   :-4.000  
-##  1st Qu.: 3.000   1st Qu.: 7.000   1st Qu.: 5.000   1st Qu.: 2.000   1st Qu.: 5.000  
-##  Median : 6.000   Median :10.000   Median : 9.000   Median : 5.000   Median : 9.000  
-##  Mean   : 6.175   Mean   : 9.328   Mean   : 8.621   Mean   : 5.761   Mean   : 8.733  
-##  3rd Qu.: 9.000   3rd Qu.:13.000   3rd Qu.:12.000   3rd Qu.: 9.000   3rd Qu.:13.000  
-##  Max.   :16.000   Max.   :16.000   Max.   :16.000   Max.   :16.000   Max.   :16.000  
-##                                                                                      
-##     var1046f        var1046g         var1046h        var1046i         var1046j     
-##  Min.   :-4.00   Min.   :-4.000   Min.   :-4.00   Min.   :-4.000   Min.   :-4.000  
-##  1st Qu.:12.00   1st Qu.: 7.000   1st Qu.:10.00   1st Qu.: 2.000   1st Qu.: 3.000  
-##  Median :15.00   Median :10.000   Median :13.00   Median : 5.000   Median : 5.000  
-##  Mean   :13.17   Mean   : 9.357   Mean   :11.66   Mean   : 5.423   Mean   : 5.732  
-##  3rd Qu.:16.00   3rd Qu.:13.000   3rd Qu.:15.00   3rd Qu.: 8.000   3rd Qu.: 8.000  
-##  Max.   :16.00   Max.   :16.000   Max.   :16.00   Max.   :16.000   Max.   :16.000  
-##                                                                                    
-##     var1046k         var1046l         var1046m         var1046n         var1046o     
-##  Min.   :-4.000   Min.   :-4.000   Min.   :-4.000   Min.   :-4.000   Min.   :-4.000  
-##  1st Qu.: 3.000   1st Qu.: 6.000   1st Qu.: 4.000   1st Qu.: 5.000   1st Qu.: 3.000  
-##  Median : 6.000   Median :10.000   Median : 6.000   Median : 8.000   Median : 5.000  
-##  Mean   : 6.542   Mean   : 9.194   Mean   : 6.552   Mean   : 8.047   Mean   : 5.587  
-##  3rd Qu.:10.000   3rd Qu.:13.000   3rd Qu.: 9.000   3rd Qu.:12.000   3rd Qu.: 8.000  
-##  Max.   :16.000   Max.   :16.000   Max.   :16.000   Max.   :16.000   Max.   :16.000  
-##                                                                                      
-##     var1046p         var687           var688            var689           var953      
-##  Min.   :-4.00   Min.   :-3.000   Min.   :-5.0000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 8.00   1st Qu.: 1.000   1st Qu.:-5.0000   1st Qu.: 1.000   1st Qu.: 3.000  
-##  Median :13.00   Median : 1.000   Median : 1.0000   Median : 1.000   Median : 3.000  
-##  Mean   :11.25   Mean   : 1.279   Mean   :-0.1854   Mean   : 1.175   Mean   : 2.593  
-##  3rd Qu.:15.00   3rd Qu.: 2.000   3rd Qu.: 2.0000   3rd Qu.: 1.000   3rd Qu.: 3.000  
-##  Max.   :16.00   Max.   : 3.000   Max.   : 3.0000   Max.   : 2.000   Max.   : 3.000  
-##                                                                                      
-##     var1265           var351           var402           var595          var972b      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-2.000  
-##  1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 2.000   Median : 4.000   Median : 3.000   Median : 2.000   Median : 3.000  
-##  Mean   : 1.386   Mean   : 3.356   Mean   : 2.891   Mean   : 2.221   Mean   : 3.118  
-##  3rd Qu.: 3.000   3rd Qu.: 5.000   3rd Qu.: 4.000   3rd Qu.: 3.000   3rd Qu.: 4.000  
-##  Max.   : 3.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##     var972d          var972e          var972f          var972h          var972i      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 2.000  
-##  Median : 2.000   Median : 2.000   Median : 3.000   Median : 3.000   Median : 2.000  
-##  Mean   : 2.343   Mean   : 2.087   Mean   : 2.853   Mean   : 3.324   Mean   : 2.109  
-##  3rd Qu.: 3.000   3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 3.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##     var972k          var1039b         var1039c        var1039d         var1039e     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 3.00   1st Qu.: 3.000   1st Qu.: 3.000  
-##  Median : 2.000   Median : 4.000   Median : 3.00   Median : 3.000   Median : 3.000  
-##  Mean   : 2.523   Mean   : 3.474   Mean   : 3.42   Mean   : 2.771   Mean   : 2.997  
-##  3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 4.00   3rd Qu.: 3.000   3rd Qu.: 3.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.00   Max.   : 5.000   Max.   : 5.000  
-##                                                                                     
-##     var1039f         var1039g         var1039h        var1039i         var1039j     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 3.00   1st Qu.: 3.000   1st Qu.: 3.000  
-##  Median : 4.000   Median : 3.000   Median : 4.00   Median : 4.000   Median : 3.000  
-##  Mean   : 3.828   Mean   : 3.483   Mean   : 3.24   Mean   : 3.731   Mean   : 3.266  
-##  3rd Qu.: 4.000   3rd Qu.: 4.000   3rd Qu.: 4.00   3rd Qu.: 4.000   3rd Qu.: 4.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.00   Max.   : 5.000   Max.   : 5.000  
-##                                                                                     
-##     var1039l         var1039m         var1145a         var1145b        var1145c     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 3.000   1st Qu.: 5.000   1st Qu.: 5.00   1st Qu.: 6.000  
-##  Median : 3.000   Median : 3.000   Median : 6.000   Median : 6.00   Median : 6.000  
-##  Mean   : 3.171   Mean   : 3.127   Mean   : 5.439   Mean   : 5.22   Mean   : 5.628  
-##  3rd Qu.: 4.000   3rd Qu.: 4.000   3rd Qu.: 7.000   3rd Qu.: 7.00   3rd Qu.: 7.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   :10.000   Max.   :10.00   Max.   :10.000  
-##                                                                                     
-##     var1145d         var1145e         var1145f         var1145g         var1145h     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000  
-##  Median : 6.000   Median : 6.000   Median : 6.000   Median : 6.000   Median : 6.000  
-##  Mean   : 5.595   Mean   : 5.592   Mean   : 5.938   Mean   : 5.836   Mean   : 5.697  
-##  3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000  
-##  Max.   :10.000   Max.   : 9.000   Max.   :10.000   Max.   :10.000   Max.   :10.000  
-##                                                                                      
-##     var1145i        var1145j         var1145k         var1145l         var1145m     
-##  Min.   :-3.00   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 5.00   1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000  
-##  Median : 6.00   Median : 6.000   Median : 6.000   Median : 6.000   Median : 6.000  
-##  Mean   : 5.77   Mean   : 5.428   Mean   : 5.004   Mean   : 5.345   Mean   : 5.311  
-##  3rd Qu.: 7.00   3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000  
-##  Max.   :10.00   Max.   :10.000   Max.   :10.000   Max.   :10.000   Max.   :10.000  
-##                                                                                     
-##     var1145n         var1145o         var1145p         var1146          var1163      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 5.000   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 6.000   Median : 6.000   Median : 6.000   Median : 2.000   Median : 2.000  
-##  Mean   : 5.145   Mean   : 5.347   Mean   : 4.607   Mean   : 2.174   Mean   : 2.094  
-##  3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 7.000   3rd Qu.: 2.000   3rd Qu.: 3.000  
-##  Max.   :10.000   Max.   :10.000   Max.   :10.000   Max.   : 4.000   Max.   : 4.000  
-##                                                                                      
-##     var1335          var1336          var1337           var347           var544      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 1.000  
-##  Median : 4.000   Median : 2.000   Median : 4.000   Median : 2.000   Median : 2.000  
-##  Mean   : 3.482   Mean   : 2.065   Mean   : 3.598   Mean   : 2.427   Mean   : 1.584  
-##  3rd Qu.: 4.000   3rd Qu.: 2.000   3rd Qu.: 4.000   3rd Qu.: 3.000   3rd Qu.: 2.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 3.000  
-##                                                                                      
-##     var757bm         var1318          var1332         var1333          var1334      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.00   1st Qu.: 3.000   1st Qu.: 2.000  
-##  Median : 1.000   Median : 1.000   Median : 1.00   Median : 3.000   Median : 3.000  
-##  Mean   : 1.164   Mean   : 1.857   Mean   : 1.34   Mean   : 3.221   Mean   : 2.646  
-##  3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 1.00   3rd Qu.: 4.000   3rd Qu.: 3.000  
-##  Max.   : 2.000   Max.   : 3.000   Max.   : 4.00   Max.   : 4.000   Max.   : 4.000  
-##                                                                                     
-##        var763           var766           var767        var1319           var844      
-##  Length   :1963   Length   :1963   Length   :1963   Min.   :-3.000   Min.   :-3.000  
-##  N.unique :1758   N.unique :1744   N.unique :1675   1st Qu.: 3.000   1st Qu.: 1.000  
-##  N.blank  :   0   N.blank  :   0   N.blank  :   0   Median : 4.000   Median : 2.000  
-##  Min.nchar:   1   Min.nchar:   1   Min.nchar:   1   Mean   : 3.875   Mean   : 1.914  
-##  Max.nchar: 255   Max.nchar: 255   Max.nchar: 235   3rd Qu.: 5.000   3rd Qu.: 2.000  
-##                                                     Max.   : 6.000   Max.   : 5.000  
-##                                                                                      
-##      var846           var847           var594          var1017           var357      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 2.000   Median : 2.000   Median : 4.000   Median : 3.000   Median : 3.000  
-##  Mean   : 2.141   Mean   : 1.986   Mean   : 3.312   Mean   : 2.702   Mean   : 2.841  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 4.000   3rd Qu.: 4.000   3rd Qu.: 4.000  
-##  Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000   Max.   : 5.000  
-##                                                                                      
-##     var1307          var1338          var1339          var1340          var1341      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 1.000   Median : 1.000   Median : 1.000   Median : 2.000   Median : 2.000  
-##  Mean   : 1.085   Mean   : 1.226   Mean   : 1.133   Mean   : 2.112   Mean   : 1.756  
-##  3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 2.000  
-##  Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.000  
-##                                                                                      
-##     var1342           var516          var683b          var728b          var729b     
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.00  
-##  1st Qu.: 1.000   1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 3.000   1st Qu.: 3.00  
-##  Median : 1.000   Median : 2.000   Median : 3.000   Median : 3.000   Median : 3.00  
-##  Mean   : 1.198   Mean   : 1.853   Mean   : 2.606   Mean   : 2.587   Mean   : 2.71  
-##  3rd Qu.: 2.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.00  
-##  Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.000   Max.   : 3.00  
-##                                                                                     
-##      var546           var758           var759          var1031          var1103      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.000  
-##  1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000   1st Qu.: 1.000  
-##  Median : 1.000   Median : 1.000   Median : 1.000   Median : 2.000   Median : 2.000  
-##  Mean   : 1.618   Mean   : 1.355   Mean   : 1.177   Mean   : 1.625   Mean   : 1.709  
-##  3rd Qu.: 3.000   3rd Qu.: 1.000   3rd Qu.: 1.000   3rd Qu.: 2.000   3rd Qu.: 2.000  
-##  Max.   : 4.000   Max.   : 4.000   Max.   : 4.000   Max.   : 3.000   Max.   : 4.000  
-##                                                                                      
-##     var1104          var1106          var1315a         var1310         var1311      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000  
-##  1st Qu.: 2.000   1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 2.00   1st Qu.: 2.000  
-##  Median : 3.000   Median : 3.000   Median : 3.000   Median : 3.00   Median : 3.000  
-##  Mean   : 2.527   Mean   : 2.517   Mean   : 2.208   Mean   : 2.38   Mean   : 2.271  
-##  3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.000   3rd Qu.: 3.00   3rd Qu.: 3.000  
-##  Max.   : 4.000   Max.   : 4.000   Max.   : 4.000   Max.   : 4.00   Max.   : 4.000  
-##                                                                                     
-##     var1312          var1313          var1314         var900k          var900l      
-##  Min.   :-3.000   Min.   :-3.000   Min.   :-3.00   Min.   :-3.000   Min.   :-5.000  
-##  1st Qu.: 2.000   1st Qu.: 1.000   1st Qu.: 1.00   1st Qu.: 2.000   1st Qu.: 2.000  
-##  Median : 3.000   Median : 2.000   Median : 2.00   Median : 3.000   Median : 2.000  
-##  Mean   : 2.285   Mean   : 1.561   Mean   : 1.42   Mean   : 2.971   Mean   : 2.209  
-##  3rd Qu.: 3.000   3rd Qu.: 2.000   3rd Qu.: 3.00   3rd Qu.: 4.000   3rd Qu.: 3.000  
-##  Max.   : 4.000   Max.   : 4.000   Max.   : 4.00   Max.   : 5.000   Max.   : 3.000  
-##                                                                                     
-##      var548          var5504         var462b          soorthhn        plaatsin          lft2      
-##  Min.   :-5.000   Min.   :-5.00   Min.   :-10105   Min.   :1.000   Min.   : 1.00   Min.   : 1.00  
-##  1st Qu.: 1.000   1st Qu.:-5.00   1st Qu.: 29826   1st Qu.:3.000   1st Qu.: 2.00   1st Qu.:20.00  
-##  Median : 2.000   Median :-5.00   Median : 48446   Median :4.000   Median : 4.00   Median :43.00  
-##  Mean   : 1.698   Mean   :-2.97   Mean   : 54056   Mean   :3.604   Mean   : 3.94   Mean   :40.02  
-##  3rd Qu.: 2.000   3rd Qu.: 1.00   3rd Qu.: 71490   3rd Qu.:5.000   3rd Qu.: 6.00   3rd Qu.:58.00  
-##  Max.   : 2.000   Max.   : 2.00   Max.   :317482   Max.   :8.000   Max.   :10.00   Max.   :96.00  
-##                                   NAs    :14       NAs    :6       NAs    :6       NAs    :392    
-##       lft3            lft4            lft5            lft6            lft7           lft8      
-##  Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   : 1.00   Min.   :  11   Min.   :14.00  
-##  1st Qu.:12.00   1st Qu.:11.00   1st Qu.:10.00   1st Qu.: 9.00   1st Qu.:  43   1st Qu.:14.75  
-##  Median :22.50   Median :20.00   Median :17.00   Median :16.00   Median :2007   Median :20.00  
-##  Mean   :28.03   Mean   :27.03   Mean   :23.59   Mean   :26.12   Mean   :1346   Mean   :26.25  
-##  3rd Qu.:46.00   3rd Qu.:45.00   3rd Qu.:43.00   3rd Qu.:43.50   3rd Qu.:2007   3rd Qu.:31.50  
-##  Max.   :90.00   Max.   :82.00   Max.   :77.00   Max.   :99.00   Max.   :2007   Max.   :51.00  
-##  NAs    :1075    NAs    :1390    NAs    :1787    NAs    :1912    NAs    :1951   NAs    :1959   
-##       lft9           lft10           geslac_1         geslac_2         geslac_3         geslac_4   
-##  Min.   :15.00   Min.   :12     Length   :1963   Length   :1963   Length   :1963   Length   :1963  
-##  1st Qu.:19.50   1st Qu.:12     N.unique :   3   N.unique :   3   N.unique :   3   N.unique :   3  
-##  Median :24.00   Median :12     N.blank  : 392   N.blank  :1075   N.blank  :1390   N.blank  :1787  
-##  Mean   :30.33   Mean   :12     Min.nchar:   0   Min.nchar:   0   Min.nchar:   0   Min.nchar:   0  
-##  3rd Qu.:38.00   3rd Qu.:12     Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1  
-##  Max.   :52.00   Max.   :12                                                                        
-##  NAs    :1960    NAs    :1962                                                                      
-##       geslac_5         geslac_6         geslac_7         geslac_8         geslac_9   
-##  Length   :1963   Length   :1963   Length   :1963   Length   :1963   Length   :1963  
-##  N.unique :   3   N.unique :   3   N.unique :   2   N.unique :   3   N.unique :   2  
-##  N.blank  :1912   N.blank  :1951   N.blank  :1959   N.blank  :1960   N.blank  :1962  
-##  Min.nchar:   0   Min.nchar:   0   Min.nchar:   0   Min.nchar:   0   Min.nchar:   0  
-##  Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1   Max.nchar:   1  
-##                                                                                      
-##                                                                                      
-##       lftcatjo         soortbew       soi98dop           isco_op        gemgrjj         landd      
-##  Length   :1963   Length   :1963   Min.   :200123   Length   :1963   Min.   :1.00   Min.   :1.000  
-##  N.unique :   5   N.unique :   3   1st Qu.:338110   N.unique : 210   1st Qu.:4.00   1st Qu.:2.000  
-##  N.blank  :1845   N.blank  :   6   Median :430168   N.blank  : 280   Median :4.00   Median :3.000  
-##  Min.nchar:   0   Min.nchar:   0   Mean   :444655   Min.nchar:   0   Mean   :4.84   Mean   :2.805  
-##  Max.nchar:   5   Max.nchar:   2   3rd Qu.:520799   Max.nchar:   4   3rd Qu.:6.00   3rd Qu.:3.000  
-##                                    Max.   :999900                    Max.   :8.00   Max.   :4.000  
-##                                    NAs    :379                                                     
-##      stede          generat          typehh         plaatshh          plhh17     wperiode     
-##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   : 1.000   Min.   :1   Min.   :200811  
-##  1st Qu.:2.000   1st Qu.:4.000   1st Qu.:3.000   1st Qu.: 2.000   1st Qu.:1   1st Qu.:200812  
-##  Median :3.000   Median :4.000   Median :4.000   Median : 4.000   Median :1   Median :200902  
-##  Mean   :2.933   Mean   :3.656   Mean   :3.602   Mean   : 3.938   Mean   :1   Mean   :200875  
-##  3rd Qu.:4.000   3rd Qu.:4.000   3rd Qu.:5.000   3rd Qu.: 6.000   3rd Qu.:1   3rd Qu.:200904  
-##  Max.   :5.000   Max.   :4.000   Max.   :8.000   Max.   :10.000   Max.   :1   Max.   :200905  
-##                                  NAs    :6       NAs    :6</code></pre>
-<pre class="r"><code>head(cv08_haven)</code></pre>
-<pre><code>## # A tibble: 6 × 278
-##   we_id      veilignr lft1   geslacht allochtn lft01 lftop gewicht var006n v040    var723   var723a 
-##   &lt;dbl+lbl&gt;     &lt;dbl&gt; &lt;dbl+&gt; &lt;chr+lb&gt; &lt;dbl+lb&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
-## 1 36775330  811002474 51     M [Man]  0 [geen… 50    51      8423. 6 [hbo] 2 [Nee] -5 [N.v… -5 [N.v…
-## 2 36775340  811002539 39     V [Vrou… 0 [geen… 38    39      6244. 8 [wo]  1 [Ja]  45       -5 [N.v…
-## 3 36775420  811002551 16     V [Vrou… 1 [allo… 15    16     13434. 3 [mav… 2 [Nee] -5 [N.v… -5 [N.v…
-## 4 36775440  811002563 30     M [Man]  0 [geen… 29    29      8997  8 [wo]  1 [Ja]  20       -5 [N.v…
-## 5 36775450  811002743 57     M [Man]  0 [geen… 56    57      8423. 6 [hbo] 2 [Nee] -5 [N.v… -5 [N.v…
-## 6 36775460  811002607 49     V [Vrou… 1 [allo… 48    49      9537. 2 [vmb… 2 [Nee] -5 [N.v… -5 [N.v…
-## # ℹ 266 more variables: v202n &lt;dbl+lbl&gt;, var1061a &lt;dbl+lbl&gt;, var1061b &lt;dbl+lbl&gt;,
-## #   var1062a &lt;dbl+lbl&gt;, var1062b &lt;dbl+lbl&gt;, int137n &lt;dbl+lbl&gt;, int138n &lt;dbl+lbl&gt;,
-## #   int139n &lt;dbl+lbl&gt;, int140n &lt;dbl+lbl&gt;, int141n &lt;dbl+lbl&gt;, v401 &lt;dbl+lbl&gt;, var1343 &lt;dbl+lbl&gt;,
-## #   var648 &lt;dbl+lbl&gt;, var149 &lt;dbl+lbl&gt;, var058 &lt;dbl+lbl&gt;, var059 &lt;dbl+lbl&gt;, var064 &lt;dbl+lbl&gt;,
-## #   var365 &lt;dbl+lbl&gt;, var065 &lt;dbl+lbl&gt;, var092 &lt;dbl+lbl&gt;, var096 &lt;dbl+lbl&gt;, int054 &lt;dbl+lbl&gt;,
-## #   int055 &lt;dbl+lbl&gt;, int056 &lt;dbl+lbl&gt;, int057 &lt;dbl+lbl&gt;, int058 &lt;dbl+lbl&gt;, int059 &lt;dbl+lbl&gt;,
-## #   int059a &lt;dbl+lbl&gt;, var571 &lt;dbl+lbl&gt;, var572 &lt;dbl+lbl&gt;, var573 &lt;dbl+lbl&gt;, var574 &lt;dbl+lbl&gt;, …</code></pre>
-<pre class="r"><code>#fix(cv08)
-#View(cv08_haven)</code></pre>
+<pre><code>str(cv08)
+str(cv08_nolab)
+str(cv08_haven)
+str(cv08$lftop)
+str(cv08_haven$lftop)</code></pre>
+<pre><code>attributes(cv08$lftop)
+attributes(cv08_nolab$lftop)
+attributes(cv08_haven$lftop)
+
+names(cv08_haven)
+summary(cv08_haven)
+head(cv08_haven)
+fix(cv08)
+View(cv08_haven)</code></pre>
+<p><br></p>
 </div>
 <div id="a7---assign-missing-values" class="section level2"
 number="1.2">
@@ -1070,6 +563,7 @@ table(cv08_haven$lftop_new, useNA = &quot;always&quot;)</code></pre>
 ##   27   30   44   34   33   36   40   29   27   30   19   24   24   24   23   21   13   15   26   10 
 ##   76   77   78   79   80   81   82   83   84   85   86   87   88   89   90   91 &lt;NA&gt; 
 ##   14   17   13   13   10    7   10   10    7    6    3    8    2    3    1    3    4</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="a8---recoding-variables" class="section level2" number="1.3">
@@ -1166,6 +660,7 @@ table(cv08_haven$educ3, useNA = &quot;always&quot;)</code></pre>
   = 3, &#39;7&#39; = 3, &#39;8&#39; = 3, &#39;10&#39; = -9), .keep_value_labels = FALSE) %&gt;%
   mutate(educ3 = na_if(educ3, -9)) %&gt;%
   mutate(educ3 = factor(educ3, levels = c(1, 2, 3), labels = c(&quot;primary&quot;, &quot;secondary&quot;, &quot;tertiary&quot;)))</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="a9---means-and-counting" class="section level2" number="1.4">
@@ -1268,6 +763,7 @@ cv08_haven &lt;- cv08_haven %&gt;%
     rowSums(is.na(cbind(int055n, int056n, int057n))), int_mean = ifelse(nmis &lt; 2, int_mean_temp, 
     NA)) %&gt;% 
   dplyr:: select(-int_mean_temp, -nmis)</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="a10---merging-data-files" class="section level2" number="1.5">
@@ -1568,6 +1064,7 @@ summary(cv_tot_tidy)</code></pre>
 ## </code></pre>
 <pre class="r"><code>#Merge wide
 cv_tot_panel_tidy &lt;- full_join(cv08_sel, cv10_sel, by = &quot;id2&quot;, suffix = c(&quot;.2008&quot;, &quot;.2010&quot;))</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="a11---aggregate-data" class="section level2" number="1.6">
@@ -1608,6 +1105,7 @@ cv_total_tidy &lt;- cv_tot_tidy %&gt;%
     group_by(region) %&gt;%
     mutate(age_region = mean(age, na.rm = TRUE)) %&gt;%
     ungroup()</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="a12---missing-values" class="section level2" number="1.7">
@@ -1745,7 +1243,7 @@ require(mice)</code></pre>
 ## 
 ##     cbind, rbind</code></pre>
 <pre class="r"><code>mice:: md.pattern(cv_total)</code></pre>
-<p><img src="week1_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" /></p>
+<p><img src="week1_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" /></p>
 <pre><code>##      id id2 region wave health age educ3 men   
 ## 4876  1   1      1    1      1   1     1   1  0
 ## 10    1   1      1    1      1   1     1   0  1
@@ -1753,134 +1251,27 @@ require(mice)</code></pre>
 ## 4     1   1      1    1      1   0     1   1  1
 ## 1     1   1      1    1      0   1     1   1  1
 ##       0   0      0    0      1   4     8  10 23</code></pre>
-<pre class="r"><code>imp &lt;- mice(data = cv_total, method = c(&quot;&quot;, &quot;&quot;, &quot;cart&quot;, &quot;logreg&quot;, &quot;polr&quot;, &quot;cart&quot;, &quot;&quot;, &quot;&quot;))</code></pre>
-<pre><code>## 
-##  iter imp variable
-##   1   1  age  men  educ3  health
-##   1   2  age  men  educ3  health
-##   1   3  age  men  educ3  health
-##   1   4  age  men  educ3  health
-##   1   5  age  men  educ3  health
-##   2   1  age  men  educ3  health
-##   2   2  age  men  educ3  health
-##   2   3  age  men  educ3  health
-##   2   4  age  men  educ3  health
-##   2   5  age  men  educ3  health
-##   3   1  age  men  educ3  health
-##   3   2  age  men  educ3  health
-##   3   3  age  men  educ3  health
-##   3   4  age  men  educ3  health
-##   3   5  age  men  educ3  health
-##   4   1  age  men  educ3  health
-##   4   2  age  men  educ3  health
-##   4   3  age  men  educ3  health
-##   4   4  age  men  educ3  health
-##   4   5  age  men  educ3  health
-##   5   1  age  men  educ3  health
-##   5   2  age  men  educ3  health
-##   5   3  age  men  educ3  health
-##   5   4  age  men  educ3  health
-##   5   5  age  men  educ3  health</code></pre>
-<pre><code>## Warning: Number of logged events: 100</code></pre>
-<pre class="r"><code>attributes(imp)</code></pre>
-<pre><code>## $names
-##  [1] &quot;data&quot;            &quot;imp&quot;             &quot;m&quot;               &quot;where&quot;           &quot;blocks&quot;         
-##  [6] &quot;call&quot;            &quot;nmis&quot;            &quot;method&quot;          &quot;predictorMatrix&quot; &quot;visitSequence&quot;  
-## [11] &quot;formulas&quot;        &quot;calltype&quot;        &quot;post&quot;            &quot;blots&quot;           &quot;ignore&quot;         
-## [16] &quot;seed&quot;            &quot;iteration&quot;       &quot;lastSeedValue&quot;   &quot;chainMean&quot;       &quot;chainVar&quot;       
-## [21] &quot;loggedEvents&quot;    &quot;version&quot;         &quot;date&quot;           
-## 
-## $class
-## [1] &quot;mids&quot;</code></pre>
-<pre class="r"><code>pred &lt;- imp$pred
+<p>The following chunck took quite long to run every time when building
+my website, so I made it visible on my website, but not calculate
+anything.</p>
+<pre><code>imp &lt;- mice(data = cv_total, method = c(&quot;&quot;, &quot;&quot;, &quot;cart&quot;, &quot;logreg&quot;, &quot;polr&quot;, &quot;cart&quot;, &quot;&quot;, &quot;&quot;))
+attributes(imp)
+pred &lt;- imp$pred
 pred[, &quot;id&quot;] &lt;- 0
 pred[, &quot;id2&quot;] &lt;- 0
 pred[, &quot;wave&quot;] &lt;- 0
-pred</code></pre>
-<pre><code>##        id id2 age men educ3 health region wave
-## id      0   0   1   1     1      1      1    0
-## id2     0   0   1   1     1      1      1    0
-## age     0   0   0   1     1      1      1    0
-## men     0   0   1   0     1      1      1    0
-## educ3   0   0   1   1     0      1      1    0
-## health  0   0   1   1     1      0      1    0
-## region  0   0   1   1     1      1      0    0
-## wave    0   0   1   1     1      1      1    0</code></pre>
-<pre class="r"><code>imp &lt;- mice(data = cv_total, method = c(&quot;&quot;, &quot;&quot;, &quot;cart&quot;, &quot;logreg&quot;, &quot;polr&quot;, &quot;cart&quot;, &quot;&quot;, &quot;&quot;), pred = pred, seed = 45622)</code></pre>
-<pre><code>## 
-##  iter imp variable
-##   1   1  age  men  educ3  health
-##   1   2  age  men  educ3  health
-##   1   3  age  men  educ3  health
-##   1   4  age  men  educ3  health
-##   1   5  age  men  educ3  health
-##   2   1  age  men  educ3  health
-##   2   2  age  men  educ3  health
-##   2   3  age  men  educ3  health
-##   2   4  age  men  educ3  health
-##   2   5  age  men  educ3  health
-##   3   1  age  men  educ3  health
-##   3   2  age  men  educ3  health
-##   3   3  age  men  educ3  health
-##   3   4  age  men  educ3  health
-##   3   5  age  men  educ3  health
-##   4   1  age  men  educ3  health
-##   4   2  age  men  educ3  health
-##   4   3  age  men  educ3  health
-##   4   4  age  men  educ3  health
-##   4   5  age  men  educ3  health
-##   5   1  age  men  educ3  health
-##   5   2  age  men  educ3  health
-##   5   3  age  men  educ3  health
-##   5   4  age  men  educ3  health
-##   5   5  age  men  educ3  health</code></pre>
-<pre><code>## Warning: Number of logged events: 100</code></pre>
-<pre class="r"><code>summary(cv_total)</code></pre>
-<pre><code>##        id                id2            age         men       educ3          health    
-##  Min.   :20131231   Min.   :   1   Min.   :16.00   0  :2469   1  : 839   Min.   :1.00  
-##  1st Qu.:20132456   1st Qu.: 613   1st Qu.:33.00   1  :2420   2  :2777   1st Qu.:1.00  
-##  Median :20133680   Median :1225   Median :47.00   NAs:  10   3  :1275   Median :2.00  
-##  Mean   :27624666   Mean   :1274   Mean   :47.63              NAs:   8   Mean   :1.98  
-##  3rd Qu.:37978375   3rd Qu.:1838   3rd Qu.:62.00                         3rd Qu.:2.00  
-##  Max.   :41199300   Max.   :2936   Max.   :96.00                         Max.   :5.00  
-##                                    NAs    :4                             NAs    :1     
-##                      region          wave     
-##  Postcode (nog) onbekend:   0   Min.   :2008  
-##  Noord-Nederland        : 526   1st Qu.:2008  
-##  Oost-Nederland         :1094   Median :2010  
-##  West-Nederland         :2116   Mean   :2009  
-##  Zuid-Nederland         :1163   3rd Qu.:2010  
-##                                 Max.   :2010  
-## </code></pre>
-<pre class="r"><code>summary(complete(imp))</code></pre>
-<pre><code>##        id                id2            age        men      educ3        health     
-##  Min.   :20131231   Min.   :   1   Min.   :16.00   0:2471   1: 842   Min.   :1.000  
-##  1st Qu.:20132456   1st Qu.: 613   1st Qu.:33.00   1:2428   2:2779   1st Qu.:1.000  
-##  Median :20133680   Median :1225   Median :47.00            3:1278   Median :2.000  
-##  Mean   :27624666   Mean   :1274   Mean   :47.62                     Mean   :1.979  
-##  3rd Qu.:37978375   3rd Qu.:1838   3rd Qu.:62.00                     3rd Qu.:2.000  
-##  Max.   :41199300   Max.   :2936   Max.   :96.00                     Max.   :5.000  
-##                      region          wave     
-##  Postcode (nog) onbekend:   0   Min.   :2008  
-##  Noord-Nederland        : 526   1st Qu.:2008  
-##  Oost-Nederland         :1094   Median :2010  
-##  West-Nederland         :2116   Mean   :2009  
-##  Zuid-Nederland         :1163   3rd Qu.:2010  
-##                                 Max.   :2010</code></pre>
-<pre class="r"><code>plot(imp)</code></pre>
-<p><img src="week1_files/figure-html/unnamed-chunk-21-2.png" alt="" width="672" /><img src="week1_files/figure-html/unnamed-chunk-21-3.png" alt="" width="672" /></p>
-<pre class="r"><code>model_imp &lt;- with(imp, lm(as.numeric(health) ~ men + age + educ3 + region))
+pred
+
+imp &lt;- mice(data = cv_total, method = c(&quot;&quot;, &quot;&quot;, &quot;cart&quot;, &quot;logreg&quot;, &quot;polr&quot;, &quot;cart&quot;, &quot;&quot;, &quot;&quot;), pred = pred, seed = 45622)
+
+summary(cv_total)
+summary(complete(imp))
+
+plot(imp)
+
+model_imp &lt;- with(imp, lm(as.numeric(health) ~ men + age + educ3 + region))
 pool_model_imp &lt;- pool(model_imp)
 summary(pool_model_imp)</code></pre>
-<pre><code>##                   term    estimate    std.error  statistic       df       p.value
-## 1          (Intercept)  1.64227489 0.0515381739 31.8652131 4883.812 1.314456e-202
-## 2                 men1 -0.01821954 0.0211574583 -0.8611405 4683.712  3.892048e-01
-## 3                  age  0.01146351 0.0005846149 19.6086530 4854.560  1.877524e-82
-## 4               educ32 -0.17813172 0.0292524289 -6.0894676 4881.477  1.219647e-09
-## 5               educ33 -0.31977903 0.0330290911 -9.6817388 4859.881  5.686942e-22
-## 6 regionOost-Nederland -0.05554060 0.0391698388 -1.4179430 4888.390  1.562711e-01
-## 7 regionWest-Nederland -0.01515412 0.0360044223 -0.4208962 4888.642  6.738494e-01
-## 8 regionZuid-Nederland  0.01582036 0.0387973170  0.4077694 4888.518  6.834609e-01</code></pre>
 </div>
 <div id="in-tidy-5" class="section level3" number="1.7.2">
 <h3><span class="header-section-number">1.7.2</span> In tidy</h3>
@@ -1958,8 +1349,10 @@ model3</code></pre>
 ##   (1 observation deleted due to missingness)
 ## Multiple R-squared:  0.09964,    Adjusted R-squared:  0.0978 
 ## F-statistic: 54.08 on 10 and 4887 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Imputing missing values</p>
-<pre class="r"><code>pred &lt;- cv_total_tidy %&gt;%
+<p>Imputing missing values Same as above, this chunck took quite a bit
+of time to run, thus I made sure that R doesn’t run it every time I want
+to build my website.</p>
+<pre><code>pred &lt;- cv_total_tidy %&gt;%
   dplyr::select(c(&quot;id&quot;, &quot;id2&quot;, &quot;age&quot;, &quot;men&quot;, &quot;educ3&quot;, &quot;health&quot;, &quot;region&quot;, &quot;wave&quot;)) %&gt;%
   mutate_all(as.numeric) %&gt;%
   mutate_at(c(&quot;men&quot;, &quot;educ3&quot;), as.factor) %&gt;%
@@ -1968,95 +1361,22 @@ model3</code></pre>
   pluck(&quot;predictorMatrix&quot;) %&gt;%
   as.data.frame() %&gt;% 
   mutate_at(c(&quot;id&quot;, &quot;id2&quot;, &quot;age&quot;), funs(recode(1, 0))) %&gt;% 
-  as.matrix()</code></pre>
-<pre><code>## 
-##  iter imp variable
-##   1   1  age  men  educ3  health
-##   1   2  age  men  educ3  health
-##   1   3  age  men  educ3  health
-##   1   4  age  men  educ3  health
-##   1   5  age  men  educ3  health
-##   2   1  age  men  educ3  health
-##   2   2  age  men  educ3  health
-##   2   3  age  men  educ3  health
-##   2   4  age  men  educ3  health
-##   2   5  age  men  educ3  health
-##   3   1  age  men  educ3  health
-##   3   2  age  men  educ3  health
-##   3   3  age  men  educ3  health
-##   3   4  age  men  educ3  health
-##   3   5  age  men  educ3  health
-##   4   1  age  men  educ3  health
-##   4   2  age  men  educ3  health
-##   4   3  age  men  educ3  health
-##   4   4  age  men  educ3  health
-##   4   5  age  men  educ3  health
-##   5   1  age  men  educ3  health
-##   5   2  age  men  educ3  health
-##   5   3  age  men  educ3  health
-##   5   4  age  men  educ3  health
-##   5   5  age  men  educ3  health</code></pre>
-<pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
-## ℹ Please use a list of either functions or
-##   lambdas:
-## 
-## # Simple named list: list(mean = mean, median =
-##   median)
-## 
-## # Auto named with `tibble::lst()`:
-##   tibble::lst(mean, median)
-## 
-## # Using lambdas list(~ mean(., trim = .2), ~
-##   median(., na.rm = TRUE))
-## Call `lifecycle::last_lifecycle_warnings()` to see
-## where this warning was generated.</code></pre>
-<pre class="r"><code>model_imp &lt;- cv_total_tidy %&gt;%
+  as.matrix()
+
+model_imp &lt;- cv_total_tidy %&gt;%
   dplyr::select(c(&quot;id&quot;, &quot;id2&quot;, &quot;age&quot;, &quot;men&quot;, &quot;educ3&quot;, &quot;health&quot;, &quot;region&quot;, &quot;wave&quot;)) %&gt;%
   mutate_all(as.numeric) %&gt;%
   mutate_at(c(&quot;men&quot;, &quot;educ3&quot;), as.factor) %&gt;%
   mice(method = c(&quot;&quot;, &quot;&quot;, &quot;cart&quot;, &quot;logreg&quot;, &quot;polr&quot;, &quot;cart&quot;, &quot;&quot;, &quot;&quot;), pred = pred, seed = 45622) %&gt;%
   with(lm(as.numeric(health) ~ men + age + educ3 + region)) %&gt;%
-  pool()</code></pre>
-<pre><code>## 
-##  iter imp variable
-##   1   1  age  men  educ3  health
-##   1   2  age  men  educ3  health
-##   1   3  age  men  educ3  health
-##   1   4  age  men  educ3  health
-##   1   5  age  men  educ3  health
-##   2   1  age  men  educ3  health
-##   2   2  age  men  educ3  health
-##   2   3  age  men  educ3  health
-##   2   4  age  men  educ3  health
-##   2   5  age  men  educ3  health
-##   3   1  age  men  educ3  health
-##   3   2  age  men  educ3  health
-##   3   3  age  men  educ3  health
-##   3   4  age  men  educ3  health
-##   3   5  age  men  educ3  health
-##   4   1  age  men  educ3  health
-##   4   2  age  men  educ3  health
-##   4   3  age  men  educ3  health
-##   4   4  age  men  educ3  health
-##   4   5  age  men  educ3  health
-##   5   1  age  men  educ3  health
-##   5   2  age  men  educ3  health
-##   5   3  age  men  educ3  health
-##   5   4  age  men  educ3  health
-##   5   5  age  men  educ3  health</code></pre>
-<pre class="r"><code>summary(model_imp)</code></pre>
-<pre><code>##          term    estimate    std.error statistic       df       p.value
-## 1 (Intercept)  1.60692967 0.0523595577 30.690283 4808.538 4.698258e-189
-## 2        men1 -0.06662285 0.0212827764 -3.130365 3706.644  1.759476e-03
-## 3         age  0.01142022 0.0005845252 19.537606 4811.338  7.267448e-82
-## 4      educ32 -0.17566773 0.0292719839 -6.001224 4828.451  2.101402e-09
-## 5      educ33 -0.31479718 0.0330660140 -9.520264 4727.667  2.677778e-21
-## 6      region  0.01594022 0.0114385730  1.393550 4888.428  1.635169e-01</code></pre>
+  pool()
+
+summary(model_imp)</code></pre>
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgMSINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFNOQVNTIEFwcGVuZGl4IEENCiMjIEExIHRocm91Z2ggQTYgLSBTZXR0aW5nIHVwDQpgYGB7cn0NCnJtKGxpc3QgPSBscygpKQ0KDQojaW5zdGFsbC5wYWNrYWdlcygiaW5zdGFsbHIiKQ0KcmVxdWlyZShpbnN0YWxscikNCiNpbnN0YWxsLnBhY2thZ2VzKCJmb3JlaWduIikNCnJlcXVpcmUoZm9yZWlnbikNCnJlcXVpcmUodGlkeXZlcnNlKQ0KI3VwZGF0ZVIoKQ0KYGBgDQoNCkxvYWRpbmcgZGF0YSBzZXRzDQpgYGAge3IsIHdhcm5pbmcgPSBGQUxTRX0NCmN2MDggPC0gZm9yZWlnbjo6cmVhZC5zcHNzKCJDdWx0dXJhbF9DaGFuZ2VzXzIwMDguc2F2IiwgdXNlLnZhbHVlLmxhYmVscyA9IFQsIHRvLmRhdGEuZnJhbWUgPSBUKQ0KY3YxMCA8LSBmb3JlaWduOjpyZWFkLnNwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiLCB1c2UudmFsdWUubGFiZWxzID0gVCwgdG8uZGF0YS5mcmFtZSA9IFQpDQoNCmN2MDhfbm9sYWIgPC0gZm9yZWlnbjo6cmVhZC5zcHNzKCJDdWx0dXJhbF9DaGFuZ2VzXzIwMDguc2F2IiwgdXNlLnZhbHVlLmxhYmVscyA9IEYsIHRvLmRhdGEuZnJhbWUgPSBUKQ0KY3YxMF9ub2xhYiA8LSBmb3JlaWduOjpyZWFkLnNwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiLCB1c2UudmFsdWUubGFiZWxzID0gRiwgdG8uZGF0YS5mcmFtZSA9IFQpDQoNCmN2MDhfaGF2ZW4gPC0gaGF2ZW46OnJlYWRfc3BzcygiQ3VsdHVyYWxfQ2hhbmdlc18yMDA4LnNhdiIpDQpjdjEwX2hhdmVuIDwtIGhhdmVuOjpyZWFkX3Nwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiKQ0KYGBgDQoNCkluc3BlY3QgdGhlIGRhdGENCmBgYHtyLCBpbmNsdWRlID0gRkFMU0V9DQpzdHIoY3YwOCkNCnN0cihjdjA4X25vbGFiKQ0Kc3RyKGN2MDhfaGF2ZW4pDQpzdHIoY3YwOCRsZnRvcCkNCnN0cihjdjA4X2hhdmVuJGxmdG9wKQ0KYGBgDQoNCmBgYHtyfQ0KYXR0cmlidXRlcyhjdjA4JGxmdG9wKQ0KYXR0cmlidXRlcyhjdjA4X25vbGFiJGxmdG9wKQ0KYXR0cmlidXRlcyhjdjA4X2hhdmVuJGxmdG9wKQ0KDQpuYW1lcyhjdjA4X2hhdmVuKQ0Kc3VtbWFyeShjdjA4X2hhdmVuKQ0KaGVhZChjdjA4X2hhdmVuKQ0KI2ZpeChjdjA4KQ0KI1ZpZXcoY3YwOF9oYXZlbikNCmBgYA0KDQojIyBBNyAtIEFzc2lnbiBtaXNzaW5nIHZhbHVlcw0KIyMjIEluIGJhc2UNCmBgYHtyfQ0KI3N0cihjdjA4X2hhdmVuJGxmdG9wKQ0Kc3VtbWFyeShjdjA4X2hhdmVuJGxmdG9wKQ0KYXR0cihjdjA4X2hhdmVuJGxmdG9wLCAibGFiZWxzIikNCnRhYmxlKGN2MDhfaGF2ZW4kbGZ0b3AsIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDgkbGZ0b3BfbmV3IDwtIGN2MDgkbGZ0b3ANCmN2MDgkbGZ0b3BfbmV3W2N2MDgkbGZ0b3BfbmV3ID09ICJPbmJla2VuZCJdIDwtIE5BDQoNCnRhYmxlKGN2MDgkbGZ0b3BfbmV3LCB1c2VOQSA9ICJhbHdheXMiKQ0KbGV2ZWxzKGN2MDgkbGZ0b3BfbmV3KQ0KDQpjdjA4JGFnZW4gPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoY3YwOCRsZnRvcF9uZXcpKQ0KdGFibGUoY3YwOCRhZ2VuLCB1c2VOQSA9ICJhbHdheXMiKQ0KDQojc3RyKGN2MDgkYWdlbikNCmBgYA0KDQojIyMgSW4gdGlkeQ0KYGBge3J9DQojY3YwOF9oYXZlbiA8LSBtdXRhdGUoY3YwOF9oYXZlbiwgbGZ0b3BfbmV3ID0gbGZ0b3ApDQojY3YwOF9oYXZlbiRsZnRvcF9uZXcgPC0gbmFfaWYoY3YwOF9oYXZlbiRsZnRvcF9uZXcsIDk5KQ0KDQojT1IgKG1vcmUgcXVpY2tseSkNCg0KY3YwOF9oYXZlbiA8LSBtdXRhdGUoY3YwOF9oYXZlbiwgbGZ0b3BfbmV3ID0gbmFfaWYobGZ0b3AsIDk5KSkNCg0KdGFibGUoY3YwOF9oYXZlbiRsZnRvcF9uZXcsIHVzZU5BID0gImFsd2F5cyIpDQpgYGANCg0KDQojIyBBOCAtIFJlY29kaW5nIHZhcmlhYmxlcyANCiMjIyBJbiBiYXNlDQpgYGB7cn0NCmxldmVscyhjdjA4JHZhcjAwNm4pDQp0YWJsZShjdjA4JHZhcjAwNm4sIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDgkZWR1Y24gPC0gYXMubnVtZXJpYyhjdjA4JHZhcjAwNm4pDQp0YWJsZShjdjA4JGVkdWNuLCB1c2VOQSA9ICJhbHdheXMiKQ0KDQpjdjA4JGVkdWMzIDwtIE5BDQoNCmN2MDgkZWR1YzNbY3YwOCRlZHVjbiA9PSAyIHwgY3YwOCRlZHVjbiA9PTNdIDwtIDENCmN2MDgkZWR1YzNbY3YwOCRlZHVjbiA+IDMgJiBjdjA4JGVkdWNuIDwgOF0gPC0gMg0KY3YwOCRlZHVjM1tjdjA4JGVkdWNuID4gNyAmIGN2MDgkZWR1Y24gPCAxMV0gPC0gMw0KDQp0YWJsZShjdjA4JGVkdWMzLCB1c2VOQSA9ICJhbHdheXMiKQ0KcHJvcC50YWJsZSh0YWJsZShjdjA4JGVkdWMzLCB1c2VOQSA9ICJhbHdheXMiKSkNCg0KY3YwOCRlZHVjMyA8LSBhcy5mYWN0b3IoY3YwOCRlZHVjMykNCnRhYmxlKGN2MDgkZWR1YzMsIHVzZU5BID0gImFsd2F5cyIpDQoNCmxldmVscyhjdjA4JGVkdWMzKSA8LSBjKCAicHJpbWFyeSIsICJzZWNvbmRhcnkiLCAidGVydGlhcnkiKQ0KdGFibGUoY3YwOCRlZHVjMywgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KIyMjIEluIHRpZHkNCmBgYHtyfQ0KI2luc3RhbGwucGFja2FnZXMoImxhYmVsbGVkIikNCnJlcXVpcmUobGFiZWxsZWQpDQoNCiNzdHIoY3YwOF9oYXZlbiR2YXIwMDZuKQ0KYXR0cihjdjA4X2hhdmVuJHZhcjAwNm4sICJsYWJlbHMiKQ0KDQp0YWJsZShjdjA4X2hhdmVuJHZhcjAwNm4sIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDhfaGF2ZW4gPC0gbXV0YXRlKGN2MDhfaGF2ZW4sIGVkdWMzID0gcmVjb2RlKHZhcjAwNm4sICctMycgPSAtOSwgJy0xJyA9IDEsICcxJyA9IDEsICcyJyA9IDIsICczJyA9IDIsICc0JyA9IDIsICc1JyA9IDIsICc2JyA9IDMsICc3JyA9IDMsICc4JyA9IDMsICcxMCcgPSAtOSksIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKQ0KY3YwOF9oYXZlbiA8LSBtdXRhdGUoY3YwOF9oYXZlbiwgZWR1YzMgPSBuYV9pZihlZHVjMywgLTkpKQ0KDQpjdjA4X2hhdmVuIDwtIG11dGF0ZShjdjA4X2hhdmVuLCBlZHVjMyA9IGZhY3RvcihlZHVjMywgbGV2ZWxzID0gYygxLCAyLCAzKSwgbGFiZWxzID0gYygicHJpbWFyeSIsICJzZWNvbmRhcnkiLCAidGVydGlhcnkiKSkpDQoNCnRhYmxlKGN2MDhfaGF2ZW4kZWR1YzMsIHVzZU5BID0gImFsd2F5cyIpDQpgYGANClVzaW5nIHBpcGluZw0KYGBge3J9DQpjdjA4X2hhdmVuIDwtIGN2MDhfaGF2ZW4gJT4lDQogIG11dGF0ZShjdjA4X2hhdmVuLCBlZHVjMyA9IHJlY29kZSh2YXIwMDZuLCAnLTMnID0gLTksICctMScgPSAxLCAnMScgPSAxLCAnMicgPSAyLCAnMycgPSAyLCAnNCcgPSAyLCAnNScgPSAyLCAnNicNCiAgPSAzLCAnNycgPSAzLCAnOCcgPSAzLCAnMTAnID0gLTkpLCAua2VlcF92YWx1ZV9sYWJlbHMgPSBGQUxTRSkgJT4lDQogIG11dGF0ZShlZHVjMyA9IG5hX2lmKGVkdWMzLCAtOSkpICU+JQ0KICBtdXRhdGUoZWR1YzMgPSBmYWN0b3IoZWR1YzMsIGxldmVscyA9IGMoMSwgMiwgMyksIGxhYmVscyA9IGMoInByaW1hcnkiLCAic2Vjb25kYXJ5IiwgInRlcnRpYXJ5IikpKQ0KYGBgDQoNCiMjIEE5IC0gTWVhbnMgYW5kIGNvdW50aW5nDQojIyMgSW4gYmFzZQ0KYGBge3J9DQpzdW1tYXJ5KGN2MDgkaW50MDU1KQ0Kc3VtbWFyeShjdjA4JGludDA1NikNCnN1bW1hcnkoY3YwOCRpbnQwNTcpDQoNCmN2MDgkaW50MDU1biA8LSBhcy5udW1lcmljKGN2MDgkaW50MDU1KQ0KdGFibGUoY3YwOCRpbnQwNTVuLCB1c2VOQSA9ICJhbHdheXMiKQ0KY3YwOCRpbnQwNTZuIDwtIGFzLm51bWVyaWMoY3YwOCRpbnQwNTYpDQp0YWJsZShjdjA4JGludDA1Nm4sIHVzZU5BID0gImFsd2F5cyIpDQpjdjA4JGludDA1N24gPC0gYXMubnVtZXJpYyhjdjA4JGludDA1NykNCnRhYmxlKGN2MDgkaW50MDU3biwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOCRpbnQwNTVuW2N2MDgkaW50MDU1biA8IDVdIDwtIE5BDQpjdjA4JGludDA1NW4gPC0gY3YwOCRpbnQwNTVuIC0gNA0KY3YwOCRpbnQwNTZuW2N2MDgkaW50MDU2biA8IDVdIDwtIE5BDQpjdjA4JGludDA1Nm4gPC0gY3YwOCRpbnQwNTZuIC0gNA0KY3YwOCRpbnQwNTduW2N2MDgkaW50MDU3biA8IDVdIDwtIE5BDQpjdjA4JGludDA1N24gPC0gY3YwOCRpbnQwNTduIC0gNA0KDQojbWVhbnMgcGVyIHJlc3BvbmRlbnQNCnRlc3RtZWFucyA8LSByb3dNZWFucyhjYmluZChjdjA4JGludDA1NW4sIGN2MDgkaW50MDU2biwgY3YwOCRpbnQwNTduKSwgbmEucm0gPSBUKQ0KaGVhZCh0ZXN0bWVhbnMpDQoNCm5taXMgPC0gcm93U3Vtcyhpcy5uYShjYmluZChjdjA4JGludDA1NW4sIGN2MDgkdWJ0MDU2biwgY3YwOCRpbnQwNTduKSkpDQp0ZXN0bWVhbnMgPC0gaWZlbHNlKG5taXMgPDIsIHRlc3RtZWFucywgTkEpDQpjdjA4JGludF9tZWFuIDwtIHRlc3RtZWFucw0KYGBgDQoNCiMjIyBJbiB0aWR5DQpgYGB7cn0NCnRhYmxlKGN2MDhfaGF2ZW4kaW50MDU1LCB1c2VOQSA9ICJhbHdheXMiKQ0KdGFibGUoY3YwOF9oYXZlbiRpbnQwNTYsIHVzZU5BID0gImFsd2F5cyIpDQp0YWJsZShjdjA4X2hhdmVuJGludDA1NywgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOF9oYXZlbiA8LSBjdjA4X2hhdmVuICU+JQ0KICBtdXRhdGUoaW50MDU1biA9IHJlY29kZShpbnQwNTUsICctNicgPSAtOSwgJy01JyA9IC05LCAnLTMnID0gLTksICctMicgPSAtOSwgJzEnID0gNCwgJzInID0gMywgJzMnDQogICAgPSAyLCAnNCcgPSAxKSwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpICU+JQ0KICBtdXRhdGUoaW50MDU1biA9IG5hX2lmKGludDA1NW4sIC05KSkgJT4lDQogIG11dGF0ZShpbnQwNTVuID0gbGFiZWxsZWQoaW50MDU1biwgYygnSGVsZW1hYWwgZ2VlbiB0ZWdlbnN0ZWxsaW5nJyA9IDEsJ05pZXQgem8gZ3Jvb3QnID0gMiwgJ2dyb290Jw0KICAgID0gMywgJ1plZXIgZ3Jvb3QnID0gNCkpKQ0KY3YwOF9oYXZlbiA8LSBjdjA4X2hhdmVuICU+JQ0KICBtdXRhdGUoaW50MDU2biA9IHJlY29kZShpbnQwNTYsICctNicgPSAtOSwgJy01JyA9IC05LCAnLTMnID0gLTksICctMicgPSAtOSwgJzEnID0gNCwgJzInID0gMywgJzMnDQogICAgPSAyLCAnNCcgPSAxKSwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpICU+JQ0KICBtdXRhdGUoaW50MDU2biA9IG5hX2lmKGludDA1Nm4sIC05KSkgJT4lDQogIG11dGF0ZShpbnQwNTZuID0gbGFiZWxsZWQoaW50MDU2biwgYygnSGVsZW1hYWwgZ2VlbiB0ZWdlbnN0ZWxsaW5nJyA9IDEsJ05pZXQgem8gZ3Jvb3QnID0gMiwgJ2dyb290Jw0KICAgID0gMywgJ1plZXIgZ3Jvb3QnID0gNCkpKQ0KY3YwOF9oYXZlbiA8LSBjdjA4X2hhdmVuICU+JQ0KICBtdXRhdGUoaW50MDU3biA9IHJlY29kZShpbnQwNTcsICctNicgPSAtOSwgJy01JyA9IC05LCAnLTMnID0gLTksICctMicgPSAtOSwgJzEnID0gNCwgJzInID0gMywgJzMnDQogICAgPSAyLCAnNCcgPSAxKSwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpICU+JQ0KICBtdXRhdGUoaW50MDU3biA9IG5hX2lmKGludDA1N24sIC05KSkgJT4lDQogIG11dGF0ZShpbnQwNTduID0gbGFiZWxsZWQoaW50MDU3biwgYygnSGVsZW1hYWwgZ2VlbiB0ZWdlbnN0ZWxsaW5nJyA9IDEsJ05pZXQgem8gZ3Jvb3QnID0gMiwgJ2dyb290Jw0KICAgID0gMywgJ1plZXIgZ3Jvb3QnID0gNCkpKQ0KDQogICNtZWFuIHJlZ2FyZGxlc3Mgb2YgaG93IG1hbnkgbWlzc2luZ3MNCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgcm93d2lzZSgpICU+JQ0KICBtdXRhdGUoaW50X21lYW4gPSBtZWFuKGMoaW50MDU1biwgaW50MDU2biwgaW50MDU3biksIG5hLnJtID0gVFJVRSkpDQoNCiAgI21lYW4gd2l0aCBtYXggMSBtaXNzaW5nLCBvdGhlcndpc2UgTkENCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgbXV0YXRlKGludF9tZWFuX3RlbXAgPSByb3dNZWFucyhjYmluZChpbnQwNTVuLCBpbnQwNTZuLCBpbnQwNTduKSwgbmEucm0gPSBUUlVFKSwgbm1pcyA9IA0KICAgIHJvd1N1bXMoaXMubmEoY2JpbmQoaW50MDU1biwgaW50MDU2biwgaW50MDU3bikpKSwgaW50X21lYW4gPSBpZmVsc2Uobm1pcyA8IDIsIGludF9tZWFuX3RlbXAsIA0KICAgIE5BKSkgJT4lIA0KICBkcGx5cjo6IHNlbGVjdCgtaW50X21lYW5fdGVtcCwgLW5taXMpDQpgYGANCg0KIyMgQTEwIC0gTWVyZ2luZyBkYXRhIGZpbGVzDQojIyMgSW4gYmFzZQ0KMS4gU2VsZWN0aW5nIHRoZSB2YXJpYWJsZXMgd2Ugd2FudCB0byBrZWVwDQpgYGB7cn0NCmN2MDhfc2VsIDwtIGN2MDhbLCBjKCJ3ZV9pZCIsICJsZnRvcCIsICJnZXNsYWNodCIsICJ2YXIwMDZuIiwgInY0MDEiLCAibGFuZGQiKV0NCmN2MTBfc2VsIDwtIGN2MTBbLCBjKCJTbGV1dGVsIiwgInZhcjAwMiIsICJ2YXIwMDEiLCAiVmx0b3Bsb3AiLCAiVjQwMSIsICJMYW5kZCIpXQ0KYGBgDQoNCjIuIE1ha2UgdmFyaWFibGVzIGNvbnNpc3RlbnQNCmBgYHtyfQ0KbmFtZXMoY3YwOF9zZWwpIDwtIG5hbWVzKGN2MTBfc2VsKSA8LSBjKCJpZCIsICJhZ2UiLCAic2V4IiwgImVkdWMiLCAiaGVhbHRoIiwgInJlZ2lvbiIpDQpzdW1tYXJ5KGN2MDhfc2VsKQ0Kc3VtbWFyeShjdjEwX3NlbCkNCg0KI0lEDQpjdjA4X3NlbCRpZCA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihjdjA4X3NlbCRpZCkpDQpjdjEwX3NlbCRpZCA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihjdjEwX3NlbCRpZCkpDQoNCiNBZ2UNCmN2MDhfc2VsJGFnZSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihjdjA4X3NlbCRhZ2UpKQ0KY3YxMF9zZWwkYWdlIDwtIGFzLm51bWVyaWMoYXMuY2hhcmFjdGVyKGN2MTBfc2VsJGFnZSkpDQoNCiNTZXgNCnRhYmxlKGN2MDhfc2VsJHNleCwgdXNlTkEgPSAiYWx3YXlzIikNCnRhYmxlKGN2MTBfc2VsJHNleCwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOF9zZWwkc2V4biA8LSBhcy5udW1lcmljKGN2MDhfc2VsJHNleCkNCnRhYmxlKGN2MDhfc2VsJHNleG4sIHVzZU5BID0gImFsd2F5cyIpDQpjdjA4X3NlbCRtZW4gPC0gaWZlbHNlKGN2MDhfc2VsJHNleG4gPT0gMiwgMSwgMCkNCmN2MDhfc2VsJG1lbiA8LSBpZmVsc2UoY3YwOF9zZWwkc2V4biA9PSAxLCBOQSwgY3YwOF9zZWwkbWVuKQ0KdGFibGUoY3YwOF9zZWwkbWVuLCB1c2VOQSA9ICJhbHdheXMiKQ0KDQpjdjEwX3NlbCRzZXhuIDwtIGFzLm51bWVyaWMoY3YxMF9zZWwkc2V4KQ0KdGFibGUoY3YxMF9zZWwkc2V4biwgdXNlTkEgPSAiYWx3YXlzIikNCmN2MTBfc2VsJG1lbiA8LSBpZmVsc2UoY3YxMF9zZWwkc2V4biA9PSAyLCAxLCAwKQ0KdGFibGUoY3YxMF9zZWwkbWVuLCB1c2VOQSA9ICJhbHdheXMiKQ0KDQojRWR1Y2F0aW9uDQpsZXZlbHMoY3YwOF9zZWwkZWR1YykNCmxldmVscyhjdjEwX3NlbCRlZHVjKQ0KdGFibGUoY3YwOF9zZWwkZWR1YywgdXNlTkE9ICJhbHdheXMiKQ0KdGFibGUoY3YxMF9zZWwkZWR1YywgdXNlTkE9ICJhbHdheXMiKQ0KDQpjdjA4X3NlbCRlZHVjbiA8LSBhcy5udW1lcmljKGN2MDhfc2VsJGVkdWMpDQp0YWJsZShjdjA4X3NlbCRlZHVjbikNCg0KY3YwOF9zZWwkZWR1YzMgPC0gTkENCmN2MDhfc2VsJGVkdWMzW2N2MDhfc2VsJGVkdWNuID09IDIgfCBjdjA4X3NlbCRlZHVjbiA9PSAzXSA8LSAxDQpjdjA4X3NlbCRlZHVjM1tjdjA4X3NlbCRlZHVjbiA+IDMgJiBjdjA4X3NlbCRlZHVjbiA8IDhdIDwtIDINCmN2MDhfc2VsJGVkdWMzW2N2MDhfc2VsJGVkdWNuID4gNyAmIGN2MDhfc2VsJGVkdWNuIDwgMTFdIDwtIDMNCnRhYmxlKGN2MDhfc2VsJGVkdWMzLCB1c2VOQSA9ICJhbHdheXMiKQ0KDQpjdjEwX3NlbCRlZHVjbiA8LSBhcy5udW1lcmljKGN2MTBfc2VsJGVkdWMpDQp0YWJsZShjdjEwX3NlbCRlZHVjbikNCg0KY3YxMF9zZWwkZWR1YzMgPC0gTkENCmN2MTBfc2VsJGVkdWMzW2N2MTBfc2VsJGVkdWNuIDwgM10gPC0gMQ0KY3YxMF9zZWwkZWR1YzNbY3YxMF9zZWwkZWR1Y24gPiAyICYgY3YxMF9zZWwkZWR1Y24gPCA2XSA8LSAyDQpjdjEwX3NlbCRlZHVjM1tjdjEwX3NlbCRlZHVjbiA9PSA2XSA8LSAzDQp0YWJsZShjdjEwX3NlbCRlZHVjMywgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KMy4gTWVyZ2UNCmBgYHtyfQ0KY3YwOF9zZWwkd2F2ZSA8LSAyMDA4DQpjdjEwX3NlbCR3YXZlIDwtIDIwMTANCg0KY3YwOF9zZWwkaWQyIDwtIHJhbmsoY3YwOF9zZWwkaWQpDQpjdjEwX3NlbCRpZDIgPC0gcmFuayhjdjEwX3NlbCRpZCkNCg0KI2NsZWFuIHVwIGRhdGEgc2V0cw0KY3YwOF9zZWwgPC0gY3YwOF9zZWxbLCBjKCJpZCIsICJpZDIiLCAiYWdlIiwgIm1lbiIsICJlZHVjMyIsICJoZWFsdGgiLCAicmVnaW9uIiwgIndhdmUiKV0NCmN2MTBfc2VsIDwtIGN2MTBfc2VsWywgYygiaWQiLCAiaWQyIiwgImFnZSIsICJtZW4iLCAiZWR1YzMiLCAiaGVhbHRoIiwgInJlZ2lvbiIsICJ3YXZlIildDQoNCnN1bW1hcnkoY3YwOF9zZWwpDQpzdW1tYXJ5KGN2MTBfc2VsKQ0KDQojTG9uZyBmb3JtYXQNCmN2X3RvdCA8LSByYmluZChjdjA4X3NlbCwgY3YxMF9zZWwpDQpzdW1tYXJ5KGN2X3RvdCkNCg0KI1dpZGUgZm9ybWF0DQpjdl90b3RfcGFuZWwgPC0gbWVyZ2UoY3YwOF9zZWwsIGN2MTBfc2VsLCBhbGwgPSBUUlVFLCBieSA9ICJpZDIiKQ0KaGVhZChjdl90b3RfcGFuZWwpDQpgYGANCg0KIyMjIEluIHRpZHkNCmBgYHtyfQ0KY3YwOF9zZWwgPC0gY3YwOF9oYXZlbiAlPiUNCiAgZHBseXI6OiBzZWxlY3QoYygid2VfaWQiLCAibGZ0b3AiLCAiZ2VzbGFjaHQiLCAidmFyMDA2biIsICJ2NDAxIiwgImxhbmRkIikpDQpjdjEwX3NlbCA8LSBjdjEwX2hhdmVuICU+JQ0KICBkcGx5cjo6IHNlbGVjdChjKCJTbGV1dGVsIiwgInZhcjAwMiIsICJ2YXIwMDEiLCAiVmx0b3Bsb3AiLCAiVjQwMSIsICJMYW5kZCIpKQ0KDQpuYW1lcyhjdjA4X3NlbCkgPC0gbmFtZXMoY3YxMF9zZWwpIDwtIGMoImlkIiwgImFnZSIsICJzZXgiLCAiZWR1YyIsICJoZWFsdGgiLCAicmVnaW9uIikNCg0KY3YwOF9zZWwgPC0gY3YwOF9zZWwgJT4lDQogICAgbXV0YXRlKGFnZSA9IG5hX2lmKGFnZSwgOTkpKQ0KY3YxMF9zZWwgPC0gY3YxMF9zZWwgJT4lDQogICAgbXV0YXRlKGFnZSA9IG5hX2lmKGFnZSwgOTkpKQ0KDQpjdjA4X3NlbCA8LSBjdjA4X3NlbCAlPiUNCiAgICBtdXRhdGUobWVuID0gcmVjb2RlKHNleCwgYDlgID0gLTksIE0gPSAxLCBWID0gMCwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpLCANCiAgICAgIG1lbiA9IG5hX2lmKG1lbiwgLTkpLCBtZW4gPSBsYWJlbGxlZChtZW4sIGMobWFuID0gMSwgdnJvdXcgPSAwKSkpDQpjdjEwX3NlbCA8LSBjdjEwX3NlbCAlPiUNCiAgICBtdXRhdGUobWVuID0gcmVjb2RlKHNleCwgYDJgID0gMCwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpLCBtZW4gPSBsYWJlbGxlZChtZW4sIA0KICAgICAgYyhtYW4gPSAxLCB2cm91dyA9IDApKSkNCg0KY3YwOF9zZWwgPC0gY3YwOF9zZWwgJT4lDQogICAgbXV0YXRlKGVkdWMzID0gcmVjb2RlKGVkdWMsIGAtM2AgPSAtOSwgYC0xYCA9IDEsIGAxYCA9IDEsIGAyYCA9IDIsIGAzYCA9IDIsIGA0YCA9IDIsIGA1YCA9IDIsIA0KICAgICAgYDZgID0gMywgYDdgID0gMywgYDhgID0gMywgYDEwYCA9IC05LCAua2VlcF92YWx1ZV9sYWJlbHMgPSBGQUxTRSksIGVkdWMzID0gbmFfaWYoZWR1YzMsIC05KSwgDQogICAgICBlZHVjMyA9IGZhY3RvcihlZHVjMywgbGV2ZWxzID0gYygxLCAyLCAzKSwgbGFiZWxzID0gYygicHJpbWFyeSIsICJzZWNvbmRhcnkiLCAidGVydGlhcnkiKSkpDQoNCmN2MTBfc2VsIDwtIGN2MTBfc2VsICU+JQ0KICAgIG11dGF0ZShlZHVjMyA9IHJlY29kZShlZHVjLCBgLTFgID0gMSwgYDFgID0gMSwgYDJgID0gMiwgYDNgID0gMiwgYDRgID0gMiwgYDVgID0gMywgYDEwYCA9IC05LCANCiAgICAgIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSwgZWR1YzMgPSBuYV9pZihlZHVjMywgLTkpLCBlZHVjMyA9IGZhY3RvcihlZHVjMywgbGV2ZWxzID0gYygxLCAyLA0KICAgICAgMyksIGxhYmVscyA9IGMoInByaW1hcnkiLCAic2Vjb25kYXJ5IiwgInRlcnRpYXJ5IikpKQ0KDQpjdjA4X3NlbCR3YXZlIDwtIDIwMDgNCmN2MTBfc2VsJHdhdmUgPC0gMjAxMA0KDQpjdjA4X3NlbCRpZDIgPC0gcmFuayhjdjA4X3NlbCRpZCkNCmN2MTBfc2VsJGlkMiA8LSByYW5rKGN2MTBfc2VsJGlkKQ0KDQpjdjA4X3NlbCA8LSBjdjA4X3NlbCAlPiUNCiAgICBkcGx5cjo6c2VsZWN0KGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpKQ0KDQpjdjEwX3NlbCA8LSBjdjEwX3NlbCAlPiUNCiAgICBkcGx5cjo6c2VsZWN0KGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpKQ0KDQojTWVyZ2UgbG9uZw0KY3ZfdG90X3RpZHkgPC0gY3YwOF9zZWwgJT4lDQogICAgYWRkX3JvdyhjdjEwX3NlbCkNCg0Kc3VtbWFyeShjdl90b3RfdGlkeSkNCg0KI01lcmdlIHdpZGUNCmN2X3RvdF9wYW5lbF90aWR5IDwtIGZ1bGxfam9pbihjdjA4X3NlbCwgY3YxMF9zZWwsIGJ5ID0gImlkMiIsIHN1ZmZpeCA9IGMoIi4yMDA4IiwgIi4yMDEwIikpDQpgYGANCg0KIyMgQTExIC0gQWdncmVnYXRlIGRhdGENCiMjIyBJbiBiYXNlDQpgYGB7cn0NCmFnZV9yZWdpb24gPC0gYWdncmVnYXRlKGN2X3RvdCRhZ2UsIGJ5ID0gbGlzdChjdl90b3QkcmVnaW9uKSwgRlVOID0gbWVhbikNCmhlYWQoYWdlX3JlZ2lvbikNCg0KYWdlX3JlZ2lvbiA8LSBhZ2dyZWdhdGUoY3ZfdG90JGFnZSwgYnkgPSBsaXN0KGN2X3RvdCRyZWdpb24pLCBGVU4gPSBtZWFuLCBuYS5ybSA9IFRSVUUpDQpoZWFkKGFnZV9yZWdpb24pDQpuYW1lcyhhZ2VfcmVnaW9uKSA8LSBjKCJyZWdpb24iLCAiYWdlX3JlZ2lvbiIpDQphZ2VfcmVnaW9uDQoNCmN2X3RvdGFsIDwtIG1lcmdlKGN2X3RvdCwgYWdlX3JlZ2lvbiwgYnkgPSAicmVnaW9uIiwgYWxsLnggPSBUUlVFKQ0KYGBgDQoNCiMjIyBJbiB0aWR5DQpgYGB7cn0NCmFnZV9yZWdpb24gPC0gZ3JvdXBfYnkoY3ZfdG90X3RpZHksIHJlZ2lvbikNCmFnZV9yZWdpb24gPC0gbXV0YXRlKGFnZV9yZWdpb24sIG1lYW4gPSBtZWFuKGFnZSwgbmEucm0gPSBUUlVFKSkNCg0KIyBPciBzaG9ydGVyOg0KY3ZfdG90YWxfdGlkeSA8LSBjdl90b3RfdGlkeSAlPiUNCiAgICBncm91cF9ieShyZWdpb24pICU+JQ0KICAgIG11dGF0ZShhZ2VfcmVnaW9uID0gbWVhbihhZ2UsIG5hLnJtID0gVFJVRSkpICU+JQ0KICAgIHVuZ3JvdXAoKQ0KYGBgDQoNCiMjIEExMiAtIE1pc3NpbmcgdmFsdWVzDQojIyMgSW4gYmFzZQ0KYGBge3J9DQpjdl90b3RhbCRoZWFsdGhbY3ZfdG90YWwkaGVhbHRoID09ICJXZWlnZXJ0Il0gPC0gTkENCmN2X3RvdGFsJGhlYWx0aG4gPC0gYXMubnVtZXJpYyhjdl90b3RhbCRoZWFsdGgpIC0gNA0KdGFibGUoY3ZfdG90YWwkaGVhbHRoLCB1c2VOQSA9ICJhbHdheXMiKQ0KdGFibGUoY3ZfdG90YWwkaGVhbHRobiwgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KTGlzdHdpc2UgZGVsZXRpb24NCmBgYHtyfQ0Kc3VtbWFyeShjdl90b3RhbCkNCm1vZGVsMiA8LSBsbShhcy5udW1lcmljKGhlYWx0aG4pIH4gbWVuICsgYWdlICsgYXMuZmFjdG9yKGVkdWMzKSArIGFzLmZhY3RvcihyZWdpb24pLCBkYXRhID0gY3ZfdG90YWwpDQpzdW1tYXJ5KG1vZGVsMikNCmBgYA0KUmVwbGFjaW5nIG1pc3NpbmcgdmFsdWVzDQpgYGB7cn0NCiMgQ2F0ZWdvcmljYWwgdmFyaWFibGVzIChhZGQgTkEgY2F0ZWdvcnkpDQpjdl90b3RhbCRtZW4yIDwtIGlmZWxzZShpcy5uYShjdl90b3RhbCRtZW4pLCAyLCBjdl90b3RhbCRtZW4pDQpzdW1tYXJ5KGN2X3RvdGFsJG1lbjIpDQoNCmN2X3RvdGFsJGVkdWMzYiA8LSBpZmVsc2UoaXMubmEoY3ZfdG90YWwkZWR1YzMpLCA0LCBjdl90b3RhbCRlZHVjMykNCnN1bW1hcnkoY3ZfdG90YWwkZWR1YzNiKQ0KDQojIENvbnRpbnVvdXMgdmFyaWFibGVzIChpbnB1dCB0aGUgbWVhbikNCmN2X3RvdGFsJGFnZTIgPC0gaWZlbHNlKGlzLm5hKGN2X3RvdGFsJGFnZSksIG1lYW4oY3ZfdG90YWwkYWdlLCBuYS5ybSA9IFRSVUUpLCBjdl90b3RhbCRhZ2UpDQpjdl90b3RhbCRhZ2VfbWlzIDwtIGlmZWxzZShpcy5uYShjdl90b3RhbCRhZ2UpLCAxLCAwKQ0Kc3VtbWFyeShjdl90b3RhbCRhZ2UyKQ0KdGFibGUoY3ZfdG90YWwkYWdlX21pcykNCg0KbW9kZWwzIDwtIGxtKGhlYWx0aG4gfiBhcy5mYWN0b3IobWVuMikgKyBhZ2UyICsgYWdlX21pcyArIGFzLmZhY3RvcihlZHVjM2IpICsgYXMuZmFjdG9yKHJlZ2lvbiksIGRhdGEgPSBjdl90b3RhbCkNCnN1bW1hcnkobW9kZWwzKQ0KYGBgDQpJbXB1dGluZyBtaXNzaW5nIHZhbHVlcw0KYGBge3J9DQojIFJlc2V0IGRhdGEgc2V0DQpjdl90b3RhbCA8LSBjdl90b3RhbFssIGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpXQ0KY3ZfdG90YWwkaGVhbHRoW2N2X3RvdGFsJGhlYWx0aCA9PSAiV2VpZ2VydCJdIDwtIE5BDQpjdl90b3RhbCRoZWFsdGggPC0gYXMubnVtZXJpYyhjdl90b3RhbCRoZWFsdGgpIC0gNA0KDQpjdl90b3RhbCRtZW4gPC0gYXMuZmFjdG9yKGN2X3RvdGFsJG1lbikNCmN2X3RvdGFsJGVkdWMzIDwtIGFzLmZhY3Rvcihjdl90b3RhbCRlZHVjMykNCg0KIyBpbnN0YWxsLnBhY2thZ2VzKCJtaWNlIikNCnJlcXVpcmUobWljZSkNCm1pY2U6OiBtZC5wYXR0ZXJuKGN2X3RvdGFsKQ0KDQppbXAgPC0gbWljZShkYXRhID0gY3ZfdG90YWwsIG1ldGhvZCA9IGMoIiIsICIiLCAiY2FydCIsICJsb2dyZWciLCAicG9sciIsICJjYXJ0IiwgIiIsICIiKSkNCmF0dHJpYnV0ZXMoaW1wKQ0KcHJlZCA8LSBpbXAkcHJlZA0KcHJlZFssICJpZCJdIDwtIDANCnByZWRbLCAiaWQyIl0gPC0gMA0KcHJlZFssICJ3YXZlIl0gPC0gMA0KcHJlZA0KDQppbXAgPC0gbWljZShkYXRhID0gY3ZfdG90YWwsIG1ldGhvZCA9IGMoIiIsICIiLCAiY2FydCIsICJsb2dyZWciLCAicG9sciIsICJjYXJ0IiwgIiIsICIiKSwgcHJlZCA9IHByZWQsIHNlZWQgPSA0NTYyMikNCg0Kc3VtbWFyeShjdl90b3RhbCkNCnN1bW1hcnkoY29tcGxldGUoaW1wKSkNCg0KcGxvdChpbXApDQoNCm1vZGVsX2ltcCA8LSB3aXRoKGltcCwgbG0oYXMubnVtZXJpYyhoZWFsdGgpIH4gbWVuICsgYWdlICsgZWR1YzMgKyByZWdpb24pKQ0KcG9vbF9tb2RlbF9pbXAgPC0gcG9vbChtb2RlbF9pbXApDQpzdW1tYXJ5KHBvb2xfbW9kZWxfaW1wKQ0KYGBgDQojIyMgSW4gdGlkeQ0KYGBge3J9DQpjdl90b3RhbF90aWR5IDwtIGN2X3RvdGFsX3RpZHkgJT4lDQogICAgbXV0YXRlKGhlYWx0aCA9IG5hX2lmKGhlYWx0aCwgLTIpLCBoZWFsdGhuID0gYXMubnVtZXJpYyhoZWFsdGgpIC0gNCkNCmBgYA0KDQpMaXN0d2lzZSBkZWxldGlvbg0KYGBge3J9DQptb2RlbDIgPC0gY3ZfdG90YWxfdGlkeSAlPiUNCiAgICBtdXRhdGUoYWNyb3NzKGMoZWR1YzMsIHJlZ2lvbiksIGFzLmZhY3RvcikpICU+JQ0KICAgIGxtKGZvcm11bGEgPSBoZWFsdGhuIH4gbWVuICsgYWdlICsgZWR1YzMgKyByZWdpb24pICU+JQ0KICAgIHN1bW1hcnkoKQ0KDQptb2RlbDINCmBgYA0KUmVwbGFjaW5nIG1pc3NpbmcgdmFsdWVzDQpgYGB7cn0NCmN2X3RvdGFsX3RpZHkyIDwtIGN2X3RvdGFsX3RpZHkgJT4lDQogICAgbXV0YXRlKGFjcm9zcyhldmVyeXRoaW5nKCksIGFzLm51bWVyaWMpLCBtZW4yID0gcmVwbGFjZV9uYShtZW4sIDIpLCBlZHVjM2IgPSByZXBsYWNlX25hKGVkdWMzLA0KICAgIDQpLCBhZ2UyID0gcmVwbGFjZV9uYShhZ2UsIG1lYW4oYWdlLCBuYS5ybSA9IFRSVUUpKSwgYWdlX21pcyA9IGlmZWxzZShpcy5uYShhZ2UpLCAxLCAwKSkNCg0KbW9kZWwzIDwtIGN2X3RvdGFsX3RpZHkyICU+JQ0KICAgIG11dGF0ZV9hdChjKCJtZW4yIiwgImVkdWMzYiIsICJyZWdpb24iKSwgYXMuZmFjdG9yKSAlPiUNCiAgICBsbShmb3JtdWxhID0gaGVhbHRobiB+IG1lbjIgKyBhZ2UyICsgYWdlX21pcyArIGVkdWMzYiArIHJlZ2lvbikgJT4lDQogICAgc3VtbWFyeSgpDQoNCm1vZGVsMw0KYGBgDQpJbXB1dGluZyBtaXNzaW5nIHZhbHVlcw0KYGBge3J9DQpwcmVkIDwtIGN2X3RvdGFsX3RpZHkgJT4lDQogIGRwbHlyOjpzZWxlY3QoYygiaWQiLCAiaWQyIiwgImFnZSIsICJtZW4iLCAiZWR1YzMiLCAiaGVhbHRoIiwgInJlZ2lvbiIsICJ3YXZlIikpICU+JQ0KICBtdXRhdGVfYWxsKGFzLm51bWVyaWMpICU+JQ0KICBtdXRhdGVfYXQoYygibWVuIiwgImVkdWMzIiksIGFzLmZhY3RvcikgJT4lDQogIG1pY2UobWV0aG9kID0gYygiIiwgIiIsICJjYXJ0IiwgImxvZ3JlZyIsICJwb2xyIiwgImNhcnQiLCAiIiwgIiIpKSAlPiUNCiAgdW5jbGFzcygpICU+JSANCiAgcGx1Y2soInByZWRpY3Rvck1hdHJpeCIpICU+JQ0KICBhcy5kYXRhLmZyYW1lKCkgJT4lIA0KICBtdXRhdGVfYXQoYygiaWQiLCAiaWQyIiwgImFnZSIpLCBmdW5zKHJlY29kZSgxLCAwKSkpICU+JSANCiAgYXMubWF0cml4KCkNCg0KbW9kZWxfaW1wIDwtIGN2X3RvdGFsX3RpZHkgJT4lDQogIGRwbHlyOjpzZWxlY3QoYygiaWQiLCAiaWQyIiwgImFnZSIsICJtZW4iLCAiZWR1YzMiLCAiaGVhbHRoIiwgInJlZ2lvbiIsICJ3YXZlIikpICU+JQ0KICBtdXRhdGVfYWxsKGFzLm51bWVyaWMpICU+JQ0KICBtdXRhdGVfYXQoYygibWVuIiwgImVkdWMzIiksIGFzLmZhY3RvcikgJT4lDQogIG1pY2UobWV0aG9kID0gYygiIiwgIiIsICJjYXJ0IiwgImxvZ3JlZyIsICJwb2xyIiwgImNhcnQiLCAiIiwgIiIpLCBwcmVkID0gcHJlZCwgc2VlZCA9IDQ1NjIyKSAlPiUNCiAgd2l0aChsbShhcy5udW1lcmljKGhlYWx0aCkgfiBtZW4gKyBhZ2UgKyBlZHVjMyArIHJlZ2lvbikpICU+JQ0KICBwb29sKCkNCg0Kc3VtbWFyeShtb2RlbF9pbXApDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgMSINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFNOQVNTIEFwcGVuZGl4IEENCiMjIEExIHRocm91Z2ggQTYgLSBTZXR0aW5nIHVwDQpgYGB7cn0NCnJtKGxpc3QgPSBscygpKQ0KDQojaW5zdGFsbC5wYWNrYWdlcygiaW5zdGFsbHIiKQ0KcmVxdWlyZShpbnN0YWxscikNCiNpbnN0YWxsLnBhY2thZ2VzKCJmb3JlaWduIikNCnJlcXVpcmUoZm9yZWlnbikNCnJlcXVpcmUodGlkeXZlcnNlKQ0KI3VwZGF0ZVIoKQ0KYGBgDQoNCkxvYWRpbmcgZGF0YSBzZXRzDQpgYGAge3IsIHdhcm5pbmcgPSBGQUxTRX0NCmN2MDggPC0gZm9yZWlnbjo6cmVhZC5zcHNzKCJDdWx0dXJhbF9DaGFuZ2VzXzIwMDguc2F2IiwgdXNlLnZhbHVlLmxhYmVscyA9IFQsIHRvLmRhdGEuZnJhbWUgPSBUKQ0KY3YxMCA8LSBmb3JlaWduOjpyZWFkLnNwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiLCB1c2UudmFsdWUubGFiZWxzID0gVCwgdG8uZGF0YS5mcmFtZSA9IFQpDQoNCmN2MDhfbm9sYWIgPC0gZm9yZWlnbjo6cmVhZC5zcHNzKCJDdWx0dXJhbF9DaGFuZ2VzXzIwMDguc2F2IiwgdXNlLnZhbHVlLmxhYmVscyA9IEYsIHRvLmRhdGEuZnJhbWUgPSBUKQ0KY3YxMF9ub2xhYiA8LSBmb3JlaWduOjpyZWFkLnNwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiLCB1c2UudmFsdWUubGFiZWxzID0gRiwgdG8uZGF0YS5mcmFtZSA9IFQpDQoNCmN2MDhfaGF2ZW4gPC0gaGF2ZW46OnJlYWRfc3BzcygiQ3VsdHVyYWxfQ2hhbmdlc18yMDA4LnNhdiIpDQpjdjEwX2hhdmVuIDwtIGhhdmVuOjpyZWFkX3Nwc3MoIkN1bHR1cmFsX0NoYW5nZXNfMjAxMC5zYXYiKQ0KYGBgDQoNCkluc3BlY3QgdGhlIGRhdGENCmBgYHt9DQpzdHIoY3YwOCkNCnN0cihjdjA4X25vbGFiKQ0Kc3RyKGN2MDhfaGF2ZW4pDQpzdHIoY3YwOCRsZnRvcCkNCnN0cihjdjA4X2hhdmVuJGxmdG9wKQ0KYGBgDQoNCmBgYHt9DQphdHRyaWJ1dGVzKGN2MDgkbGZ0b3ApDQphdHRyaWJ1dGVzKGN2MDhfbm9sYWIkbGZ0b3ApDQphdHRyaWJ1dGVzKGN2MDhfaGF2ZW4kbGZ0b3ApDQoNCm5hbWVzKGN2MDhfaGF2ZW4pDQpzdW1tYXJ5KGN2MDhfaGF2ZW4pDQpoZWFkKGN2MDhfaGF2ZW4pDQpmaXgoY3YwOCkNClZpZXcoY3YwOF9oYXZlbikNCmBgYA0KDQo8YnI+DQoNCiMjIEE3IC0gQXNzaWduIG1pc3NpbmcgdmFsdWVzDQojIyMgSW4gYmFzZQ0KYGBge3J9DQojc3RyKGN2MDhfaGF2ZW4kbGZ0b3ApDQpzdW1tYXJ5KGN2MDhfaGF2ZW4kbGZ0b3ApDQphdHRyKGN2MDhfaGF2ZW4kbGZ0b3AsICJsYWJlbHMiKQ0KdGFibGUoY3YwOF9oYXZlbiRsZnRvcCwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOCRsZnRvcF9uZXcgPC0gY3YwOCRsZnRvcA0KY3YwOCRsZnRvcF9uZXdbY3YwOCRsZnRvcF9uZXcgPT0gIk9uYmVrZW5kIl0gPC0gTkENCg0KdGFibGUoY3YwOCRsZnRvcF9uZXcsIHVzZU5BID0gImFsd2F5cyIpDQpsZXZlbHMoY3YwOCRsZnRvcF9uZXcpDQoNCmN2MDgkYWdlbiA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihjdjA4JGxmdG9wX25ldykpDQp0YWJsZShjdjA4JGFnZW4sIHVzZU5BID0gImFsd2F5cyIpDQoNCiNzdHIoY3YwOCRhZ2VuKQ0KYGBgDQoNCiMjIyBJbiB0aWR5DQpgYGB7cn0NCiNjdjA4X2hhdmVuIDwtIG11dGF0ZShjdjA4X2hhdmVuLCBsZnRvcF9uZXcgPSBsZnRvcCkNCiNjdjA4X2hhdmVuJGxmdG9wX25ldyA8LSBuYV9pZihjdjA4X2hhdmVuJGxmdG9wX25ldywgOTkpDQoNCiNPUiAobW9yZSBxdWlja2x5KQ0KDQpjdjA4X2hhdmVuIDwtIG11dGF0ZShjdjA4X2hhdmVuLCBsZnRvcF9uZXcgPSBuYV9pZihsZnRvcCwgOTkpKQ0KDQp0YWJsZShjdjA4X2hhdmVuJGxmdG9wX25ldywgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KDQo8YnI+DQoNCiMjIEE4IC0gUmVjb2RpbmcgdmFyaWFibGVzIA0KIyMjIEluIGJhc2UNCmBgYHtyfQ0KbGV2ZWxzKGN2MDgkdmFyMDA2bikNCnRhYmxlKGN2MDgkdmFyMDA2biwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOCRlZHVjbiA8LSBhcy5udW1lcmljKGN2MDgkdmFyMDA2bikNCnRhYmxlKGN2MDgkZWR1Y24sIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDgkZWR1YzMgPC0gTkENCg0KY3YwOCRlZHVjM1tjdjA4JGVkdWNuID09IDIgfCBjdjA4JGVkdWNuID09M10gPC0gMQ0KY3YwOCRlZHVjM1tjdjA4JGVkdWNuID4gMyAmIGN2MDgkZWR1Y24gPCA4XSA8LSAyDQpjdjA4JGVkdWMzW2N2MDgkZWR1Y24gPiA3ICYgY3YwOCRlZHVjbiA8IDExXSA8LSAzDQoNCnRhYmxlKGN2MDgkZWR1YzMsIHVzZU5BID0gImFsd2F5cyIpDQpwcm9wLnRhYmxlKHRhYmxlKGN2MDgkZWR1YzMsIHVzZU5BID0gImFsd2F5cyIpKQ0KDQpjdjA4JGVkdWMzIDwtIGFzLmZhY3RvcihjdjA4JGVkdWMzKQ0KdGFibGUoY3YwOCRlZHVjMywgdXNlTkEgPSAiYWx3YXlzIikNCg0KbGV2ZWxzKGN2MDgkZWR1YzMpIDwtIGMoICJwcmltYXJ5IiwgInNlY29uZGFyeSIsICJ0ZXJ0aWFyeSIpDQp0YWJsZShjdjA4JGVkdWMzLCB1c2VOQSA9ICJhbHdheXMiKQ0KYGBgDQojIyMgSW4gdGlkeQ0KYGBge3J9DQojaW5zdGFsbC5wYWNrYWdlcygibGFiZWxsZWQiKQ0KcmVxdWlyZShsYWJlbGxlZCkNCg0KI3N0cihjdjA4X2hhdmVuJHZhcjAwNm4pDQphdHRyKGN2MDhfaGF2ZW4kdmFyMDA2biwgImxhYmVscyIpDQoNCnRhYmxlKGN2MDhfaGF2ZW4kdmFyMDA2biwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YwOF9oYXZlbiA8LSBtdXRhdGUoY3YwOF9oYXZlbiwgZWR1YzMgPSByZWNvZGUodmFyMDA2biwgJy0zJyA9IC05LCAnLTEnID0gMSwgJzEnID0gMSwgJzInID0gMiwgJzMnID0gMiwgJzQnID0gMiwgJzUnID0gMiwgJzYnID0gMywgJzcnID0gMywgJzgnID0gMywgJzEwJyA9IC05KSwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpDQpjdjA4X2hhdmVuIDwtIG11dGF0ZShjdjA4X2hhdmVuLCBlZHVjMyA9IG5hX2lmKGVkdWMzLCAtOSkpDQoNCmN2MDhfaGF2ZW4gPC0gbXV0YXRlKGN2MDhfaGF2ZW4sIGVkdWMzID0gZmFjdG9yKGVkdWMzLCBsZXZlbHMgPSBjKDEsIDIsIDMpLCBsYWJlbHMgPSBjKCJwcmltYXJ5IiwgInNlY29uZGFyeSIsICJ0ZXJ0aWFyeSIpKSkNCg0KdGFibGUoY3YwOF9oYXZlbiRlZHVjMywgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KVXNpbmcgcGlwaW5nDQpgYGB7cn0NCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgbXV0YXRlKGN2MDhfaGF2ZW4sIGVkdWMzID0gcmVjb2RlKHZhcjAwNm4sICctMycgPSAtOSwgJy0xJyA9IDEsICcxJyA9IDEsICcyJyA9IDIsICczJyA9IDIsICc0JyA9IDIsICc1JyA9IDIsICc2Jw0KICA9IDMsICc3JyA9IDMsICc4JyA9IDMsICcxMCcgPSAtOSksIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSAlPiUNCiAgbXV0YXRlKGVkdWMzID0gbmFfaWYoZWR1YzMsIC05KSkgJT4lDQogIG11dGF0ZShlZHVjMyA9IGZhY3RvcihlZHVjMywgbGV2ZWxzID0gYygxLCAyLCAzKSwgbGFiZWxzID0gYygicHJpbWFyeSIsICJzZWNvbmRhcnkiLCAidGVydGlhcnkiKSkpDQpgYGANCg0KPGJyPg0KDQojIyBBOSAtIE1lYW5zIGFuZCBjb3VudGluZw0KIyMjIEluIGJhc2UNCmBgYHtyfQ0Kc3VtbWFyeShjdjA4JGludDA1NSkNCnN1bW1hcnkoY3YwOCRpbnQwNTYpDQpzdW1tYXJ5KGN2MDgkaW50MDU3KQ0KDQpjdjA4JGludDA1NW4gPC0gYXMubnVtZXJpYyhjdjA4JGludDA1NSkNCnRhYmxlKGN2MDgkaW50MDU1biwgdXNlTkEgPSAiYWx3YXlzIikNCmN2MDgkaW50MDU2biA8LSBhcy5udW1lcmljKGN2MDgkaW50MDU2KQ0KdGFibGUoY3YwOCRpbnQwNTZuLCB1c2VOQSA9ICJhbHdheXMiKQ0KY3YwOCRpbnQwNTduIDwtIGFzLm51bWVyaWMoY3YwOCRpbnQwNTcpDQp0YWJsZShjdjA4JGludDA1N24sIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDgkaW50MDU1bltjdjA4JGludDA1NW4gPCA1XSA8LSBOQQ0KY3YwOCRpbnQwNTVuIDwtIGN2MDgkaW50MDU1biAtIDQNCmN2MDgkaW50MDU2bltjdjA4JGludDA1Nm4gPCA1XSA8LSBOQQ0KY3YwOCRpbnQwNTZuIDwtIGN2MDgkaW50MDU2biAtIDQNCmN2MDgkaW50MDU3bltjdjA4JGludDA1N24gPCA1XSA8LSBOQQ0KY3YwOCRpbnQwNTduIDwtIGN2MDgkaW50MDU3biAtIDQNCg0KI21lYW5zIHBlciByZXNwb25kZW50DQp0ZXN0bWVhbnMgPC0gcm93TWVhbnMoY2JpbmQoY3YwOCRpbnQwNTVuLCBjdjA4JGludDA1Nm4sIGN2MDgkaW50MDU3biksIG5hLnJtID0gVCkNCmhlYWQodGVzdG1lYW5zKQ0KDQpubWlzIDwtIHJvd1N1bXMoaXMubmEoY2JpbmQoY3YwOCRpbnQwNTVuLCBjdjA4JHVidDA1Nm4sIGN2MDgkaW50MDU3bikpKQ0KdGVzdG1lYW5zIDwtIGlmZWxzZShubWlzIDwyLCB0ZXN0bWVhbnMsIE5BKQ0KY3YwOCRpbnRfbWVhbiA8LSB0ZXN0bWVhbnMNCmBgYA0KDQojIyMgSW4gdGlkeQ0KYGBge3J9DQp0YWJsZShjdjA4X2hhdmVuJGludDA1NSwgdXNlTkEgPSAiYWx3YXlzIikNCnRhYmxlKGN2MDhfaGF2ZW4kaW50MDU2LCB1c2VOQSA9ICJhbHdheXMiKQ0KdGFibGUoY3YwOF9oYXZlbiRpbnQwNTcsIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgbXV0YXRlKGludDA1NW4gPSByZWNvZGUoaW50MDU1LCAnLTYnID0gLTksICctNScgPSAtOSwgJy0zJyA9IC05LCAnLTInID0gLTksICcxJyA9IDQsICcyJyA9IDMsICczJw0KICAgID0gMiwgJzQnID0gMSksIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSAlPiUNCiAgbXV0YXRlKGludDA1NW4gPSBuYV9pZihpbnQwNTVuLCAtOSkpICU+JQ0KICBtdXRhdGUoaW50MDU1biA9IGxhYmVsbGVkKGludDA1NW4sIGMoJ0hlbGVtYWFsIGdlZW4gdGVnZW5zdGVsbGluZycgPSAxLCdOaWV0IHpvIGdyb290JyA9IDIsICdncm9vdCcNCiAgICA9IDMsICdaZWVyIGdyb290JyA9IDQpKSkNCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgbXV0YXRlKGludDA1Nm4gPSByZWNvZGUoaW50MDU2LCAnLTYnID0gLTksICctNScgPSAtOSwgJy0zJyA9IC05LCAnLTInID0gLTksICcxJyA9IDQsICcyJyA9IDMsICczJw0KICAgID0gMiwgJzQnID0gMSksIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSAlPiUNCiAgbXV0YXRlKGludDA1Nm4gPSBuYV9pZihpbnQwNTZuLCAtOSkpICU+JQ0KICBtdXRhdGUoaW50MDU2biA9IGxhYmVsbGVkKGludDA1Nm4sIGMoJ0hlbGVtYWFsIGdlZW4gdGVnZW5zdGVsbGluZycgPSAxLCdOaWV0IHpvIGdyb290JyA9IDIsICdncm9vdCcNCiAgICA9IDMsICdaZWVyIGdyb290JyA9IDQpKSkNCmN2MDhfaGF2ZW4gPC0gY3YwOF9oYXZlbiAlPiUNCiAgbXV0YXRlKGludDA1N24gPSByZWNvZGUoaW50MDU3LCAnLTYnID0gLTksICctNScgPSAtOSwgJy0zJyA9IC05LCAnLTInID0gLTksICcxJyA9IDQsICcyJyA9IDMsICczJw0KICAgID0gMiwgJzQnID0gMSksIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSAlPiUNCiAgbXV0YXRlKGludDA1N24gPSBuYV9pZihpbnQwNTduLCAtOSkpICU+JQ0KICBtdXRhdGUoaW50MDU3biA9IGxhYmVsbGVkKGludDA1N24sIGMoJ0hlbGVtYWFsIGdlZW4gdGVnZW5zdGVsbGluZycgPSAxLCdOaWV0IHpvIGdyb290JyA9IDIsICdncm9vdCcNCiAgICA9IDMsICdaZWVyIGdyb290JyA9IDQpKSkNCg0KICAjbWVhbiByZWdhcmRsZXNzIG9mIGhvdyBtYW55IG1pc3NpbmdzDQpjdjA4X2hhdmVuIDwtIGN2MDhfaGF2ZW4gJT4lDQogIHJvd3dpc2UoKSAlPiUNCiAgbXV0YXRlKGludF9tZWFuID0gbWVhbihjKGludDA1NW4sIGludDA1Nm4sIGludDA1N24pLCBuYS5ybSA9IFRSVUUpKQ0KDQogICNtZWFuIHdpdGggbWF4IDEgbWlzc2luZywgb3RoZXJ3aXNlIE5BDQpjdjA4X2hhdmVuIDwtIGN2MDhfaGF2ZW4gJT4lDQogIG11dGF0ZShpbnRfbWVhbl90ZW1wID0gcm93TWVhbnMoY2JpbmQoaW50MDU1biwgaW50MDU2biwgaW50MDU3biksIG5hLnJtID0gVFJVRSksIG5taXMgPSANCiAgICByb3dTdW1zKGlzLm5hKGNiaW5kKGludDA1NW4sIGludDA1Nm4sIGludDA1N24pKSksIGludF9tZWFuID0gaWZlbHNlKG5taXMgPCAyLCBpbnRfbWVhbl90ZW1wLCANCiAgICBOQSkpICU+JSANCiAgZHBseXI6OiBzZWxlY3QoLWludF9tZWFuX3RlbXAsIC1ubWlzKQ0KYGBgDQo8YnI+DQoNCiMjIEExMCAtIE1lcmdpbmcgZGF0YSBmaWxlcw0KIyMjIEluIGJhc2UNCjEuIFNlbGVjdGluZyB0aGUgdmFyaWFibGVzIHdlIHdhbnQgdG8ga2VlcA0KYGBge3J9DQpjdjA4X3NlbCA8LSBjdjA4WywgYygid2VfaWQiLCAibGZ0b3AiLCAiZ2VzbGFjaHQiLCAidmFyMDA2biIsICJ2NDAxIiwgImxhbmRkIildDQpjdjEwX3NlbCA8LSBjdjEwWywgYygiU2xldXRlbCIsICJ2YXIwMDIiLCAidmFyMDAxIiwgIlZsdG9wbG9wIiwgIlY0MDEiLCAiTGFuZGQiKV0NCmBgYA0KDQoyLiBNYWtlIHZhcmlhYmxlcyBjb25zaXN0ZW50DQpgYGB7cn0NCm5hbWVzKGN2MDhfc2VsKSA8LSBuYW1lcyhjdjEwX3NlbCkgPC0gYygiaWQiLCAiYWdlIiwgInNleCIsICJlZHVjIiwgImhlYWx0aCIsICJyZWdpb24iKQ0Kc3VtbWFyeShjdjA4X3NlbCkNCnN1bW1hcnkoY3YxMF9zZWwpDQoNCiNJRA0KY3YwOF9zZWwkaWQgPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoY3YwOF9zZWwkaWQpKQ0KY3YxMF9zZWwkaWQgPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoY3YxMF9zZWwkaWQpKQ0KDQojQWdlDQpjdjA4X3NlbCRhZ2UgPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoY3YwOF9zZWwkYWdlKSkNCmN2MTBfc2VsJGFnZSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihjdjEwX3NlbCRhZ2UpKQ0KDQojU2V4DQp0YWJsZShjdjA4X3NlbCRzZXgsIHVzZU5BID0gImFsd2F5cyIpDQp0YWJsZShjdjEwX3NlbCRzZXgsIHVzZU5BID0gImFsd2F5cyIpDQoNCmN2MDhfc2VsJHNleG4gPC0gYXMubnVtZXJpYyhjdjA4X3NlbCRzZXgpDQp0YWJsZShjdjA4X3NlbCRzZXhuLCB1c2VOQSA9ICJhbHdheXMiKQ0KY3YwOF9zZWwkbWVuIDwtIGlmZWxzZShjdjA4X3NlbCRzZXhuID09IDIsIDEsIDApDQpjdjA4X3NlbCRtZW4gPC0gaWZlbHNlKGN2MDhfc2VsJHNleG4gPT0gMSwgTkEsIGN2MDhfc2VsJG1lbikNCnRhYmxlKGN2MDhfc2VsJG1lbiwgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YxMF9zZWwkc2V4biA8LSBhcy5udW1lcmljKGN2MTBfc2VsJHNleCkNCnRhYmxlKGN2MTBfc2VsJHNleG4sIHVzZU5BID0gImFsd2F5cyIpDQpjdjEwX3NlbCRtZW4gPC0gaWZlbHNlKGN2MTBfc2VsJHNleG4gPT0gMiwgMSwgMCkNCnRhYmxlKGN2MTBfc2VsJG1lbiwgdXNlTkEgPSAiYWx3YXlzIikNCg0KI0VkdWNhdGlvbg0KbGV2ZWxzKGN2MDhfc2VsJGVkdWMpDQpsZXZlbHMoY3YxMF9zZWwkZWR1YykNCnRhYmxlKGN2MDhfc2VsJGVkdWMsIHVzZU5BPSAiYWx3YXlzIikNCnRhYmxlKGN2MTBfc2VsJGVkdWMsIHVzZU5BPSAiYWx3YXlzIikNCg0KY3YwOF9zZWwkZWR1Y24gPC0gYXMubnVtZXJpYyhjdjA4X3NlbCRlZHVjKQ0KdGFibGUoY3YwOF9zZWwkZWR1Y24pDQoNCmN2MDhfc2VsJGVkdWMzIDwtIE5BDQpjdjA4X3NlbCRlZHVjM1tjdjA4X3NlbCRlZHVjbiA9PSAyIHwgY3YwOF9zZWwkZWR1Y24gPT0gM10gPC0gMQ0KY3YwOF9zZWwkZWR1YzNbY3YwOF9zZWwkZWR1Y24gPiAzICYgY3YwOF9zZWwkZWR1Y24gPCA4XSA8LSAyDQpjdjA4X3NlbCRlZHVjM1tjdjA4X3NlbCRlZHVjbiA+IDcgJiBjdjA4X3NlbCRlZHVjbiA8IDExXSA8LSAzDQp0YWJsZShjdjA4X3NlbCRlZHVjMywgdXNlTkEgPSAiYWx3YXlzIikNCg0KY3YxMF9zZWwkZWR1Y24gPC0gYXMubnVtZXJpYyhjdjEwX3NlbCRlZHVjKQ0KdGFibGUoY3YxMF9zZWwkZWR1Y24pDQoNCmN2MTBfc2VsJGVkdWMzIDwtIE5BDQpjdjEwX3NlbCRlZHVjM1tjdjEwX3NlbCRlZHVjbiA8IDNdIDwtIDENCmN2MTBfc2VsJGVkdWMzW2N2MTBfc2VsJGVkdWNuID4gMiAmIGN2MTBfc2VsJGVkdWNuIDwgNl0gPC0gMg0KY3YxMF9zZWwkZWR1YzNbY3YxMF9zZWwkZWR1Y24gPT0gNl0gPC0gMw0KdGFibGUoY3YxMF9zZWwkZWR1YzMsIHVzZU5BID0gImFsd2F5cyIpDQpgYGANCjMuIE1lcmdlDQpgYGB7cn0NCmN2MDhfc2VsJHdhdmUgPC0gMjAwOA0KY3YxMF9zZWwkd2F2ZSA8LSAyMDEwDQoNCmN2MDhfc2VsJGlkMiA8LSByYW5rKGN2MDhfc2VsJGlkKQ0KY3YxMF9zZWwkaWQyIDwtIHJhbmsoY3YxMF9zZWwkaWQpDQoNCiNjbGVhbiB1cCBkYXRhIHNldHMNCmN2MDhfc2VsIDwtIGN2MDhfc2VsWywgYygiaWQiLCAiaWQyIiwgImFnZSIsICJtZW4iLCAiZWR1YzMiLCAiaGVhbHRoIiwgInJlZ2lvbiIsICJ3YXZlIildDQpjdjEwX3NlbCA8LSBjdjEwX3NlbFssIGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpXQ0KDQpzdW1tYXJ5KGN2MDhfc2VsKQ0Kc3VtbWFyeShjdjEwX3NlbCkNCg0KI0xvbmcgZm9ybWF0DQpjdl90b3QgPC0gcmJpbmQoY3YwOF9zZWwsIGN2MTBfc2VsKQ0Kc3VtbWFyeShjdl90b3QpDQoNCiNXaWRlIGZvcm1hdA0KY3ZfdG90X3BhbmVsIDwtIG1lcmdlKGN2MDhfc2VsLCBjdjEwX3NlbCwgYWxsID0gVFJVRSwgYnkgPSAiaWQyIikNCmhlYWQoY3ZfdG90X3BhbmVsKQ0KYGBgDQoNCiMjIyBJbiB0aWR5DQpgYGB7cn0NCmN2MDhfc2VsIDwtIGN2MDhfaGF2ZW4gJT4lDQogIGRwbHlyOjogc2VsZWN0KGMoIndlX2lkIiwgImxmdG9wIiwgImdlc2xhY2h0IiwgInZhcjAwNm4iLCAidjQwMSIsICJsYW5kZCIpKQ0KY3YxMF9zZWwgPC0gY3YxMF9oYXZlbiAlPiUNCiAgZHBseXI6OiBzZWxlY3QoYygiU2xldXRlbCIsICJ2YXIwMDIiLCAidmFyMDAxIiwgIlZsdG9wbG9wIiwgIlY0MDEiLCAiTGFuZGQiKSkNCg0KbmFtZXMoY3YwOF9zZWwpIDwtIG5hbWVzKGN2MTBfc2VsKSA8LSBjKCJpZCIsICJhZ2UiLCAic2V4IiwgImVkdWMiLCAiaGVhbHRoIiwgInJlZ2lvbiIpDQoNCmN2MDhfc2VsIDwtIGN2MDhfc2VsICU+JQ0KICAgIG11dGF0ZShhZ2UgPSBuYV9pZihhZ2UsIDk5KSkNCmN2MTBfc2VsIDwtIGN2MTBfc2VsICU+JQ0KICAgIG11dGF0ZShhZ2UgPSBuYV9pZihhZ2UsIDk5KSkNCg0KY3YwOF9zZWwgPC0gY3YwOF9zZWwgJT4lDQogICAgbXV0YXRlKG1lbiA9IHJlY29kZShzZXgsIGA5YCA9IC05LCBNID0gMSwgViA9IDAsIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSwgDQogICAgICBtZW4gPSBuYV9pZihtZW4sIC05KSwgbWVuID0gbGFiZWxsZWQobWVuLCBjKG1hbiA9IDEsIHZyb3V3ID0gMCkpKQ0KY3YxMF9zZWwgPC0gY3YxMF9zZWwgJT4lDQogICAgbXV0YXRlKG1lbiA9IHJlY29kZShzZXgsIGAyYCA9IDAsIC5rZWVwX3ZhbHVlX2xhYmVscyA9IEZBTFNFKSwgbWVuID0gbGFiZWxsZWQobWVuLCANCiAgICAgIGMobWFuID0gMSwgdnJvdXcgPSAwKSkpDQoNCmN2MDhfc2VsIDwtIGN2MDhfc2VsICU+JQ0KICAgIG11dGF0ZShlZHVjMyA9IHJlY29kZShlZHVjLCBgLTNgID0gLTksIGAtMWAgPSAxLCBgMWAgPSAxLCBgMmAgPSAyLCBgM2AgPSAyLCBgNGAgPSAyLCBgNWAgPSAyLCANCiAgICAgIGA2YCA9IDMsIGA3YCA9IDMsIGA4YCA9IDMsIGAxMGAgPSAtOSwgLmtlZXBfdmFsdWVfbGFiZWxzID0gRkFMU0UpLCBlZHVjMyA9IG5hX2lmKGVkdWMzLCAtOSksIA0KICAgICAgZWR1YzMgPSBmYWN0b3IoZWR1YzMsIGxldmVscyA9IGMoMSwgMiwgMyksIGxhYmVscyA9IGMoInByaW1hcnkiLCAic2Vjb25kYXJ5IiwgInRlcnRpYXJ5IikpKQ0KDQpjdjEwX3NlbCA8LSBjdjEwX3NlbCAlPiUNCiAgICBtdXRhdGUoZWR1YzMgPSByZWNvZGUoZWR1YywgYC0xYCA9IDEsIGAxYCA9IDEsIGAyYCA9IDIsIGAzYCA9IDIsIGA0YCA9IDIsIGA1YCA9IDMsIGAxMGAgPSAtOSwgDQogICAgICAua2VlcF92YWx1ZV9sYWJlbHMgPSBGQUxTRSksIGVkdWMzID0gbmFfaWYoZWR1YzMsIC05KSwgZWR1YzMgPSBmYWN0b3IoZWR1YzMsIGxldmVscyA9IGMoMSwgMiwNCiAgICAgIDMpLCBsYWJlbHMgPSBjKCJwcmltYXJ5IiwgInNlY29uZGFyeSIsICJ0ZXJ0aWFyeSIpKSkNCg0KY3YwOF9zZWwkd2F2ZSA8LSAyMDA4DQpjdjEwX3NlbCR3YXZlIDwtIDIwMTANCg0KY3YwOF9zZWwkaWQyIDwtIHJhbmsoY3YwOF9zZWwkaWQpDQpjdjEwX3NlbCRpZDIgPC0gcmFuayhjdjEwX3NlbCRpZCkNCg0KY3YwOF9zZWwgPC0gY3YwOF9zZWwgJT4lDQogICAgZHBseXI6OnNlbGVjdChjKCJpZCIsICJpZDIiLCAiYWdlIiwgIm1lbiIsICJlZHVjMyIsICJoZWFsdGgiLCAicmVnaW9uIiwgIndhdmUiKSkNCg0KY3YxMF9zZWwgPC0gY3YxMF9zZWwgJT4lDQogICAgZHBseXI6OnNlbGVjdChjKCJpZCIsICJpZDIiLCAiYWdlIiwgIm1lbiIsICJlZHVjMyIsICJoZWFsdGgiLCAicmVnaW9uIiwgIndhdmUiKSkNCg0KI01lcmdlIGxvbmcNCmN2X3RvdF90aWR5IDwtIGN2MDhfc2VsICU+JQ0KICAgIGFkZF9yb3coY3YxMF9zZWwpDQoNCnN1bW1hcnkoY3ZfdG90X3RpZHkpDQoNCiNNZXJnZSB3aWRlDQpjdl90b3RfcGFuZWxfdGlkeSA8LSBmdWxsX2pvaW4oY3YwOF9zZWwsIGN2MTBfc2VsLCBieSA9ICJpZDIiLCBzdWZmaXggPSBjKCIuMjAwOCIsICIuMjAxMCIpKQ0KYGBgDQoNCjxicj4gDQoNCiMjIEExMSAtIEFnZ3JlZ2F0ZSBkYXRhDQojIyMgSW4gYmFzZQ0KYGBge3J9DQphZ2VfcmVnaW9uIDwtIGFnZ3JlZ2F0ZShjdl90b3QkYWdlLCBieSA9IGxpc3QoY3ZfdG90JHJlZ2lvbiksIEZVTiA9IG1lYW4pDQpoZWFkKGFnZV9yZWdpb24pDQoNCmFnZV9yZWdpb24gPC0gYWdncmVnYXRlKGN2X3RvdCRhZ2UsIGJ5ID0gbGlzdChjdl90b3QkcmVnaW9uKSwgRlVOID0gbWVhbiwgbmEucm0gPSBUUlVFKQ0KaGVhZChhZ2VfcmVnaW9uKQ0KbmFtZXMoYWdlX3JlZ2lvbikgPC0gYygicmVnaW9uIiwgImFnZV9yZWdpb24iKQ0KYWdlX3JlZ2lvbg0KDQpjdl90b3RhbCA8LSBtZXJnZShjdl90b3QsIGFnZV9yZWdpb24sIGJ5ID0gInJlZ2lvbiIsIGFsbC54ID0gVFJVRSkNCmBgYA0KDQojIyMgSW4gdGlkeQ0KYGBge3J9DQphZ2VfcmVnaW9uIDwtIGdyb3VwX2J5KGN2X3RvdF90aWR5LCByZWdpb24pDQphZ2VfcmVnaW9uIDwtIG11dGF0ZShhZ2VfcmVnaW9uLCBtZWFuID0gbWVhbihhZ2UsIG5hLnJtID0gVFJVRSkpDQoNCiMgT3Igc2hvcnRlcjoNCmN2X3RvdGFsX3RpZHkgPC0gY3ZfdG90X3RpZHkgJT4lDQogICAgZ3JvdXBfYnkocmVnaW9uKSAlPiUNCiAgICBtdXRhdGUoYWdlX3JlZ2lvbiA9IG1lYW4oYWdlLCBuYS5ybSA9IFRSVUUpKSAlPiUNCiAgICB1bmdyb3VwKCkNCmBgYA0KDQo8YnI+DQoNCiMjIEExMiAtIE1pc3NpbmcgdmFsdWVzDQojIyMgSW4gYmFzZQ0KYGBge3J9DQpjdl90b3RhbCRoZWFsdGhbY3ZfdG90YWwkaGVhbHRoID09ICJXZWlnZXJ0Il0gPC0gTkENCmN2X3RvdGFsJGhlYWx0aG4gPC0gYXMubnVtZXJpYyhjdl90b3RhbCRoZWFsdGgpIC0gNA0KdGFibGUoY3ZfdG90YWwkaGVhbHRoLCB1c2VOQSA9ICJhbHdheXMiKQ0KdGFibGUoY3ZfdG90YWwkaGVhbHRobiwgdXNlTkEgPSAiYWx3YXlzIikNCmBgYA0KTGlzdHdpc2UgZGVsZXRpb24NCmBgYHtyfQ0Kc3VtbWFyeShjdl90b3RhbCkNCm1vZGVsMiA8LSBsbShhcy5udW1lcmljKGhlYWx0aG4pIH4gbWVuICsgYWdlICsgYXMuZmFjdG9yKGVkdWMzKSArIGFzLmZhY3RvcihyZWdpb24pLCBkYXRhID0gY3ZfdG90YWwpDQpzdW1tYXJ5KG1vZGVsMikNCmBgYA0KUmVwbGFjaW5nIG1pc3NpbmcgdmFsdWVzDQpgYGB7cn0NCiMgQ2F0ZWdvcmljYWwgdmFyaWFibGVzIChhZGQgTkEgY2F0ZWdvcnkpDQpjdl90b3RhbCRtZW4yIDwtIGlmZWxzZShpcy5uYShjdl90b3RhbCRtZW4pLCAyLCBjdl90b3RhbCRtZW4pDQpzdW1tYXJ5KGN2X3RvdGFsJG1lbjIpDQoNCmN2X3RvdGFsJGVkdWMzYiA8LSBpZmVsc2UoaXMubmEoY3ZfdG90YWwkZWR1YzMpLCA0LCBjdl90b3RhbCRlZHVjMykNCnN1bW1hcnkoY3ZfdG90YWwkZWR1YzNiKQ0KDQojIENvbnRpbnVvdXMgdmFyaWFibGVzIChpbnB1dCB0aGUgbWVhbikNCmN2X3RvdGFsJGFnZTIgPC0gaWZlbHNlKGlzLm5hKGN2X3RvdGFsJGFnZSksIG1lYW4oY3ZfdG90YWwkYWdlLCBuYS5ybSA9IFRSVUUpLCBjdl90b3RhbCRhZ2UpDQpjdl90b3RhbCRhZ2VfbWlzIDwtIGlmZWxzZShpcy5uYShjdl90b3RhbCRhZ2UpLCAxLCAwKQ0Kc3VtbWFyeShjdl90b3RhbCRhZ2UyKQ0KdGFibGUoY3ZfdG90YWwkYWdlX21pcykNCg0KbW9kZWwzIDwtIGxtKGhlYWx0aG4gfiBhcy5mYWN0b3IobWVuMikgKyBhZ2UyICsgYWdlX21pcyArIGFzLmZhY3RvcihlZHVjM2IpICsgYXMuZmFjdG9yKHJlZ2lvbiksIGRhdGEgPSBjdl90b3RhbCkNCnN1bW1hcnkobW9kZWwzKQ0KYGBgDQpJbXB1dGluZyBtaXNzaW5nIHZhbHVlcw0KYGBge3J9DQojIFJlc2V0IGRhdGEgc2V0DQpjdl90b3RhbCA8LSBjdl90b3RhbFssIGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpXQ0KY3ZfdG90YWwkaGVhbHRoW2N2X3RvdGFsJGhlYWx0aCA9PSAiV2VpZ2VydCJdIDwtIE5BDQpjdl90b3RhbCRoZWFsdGggPC0gYXMubnVtZXJpYyhjdl90b3RhbCRoZWFsdGgpIC0gNA0KDQpjdl90b3RhbCRtZW4gPC0gYXMuZmFjdG9yKGN2X3RvdGFsJG1lbikNCmN2X3RvdGFsJGVkdWMzIDwtIGFzLmZhY3Rvcihjdl90b3RhbCRlZHVjMykNCg0KIyBpbnN0YWxsLnBhY2thZ2VzKCJtaWNlIikNCnJlcXVpcmUobWljZSkNCm1pY2U6OiBtZC5wYXR0ZXJuKGN2X3RvdGFsKQ0KYGBgDQoNClRoZSBmb2xsb3dpbmcgY2h1bmNrIHRvb2sgcXVpdGUgbG9uZyB0byBydW4gZXZlcnkgdGltZSB3aGVuIGJ1aWxkaW5nIG15IHdlYnNpdGUsIHNvIEkgbWFkZSBpdCB2aXNpYmxlIG9uIG15IHdlYnNpdGUsIGJ1dCBub3QgY2FsY3VsYXRlIGFueXRoaW5nLg0KYGBge30NCmltcCA8LSBtaWNlKGRhdGEgPSBjdl90b3RhbCwgbWV0aG9kID0gYygiIiwgIiIsICJjYXJ0IiwgImxvZ3JlZyIsICJwb2xyIiwgImNhcnQiLCAiIiwgIiIpKQ0KYXR0cmlidXRlcyhpbXApDQpwcmVkIDwtIGltcCRwcmVkDQpwcmVkWywgImlkIl0gPC0gMA0KcHJlZFssICJpZDIiXSA8LSAwDQpwcmVkWywgIndhdmUiXSA8LSAwDQpwcmVkDQoNCmltcCA8LSBtaWNlKGRhdGEgPSBjdl90b3RhbCwgbWV0aG9kID0gYygiIiwgIiIsICJjYXJ0IiwgImxvZ3JlZyIsICJwb2xyIiwgImNhcnQiLCAiIiwgIiIpLCBwcmVkID0gcHJlZCwgc2VlZCA9IDQ1NjIyKQ0KDQpzdW1tYXJ5KGN2X3RvdGFsKQ0Kc3VtbWFyeShjb21wbGV0ZShpbXApKQ0KDQpwbG90KGltcCkNCg0KbW9kZWxfaW1wIDwtIHdpdGgoaW1wLCBsbShhcy5udW1lcmljKGhlYWx0aCkgfiBtZW4gKyBhZ2UgKyBlZHVjMyArIHJlZ2lvbikpDQpwb29sX21vZGVsX2ltcCA8LSBwb29sKG1vZGVsX2ltcCkNCnN1bW1hcnkocG9vbF9tb2RlbF9pbXApDQpgYGANCg0KIyMjIEluIHRpZHkNCmBgYHtyfQ0KY3ZfdG90YWxfdGlkeSA8LSBjdl90b3RhbF90aWR5ICU+JQ0KICAgIG11dGF0ZShoZWFsdGggPSBuYV9pZihoZWFsdGgsIC0yKSwgaGVhbHRobiA9IGFzLm51bWVyaWMoaGVhbHRoKSAtIDQpDQpgYGANCg0KTGlzdHdpc2UgZGVsZXRpb24NCmBgYHtyfQ0KbW9kZWwyIDwtIGN2X3RvdGFsX3RpZHkgJT4lDQogICAgbXV0YXRlKGFjcm9zcyhjKGVkdWMzLCByZWdpb24pLCBhcy5mYWN0b3IpKSAlPiUNCiAgICBsbShmb3JtdWxhID0gaGVhbHRobiB+IG1lbiArIGFnZSArIGVkdWMzICsgcmVnaW9uKSAlPiUNCiAgICBzdW1tYXJ5KCkNCg0KbW9kZWwyDQpgYGANClJlcGxhY2luZyBtaXNzaW5nIHZhbHVlcw0KYGBge3J9DQpjdl90b3RhbF90aWR5MiA8LSBjdl90b3RhbF90aWR5ICU+JQ0KICAgIG11dGF0ZShhY3Jvc3MoZXZlcnl0aGluZygpLCBhcy5udW1lcmljKSwgbWVuMiA9IHJlcGxhY2VfbmEobWVuLCAyKSwgZWR1YzNiID0gcmVwbGFjZV9uYShlZHVjMywNCiAgICA0KSwgYWdlMiA9IHJlcGxhY2VfbmEoYWdlLCBtZWFuKGFnZSwgbmEucm0gPSBUUlVFKSksIGFnZV9taXMgPSBpZmVsc2UoaXMubmEoYWdlKSwgMSwgMCkpDQoNCm1vZGVsMyA8LSBjdl90b3RhbF90aWR5MiAlPiUNCiAgICBtdXRhdGVfYXQoYygibWVuMiIsICJlZHVjM2IiLCAicmVnaW9uIiksIGFzLmZhY3RvcikgJT4lDQogICAgbG0oZm9ybXVsYSA9IGhlYWx0aG4gfiBtZW4yICsgYWdlMiArIGFnZV9taXMgKyBlZHVjM2IgKyByZWdpb24pICU+JQ0KICAgIHN1bW1hcnkoKQ0KDQptb2RlbDMNCmBgYA0KSW1wdXRpbmcgbWlzc2luZyB2YWx1ZXMNClNhbWUgYXMgYWJvdmUsIHRoaXMgY2h1bmNrIHRvb2sgcXVpdGUgYSBiaXQgb2YgdGltZSB0byBydW4sIHRodXMgSSBtYWRlIHN1cmUgdGhhdCBSIGRvZXNuJ3QgcnVuIGl0IGV2ZXJ5IHRpbWUgSSB3YW50IHRvIGJ1aWxkIG15IHdlYnNpdGUuDQpgYGB7fQ0KcHJlZCA8LSBjdl90b3RhbF90aWR5ICU+JQ0KICBkcGx5cjo6c2VsZWN0KGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpKSAlPiUNCiAgbXV0YXRlX2FsbChhcy5udW1lcmljKSAlPiUNCiAgbXV0YXRlX2F0KGMoIm1lbiIsICJlZHVjMyIpLCBhcy5mYWN0b3IpICU+JQ0KICBtaWNlKG1ldGhvZCA9IGMoIiIsICIiLCAiY2FydCIsICJsb2dyZWciLCAicG9sciIsICJjYXJ0IiwgIiIsICIiKSkgJT4lDQogIHVuY2xhc3MoKSAlPiUgDQogIHBsdWNrKCJwcmVkaWN0b3JNYXRyaXgiKSAlPiUNCiAgYXMuZGF0YS5mcmFtZSgpICU+JSANCiAgbXV0YXRlX2F0KGMoImlkIiwgImlkMiIsICJhZ2UiKSwgZnVucyhyZWNvZGUoMSwgMCkpKSAlPiUgDQogIGFzLm1hdHJpeCgpDQoNCm1vZGVsX2ltcCA8LSBjdl90b3RhbF90aWR5ICU+JQ0KICBkcGx5cjo6c2VsZWN0KGMoImlkIiwgImlkMiIsICJhZ2UiLCAibWVuIiwgImVkdWMzIiwgImhlYWx0aCIsICJyZWdpb24iLCAid2F2ZSIpKSAlPiUNCiAgbXV0YXRlX2FsbChhcy5udW1lcmljKSAlPiUNCiAgbXV0YXRlX2F0KGMoIm1lbiIsICJlZHVjMyIpLCBhcy5mYWN0b3IpICU+JQ0KICBtaWNlKG1ldGhvZCA9IGMoIiIsICIiLCAiY2FydCIsICJsb2dyZWciLCAicG9sciIsICJjYXJ0IiwgIiIsICIiKSwgcHJlZCA9IHByZWQsIHNlZWQgPSA0NTYyMikgJT4lDQogIHdpdGgobG0oYXMubnVtZXJpYyhoZWFsdGgpIH4gbWVuICsgYWdlICsgZWR1YzMgKyByZWdpb24pKSAlPiUNCiAgcG9vbCgpDQoNCnN1bW1hcnkobW9kZWxfaW1wKQ0KYGBgDQo=</div>
 
 
 </div>

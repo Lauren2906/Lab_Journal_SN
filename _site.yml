@@ -38,8 +38,9 @@ navbar:
         href: methods.html
       - text: "Conclusion and discussion"
         href: conclusion_discussion.html
-
-
+    - text: "Code final assignment"
+      href: code_final.html
+      
   right:
   - icon: fab fa-github
     href: https://lauren2906.github.io/Lab_Journal_SN/

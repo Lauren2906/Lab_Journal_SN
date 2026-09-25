@@ -4,4 +4,4 @@ author: "Lauren Dirix"
 bibliography: references.bib
 ---
 
-# Week 4 - XXX
+# Preparation before class

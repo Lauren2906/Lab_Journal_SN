@@ -1,0 +1,6 @@
+---
+title: "Code final assignment"
+author: "Lauren"
+date: "2026-09-25"
+output: html_document
+---
