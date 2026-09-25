@@ -39,6 +39,10 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -430,9 +434,357 @@ div.tocify {
 </div>
 
 
+<p>This webpage combines all relevant code from all the weeks that I
+used for my final assignment, so it is all easily findable in one place,
+rather than scattered around in all pages for every separate week.</p>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', '#8B0000', '1', 'Copy code', 'Copied!');
+</script>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<div id="preparation" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Preparation</h1>
+<p>Necessary packages</p>
+<pre class="r"><code>library(knitr)
+library(styler)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────
+## ✔ dplyr     1.2.1     ✔ readr     2.2.0
+## ✔ forcats   1.0.1     ✔ stringr   1.6.0
+## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+## ✔ purrr     1.2.2     
+## ── Conflicts ───────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(installr)</code></pre>
+<pre><code>## 
+## Welcome to installr version 0.23.4
+## 
+## More information is available on the installr project website:
+## https://github.com/talgalili/installr/
+## 
+## Contact: &lt;tal.galili@gmail.com&gt;
+## Suggestions and bug-reports can be submitted at: https://github.com/talgalili/installr/issues
+## 
+##          To suppress this message use:
+##          suppressPackageStartupMessages(library(installr))</code></pre>
+<pre class="r"><code>library(foreign)
+library(network)</code></pre>
+<pre><code>## 
+## &#39;network&#39; 1.20.0 (2026-02-06), part of the Statnet Project
+## * &#39;news(package=&quot;network&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;network&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre class="r"><code>library(RSiena)
+library(RsienaTwoStep)</code></pre>
+<pre><code>## Loading required package: foreach
+## 
+## Attaching package: &#39;foreach&#39;
+## 
+## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     accumulate, when</code></pre>
+<pre class="r"><code>library(igraph)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;
+## 
+## The following objects are masked from &#39;package:network&#39;:
+## 
+##     %c%, %s%, add.edges, add.vertices, delete.edges, delete.vertices,
+##     get.edge.attribute, get.edges, get.vertex.attribute, is.bipartite,
+##     is.directed, list.edge.attributes, list.vertex.attributes,
+##     set.edge.attribute, set.vertex.attribute
+## 
+## The following objects are masked from &#39;package:lubridate&#39;:
+## 
+##     %--%, union
+## 
+## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     as_data_frame, groups, union
+## 
+## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     compose, simplify
+## 
+## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     crossing
+## 
+## The following object is masked from &#39;package:tibble&#39;:
+## 
+##     as_data_frame
+## 
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum
+## 
+## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>library(devtools)</code></pre>
+<pre><code>## Loading required package: usethis</code></pre>
+<p><br></p>
+<p>Load in data</p>
+<pre class="r"><code>load(&quot;./data/IndividualCharacteristics.RData&quot;)
+load(&quot;./data/NetworkCharacteristics.RData&quot;)</code></pre>
+</div>
+<div id="create-network-matrices" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Create network
+matrices</h1>
+<pre class="r"><code># view(hanging[[1]])
+hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t1)
+strong_netw_t1 &lt;- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]&lt;-NA
+class(strong_netw_t1)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t1)
 
+hanging_df_t2 &lt;- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t2)
+strong_netw_t2 &lt;- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]&lt;-NA
+class(strong_netw_t2)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t2)</code></pre>
+<p><br> # Descriptive statistics ## Density</p>
+<pre class="r"><code># Wave 1
+netw1 &lt;- as.network(strong_netw_t1)
+network.density(netw1)</code></pre>
+<pre><code>## [1] 0.02720386</code></pre>
+<pre class="r"><code># 0.02720386
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvZGUgZmluYWwgYXNzaWdubWVudCINCmF1dGhvcjogIkxhdXJlbiINCmRhdGU6ICIyMDI2LTA5LTI1Ig0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg==</div>
+# Wave 2
+netw2 &lt;- as.network(strong_netw_t2)
+network.density(netw2)</code></pre>
+<pre><code>## [1] 0.01859504</code></pre>
+<pre class="r"><code># 0.01859504</code></pre>
+<div id="reciprocity" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Reciprocity</h2>
+<pre class="r"><code>#Wave 1
+hangingw1_nona &lt;- na_if(hanging[[1]][[1]], 9)
+rowhangingw1 &lt;- rowSums(is.na(hangingw1_nona)) == nrow(hangingw1_nona)
+colhangingw1 &lt;- colSums(is.na(hangingw1_nona)) == ncol(hangingw1_nona)
+hangingw1_nona[which(rowhangingw1) , ] &lt;- 0
+
+g_strong_t1 &lt;- igraph:: graph_from_adjacency_matrix(hangingw1_nona, mode = &quot;directed&quot;)
+
+reciprocity(g_strong_t1, ignore.loops = TRUE, mode = c(&quot;default&quot;, &quot;ratio&quot;))</code></pre>
+<pre><code>## [1] 0.4708861</code></pre>
+<pre class="r"><code># 0.4708861
+
+# Wave 2
+hangingw2_nona &lt;- na_if(hanging[[1]][[2]], 9)
+rowhangingw2 &lt;- rowSums(is.na(hangingw2_nona)) == nrow(hangingw2_nona)
+colhangingw2 &lt;- colSums(is.na(hangingw2_nona)) == ncol(hangingw2_nona)
+hangingw2_nona[which(rowhangingw2) , ] &lt;- 0
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(hangingw2_nona, mode = &quot;directed&quot;)
+
+reciprocity(g_strong_t2, ignore.loops = TRUE, mode = c(&quot;default&quot;, &quot;ratio&quot;))</code></pre>
+<pre><code>## [1] 0.4444444</code></pre>
+<pre class="r"><code># 0.4444444</code></pre>
+</div>
+<div id="dyad-configurations" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Dyad
+configurations</h2>
+<pre class="r"><code># Wave 1
+dyad_census(g_strong_t1)</code></pre>
+<pre><code>## $mut
+## [1] 93
+## 
+## $asym
+## [1] 209
+## 
+## $null
+## [1] 6958</code></pre>
+<pre class="r"><code># Mutual ties: 93
+# Asymmetrical ties: 209
+# No tie: 6958
+
+# Wave 2
+dyad_census(g_strong_t2)</code></pre>
+<pre><code>## $mut
+## [1] 60
+## 
+## $asym
+## [1] 150
+## 
+## $null
+## [1] 7050</code></pre>
+<pre class="r"><code># Mutual ties: 60
+# Asymmetrical ties: 150
+# No tie: 7050</code></pre>
+</div>
+<div id="triad-configurations" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Triad
+configurations</h2>
+<pre class="r"><code># Wave 1
+triad_census(g_strong_t1)</code></pre>
+<pre><code>##  [1] 253808  22549  10101    235    243    219    247    254     61      2
+## [11]     80     40     54      2     46     39</code></pre>
+<pre class="r"><code># 003 = 253808
+# 012 = 22549
+# 102 = 10101
+# 021D = 235
+# 021U = 243
+# 021C = 219
+# 111D = 247
+# 111U = 254
+# 030T = 61
+# 030C = 2
+# 201 = 80
+# 120D = 40
+# 120U = 54
+# 120C = 2
+# 210 = 46
+# 300 = 39
+
+# Wave 2
+triad_census(g_strong_t2)</code></pre>
+<pre><code>##  [1] 263853  16659   6713    133    125    123     88    132     30      0
+## [11]     46      9     39      2     19      9</code></pre>
+<pre class="r"><code># 003 = 263853
+# 012 = 16659
+# 102 = 6713
+# 021D = 133
+# 021U = 125
+# 021C = 123
+# 111D = 88
+# 111U = 132
+# 030T = 30
+# 030C = 0
+# 201 = 46
+# 120D = 9
+# 120U = 39
+# 120C = 2
+# 210 = 19
+# 300 = 9</code></pre>
+</div>
+<div id="transitivity" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Transitivity</h2>
+<pre class="r"><code># Wave 1
+transitivity(g_strong_t1)</code></pre>
+<pre><code>## [1] 0.3641791</code></pre>
+<pre class="r"><code># 0.3641791
+
+# Wave 2
+transitivity(g_strong_t2)</code></pre>
+<pre><code>## [1] 0.3336766</code></pre>
+<pre class="r"><code># 0.3336766</code></pre>
+</div>
+<div id="path-length" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Path length</h2>
+<pre class="r"><code># Wave 1
+mean((ego_size(g_strong_t1, order = 2, mode = &quot;out&quot;) - 1)/vcount(g_strong_t1))</code></pre>
+<pre><code>## [1] 0.07820504</code></pre>
+<pre class="r"><code># 0.07820504
+
+# Wave 2
+mean((ego_size(g_strong_t2, order = 2, mode = &quot;out&quot;) - 1)/vcount(g_strong_t2))</code></pre>
+<pre><code>## [1] 0.0458302</code></pre>
+<pre class="r"><code># 0.0458302</code></pre>
+</div>
+<div id="segregation" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Segregation</h2>
+<p>To be calculated when I get my dependent variable of interest :)</p>
+<p><br></p>
+</div>
+</div>
+<div id="data-visualisation" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Data visualisation</h1>
+<div id="t1" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> T1</h2>
+<p>Create an igraph object</p>
+<pre class="r"><code>copy_strong_netw_t1 &lt;- strong_netw_t1
+copy_strong_netw_t1[is.na(copy_strong_netw_t1)] &lt;- 0 
+
+g_strong_t1 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = &quot;directed&quot;)
+plot(g_strong_t1)</code></pre>
+<p><img src="code_final_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
+<p><br></p>
+<div id="simple-representation-of-the-network" class="section level3"
+number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Simple
+representation of the network</h3>
+<pre class="r"><code>pretty_graph_t1 &lt;- simplify(g_strong_t1)
+
+V(pretty_graph_t1)$size = betweenness(pretty_graph_t1, normalized = T, directed = T) * 250 + 50
+
+plot(pretty_graph_t1,
+     vertex.color = &quot;pink&quot;,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label.color = &quot;black&quot;,
+     vertex.label.family = &quot;Helvetica&quot;,
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-10,10))</code></pre>
+<pre><code>## Warning in text.default(x0, y0, labels = lbl, col = col, family = fam, font =
+## fnt, : font family not found in Windows font database</code></pre>
+<p><img src="code_final_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
+</div>
+<div id="node-colours-based-on-civil-service-attitudes"
+class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Node colours based
+on civil service attitudes</h3>
+<p><br></p>
+</div>
+</div>
+<div id="t2" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> T2</h2>
+<p>Create an igraph object</p>
+<pre class="r"><code>copy_strong_netw_t2 &lt;- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] &lt;- 0 
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = &quot;directed&quot;)
+plot(g_strong_t2)</code></pre>
+<p><img src="code_final_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" /></p>
+<p><br></p>
+<div id="simple-representation-of-the-network-1" class="section level3"
+number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Simple
+representation of the network</h3>
+<pre class="r"><code>pretty_graph_t2 &lt;- simplify(g_strong_t2)
+
+V(pretty_graph_t2)$size = betweenness(pretty_graph_t2, normalized = T, directed = T) * 250 + 50
+
+plot(pretty_graph_t2,
+     vertex.color = &quot;pink&quot;,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label.color = &quot;black&quot;,
+     vertex.label.family = &quot;Helvetica&quot;,
+     vertex.label.cex = 0.3,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))</code></pre>
+<pre><code>## Warning in text.default(x0, y0, labels = lbl, col = col, family = fam, font =
+## fnt, : font family not found in Windows font database</code></pre>
+<p><img src="code_final_files/figure-html/unnamed-chunk-14-1.png" alt="" width="672" />
+### Node colours based on civil service attitudes</p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvZGUgZmluYWwgYXNzaWdubWVudCINCmF1dGhvcjogIkxhdXJlbiINCmRhdGU6ICIyMDI2LTA5LTI1Ig0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KVGhpcyB3ZWJwYWdlIGNvbWJpbmVzIGFsbCByZWxldmFudCBjb2RlIGZyb20gYWxsIHRoZSB3ZWVrcyB0aGF0IEkgdXNlZCBmb3IgbXkgZmluYWwgYXNzaWdubWVudCwgc28gaXQgaXMgYWxsIGVhc2lseSBmaW5kYWJsZSBpbiBvbmUgcGxhY2UsIHJhdGhlciB0aGFuIHNjYXR0ZXJlZCBhcm91bmQgaW4gYWxsIHBhZ2VzIGZvciBldmVyeSBzZXBhcmF0ZSB3ZWVrLg0KDQpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0NCmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpDQprbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykNCmtsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQ0KYGBgDQoNCiMgUHJlcGFyYXRpb24NCk5lY2Vzc2FyeSBwYWNrYWdlcw0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShzdHlsZXIpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkoaW5zdGFsbHIpDQpsaWJyYXJ5KGZvcmVpZ24pDQpsaWJyYXJ5KG5ldHdvcmspDQpsaWJyYXJ5KFJTaWVuYSkNCmxpYnJhcnkoUnNpZW5hVHdvU3RlcCkNCmxpYnJhcnkoaWdyYXBoKQ0KbGlicmFyeShkZXZ0b29scykNCmBgYA0KDQo8YnI+DQoNCkxvYWQgaW4gZGF0YQ0KYGBge3J9DQpsb2FkKCIuL2RhdGEvSW5kaXZpZHVhbENoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvTmV0d29ya0NoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpgYGANCg0KIyBDcmVhdGUgbmV0d29yayBtYXRyaWNlcw0KYGBge3J9DQojIHZpZXcoaGFuZ2luZ1tbMV1dKQ0KaGFuZ2luZ19kZl90MSA8LSBhcy5kYXRhLmZyYW1lKGhhbmdpbmdbWzFdXVsxXSkNCmNsYXNzKGhhbmdpbmdfZGZfdDEpDQojIHZpZXcoaGFuZ2luZ19kZl90MSkNCnN0cm9uZ19uZXR3X3QxIDwtIGRhdGEubWF0cml4KGhhbmdpbmdfZGZfdDEpDQpzdHJvbmdfbmV0d190MVtzdHJvbmdfbmV0d190MT09OV08LU5BDQpjbGFzcyhzdHJvbmdfbmV0d190MSkNCiMgdmlldyhzdHJvbmdfbmV0d190MSkNCg0KaGFuZ2luZ19kZl90MiA8LSBhcy5kYXRhLmZyYW1lKGhhbmdpbmdbWzFdXVsyXSkNCmNsYXNzKGhhbmdpbmdfZGZfdDIpDQojIHZpZXcoaGFuZ2luZ19kZl90MikNCnN0cm9uZ19uZXR3X3QyIDwtIGRhdGEubWF0cml4KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MltzdHJvbmdfbmV0d190Mj09OV08LU5BDQpjbGFzcyhzdHJvbmdfbmV0d190MikNCiMgdmlldyhzdHJvbmdfbmV0d190MikNCmBgYA0KDQo8YnI+DQojIERlc2NyaXB0aXZlIHN0YXRpc3RpY3MNCiMjIERlbnNpdHkNCmBgYHtyfQ0KIyBXYXZlIDENCm5ldHcxIDwtIGFzLm5ldHdvcmsoc3Ryb25nX25ldHdfdDEpDQpuZXR3b3JrLmRlbnNpdHkobmV0dzEpDQojIDAuMDI3MjAzODYNCg0KIyBXYXZlIDINCm5ldHcyIDwtIGFzLm5ldHdvcmsoc3Ryb25nX25ldHdfdDIpDQpuZXR3b3JrLmRlbnNpdHkobmV0dzIpDQojIDAuMDE4NTk1MDQNCmBgYA0KIyMgUmVjaXByb2NpdHkNCmBgYHtyfQ0KI1dhdmUgMQ0KaGFuZ2luZ3cxX25vbmEgPC0gbmFfaWYoaGFuZ2luZ1tbMV1dW1sxXV0sIDkpDQpyb3doYW5naW5ndzEgPC0gcm93U3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5yb3coaGFuZ2luZ3cxX25vbmEpDQpjb2xoYW5naW5ndzEgPC0gY29sU3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5jb2woaGFuZ2luZ3cxX25vbmEpDQpoYW5naW5ndzFfbm9uYVt3aGljaChyb3doYW5naW5ndzEpICwgXSA8LSAwDQoNCmdfc3Ryb25nX3QxIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChoYW5naW5ndzFfbm9uYSwgbW9kZSA9ICJkaXJlY3RlZCIpDQoNCnJlY2lwcm9jaXR5KGdfc3Ryb25nX3QxLCBpZ25vcmUubG9vcHMgPSBUUlVFLCBtb2RlID0gYygiZGVmYXVsdCIsICJyYXRpbyIpKQ0KIyAwLjQ3MDg4NjENCg0KIyBXYXZlIDINCmhhbmdpbmd3Ml9ub25hIDwtIG5hX2lmKGhhbmdpbmdbWzFdXVtbMl1dLCA5KQ0Kcm93aGFuZ2luZ3cyIDwtIHJvd1N1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBucm93KGhhbmdpbmd3Ml9ub25hKQ0KY29saGFuZ2luZ3cyIDwtIGNvbFN1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBuY29sKGhhbmdpbmd3Ml9ub25hKQ0KaGFuZ2luZ3cyX25vbmFbd2hpY2gocm93aGFuZ2luZ3cyKSAsIF0gPC0gMA0KDQpnX3N0cm9uZ190MiA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoaGFuZ2luZ3cyX25vbmEsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KDQpyZWNpcHJvY2l0eShnX3N0cm9uZ190MiwgaWdub3JlLmxvb3BzID0gVFJVRSwgbW9kZSA9IGMoImRlZmF1bHQiLCAicmF0aW8iKSkNCiMgMC40NDQ0NDQ0DQpgYGANCg0KIyMgRHlhZCBjb25maWd1cmF0aW9ucw0KYGBge3J9DQojIFdhdmUgMQ0KZHlhZF9jZW5zdXMoZ19zdHJvbmdfdDEpDQojIE11dHVhbCB0aWVzOiA5Mw0KIyBBc3ltbWV0cmljYWwgdGllczogMjA5DQojIE5vIHRpZTogNjk1OA0KDQojIFdhdmUgMg0KZHlhZF9jZW5zdXMoZ19zdHJvbmdfdDIpDQojIE11dHVhbCB0aWVzOiA2MA0KIyBBc3ltbWV0cmljYWwgdGllczogMTUwDQojIE5vIHRpZTogNzA1MA0KYGBgDQojIyBUcmlhZCBjb25maWd1cmF0aW9ucw0KYGBge3J9DQojIFdhdmUgMQ0KdHJpYWRfY2Vuc3VzKGdfc3Ryb25nX3QxKQ0KIyAwMDMgPSAyNTM4MDgNCiMgMDEyID0gMjI1NDkNCiMgMTAyID0gMTAxMDENCiMgMDIxRCA9IDIzNQ0KIyAwMjFVID0gMjQzDQojIDAyMUMgPSAyMTkNCiMgMTExRCA9IDI0Nw0KIyAxMTFVID0gMjU0DQojIDAzMFQgPSA2MQ0KIyAwMzBDID0gMg0KIyAyMDEgPSA4MA0KIyAxMjBEID0gNDANCiMgMTIwVSA9IDU0DQojIDEyMEMgPSAyDQojIDIxMCA9IDQ2DQojIDMwMCA9IDM5DQoNCiMgV2F2ZSAyDQp0cmlhZF9jZW5zdXMoZ19zdHJvbmdfdDIpDQojIDAwMyA9IDI2Mzg1Mw0KIyAwMTIgPSAxNjY1OQ0KIyAxMDIgPSA2NzEzDQojIDAyMUQgPSAxMzMNCiMgMDIxVSA9IDEyNQ0KIyAwMjFDID0gMTIzDQojIDExMUQgPSA4OA0KIyAxMTFVID0gMTMyDQojIDAzMFQgPSAzMA0KIyAwMzBDID0gMA0KIyAyMDEgPSA0Ng0KIyAxMjBEID0gOQ0KIyAxMjBVID0gMzkNCiMgMTIwQyA9IDINCiMgMjEwID0gMTkNCiMgMzAwID0gOQ0KYGBgDQojIyBUcmFuc2l0aXZpdHkNCmBgYHtyfQ0KIyBXYXZlIDENCnRyYW5zaXRpdml0eShnX3N0cm9uZ190MSkNCiMgMC4zNjQxNzkxDQoNCiMgV2F2ZSAyDQp0cmFuc2l0aXZpdHkoZ19zdHJvbmdfdDIpDQojIDAuMzMzNjc2Ng0KYGBgDQojIyBQYXRoIGxlbmd0aA0KYGBge3J9DQojIFdhdmUgMQ0KbWVhbigoZWdvX3NpemUoZ19zdHJvbmdfdDEsIG9yZGVyID0gMiwgbW9kZSA9ICJvdXQiKSAtIDEpL3Zjb3VudChnX3N0cm9uZ190MSkpDQojIDAuMDc4MjA1MDQNCg0KIyBXYXZlIDINCm1lYW4oKGVnb19zaXplKGdfc3Ryb25nX3QyLCBvcmRlciA9IDIsIG1vZGUgPSAib3V0IikgLSAxKS92Y291bnQoZ19zdHJvbmdfdDIpKQ0KIyAwLjA0NTgzMDINCmBgYA0KIyMgU2VncmVnYXRpb24NClRvIGJlIGNhbGN1bGF0ZWQgd2hlbiBJIGdldCBteSBkZXBlbmRlbnQgdmFyaWFibGUgb2YgaW50ZXJlc3QgOikNCmBgYHtyfQ0KDQpgYGANCg0KPGJyPg0KDQojIERhdGEgdmlzdWFsaXNhdGlvbg0KIyMgVDENCkNyZWF0ZSBhbiBpZ3JhcGggb2JqZWN0DQpgYGB7cn0NCmNvcHlfc3Ryb25nX25ldHdfdDEgPC0gc3Ryb25nX25ldHdfdDENCmNvcHlfc3Ryb25nX25ldHdfdDFbaXMubmEoY29weV9zdHJvbmdfbmV0d190MSldIDwtIDAgDQoNCmdfc3Ryb25nX3QxIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChjb3B5X3N0cm9uZ19uZXR3X3QxLCBtb2RlID0gImRpcmVjdGVkIikNCnBsb3QoZ19zdHJvbmdfdDEpDQpgYGANCg0KPGJyPg0KDQojIyMgU2ltcGxlIHJlcHJlc2VudGF0aW9uIG9mIHRoZSBuZXR3b3JrDQpgYGB7cn0NCnByZXR0eV9ncmFwaF90MSA8LSBzaW1wbGlmeShnX3N0cm9uZ190MSkNCg0KVihwcmV0dHlfZ3JhcGhfdDEpJHNpemUgPSBiZXR3ZWVubmVzcyhwcmV0dHlfZ3JhcGhfdDEsIG5vcm1hbGl6ZWQgPSBULCBkaXJlY3RlZCA9IFQpICogMjUwICsgNTANCg0KcGxvdChwcmV0dHlfZ3JhcGhfdDEsDQogICAgIHZlcnRleC5jb2xvciA9ICJwaW5rIiwNCiAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImdyYXkiLA0KICAgICB2ZXJ0ZXgubGFiZWwuY29sb3IgPSAiYmxhY2siLA0KICAgICB2ZXJ0ZXgubGFiZWwuZmFtaWx5ID0gIkhlbHZldGljYSIsDQogICAgIHZlcnRleC5sYWJlbC5jZXggPSAwLjMsDQogICAgIHZlcnRleC5sYWJlbC5kaXN0ID0gMC41LCANCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMDc1LA0KICAgICBtYXJnaW4gPSAwLjAxLA0KICAgICByZXNjYWxlID0gRkFMU0UsIHlsaW0gPSBjKC0xMCwxMCkpDQpgYGANCg0KIyMjIE5vZGUgY29sb3VycyBiYXNlZCBvbiBjaXZpbCBzZXJ2aWNlIGF0dGl0dWRlcw0KDQo8YnI+DQoNCiMjIFQyDQpDcmVhdGUgYW4gaWdyYXBoIG9iamVjdA0KYGBge3J9DQpjb3B5X3N0cm9uZ19uZXR3X3QyIDwtIHN0cm9uZ19uZXR3X3QyDQpjb3B5X3N0cm9uZ19uZXR3X3QyW2lzLm5hKGNvcHlfc3Ryb25nX25ldHdfdDIpXSA8LSAwIA0KDQpnX3N0cm9uZ190MiA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoY29weV9zdHJvbmdfbmV0d190MiwgbW9kZSA9ICJkaXJlY3RlZCIpDQpwbG90KGdfc3Ryb25nX3QyKQ0KYGBgDQoNCjxicj4NCg0KIyMjIFNpbXBsZSByZXByZXNlbnRhdGlvbiBvZiB0aGUgbmV0d29yaw0KYGBge3J9DQpwcmV0dHlfZ3JhcGhfdDIgPC0gc2ltcGxpZnkoZ19zdHJvbmdfdDIpDQoNClYocHJldHR5X2dyYXBoX3QyKSRzaXplID0gYmV0d2Vlbm5lc3MocHJldHR5X2dyYXBoX3QyLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDI1MCArIDUwDQoNCnBsb3QocHJldHR5X2dyYXBoX3QyLA0KICAgICB2ZXJ0ZXguY29sb3IgPSAicGluayIsDQogICAgIHZlcnRleC5mcmFtZS5jb2xvciA9ICJncmF5IiwNCiAgICAgdmVydGV4LmxhYmVsLmNvbG9yID0gImJsYWNrIiwNCiAgICAgdmVydGV4LmxhYmVsLmZhbWlseSA9ICJIZWx2ZXRpY2EiLA0KICAgICB2ZXJ0ZXgubGFiZWwuY2V4ID0gMC4zLA0KICAgICB2ZXJ0ZXgubGFiZWwuZGlzdCA9IDAuNSwgDQogICAgIGVkZ2UuY3VydmVkID0gMC4yLA0KICAgICBlZGdlLmFycm93LnNpemUgPSAwLjA3NSwNCiAgICAgbWFyZ2luID0gMC4wMSwNCiAgICAgcmVzY2FsZSA9IEZBTFNFLCB5bGltID0gYygtOSw5KSkNCmBgYA0KIyMjIE5vZGUgY29sb3VycyBiYXNlZCBvbiBjaXZpbCBzZXJ2aWNlIGF0dGl0dWRlcw0K</div>
 
 
 </div>

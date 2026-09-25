@@ -431,9 +431,194 @@ div.tocify {
 <div id="preparation-before-class" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Preparation before
 class</h1>
+<pre class="r"><code>library(&quot;network&quot;)
+library(&quot;sna&quot;)</code></pre>
+<pre><code>## sna: Tools for Social Network Analysis
+## Version 2.8 created on 2024-09-07.
+## copyright (c) 2005, Carter T. Butts, University of California-Irvine
+##  For citation information, type citation(&quot;sna&quot;).
+##  Type help(package=&quot;sna&quot;) to get started.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;sna&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:igraph&#39;:
+## 
+##     betweenness, bonpow, closeness, components, degree, dyad.census, evcent, hierarchy,
+##     is.connected, neighborhood, triad.census</code></pre>
+<pre class="r"><code>load(&quot;./data/IndividualCharacteristics.RData&quot;)
+load(&quot;./data/NetworkCharacteristics.RData&quot;)
+
+# view(hanging[[1]])
+hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t1)
+strong_netw_t1 &lt;- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]&lt;-NA
+class(strong_netw_t1)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t1)
+
+hanging_df_t2 &lt;- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t2)
+strong_netw_t2 &lt;- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]&lt;-NA
+class(strong_netw_t2)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t2)</code></pre>
+<p><br></p>
+<div id="descriptive-statistics" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Descriptive
+statistics</h2>
+<div id="density" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Density</h3>
+<pre class="r"><code># Wave 1
+netw1 &lt;- as.network(strong_netw_t1)
+network.density(netw1)</code></pre>
+<pre><code>## [1] 0.02720386</code></pre>
+<pre class="r"><code># 0.02720386
+
+# Wave 2
+netw2 &lt;- as.network(strong_netw_t2)
+network.density(netw2)</code></pre>
+<pre><code>## [1] 0.01859504</code></pre>
+<pre class="r"><code># 0.01859504</code></pre>
+</div>
+<div id="reciprocity" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Reciprocity</h3>
+<pre class="r"><code>#Wave 1
+hangingw1_nona &lt;- na_if(hanging[[1]][[1]], 9)
+rowhangingw1 &lt;- rowSums(is.na(hangingw1_nona)) == nrow(hangingw1_nona)
+colhangingw1 &lt;- colSums(is.na(hangingw1_nona)) == ncol(hangingw1_nona)
+hangingw1_nona[which(rowhangingw1) , ] &lt;- 0
+
+g_strong_t1 &lt;- igraph:: graph_from_adjacency_matrix(hangingw1_nona, mode = &quot;directed&quot;)
+
+reciprocity(g_strong_t1, ignore.loops = TRUE, mode = c(&quot;default&quot;, &quot;ratio&quot;))</code></pre>
+<pre><code>## [1] 0.4708861</code></pre>
+<pre class="r"><code># 0.4708861
+
+# Wave 2
+hangingw2_nona &lt;- na_if(hanging[[1]][[2]], 9)
+rowhangingw2 &lt;- rowSums(is.na(hangingw2_nona)) == nrow(hangingw2_nona)
+colhangingw2 &lt;- colSums(is.na(hangingw2_nona)) == ncol(hangingw2_nona)
+hangingw2_nona[which(rowhangingw2) , ] &lt;- 0
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(hangingw2_nona, mode = &quot;directed&quot;)
+
+reciprocity(g_strong_t2, ignore.loops = TRUE, mode = c(&quot;default&quot;, &quot;ratio&quot;))</code></pre>
+<pre><code>## [1] 0.4444444</code></pre>
+<pre class="r"><code># 0.4444444</code></pre>
+</div>
+<div id="dyad-configurations" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Dyad
+configurations</h3>
+<pre class="r"><code># Wave 1
+dyad_census(g_strong_t1)</code></pre>
+<pre><code>## $mut
+## [1] 93
+## 
+## $asym
+## [1] 209
+## 
+## $null
+## [1] 6958</code></pre>
+<pre class="r"><code># Mutual ties: 93
+# Asymmetrical ties: 209
+# No tie: 6958
+
+# Wave 2
+dyad_census(g_strong_t2)</code></pre>
+<pre><code>## $mut
+## [1] 60
+## 
+## $asym
+## [1] 150
+## 
+## $null
+## [1] 7050</code></pre>
+<pre class="r"><code># Mutual ties: 60
+# Asymmetrical ties: 150
+# No tie: 7050</code></pre>
+</div>
+<div id="triad-configurations" class="section level3" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Triad
+configurations</h3>
+<pre class="r"><code># Wave 1
+triad_census(g_strong_t1)</code></pre>
+<pre><code>##  [1] 253808  22549  10101    235    243    219    247    254     61      2     80     40     54
+## [14]      2     46     39</code></pre>
+<pre class="r"><code># 003 = 253808
+# 012 = 22549
+# 102 = 10101
+# 021D = 235
+# 021U = 243
+# 021C = 219
+# 111D = 247
+# 111U = 254
+# 030T = 61
+# 030C = 2
+# 201 = 80
+# 120D = 40
+# 120U = 54
+# 120C = 2
+# 210 = 46
+# 300 = 39
+
+# Wave 2
+triad_census(g_strong_t2)</code></pre>
+<pre><code>##  [1] 263853  16659   6713    133    125    123     88    132     30      0     46      9     39
+## [14]      2     19      9</code></pre>
+<pre class="r"><code># 003 = 263853
+# 012 = 16659
+# 102 = 6713
+# 021D = 133
+# 021U = 125
+# 021C = 123
+# 111D = 88
+# 111U = 132
+# 030T = 30
+# 030C = 0
+# 201 = 46
+# 120D = 9
+# 120U = 39
+# 120C = 2
+# 210 = 19
+# 300 = 9</code></pre>
+</div>
+<div id="transitivity" class="section level3" number="1.1.5">
+<h3><span class="header-section-number">1.1.5</span> Transitivity</h3>
+<pre class="r"><code># Wave 1
+transitivity(g_strong_t1)</code></pre>
+<pre><code>## [1] 0.3641791</code></pre>
+<pre class="r"><code># 0.3641791
+
+# Wave 2
+transitivity(g_strong_t2)</code></pre>
+<pre><code>## [1] 0.3336766</code></pre>
+<pre class="r"><code># 0.3336766</code></pre>
+</div>
+<div id="path-length" class="section level3" number="1.1.6">
+<h3><span class="header-section-number">1.1.6</span> Path length</h3>
+<pre class="r"><code># Wave 1
+mean((ego_size(g_strong_t1, order = 2, mode = &quot;out&quot;) - 1)/vcount(g_strong_t1))</code></pre>
+<pre><code>## [1] 0.07820504</code></pre>
+<pre class="r"><code># 0.07820504
+
+# Wave 2
+mean((ego_size(g_strong_t2, order = 2, mode = &quot;out&quot;) - 1)/vcount(g_strong_t2))</code></pre>
+<pre><code>## [1] 0.0458302</code></pre>
+<pre class="r"><code># 0.0458302</code></pre>
+</div>
+<div id="segregation" class="section level3" number="1.1.7">
+<h3><span class="header-section-number">1.1.7</span> Segregation</h3>
+<p>To be calculated when I get my dependent variable of interest :)</p>
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0KYGBge3J9DQpsaWJyYXJ5KCJuZXR3b3JrIikNCmxpYnJhcnkoInNuYSIpDQoNCmxvYWQoIi4vZGF0YS9JbmRpdmlkdWFsQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9OZXR3b3JrQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCg0KIyB2aWV3KGhhbmdpbmdbWzFdXSkNCmhhbmdpbmdfZGZfdDEgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMV0pDQpjbGFzcyhoYW5naW5nX2RmX3QxKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDEpDQpzdHJvbmdfbmV0d190MSA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QxKQ0Kc3Ryb25nX25ldHdfdDFbc3Ryb25nX25ldHdfdDE9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDEpDQojIHZpZXcoc3Ryb25nX25ldHdfdDEpDQoNCmhhbmdpbmdfZGZfdDIgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMl0pDQpjbGFzcyhoYW5naW5nX2RmX3QyKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MiA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QyKQ0Kc3Ryb25nX25ldHdfdDJbc3Ryb25nX25ldHdfdDI9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDIpDQojIHZpZXcoc3Ryb25nX25ldHdfdDIpDQpgYGANCg0KPGJyPg0KDQojIyBEZXNjcmlwdGl2ZSBzdGF0aXN0aWNzDQojIyMgRGVuc2l0eQ0KYGBge3J9DQojIFdhdmUgMQ0KbmV0dzEgPC0gYXMubmV0d29yayhzdHJvbmdfbmV0d190MSkNCm5ldHdvcmsuZGVuc2l0eShuZXR3MSkNCiMgMC4wMjcyMDM4Ng0KDQojIFdhdmUgMg0KbmV0dzIgPC0gYXMubmV0d29yayhzdHJvbmdfbmV0d190MikNCm5ldHdvcmsuZGVuc2l0eShuZXR3MikNCiMgMC4wMTg1OTUwNA0KYGBgDQojIyMgUmVjaXByb2NpdHkNCmBgYHtyfQ0KI1dhdmUgMQ0KaGFuZ2luZ3cxX25vbmEgPC0gbmFfaWYoaGFuZ2luZ1tbMV1dW1sxXV0sIDkpDQpyb3doYW5naW5ndzEgPC0gcm93U3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5yb3coaGFuZ2luZ3cxX25vbmEpDQpjb2xoYW5naW5ndzEgPC0gY29sU3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5jb2woaGFuZ2luZ3cxX25vbmEpDQpoYW5naW5ndzFfbm9uYVt3aGljaChyb3doYW5naW5ndzEpICwgXSA8LSAwDQoNCmdfc3Ryb25nX3QxIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChoYW5naW5ndzFfbm9uYSwgbW9kZSA9ICJkaXJlY3RlZCIpDQoNCnJlY2lwcm9jaXR5KGdfc3Ryb25nX3QxLCBpZ25vcmUubG9vcHMgPSBUUlVFLCBtb2RlID0gYygiZGVmYXVsdCIsICJyYXRpbyIpKQ0KIyAwLjQ3MDg4NjENCg0KIyBXYXZlIDINCmhhbmdpbmd3Ml9ub25hIDwtIG5hX2lmKGhhbmdpbmdbWzFdXVtbMl1dLCA5KQ0Kcm93aGFuZ2luZ3cyIDwtIHJvd1N1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBucm93KGhhbmdpbmd3Ml9ub25hKQ0KY29saGFuZ2luZ3cyIDwtIGNvbFN1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBuY29sKGhhbmdpbmd3Ml9ub25hKQ0KaGFuZ2luZ3cyX25vbmFbd2hpY2gocm93aGFuZ2luZ3cyKSAsIF0gPC0gMA0KDQpnX3N0cm9uZ190MiA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoaGFuZ2luZ3cyX25vbmEsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KDQpyZWNpcHJvY2l0eShnX3N0cm9uZ190MiwgaWdub3JlLmxvb3BzID0gVFJVRSwgbW9kZSA9IGMoImRlZmF1bHQiLCAicmF0aW8iKSkNCiMgMC40NDQ0NDQ0DQpgYGANCg0KIyMjIER5YWQgY29uZmlndXJhdGlvbnMNCmBgYHtyfQ0KIyBXYXZlIDENCmR5YWRfY2Vuc3VzKGdfc3Ryb25nX3QxKQ0KIyBNdXR1YWwgdGllczogOTMNCiMgQXN5bW1ldHJpY2FsIHRpZXM6IDIwOQ0KIyBObyB0aWU6IDY5NTgNCg0KIyBXYXZlIDINCmR5YWRfY2Vuc3VzKGdfc3Ryb25nX3QyKQ0KIyBNdXR1YWwgdGllczogNjANCiMgQXN5bW1ldHJpY2FsIHRpZXM6IDE1MA0KIyBObyB0aWU6IDcwNTANCmBgYA0KIyMjIFRyaWFkIGNvbmZpZ3VyYXRpb25zDQpgYGB7cn0NCiMgV2F2ZSAxDQp0cmlhZF9jZW5zdXMoZ19zdHJvbmdfdDEpDQojIDAwMyA9IDI1MzgwOA0KIyAwMTIgPSAyMjU0OQ0KIyAxMDIgPSAxMDEwMQ0KIyAwMjFEID0gMjM1DQojIDAyMVUgPSAyNDMNCiMgMDIxQyA9IDIxOQ0KIyAxMTFEID0gMjQ3DQojIDExMVUgPSAyNTQNCiMgMDMwVCA9IDYxDQojIDAzMEMgPSAyDQojIDIwMSA9IDgwDQojIDEyMEQgPSA0MA0KIyAxMjBVID0gNTQNCiMgMTIwQyA9IDINCiMgMjEwID0gNDYNCiMgMzAwID0gMzkNCg0KIyBXYXZlIDINCnRyaWFkX2NlbnN1cyhnX3N0cm9uZ190MikNCiMgMDAzID0gMjYzODUzDQojIDAxMiA9IDE2NjU5DQojIDEwMiA9IDY3MTMNCiMgMDIxRCA9IDEzMw0KIyAwMjFVID0gMTI1DQojIDAyMUMgPSAxMjMNCiMgMTExRCA9IDg4DQojIDExMVUgPSAxMzINCiMgMDMwVCA9IDMwDQojIDAzMEMgPSAwDQojIDIwMSA9IDQ2DQojIDEyMEQgPSA5DQojIDEyMFUgPSAzOQ0KIyAxMjBDID0gMg0KIyAyMTAgPSAxOQ0KIyAzMDAgPSA5DQpgYGANCiMjIyBUcmFuc2l0aXZpdHkNCmBgYHtyfQ0KIyBXYXZlIDENCnRyYW5zaXRpdml0eShnX3N0cm9uZ190MSkNCiMgMC4zNjQxNzkxDQoNCiMgV2F2ZSAyDQp0cmFuc2l0aXZpdHkoZ19zdHJvbmdfdDIpDQojIDAuMzMzNjc2Ng0KYGBgDQojIyMgUGF0aCBsZW5ndGgNCmBgYHtyfQ0KIyBXYXZlIDENCm1lYW4oKGVnb19zaXplKGdfc3Ryb25nX3QxLCBvcmRlciA9IDIsIG1vZGUgPSAib3V0IikgLSAxKS92Y291bnQoZ19zdHJvbmdfdDEpKQ0KIyAwLjA3ODIwNTA0DQoNCiMgV2F2ZSAyDQptZWFuKChlZ29fc2l6ZShnX3N0cm9uZ190Miwgb3JkZXIgPSAyLCBtb2RlID0gIm91dCIpIC0gMSkvdmNvdW50KGdfc3Ryb25nX3QyKSkNCiMgMC4wNDU4MzAyDQpgYGANCiMjIyBTZWdyZWdhdGlvbg0KVG8gYmUgY2FsY3VsYXRlZCB3aGVuIEkgZ2V0IG15IGRlcGVuZGVudCB2YXJpYWJsZSBvZiBpbnRlcmVzdCA6KQ0KYGBge3J9DQoNCmBgYA==</div>
 
 
 </div>

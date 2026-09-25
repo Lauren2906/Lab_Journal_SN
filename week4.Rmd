@@ -260,22 +260,6 @@ ind_mat <- data.matrix(cbind(gender_df, ethnicity_df))
 class(ind_mat)
 # view(ind_mat)
 ```
-
-As both gender and ethnicity are stable characteristics, we only need one variable for each (not both T1 and T2).
-
-```{r}
-copy_ind_mat <- ind_mat
-for(i in 1:nrow(copy_ind_mat)){
-  if (is.na(copy_ind_mat[i])) {
-    copy_ind_mat[i] <- copy_ind_mat[i, 2]
-  }
-}
-
-print(ind_mat)
-# View(ind_mat)
-# view(copy_ind_mat)
-```
-
 ## Visualisation
 ```{r}
 require(igraph)
@@ -321,7 +305,7 @@ test_m[which(misrow), ] <- 0
 <br>
 
 # Webscraping
-```
+```{}
 install.packages("xml2")
 require(xml2)
 install.packages("rvest")
@@ -330,7 +314,7 @@ require(rvest)
 Trying to save data from a nos article
 Saving the href
 
-```
+```{}
 url <- "https://nos.nl/zoeken?q=Jochem+Tolsma&page=1"
 
 nos <- read_html(url)
@@ -353,7 +337,7 @@ lijst[1] %>% html_children %>% html_attr(name = "href")
 # /html/body/div/main/div[2]
 ```
 Saving the date
-```
+```{}
 # By myself
 time_num <- lijst[1] %>% html_children %>% html_children %>% .[2] %>% html_children %>% .[2] %>% html_children %>% html_children %>% html_attr(name = "datetime")
 time_num
@@ -377,6 +361,7 @@ vcount(g_strong_t2)
 ecount(g_strong_t2)
 
 pretty_graph <- simplify(g_strong_t2)
+pretty_graph <- g_strong_t2
 plot(pretty_graph)
 
 plot(pretty_graph,
@@ -394,19 +379,38 @@ plot(pretty_graph,
 ```
 <br>
 
-Trying (and being unsuccesful) to give gender different colours
-```{}
-in_network <- data.frame(as_ids(V(pretty_graph)))
-names(in_network)[1] <- "name"
+Giving gender different colours
+```{r}
+gender1 <- gender[[1]][,1]
+gender2 <- gender[[1]][,2]
+gender_test <- coalesce(gender1, gender2)
+head(gender_test)
+```
+```{r}
+hangingw2_nona <- na_if(hanging[[1]][[2]], 9)
+#checking if one misses in rows
+rowhangingw2 <- rowSums(is.na(hangingw2_nona)) == nrow(hangingw2_nona)
+#checking if one misses in cols
+colhangingw2 <- colSums(is.na(hangingw2_nona)) == ncol(hangingw2_nona)
+hangingw2_nona[which(rowhangingw2) , ] <- 0
 
-ind_df <- as.data.frame(ind_mat)
-names(ind_df)[1] <- "name"
-ind_df$name <- as.character(ind_df$name)
+igraph::betweenness(pretty_graph, directed = TRUE)
+V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = TRUE) * 100 + 10
+pretty_graph_t2 <- igraph::graph_from_adjacency_matrix(hangingw2_nona, mode = "directed", weighted = NULL, diag = TRUE, add.colnames = NA,
+    add.rownames = NA)
 
-in_network <- left_join(in_network, ind_df, by = c("name" = "name"))
+kleurtje <- ifelse(gender_test==2, "orange", "purple")
+plot(pretty_graph_t2,
+     vertex.color = kleurtje, # nice color for the vertices
+     vertex.size = 5,  # we'll vertices a bit smaller
+     vertex.frame.color = "gray",  # we'll put a gray frame around vertices
+     vertex.label.color = "black",  # not that ugly blue color for the labels (names)
+     vertex.label.cex = 0.5,  # make the label a bit smaller too
+     vertex.label.dist = 0.9,  # we'll pull the labels a bit away from the vertices
+     edge.curved = 0.2, # curved edges is always a nice touch
+     edge.arrow.size = 0.1)
 
-in_network$vcol <- ifelse()
-
+pretty_graph_t2
 ```
 
 Trying to change node size based on degree
