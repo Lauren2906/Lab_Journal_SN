@@ -144,8 +144,4 @@ mean((ego_size(g_strong_t1, order = 2, mode = "out") - 1)/vcount(g_strong_t1))
 mean((ego_size(g_strong_t2, order = 2, mode = "out") - 1)/vcount(g_strong_t2))
 # 0.0458302
 ```
-### Segregation
-To be calculated when I get my dependent variable of interest :)
-```{r}
 
-```

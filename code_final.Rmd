@@ -7,9 +7,9 @@ output: html_document
 
 This webpage combines all relevant code from all the weeks that I used for my final assignment, so it is all easily findable in one place, rather than scattered around in all pages for every separate week.
 
-```{r klippy, echo=FALSE, include=TRUE}
+```{r, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'))
-klippy::klippy(color = 'darkred')
+klippy::klippy(color = 'purple')
 klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
 ```
 
@@ -185,7 +185,6 @@ copy_strong_netw_t1 <- strong_netw_t1
 copy_strong_netw_t1[is.na(copy_strong_netw_t1)] <- 0 
 
 g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
-plot(g_strong_t1)
 ```
 
 <br>
@@ -220,7 +219,6 @@ copy_strong_netw_t2 <- strong_netw_t2
 copy_strong_netw_t2[is.na(copy_strong_netw_t2)] <- 0 
 
 g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
-plot(g_strong_t2)
 ```
 
 <br>
@@ -243,4 +241,5 @@ plot(pretty_graph_t2,
      margin = 0.01,
      rescale = FALSE, ylim = c(-9,9))
 ```
+
 ### Node colours based on civil service attitudes

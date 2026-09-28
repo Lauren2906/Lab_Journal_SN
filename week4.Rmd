@@ -396,11 +396,11 @@ hangingw2_nona[which(rowhangingw2) , ] <- 0
 
 igraph::betweenness(pretty_graph, directed = TRUE)
 V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = TRUE) * 100 + 10
-pretty_graph_t2 <- igraph::graph_from_adjacency_matrix(hangingw2_nona, mode = "directed", weighted = NULL, diag = TRUE, add.colnames = NA,
+pretty_graph <- igraph::graph_from_adjacency_matrix(hangingw2_nona, mode = "directed", weighted = NULL, diag = TRUE, add.colnames = NA,
     add.rownames = NA)
 
 kleurtje <- ifelse(gender_test==2, "orange", "purple")
-plot(pretty_graph_t2,
+plot(pretty_graph,
      vertex.color = kleurtje, # nice color for the vertices
      vertex.size = 5,  # we'll vertices a bit smaller
      vertex.frame.color = "gray",  # we'll put a gray frame around vertices
@@ -410,7 +410,7 @@ plot(pretty_graph_t2,
      edge.curved = 0.2, # curved edges is always a nice touch
      edge.arrow.size = 0.1)
 
-pretty_graph_t2
+pretty_graph
 ```
 
 Trying to change node size based on degree

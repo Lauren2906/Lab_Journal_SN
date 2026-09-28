@@ -3,21 +3,26 @@ title: "Introduction"
 author: "Lauren"
 date: "2026-09-11"
 output: html_document
+bibliography: references.bib
 ---
 
 # Introduction
 
-[Hook] -\> Being civically engaged is important, because XXX. However, youth is more often (and more than other groups) a 'spectator' who discusses socially important topics privately, rather than being active in the community (<https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/>). Youth is thus (seemingly) changing how they are engaging with social issues. However, physical engagement still important, e.g. volunteering.
+American youth is more likely than any other age-group to be a 'spectator' in social life, meaning that they discuss socially important topics privately, but are not necessarily active in their community [@shearer2026]. Thus, while youth is discussing social topics, they are not acting on them in the same way that older generations are. This points to an interesting development in civil engagement; from engagement as a behavioural characteristic, to engagement as a social characteristic.
 
-[Network perspective] -\> So civic behaviour is important, but why do people behave civically, and how can we thus reverse the trend of youth less physically civic behaviour? Important to know: Is our civic behaviour related to who we interact with. If so, potential clustering of behaviour, leaving civic behaviour only to certain people in society, rather than as a universal thing.
+Youth discuss social issues more than ever (SOURCE?), and the more a topic is discussed within a friend group, the more likely it is that the peers within the group take over the dominant opinion (SOURCE??????????). Increased discussion about civic topics, would thus suggest that individuals in a friendship network are more similar to their direct peers than to other individuals in their network in their civic engagement attitudes. This clustering of attitudes in a network could point at increasing segregation in civic attitudes, despite the positive personal and societal benefits to being civilly engaged. Engagement is found to be related to trust (XXX), voting (XXX) and XXX (XXX), aspects that could cluster in networks, making them more accessible to certain people than to others.
 
-[scientific relevance] -\> Civic behaviour already studied by XXX. Also in network perspective already studied, however XXX. This paper will do it differently by looking at a different context, and at older youth, who are more able to shape their own decisions as to what participation they do (less restricted individuals, but also less steered opportunities) –\> more accurate reflection of later life, which may be interesting to look at. Thus, in this paper I will firstly answer the following question:
+Civic engagement is a well-studied topic, also within social network analyses. One example is @Wegemer_2021 who looks at civic behaviour in teens. He finds that social networks do not affect an individual's degree of activism. This, however, could be explained by youths inclination towards being spectators, rather than participators. Youth does not want to participate, regardless of whether their friends do. However, this relationship may be different for attitudes. Even if youth does not seems affected by their peers in their behaviour, their opinions may still change.
 
-Are students who are connected to each other more similar with regards to civic engagement, than students who are not connected to each other?
+This paper will look into civic engagement attitudes, rather than actual behaviour. By looking at slightly older youth than previous research, this paper will be able to give a more accurate reflection of attitudes in an environment where civic engagement is less directly stimulated than in high school, better reflecting real life situations. Thus, in this paper I will firstly answer the following question:
 
-[Why?] The potential of clustering is really interesting, but just the fact that it is there doesnt tell us much; we need to know why people cluster. Either, people choose similar people to connect with, or they become more similar over time. Mostly more similar over time is interesting, as that may have the potential to reverse the trend of youth increasingly doing 'private participation', by learning how to do public participation from their peers. Thus leading to the following question:
+RQ1: *Are students who are connected to each other more similar with regards to civic engagement attitudes, than students who are not connected to each other?*
 
-Do students become more similar to each other with regards to civic engagement, when they are connected in a network?
+<br>
+
+Clustering within social networks can have multiple reasons, thus to fully understand potential clustering, it is important to take into account *why* there is clustering. Clustering with regards to civil engagemetn attitudes within a social network could be due to preferences or due to social influence (SOURCE). Attitudes towards civic engagement may not be the first reason that people decide to become friends with one another, rather these processes may rely on attitudes and behaviour that is seen as more important to someone's identity (SOURCE?). This leaves open the opportunity for social influences to take place, as people with different civic engagement attitudes can make ties together, allowing for civic attitudes to potentially spread through a network, rather than remaining within clusters of highly engaged individuals. This leads to the following research question:
+
+RQ2: *Do students become more similar to each other with regards to civic engagement, when they are connected in a network?*
 
 ------------------------------------------------------------------------
 

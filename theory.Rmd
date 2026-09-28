@@ -7,7 +7,21 @@ output: html_document
 
 # Theory
 
-XXX
+## Clustering within networks
+
+People tend to choose similar others to hang out with (homophily)
+
+People are influenced by their peers into adopting the same attitudes (social learning)
+
+Combined lead to clustering
+
+H1: *Students in Michigan learning communities, who are more similar in their civic engagement attitudes are more likely to have ties with one another than with people who differ from them in their attitudes.*
+
+## Influence effects
+
+Waarom verwachten we een effect van influence rather than van homophily? Omdat attitudes niet zichtbaar zijn vanuit de buitenkant, en dus niet likely iets zijn op basis waarvan mensen hun vrienden kiezen. In plaats daarvan leer je attitudes van je vrienden later, nadat je al een tie hebt (dan kan je natuurlijk wel je tie verbreken), waardoor de mogelijkheid tot influence processen ontstaat
+
+H2: *Students in Michigan learning communities, become more similar to their direct ties with regards to their civic engagement attitudes.*
 
 ------------------------------------------------------------------------
 
