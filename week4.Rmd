@@ -396,8 +396,7 @@ hangingw2_nona[which(rowhangingw2) , ] <- 0
 
 igraph::betweenness(pretty_graph, directed = TRUE)
 V(pretty_graph)$size = betweenness(pretty_graph, normalized = T, directed = TRUE) * 100 + 10
-pretty_graph <- igraph::graph_from_adjacency_matrix(hangingw2_nona, mode = "directed", weighted = NULL, diag = TRUE, add.colnames = NA,
-    add.rownames = NA)
+pretty_graph <- igraph::graph_from_adjacency_matrix(hangingw2_nona, mode = "directed", weighted = NULL, diag = TRUE, add.colnames = NA, add.rownames = NA)
 
 kleurtje <- ifelse(gender_test==2, "orange", "purple")
 plot(pretty_graph,

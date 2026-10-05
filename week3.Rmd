@@ -249,7 +249,7 @@ f_pubnets <- function(df_scholars = df, list_publications = publications, discip
         publicationlist[[wave]] <- publications %>%
             filter(gs_id %in% df_sel$gs_id) %>%
             filter(year %in% waves[[wave]]) %>%
-            select(author) %>%
+            dplyr::select(author) %>%
             lapply(str_split, pattern = ",")
     }
 
@@ -318,8 +318,8 @@ df_soc --> dataset on actor level
 df_network --> dataset on network level (the dependent variable/ Y)
 
 ```{r}
-view(df_soc)
-view(df_network)
+# view(df_soc)
+# view(df_network)
 ```
 
 The data has multiple waves, seperate those
@@ -389,8 +389,7 @@ You can decide to use different algorithms, or multiple cores or whatever, but h
 ```{r}
 myAlgorithm <- sienaAlgorithmCreate(projname = "soc_init")
 (ans <- siena07(myAlgorithm, data = mydata, effects = myeff))
-# (the outer parentheses lead to printing the obtained result on the screen) if necessary, estimate
-# further
+# (the outer parentheses lead to printing the obtained result on the screen) if necessary, estimate further
 (ans <- siena07(myAlgorithm, data = mydata, effects = myeff, prevAns = ans, returnDeps = TRUE))
 ```
 What does this mean:
@@ -474,121 +473,6 @@ Using RSiena as an ABM/ making the micro macro link
 <br>
 
 # On own data
-Getting started
-```{r}
-rm(list = ls())
-
-fpackage.check <- function(packages) {
-    lapply(packages, FUN = function(x) {
-        if (!require(x, character.only = TRUE)) {
-            install.packages(x, dependencies = TRUE)
-            library(x, character.only = TRUE)
-        }
-    })
-}
-
-fsave <- function(x, file = NULL, location = "./data/processed/") {
-    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
-    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
-    if (is.null(file))
-        file = deparse(substitute(x))
-    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
-    totalname <- paste(location, datename, file, ".rda", sep = "")
-    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
-}
-
-fload <- function(filename) {
-    load(filename)
-    get(ls()[ls() != "filename"])
-}
-
-fshowdf <- function(x, ...) {
-    knitr::kable(x, digits = 2, "html", ...) %>%
-        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-        kableExtra::scroll_box(width = "100%", height = "300px")
-}
-
-# this is the most important one. We created it in the previous script
-
-f_pubnets <- function(df_scholars = df, list_publications = publications, discip = "sociology", affiliation = "RU",
-    waves = list(wave1 = c(2018, 2019, 2020), wave2 = c(2021, 2022, 2023))) {
-
-    publications <- list_publications %>%
-        bind_rows() %>%
-        distinct(title, .keep_all = TRUE)
-
-    df_scholars %>%
-        filter(affil1 == affiliation | affil2 == affiliation) %>%
-        filter(discipline == discip) -> df_sel
-
-    networklist <- list()
-    for (wave in 1:length(waves)) {
-        networklist[[wave]] <- matrix(0, nrow = nrow(df_sel), ncol = nrow(df_sel))
-    }
-
-    publicationlist <- list()
-    for (wave in 1:length(waves)) {
-        publicationlist[[wave]] <- publications %>%
-            filter(gs_id %in% df_sel$gs_id) %>%
-            filter(year %in% waves[[wave]]) %>%
-            select(author) %>%
-            lapply(str_split, pattern = ",")
-    }
-
-    publicationlist2 <- list()
-    for (wave in 1:length(waves)) {
-        publicationlist2[[wave]] <- publicationlist[[wave]]$author %>%
-            # lowercase
-        lapply(tolower) %>%
-            # Removing diacritics
-        lapply(stri_trans_general, id = "latin-ascii") %>%
-            # only last name
-        lapply(word, start = -1, sep = " ") %>%
-            # only last last name
-        lapply(word, start = -1, sep = "-")
-    }
-
-    for (wave in 1:length(waves)) {
-        # let us remove all publications with only one author
-        remove <- which(sapply(publicationlist2[[wave]], FUN = function(x) length(x) == 1) == TRUE)
-        publicationlist2[[wave]] <- publicationlist2[[wave]][-remove]
-    }
-
-    for (wave in 1:length(waves)) {
-        pubs <- publicationlist2[[wave]]
-        for (ego in 1:nrow(df_sel)) {
-            # which ego?
-            lastname_ego <- df_sel$lastname[ego]
-            # for all publications
-            for (pub in 1:length(pubs)) {
-                # only continue if ego is author of pub
-                if (lastname_ego %in% pubs[[pub]]) {
-                  aut_pot <- which.max(pubs[[pub]] %in% lastname_ego)
-                  # only continue if ego is first author of pub
-                  if (aut_pot == 1) {
-                    # check all alters/co-authors
-                    for (alter in 1:nrow(df_sel)) {
-                      # which alter
-                      lastname_alter <- df_sel$lastname[alter]
-                      if (lastname_alter %in% pubs[[pub]]) {
-                        networklist[[wave]][ego, alter] <- networklist[[wave]][ego, alter] + 1
-                      }
-                    }
-                  }
-                }
-            }
-        }
-    }
-    return(list(df = df_sel, network = networklist))
-}
-```
-
-Install/ load packages
-```{r}
-packages = c("RSiena", "tidyverse", "stringdist", "stringi")
-
-fpackage.check(packages)
-```
 Load in data
 ```{r}
 packages = c("stringdist", "stringi", "tidyverse")
@@ -649,7 +533,7 @@ gender_df <- as.data.frame(gender)
 ethnicity_df <- as.data.frame(ethnic)
 ind_mat <- data.matrix(cbind(gender_df, ethnicity_df))
 class(ind_mat)
-view(ind_mat)
+# view(ind_mat)
 ```
 
 As both gender and ethnicity are stable characteristics, we only need one variable for each (not both T1 and T2).
@@ -668,7 +552,7 @@ net_t1 <- network::as.network(strong_netw_t1)
 ```
 
 ## RSiena tryout
-```{r}
+```{}
 strongnetw_RS_T1 <- as_dependent_rsiena(strong_netw_t1)
 strongnetw_RS_T2 <- as_dependent_rsiena(strong_netw_t2)
 rsiena_try <- make_data_rsiena(strongnetw_RS_T1, strongnetw_RS_T2)

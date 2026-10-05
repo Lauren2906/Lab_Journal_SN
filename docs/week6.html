@@ -70,6 +70,28 @@ if (window.hljs) {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -428,11 +450,274 @@ div.tocify {
 </div>
 
 
-<div id="week-5---xxx" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Week 5 - XXX</h1>
+<div id="preparation-before-class" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Preparation before
+class</h1>
+<div id="understanding-an-effect-in-rsiena" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Understanding an
+effect in RSiena</h2>
+<p>To answer my research question, I want to see whether people’s
+attitudes are affected by the people they interact with. As I have a
+directed network, I can look at the effect of outgoing, incoming and
+reciprocated relations. I would expect there to be the biggest influence
+effect when there is a reciprocated tie, as that means that the ego and
+alter are probably closer. However, outdegree could also be really
+interesting, as you may change your attitude, because you want to be
+friends with someone, so you try to look more like them, in order to
+(hopefully) get a reciprocated tie. However, that is not really my
+research question, so for now I will focus on reciprocated ties.</p>
+<p><br></p>
+<p>RSiena has a built-in effect called “Reciprocated degree effect
+(recipDeg)” <span class="citation">Ripley et al. (2026)</span>, which
+(seems to) look at how much more similar one becomes to people who you
+have a reciprocated tie with. The formula is as follows:</p>
+<p><span class="math display">\[
+s_{i}^{beh}(x , z) = z_{i}\sum j x_{ij}x_{ji}
+\]</span></p>
+<p><br></p>
+<p>Part by part, what does this formula mean?</p>
+<p><span class="math display">\[
+s_{i}^{beh}(x , z)
+\]</span></p>
+<p>= Similarity of the behaviour between X (dependent network variable)
+and Z (behavioural dependent variable (centred))</p>
+<p><span class="math display">\[
+\sum j x_{ij}x_{ji}
+\]</span></p>
+<p>This calculates the sum of reciprocated ties for ego (j), by
+multiplying the outgoing ties from ego (X_{ij}), with the incoming ties
+(X_{ji}). This means if there is either no outgoing or incoming tie, the
+tie is not being counted (as it is multiplied with 0), meaning that only
+the reciprocated ties are counted.</p>
+<p><br></p>
+<p>This sum is then multiplied by</p>
+<p><span class="math display">\[
+z_{i}
+\]</span></p>
+<p>Or in words: the value of the behavioural variable for ego. So this
+formula multiplies the amount of reciprocated ties by the value of the
+behavioural value of ego.</p>
+</div>
+<div id="fixing-my-plot" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Fixing my plot</h2>
+<div id="wave-1" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Wave 1</h3>
+<p>Create an igraph object</p>
+<pre class="r"><code>library(igraph)
+
+copy_strong_netw_t1 &lt;- strong_netw_t1
+copy_strong_netw_t1[is.na(copy_strong_netw_t1)] &lt;- 0 
+
+g_strong_t1 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = &quot;directed&quot;)</code></pre>
+<p><br></p>
+<div id="simple-representation-of-the-network" class="section level4"
+number="1.2.1.1">
+<h4><span class="header-section-number">1.2.1.1</span> Simple
+representation of the network</h4>
+<pre class="r"><code>pretty_graph_t1 &lt;- simplify(g_strong_t1)
+
+V(pretty_graph_t1)$size = igraph:: betweenness(pretty_graph_t1, normalized = T, directed = T) * 250 + 50
+
+plot(pretty_graph_t1,
+     vertex.color = &quot;pink&quot;,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label = NA,
+     vertex.label.dist = 0.5, 
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-10,10),
+     add.legend = TRUE)</code></pre>
+<p><img src="week6_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" /></p>
+<p><br></p>
+</div>
+<div id="node-colours-based-on-civil-engagement-attitudes"
+class="section level4" number="1.2.1.2">
+<h4><span class="header-section-number">1.2.1.2</span> Node colours
+based on civil engagement attitudes</h4>
+<p>Variable based on civil engagement attitudes Create CE variable</p>
+<pre class="r"><code>unloadNamespace(&quot;sna&quot;)
+library(tidyverse)
+
+IC_df &lt;- as.data.frame(T1civeng[[1]])
+IC_df$missings &lt;- rowSums(is.na(IC_df))
+IC_df$ce_t1 &lt;- ifelse(IC_df$missings &lt;= 1, rowMeans(IC_df[,1:4]), NA)
+
+IC_df &lt;- IC_df %&gt;% 
+  rownames_to_column(var = &quot;id&quot;)</code></pre>
+<p>Create plot, with differing colour for CE</p>
+<pre><code># DOESNT WORK
+IC_df$ce_t1_cat &lt;- cut(IC_df$ce_t1,
+                       breaks = c(0, 1, 2, 3, 4, 5, 6, 7),
+                       labels= c(&#39;none&#39;, &#39;very few&#39;, &#39;fewer&#39;, &#39;few&#39;, &#39;moderate&#39;, &#39;high&#39;, &#39;very high&#39;))
+
+table(IC_df$ce_t1, IC_df$ce_t1_cat)
+#Categories tbd, but for now okay
+
+IC_df &lt;- IC_df %&gt;%
+  dplyr::mutate(colour = dplyr::recode(ce_t1_cat,
+                                        &quot;none&quot; = &quot;#FFD1DC&quot;,
+                                        &quot;very few&quot; = &quot;#FFB6C1&quot;,
+                                        &quot;fewer&quot; = &quot;#FFA6C9&quot;,
+                                        &quot;few&quot; = &quot;#F77FBE&quot;,
+                                        &quot;moderate&quot; = &quot;#CC3366&quot;,
+                                        &quot;high&quot; = &quot;#DE5D83&quot;,
+                                        &quot;very high&quot; = &quot;#DA70D6&quot;))
+
+IC_df &lt;- IC_df %&gt;%
+  dplyr::mutate(colour = dplyr::recode(ce_t1_cat,
+                                        &quot;none&quot; = &quot;red&quot;,
+                                        &quot;very few&quot; = &quot;orange&quot;,
+                                        &quot;fewer&quot; = &quot;yellow&quot;,
+                                        &quot;few&quot; = &quot;green&quot;,
+                                        &quot;moderate&quot; = &quot;blue&quot;,
+                                        &quot;high&quot; = &quot;purple&quot;,
+                                        &quot;very high&quot; = &quot;pink&quot;))
+
+
+colour &lt;- IC_df$colour
+view(colour)</code></pre>
+<pre class="r"><code>IC_df$ce_t1_cat &lt;- cut(IC_df$ce_t1,
+                       breaks = c(0, 5, 7),
+                       labels= c(&#39;little&#39;, &#39;many&#39;))
+table(IC_df$ce_t1, IC_df$ce_t1_cat)</code></pre>
+<pre><code>##       
+##        little many
+##   3         1    0
+##   3.25      1    0
+##   3.5       6    0
+##   3.75      2    0
+##   4         7    0
+##   4.25     10    0
+##   4.5      15    0
+##   4.75     13    0
+##   5         7    0
+##   5.25      0   13
+##   5.5       0    5
+##   5.75      0    8
+##   6         0    6
+##   6.25      0    4
+##   6.5       0    2
+##   6.75      0    2
+##   7         0    6</code></pre>
+<pre class="r"><code>#cutoff point for now completely random
+
+colour &lt;- ifelse(IC_df$ce_t1_cat==&#39;little&#39;, &quot;lightpink&quot;, &quot;purple&quot;)
+
+graph_CE &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = &quot;directed&quot;)
+graph_CE &lt;- simplify(graph_CE)
+V(graph_CE)$size = igraph:: betweenness(graph_CE, normalized = T, directed = T) * 250 + 50</code></pre>
+<pre class="r"><code>layout &lt;- layout_with_fr(graph_CE)
+plot1 &lt;- plot(graph_CE,
+     vertex.color = colour,
+     vertex.size = 5, 
+     vertex.frame.color = &quot;gray&quot;,
+     edge.curved = 0.2, 
+     edge.arrow.size = 0.1,
+     vertex.label = NA,
+     layout = layout)
+legend(&quot;topleft&quot;, c(&quot;few&quot;, &quot;high&quot;, &quot;missing&quot;), pch = 21, col = &quot;#777777&quot;, pt.bg = c(&quot;lightpink&quot;, &quot;purple&quot;, &quot;white&quot;), pt.cex = 2,
+    cex = 0.8, bty = &quot;n&quot;, ncol = 1)</code></pre>
+<p><img src="week6_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="wave-2" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Wave 2</h3>
+<p>Create an igraph object</p>
+<pre class="r"><code>copy_strong_netw_t2 &lt;- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] &lt;- 0 
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = &quot;directed&quot;)</code></pre>
+<p><br></p>
+<div id="simple-representation-of-the-network-1" class="section level4"
+number="1.2.2.1">
+<h4><span class="header-section-number">1.2.2.1</span> Simple
+representation of the network</h4>
+<pre class="r"><code>pretty_graph_t2 &lt;- simplify(g_strong_t2)
+
+V(pretty_graph_t2)$size = igraph:: betweenness(pretty_graph_t2, normalized = T, directed = T) * 250 + 50
+
+plot(pretty_graph_t2,
+     vertex.color = &quot;pink&quot;,
+     vertex.frame.color = &quot;gray&quot;,
+     vertex.label.color = &quot;black&quot;,
+     vertex.label = NA,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.075,
+     margin = 0.01,
+     rescale = FALSE, ylim = c(-9,9))</code></pre>
+<p><img src="week6_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
+<p><br></p>
+</div>
+<div id="node-colours-based-on-civil-service-attitudes"
+class="section level4" number="1.2.2.2">
+<h4><span class="header-section-number">1.2.2.2</span> Node colours
+based on civil service attitudes</h4>
+<p>Create variable</p>
+<pre class="r"><code>IC_df2 &lt;- as.data.frame(T2civeng[[1]])
+IC_df2$missings &lt;- rowSums(is.na(IC_df2))
+IC_df2$ce_t2 &lt;- ifelse(IC_df2$missings &lt;= 1, rowMeans(IC_df2[,1:4]), NA)
+
+IC_df2 &lt;- IC_df2 %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) </code></pre>
+<p>Create plot, with differing colour for CE</p>
+<pre class="r"><code>IC_df2$ce_t2_cat &lt;- cut(IC_df2$ce_t2,
+                       breaks = c(0, 5, 7),
+                       labels= c(&#39;little&#39;, &#39;many&#39;))
+table(IC_df2$ce_t2, IC_df2$ce_t2_cat)</code></pre>
+<pre><code>##       
+##        little many
+##   2.25      1    0
+##   3         1    0
+##   3.25      1    0
+##   3.5       3    0
+##   3.75      4    0
+##   4        11    0
+##   4.25      8    0
+##   4.5       8    0
+##   4.75      7    0
+##   5        11    0
+##   5.25      0   10
+##   5.5       0    9
+##   5.75      0    3
+##   6         0   17
+##   6.25      0    2
+##   6.5       0    2
+##   7         0    7</code></pre>
+<pre class="r"><code>#cutoff point for now completely random
+
+colour &lt;- ifelse(IC_df2$ce_t2_cat==&#39;little&#39;, &quot;lightpink&quot;, &quot;purple&quot;)
+
+graph_CE_t2 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = &quot;directed&quot;)
+graph_CE_t2 &lt;- simplify(graph_CE_t2)
+V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 250 + 50</code></pre>
+<pre class="r"><code>V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 250 + 50
+plot2 &lt;- plot(graph_CE_t2,
+     vertex.color = colour,
+     vertex.size = 5, 
+     vertex.frame.color = &quot;gray&quot;,
+     edge.curved = 0.2, 
+     edge.arrow.size = 0.1,
+     vertex.label = NA,
+     layout = layout)
+legend(&quot;topleft&quot;, c(&quot;few&quot;, &quot;high&quot;, &quot;missing&quot;), pch = 21, col = &quot;#777777&quot;, pt.bg = c(&quot;lightpink&quot;, &quot;purple&quot;, &quot;white&quot;), pt.cex = 2,
+    cex = 0.8, bty = &quot;n&quot;, ncol = 1)</code></pre>
+<p><img src="week6_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ripley2026" class="csl-entry">
+Ripley, Ruth M., Tom A. B. Snijders, Zsófia Boda, and András Vörös.
+2026. <em>RSiena Manual</em>. <a
+href="https://www.stats.ox.ac.uk/~snijders/siena/RSiena_Manual.pdf">https://www.stats.ox.ac.uk/~snijders/siena/RSiena_Manual.pdf</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFdlZWsgNSAtIFhYWA0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0KDQojIyBVbmRlcnN0YW5kaW5nIGFuIGVmZmVjdCBpbiBSU2llbmENCg0KVG8gYW5zd2VyIG15IHJlc2VhcmNoIHF1ZXN0aW9uLCBJIHdhbnQgdG8gc2VlIHdoZXRoZXIgcGVvcGxlJ3MgYXR0aXR1ZGVzIGFyZSBhZmZlY3RlZCBieSB0aGUgcGVvcGxlIHRoZXkgaW50ZXJhY3Qgd2l0aC4gQXMgSSBoYXZlIGEgZGlyZWN0ZWQgbmV0d29yaywgSSBjYW4gbG9vayBhdCB0aGUgZWZmZWN0IG9mIG91dGdvaW5nLCBpbmNvbWluZyBhbmQgcmVjaXByb2NhdGVkIHJlbGF0aW9ucy4gSSB3b3VsZCBleHBlY3QgdGhlcmUgdG8gYmUgdGhlIGJpZ2dlc3QgaW5mbHVlbmNlIGVmZmVjdCB3aGVuIHRoZXJlIGlzIGEgcmVjaXByb2NhdGVkIHRpZSwgYXMgdGhhdCBtZWFucyB0aGF0IHRoZSBlZ28gYW5kIGFsdGVyIGFyZSBwcm9iYWJseSBjbG9zZXIuIEhvd2V2ZXIsIG91dGRlZ3JlZSBjb3VsZCBhbHNvIGJlIHJlYWxseSBpbnRlcmVzdGluZywgYXMgeW91IG1heSBjaGFuZ2UgeW91ciBhdHRpdHVkZSwgYmVjYXVzZSB5b3Ugd2FudCB0byBiZSBmcmllbmRzIHdpdGggc29tZW9uZSwgc28geW91IHRyeSB0byBsb29rIG1vcmUgbGlrZSB0aGVtLCBpbiBvcmRlciB0byAoaG9wZWZ1bGx5KSBnZXQgYSByZWNpcHJvY2F0ZWQgdGllLiBIb3dldmVyLCB0aGF0IGlzIG5vdCByZWFsbHkgbXkgcmVzZWFyY2ggcXVlc3Rpb24sIHNvIGZvciBub3cgSSB3aWxsIGZvY3VzIG9uIHJlY2lwcm9jYXRlZCB0aWVzLg0KDQo8YnI+DQoNClJTaWVuYSBoYXMgYSBidWlsdC1pbiBlZmZlY3QgY2FsbGVkICJSZWNpcHJvY2F0ZWQgZGVncmVlIGVmZmVjdCAocmVjaXBEZWcpIiBAcmlwbGV5MjAyNiwgd2hpY2ggKHNlZW1zIHRvKSBsb29rIGF0IGhvdyBtdWNoIG1vcmUgc2ltaWxhciBvbmUgYmVjb21lcyB0byBwZW9wbGUgd2hvIHlvdSBoYXZlIGEgcmVjaXByb2NhdGVkIHRpZSB3aXRoLiBUaGUgZm9ybXVsYSBpcyBhcyBmb2xsb3dzOg0KDQokJA0Kc197aX1ee2JlaH0oeCAsIHopID0gel97aX1cc3VtIGogeF97aWp9eF97aml9DQokJA0KDQo8YnI+DQoNClBhcnQgYnkgcGFydCwgd2hhdCBkb2VzIHRoaXMgZm9ybXVsYSBtZWFuPw0KDQokJCANCnNfe2l9XntiZWh9KHggLCB6KQ0KJCQNCg0KPSBTaW1pbGFyaXR5IG9mIHRoZSBiZWhhdmlvdXIgYmV0d2VlbiBYIChkZXBlbmRlbnQgbmV0d29yayB2YXJpYWJsZSkgYW5kIFogKGJlaGF2aW91cmFsIGRlcGVuZGVudCB2YXJpYWJsZSAoY2VudHJlZCkpDQoNCiQkDQpcc3VtIGogeF97aWp9eF97aml9DQokJA0KDQpUaGlzIGNhbGN1bGF0ZXMgdGhlIHN1bSBvZiByZWNpcHJvY2F0ZWQgdGllcyBmb3IgZWdvIChcc3VtIGopLCBieSBtdWx0aXBseWluZyB0aGUgb3V0Z29pbmcgdGllcyBmcm9tIGVnbyAoWFxfe2lqfSksIHdpdGggdGhlIGluY29taW5nIHRpZXMgKFhcX3tqaX0pLiBUaGlzIG1lYW5zIGlmIHRoZXJlIGlzIGVpdGhlciBubyBvdXRnb2luZyBvciBpbmNvbWluZyB0aWUsIHRoZSB0aWUgaXMgbm90IGJlaW5nIGNvdW50ZWQgKGFzIGl0IGlzIG11bHRpcGxpZWQgd2l0aCAwKSwgbWVhbmluZyB0aGF0IG9ubHkgdGhlIHJlY2lwcm9jYXRlZCB0aWVzIGFyZSBjb3VudGVkLg0KDQo8YnI+DQoNClRoaXMgc3VtIGlzIHRoZW4gbXVsdGlwbGllZCBieQ0KDQokJA0Kel97aX0NCiQkDQoNCk9yIGluIHdvcmRzOiB0aGUgdmFsdWUgb2YgdGhlIGJlaGF2aW91cmFsIHZhcmlhYmxlIGZvciBlZ28uIFNvIHRoaXMgZm9ybXVsYSBtdWx0aXBsaWVzIHRoZSBhbW91bnQgb2YgcmVjaXByb2NhdGVkIHRpZXMgYnkgdGhlIHZhbHVlIG9mIHRoZSBiZWhhdmlvdXJhbCB2YWx1ZSBvZiBlZ28uDQoNCiMjIEZpeGluZyBteSBwbG90DQoNCmBgYHtyLCBpbmNsdWRlID0gRkFMU0V9DQpybShsaXN0ID0gbHMoKSkNCmxvYWQoIi4vZGF0YS9JbmRpdmlkdWFsQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9OZXR3b3JrQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9DaXZpY0F0dGl0dWRlcy5SRGF0YSIpDQpgYGANCg0KYGBge3IsIGluY2x1ZGUgPSBGQUxTRX0NCiMgdmlldyhoYW5naW5nW1sxXV0pDQpoYW5naW5nX2RmX3QxIDwtIGFzLmRhdGEuZnJhbWUoaGFuZ2luZ1tbMV1dWzFdKQ0KY2xhc3MoaGFuZ2luZ19kZl90MSkNCiMgdmlldyhoYW5naW5nX2RmX3QxKQ0Kc3Ryb25nX25ldHdfdDEgPC0gZGF0YS5tYXRyaXgoaGFuZ2luZ19kZl90MSkNCnN0cm9uZ19uZXR3X3QxW3N0cm9uZ19uZXR3X3QxPT05XTwtTkENCmNsYXNzKHN0cm9uZ19uZXR3X3QxKQ0KIyB2aWV3KHN0cm9uZ19uZXR3X3QxKQ0KDQpoYW5naW5nX2RmX3QyIDwtIGFzLmRhdGEuZnJhbWUoaGFuZ2luZ1tbMV1dWzJdKQ0KY2xhc3MoaGFuZ2luZ19kZl90MikNCiMgdmlldyhoYW5naW5nX2RmX3QyKQ0Kc3Ryb25nX25ldHdfdDIgPC0gZGF0YS5tYXRyaXgoaGFuZ2luZ19kZl90MikNCnN0cm9uZ19uZXR3X3QyW3N0cm9uZ19uZXR3X3QyPT05XTwtTkENCmNsYXNzKHN0cm9uZ19uZXR3X3QyKQ0KIyB2aWV3KHN0cm9uZ19uZXR3X3QyKQ0KYGBgDQoNCiMjIyBXYXZlIDENCkNyZWF0ZSBhbiBpZ3JhcGggb2JqZWN0DQpgYGB7cn0NCmxpYnJhcnkoaWdyYXBoKQ0KDQpjb3B5X3N0cm9uZ19uZXR3X3QxIDwtIHN0cm9uZ19uZXR3X3QxDQpjb3B5X3N0cm9uZ19uZXR3X3QxW2lzLm5hKGNvcHlfc3Ryb25nX25ldHdfdDEpXSA8LSAwIA0KDQpnX3N0cm9uZ190MSA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoY29weV9zdHJvbmdfbmV0d190MSwgbW9kZSA9ICJkaXJlY3RlZCIpDQpgYGANCg0KPGJyPg0KDQojIyMjIFNpbXBsZSByZXByZXNlbnRhdGlvbiBvZiB0aGUgbmV0d29yaw0KYGBge3J9DQpwcmV0dHlfZ3JhcGhfdDEgPC0gc2ltcGxpZnkoZ19zdHJvbmdfdDEpDQoNClYocHJldHR5X2dyYXBoX3QxKSRzaXplID0gaWdyYXBoOjogYmV0d2Vlbm5lc3MocHJldHR5X2dyYXBoX3QxLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDI1MCArIDUwDQoNCnBsb3QocHJldHR5X2dyYXBoX3QxLA0KICAgICB2ZXJ0ZXguY29sb3IgPSAicGluayIsDQogICAgIHZlcnRleC5mcmFtZS5jb2xvciA9ICJncmF5IiwNCiAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgIHZlcnRleC5sYWJlbC5kaXN0ID0gMC41LCANCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMSwNCiAgICAgbWFyZ2luID0gMC4wMSwNCiAgICAgcmVzY2FsZSA9IEZBTFNFLCB5bGltID0gYygtMTAsMTApLA0KICAgICBhZGQubGVnZW5kID0gVFJVRSkNCmBgYA0KDQo8YnI+DQoNCiMjIyMgTm9kZSBjb2xvdXJzIGJhc2VkIG9uIGNpdmlsIGVuZ2FnZW1lbnQgYXR0aXR1ZGVzDQpWYXJpYWJsZSBiYXNlZCBvbiBjaXZpbCBlbmdhZ2VtZW50IGF0dGl0dWRlcw0KQ3JlYXRlIENFIHZhcmlhYmxlDQpgYGB7cn0NCnVubG9hZE5hbWVzcGFjZSgic25hIikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KDQpJQ19kZiA8LSBhcy5kYXRhLmZyYW1lKFQxY2l2ZW5nW1sxXV0pDQpJQ19kZiRtaXNzaW5ncyA8LSByb3dTdW1zKGlzLm5hKElDX2RmKSkNCklDX2RmJGNlX3QxIDwtIGlmZWxzZShJQ19kZiRtaXNzaW5ncyA8PSAxLCByb3dNZWFucyhJQ19kZlssMTo0XSksIE5BKQ0KDQpJQ19kZiA8LSBJQ19kZiAlPiUgDQogIHJvd25hbWVzX3RvX2NvbHVtbih2YXIgPSAiaWQiKQ0KYGBgDQoNCkNyZWF0ZSBwbG90LCB3aXRoIGRpZmZlcmluZyBjb2xvdXIgZm9yIENFDQpgYGB7fQ0KIyBET0VTTlQgV09SSw0KSUNfZGYkY2VfdDFfY2F0IDwtIGN1dChJQ19kZiRjZV90MSwNCiAgICAgICAgICAgICAgICAgICAgICAgYnJlYWtzID0gYygwLCAxLCAyLCAzLCA0LCA1LCA2LCA3KSwNCiAgICAgICAgICAgICAgICAgICAgICAgbGFiZWxzPSBjKCdub25lJywgJ3ZlcnkgZmV3JywgJ2Zld2VyJywgJ2ZldycsICdtb2RlcmF0ZScsICdoaWdoJywgJ3ZlcnkgaGlnaCcpKQ0KDQp0YWJsZShJQ19kZiRjZV90MSwgSUNfZGYkY2VfdDFfY2F0KQ0KI0NhdGVnb3JpZXMgdGJkLCBidXQgZm9yIG5vdyBva2F5DQoNCklDX2RmIDwtIElDX2RmICU+JQ0KICBkcGx5cjo6bXV0YXRlKGNvbG91ciA9IGRwbHlyOjpyZWNvZGUoY2VfdDFfY2F0LA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJub25lIiA9ICIjRkZEMURDIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidmVyeSBmZXciID0gIiNGRkI2QzEiLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJmZXdlciIgPSAiI0ZGQTZDOSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImZldyIgPSAiI0Y3N0ZCRSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIm1vZGVyYXRlIiA9ICIjQ0MzMzY2IiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaGlnaCIgPSAiI0RFNUQ4MyIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInZlcnkgaGlnaCIgPSAiI0RBNzBENiIpKQ0KDQpJQ19kZiA8LSBJQ19kZiAlPiUNCiAgZHBseXI6Om11dGF0ZShjb2xvdXIgPSBkcGx5cjo6cmVjb2RlKGNlX3QxX2NhdCwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibm9uZSIgPSAicmVkIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidmVyeSBmZXciID0gIm9yYW5nZSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImZld2VyIiA9ICJ5ZWxsb3ciLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJmZXciID0gImdyZWVuIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibW9kZXJhdGUiID0gImJsdWUiLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJoaWdoIiA9ICJwdXJwbGUiLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ2ZXJ5IGhpZ2giID0gInBpbmsiKSkNCg0KDQpjb2xvdXIgPC0gSUNfZGYkY29sb3VyDQp2aWV3KGNvbG91cikNCmBgYA0KDQpgYGB7cn0NCklDX2RmJGNlX3QxX2NhdCA8LSBjdXQoSUNfZGYkY2VfdDEsDQogICAgICAgICAgICAgICAgICAgICAgIGJyZWFrcyA9IGMoMCwgNSwgNyksDQogICAgICAgICAgICAgICAgICAgICAgIGxhYmVscz0gYygnbGl0dGxlJywgJ21hbnknKSkNCnRhYmxlKElDX2RmJGNlX3QxLCBJQ19kZiRjZV90MV9jYXQpDQojY3V0b2ZmIHBvaW50IGZvciBub3cgY29tcGxldGVseSByYW5kb20NCg0KY29sb3VyIDwtIGlmZWxzZShJQ19kZiRjZV90MV9jYXQ9PSdsaXR0bGUnLCAibGlnaHRwaW5rIiwgInB1cnBsZSIpDQoNCmdyYXBoX0NFIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChjb3B5X3N0cm9uZ19uZXR3X3QxLCBtb2RlID0gImRpcmVjdGVkIikNCmdyYXBoX0NFIDwtIHNpbXBsaWZ5KGdyYXBoX0NFKQ0KVihncmFwaF9DRSkkc2l6ZSA9IGlncmFwaDo6IGJldHdlZW5uZXNzKGdyYXBoX0NFLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDI1MCArIDUwDQpgYGANCg0KDQpgYGB7cn0NCmxheW91dCA8LSBsYXlvdXRfd2l0aF9mcihncmFwaF9DRSkNCnBsb3QxIDwtIHBsb3QoZ3JhcGhfQ0UsDQogICAgIHZlcnRleC5jb2xvciA9IGNvbG91ciwNCiAgICAgdmVydGV4LnNpemUgPSA1LCANCiAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImdyYXkiLA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwgDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMSwNCiAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgIGxheW91dCA9IGxheW91dCkNCmxlZ2VuZCgidG9wbGVmdCIsIGMoImZldyIsICJoaWdoIiwgIm1pc3NpbmciKSwgcGNoID0gMjEsIGNvbCA9ICIjNzc3Nzc3IiwgcHQuYmcgPSBjKCJsaWdodHBpbmsiLCAicHVycGxlIiwgIndoaXRlIiksIHB0LmNleCA9IDIsDQogICAgY2V4ID0gMC44LCBidHkgPSAibiIsIG5jb2wgPSAxKQ0KYGBgDQoNCjxicj4NCg0KIyMjIFdhdmUgMg0KQ3JlYXRlIGFuIGlncmFwaCBvYmplY3QNCmBgYHtyfQ0KY29weV9zdHJvbmdfbmV0d190MiA8LSBzdHJvbmdfbmV0d190Mg0KY29weV9zdHJvbmdfbmV0d190Mltpcy5uYShjb3B5X3N0cm9uZ19uZXR3X3QyKV0gPC0gMCANCg0KZ19zdHJvbmdfdDIgPC0gaWdyYXBoOjogZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGNvcHlfc3Ryb25nX25ldHdfdDIsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KYGBgDQoNCjxicj4NCg0KIyMjIyBTaW1wbGUgcmVwcmVzZW50YXRpb24gb2YgdGhlIG5ldHdvcmsNCmBgYHtyfQ0KcHJldHR5X2dyYXBoX3QyIDwtIHNpbXBsaWZ5KGdfc3Ryb25nX3QyKQ0KDQpWKHByZXR0eV9ncmFwaF90Mikkc2l6ZSA9IGlncmFwaDo6IGJldHdlZW5uZXNzKHByZXR0eV9ncmFwaF90Miwgbm9ybWFsaXplZCA9IFQsIGRpcmVjdGVkID0gVCkgKiAyNTAgKyA1MA0KDQpwbG90KHByZXR0eV9ncmFwaF90MiwNCiAgICAgdmVydGV4LmNvbG9yID0gInBpbmsiLA0KICAgICB2ZXJ0ZXguZnJhbWUuY29sb3IgPSAiZ3JheSIsDQogICAgIHZlcnRleC5sYWJlbC5jb2xvciA9ICJibGFjayIsDQogICAgIHZlcnRleC5sYWJlbCA9IE5BLA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4wNzUsDQogICAgIG1hcmdpbiA9IDAuMDEsDQogICAgIHJlc2NhbGUgPSBGQUxTRSwgeWxpbSA9IGMoLTksOSkpDQpgYGANCg0KPGJyPg0KDQojIyMjIE5vZGUgY29sb3VycyBiYXNlZCBvbiBjaXZpbCBzZXJ2aWNlIGF0dGl0dWRlcw0KQ3JlYXRlIHZhcmlhYmxlDQpgYGB7cn0NCklDX2RmMiA8LSBhcy5kYXRhLmZyYW1lKFQyY2l2ZW5nW1sxXV0pDQpJQ19kZjIkbWlzc2luZ3MgPC0gcm93U3Vtcyhpcy5uYShJQ19kZjIpKQ0KSUNfZGYyJGNlX3QyIDwtIGlmZWxzZShJQ19kZjIkbWlzc2luZ3MgPD0gMSwgcm93TWVhbnMoSUNfZGYyWywxOjRdKSwgTkEpDQoNCklDX2RmMiA8LSBJQ19kZjIgJT4lIA0KICByb3duYW1lc190b19jb2x1bW4odmFyID0gImlkIikgDQpgYGANCg0KQ3JlYXRlIHBsb3QsIHdpdGggZGlmZmVyaW5nIGNvbG91ciBmb3IgQ0UNCmBgYHtyfQ0KSUNfZGYyJGNlX3QyX2NhdCA8LSBjdXQoSUNfZGYyJGNlX3QyLA0KICAgICAgICAgICAgICAgICAgICAgICBicmVha3MgPSBjKDAsIDUsIDcpLA0KICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHM9IGMoJ2xpdHRsZScsICdtYW55JykpDQp0YWJsZShJQ19kZjIkY2VfdDIsIElDX2RmMiRjZV90Ml9jYXQpDQojY3V0b2ZmIHBvaW50IGZvciBub3cgY29tcGxldGVseSByYW5kb20NCg0KY29sb3VyIDwtIGlmZWxzZShJQ19kZjIkY2VfdDJfY2F0PT0nbGl0dGxlJywgImxpZ2h0cGluayIsICJwdXJwbGUiKQ0KDQpncmFwaF9DRV90MiA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoY29weV9zdHJvbmdfbmV0d190MiwgbW9kZSA9ICJkaXJlY3RlZCIpDQpncmFwaF9DRV90MiA8LSBzaW1wbGlmeShncmFwaF9DRV90MikNClYoZ3JhcGhfQ0VfdDIpJHNpemUgPSBpZ3JhcGg6OiBiZXR3ZWVubmVzcyhncmFwaF9DRV90Miwgbm9ybWFsaXplZCA9IFQsIGRpcmVjdGVkID0gVCkgKiAyNTAgKyA1MA0KYGBgDQoNCmBgYHtyfQ0KVihncmFwaF9DRV90Mikkc2l6ZSA9IGlncmFwaDo6IGJldHdlZW5uZXNzKGdyYXBoX0NFX3QyLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDI1MCArIDUwDQpwbG90MiA8LSBwbG90KGdyYXBoX0NFX3QyLA0KICAgICB2ZXJ0ZXguY29sb3IgPSBjb2xvdXIsDQogICAgIHZlcnRleC5zaXplID0gNSwgDQogICAgIHZlcnRleC5mcmFtZS5jb2xvciA9ICJncmF5IiwNCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsIA0KICAgICBlZGdlLmFycm93LnNpemUgPSAwLjEsDQogICAgIHZlcnRleC5sYWJlbCA9IE5BLA0KICAgICBsYXlvdXQgPSBsYXlvdXQpDQpsZWdlbmQoInRvcGxlZnQiLCBjKCJmZXciLCAiaGlnaCIsICJtaXNzaW5nIiksIHBjaCA9IDIxLCBjb2wgPSAiIzc3Nzc3NyIsIHB0LmJnID0gYygibGlnaHRwaW5rIiwgInB1cnBsZSIsICJ3aGl0ZSIpLCBwdC5jZXggPSAyLA0KICAgIGNleCA9IDAuOCwgYnR5ID0gIm4iLCBuY29sID0gMSkNCmBgYA0KDQoNCg==</div>
 
 
 </div>

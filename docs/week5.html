@@ -431,7 +431,9 @@ div.tocify {
 <div id="preparation-before-class" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Preparation before
 class</h1>
-<pre class="r"><code>library(&quot;network&quot;)
+<pre class="r"><code>rm(list = ls())
+
+library(&quot;network&quot;)
 library(&quot;sna&quot;)</code></pre>
 <pre><code>## sna: Tools for Social Network Analysis
 ## Version 2.8 created on 2024-09-07.
@@ -446,6 +448,7 @@ library(&quot;sna&quot;)</code></pre>
 ##     is.connected, neighborhood, triad.census</code></pre>
 <pre class="r"><code>load(&quot;./data/IndividualCharacteristics.RData&quot;)
 load(&quot;./data/NetworkCharacteristics.RData&quot;)
+load(&quot;./data/CivicAttitudes.RData&quot;)
 
 # view(hanging[[1]])
 hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
@@ -613,8 +616,349 @@ mean((ego_size(g_strong_t2, order = 2, mode = &quot;out&quot;) - 1)/vcount(g_str
 </div>
 </div>
 </div>
+<div id="trying-on-my-own-with-paula" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Trying on my own (with
+Paula)</h1>
+<div id="create-civic-engagement-attitudes" class="section level2"
+number="2.1">
+<h2><span class="header-section-number">2.1</span> Create civic
+engagement attitudes</h2>
+<div id="wave-1" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Wave 1</h3>
+<div id="factor-analysis" class="section level4" number="2.1.1.1">
+<h4><span class="header-section-number">2.1.1.1</span> Factor
+analysis</h4>
+<pre class="r"><code>IC_df &lt;- as.data.frame(T1civeng[[1]])
+# view(IC_df)
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0KYGBge3J9DQpsaWJyYXJ5KCJuZXR3b3JrIikNCmxpYnJhcnkoInNuYSIpDQoNCmxvYWQoIi4vZGF0YS9JbmRpdmlkdWFsQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9OZXR3b3JrQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCg0KIyB2aWV3KGhhbmdpbmdbWzFdXSkNCmhhbmdpbmdfZGZfdDEgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMV0pDQpjbGFzcyhoYW5naW5nX2RmX3QxKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDEpDQpzdHJvbmdfbmV0d190MSA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QxKQ0Kc3Ryb25nX25ldHdfdDFbc3Ryb25nX25ldHdfdDE9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDEpDQojIHZpZXcoc3Ryb25nX25ldHdfdDEpDQoNCmhhbmdpbmdfZGZfdDIgPC0gYXMuZGF0YS5mcmFtZShoYW5naW5nW1sxXV1bMl0pDQpjbGFzcyhoYW5naW5nX2RmX3QyKQ0KIyB2aWV3KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MiA8LSBkYXRhLm1hdHJpeChoYW5naW5nX2RmX3QyKQ0Kc3Ryb25nX25ldHdfdDJbc3Ryb25nX25ldHdfdDI9PTldPC1OQQ0KY2xhc3Moc3Ryb25nX25ldHdfdDIpDQojIHZpZXcoc3Ryb25nX25ldHdfdDIpDQpgYGANCg0KPGJyPg0KDQojIyBEZXNjcmlwdGl2ZSBzdGF0aXN0aWNzDQojIyMgRGVuc2l0eQ0KYGBge3J9DQojIFdhdmUgMQ0KbmV0dzEgPC0gYXMubmV0d29yayhzdHJvbmdfbmV0d190MSkNCm5ldHdvcmsuZGVuc2l0eShuZXR3MSkNCiMgMC4wMjcyMDM4Ng0KDQojIFdhdmUgMg0KbmV0dzIgPC0gYXMubmV0d29yayhzdHJvbmdfbmV0d190MikNCm5ldHdvcmsuZGVuc2l0eShuZXR3MikNCiMgMC4wMTg1OTUwNA0KYGBgDQojIyMgUmVjaXByb2NpdHkNCmBgYHtyfQ0KI1dhdmUgMQ0KaGFuZ2luZ3cxX25vbmEgPC0gbmFfaWYoaGFuZ2luZ1tbMV1dW1sxXV0sIDkpDQpyb3doYW5naW5ndzEgPC0gcm93U3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5yb3coaGFuZ2luZ3cxX25vbmEpDQpjb2xoYW5naW5ndzEgPC0gY29sU3Vtcyhpcy5uYShoYW5naW5ndzFfbm9uYSkpID09IG5jb2woaGFuZ2luZ3cxX25vbmEpDQpoYW5naW5ndzFfbm9uYVt3aGljaChyb3doYW5naW5ndzEpICwgXSA8LSAwDQoNCmdfc3Ryb25nX3QxIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChoYW5naW5ndzFfbm9uYSwgbW9kZSA9ICJkaXJlY3RlZCIpDQoNCnJlY2lwcm9jaXR5KGdfc3Ryb25nX3QxLCBpZ25vcmUubG9vcHMgPSBUUlVFLCBtb2RlID0gYygiZGVmYXVsdCIsICJyYXRpbyIpKQ0KIyAwLjQ3MDg4NjENCg0KIyBXYXZlIDINCmhhbmdpbmd3Ml9ub25hIDwtIG5hX2lmKGhhbmdpbmdbWzFdXVtbMl1dLCA5KQ0Kcm93aGFuZ2luZ3cyIDwtIHJvd1N1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBucm93KGhhbmdpbmd3Ml9ub25hKQ0KY29saGFuZ2luZ3cyIDwtIGNvbFN1bXMoaXMubmEoaGFuZ2luZ3cyX25vbmEpKSA9PSBuY29sKGhhbmdpbmd3Ml9ub25hKQ0KaGFuZ2luZ3cyX25vbmFbd2hpY2gocm93aGFuZ2luZ3cyKSAsIF0gPC0gMA0KDQpnX3N0cm9uZ190MiA8LSBpZ3JhcGg6OiBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoaGFuZ2luZ3cyX25vbmEsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KDQpyZWNpcHJvY2l0eShnX3N0cm9uZ190MiwgaWdub3JlLmxvb3BzID0gVFJVRSwgbW9kZSA9IGMoImRlZmF1bHQiLCAicmF0aW8iKSkNCiMgMC40NDQ0NDQ0DQpgYGANCg0KIyMjIER5YWQgY29uZmlndXJhdGlvbnMNCmBgYHtyfQ0KIyBXYXZlIDENCmR5YWRfY2Vuc3VzKGdfc3Ryb25nX3QxKQ0KIyBNdXR1YWwgdGllczogOTMNCiMgQXN5bW1ldHJpY2FsIHRpZXM6IDIwOQ0KIyBObyB0aWU6IDY5NTgNCg0KIyBXYXZlIDINCmR5YWRfY2Vuc3VzKGdfc3Ryb25nX3QyKQ0KIyBNdXR1YWwgdGllczogNjANCiMgQXN5bW1ldHJpY2FsIHRpZXM6IDE1MA0KIyBObyB0aWU6IDcwNTANCmBgYA0KIyMjIFRyaWFkIGNvbmZpZ3VyYXRpb25zDQpgYGB7cn0NCiMgV2F2ZSAxDQp0cmlhZF9jZW5zdXMoZ19zdHJvbmdfdDEpDQojIDAwMyA9IDI1MzgwOA0KIyAwMTIgPSAyMjU0OQ0KIyAxMDIgPSAxMDEwMQ0KIyAwMjFEID0gMjM1DQojIDAyMVUgPSAyNDMNCiMgMDIxQyA9IDIxOQ0KIyAxMTFEID0gMjQ3DQojIDExMVUgPSAyNTQNCiMgMDMwVCA9IDYxDQojIDAzMEMgPSAyDQojIDIwMSA9IDgwDQojIDEyMEQgPSA0MA0KIyAxMjBVID0gNTQNCiMgMTIwQyA9IDINCiMgMjEwID0gNDYNCiMgMzAwID0gMzkNCg0KIyBXYXZlIDINCnRyaWFkX2NlbnN1cyhnX3N0cm9uZ190MikNCiMgMDAzID0gMjYzODUzDQojIDAxMiA9IDE2NjU5DQojIDEwMiA9IDY3MTMNCiMgMDIxRCA9IDEzMw0KIyAwMjFVID0gMTI1DQojIDAyMUMgPSAxMjMNCiMgMTExRCA9IDg4DQojIDExMVUgPSAxMzINCiMgMDMwVCA9IDMwDQojIDAzMEMgPSAwDQojIDIwMSA9IDQ2DQojIDEyMEQgPSA5DQojIDEyMFUgPSAzOQ0KIyAxMjBDID0gMg0KIyAyMTAgPSAxOQ0KIyAzMDAgPSA5DQpgYGANCiMjIyBUcmFuc2l0aXZpdHkNCmBgYHtyfQ0KIyBXYXZlIDENCnRyYW5zaXRpdml0eShnX3N0cm9uZ190MSkNCiMgMC4zNjQxNzkxDQoNCiMgV2F2ZSAyDQp0cmFuc2l0aXZpdHkoZ19zdHJvbmdfdDIpDQojIDAuMzMzNjc2Ng0KYGBgDQojIyMgUGF0aCBsZW5ndGgNCmBgYHtyfQ0KIyBXYXZlIDENCm1lYW4oKGVnb19zaXplKGdfc3Ryb25nX3QxLCBvcmRlciA9IDIsIG1vZGUgPSAib3V0IikgLSAxKS92Y291bnQoZ19zdHJvbmdfdDEpKQ0KIyAwLjA3ODIwNTA0DQoNCiMgV2F2ZSAyDQptZWFuKChlZ29fc2l6ZShnX3N0cm9uZ190Miwgb3JkZXIgPSAyLCBtb2RlID0gIm91dCIpIC0gMSkvdmNvdW50KGdfc3Ryb25nX3QyKSkNCiMgMC4wNDU4MzAyDQpgYGANCg0K</div>
+# Sample size = 121 (has to be &gt; 300)
+psych::KMO(IC_df) </code></pre>
+<pre><code>## Kaiser-Meyer-Olkin factor adequacy
+## Call: psych::KMO(r = IC_df)
+## Overall MSA =  0.77
+## MSA for each item = 
+## T1CIVICENG1 T1CIVICENG2 T1CIVICENG3 T1CIVICENG4 
+##        0.83        0.72        0.73        0.85</code></pre>
+<pre class="r"><code># KMO = .77 (has to be &gt; .5)
+det(cor(IC_df, use = &quot;complete.obs&quot;)) </code></pre>
+<pre><code>## [1] 0.1928592</code></pre>
+<pre class="r"><code># Determinant = 0.1928592 (&gt; 0.00001)
+rcor.test(IC_df, use = &quot;complete.obs&quot;)</code></pre>
+<pre><code>## 
+##             T1CIVICENG1 T1CIVICENG2 T1CIVICENG3 T1CIVICENG4
+## T1CIVICENG1  *****       0.612       0.548       0.333     
+## T1CIVICENG2 &lt;0.001       *****       0.738       0.474     
+## T1CIVICENG3 &lt;0.001      &lt;0.001       *****       0.534     
+## T1CIVICENG4 &lt;0.001      &lt;0.001      &lt;0.001       *****     
+## 
+## upper diagonal part contains correlation coefficient estimates 
+## lower diagonal part contains corresponding p-values</code></pre>
+<pre class="r"><code># Only positive correlations (as it should be)
+
+corrplot(cor(IC_df, use=&quot;complete.obs&quot;), tl.col=&#39;black&#39;, tl.cex=.75) </code></pre>
+<p><img src="week5_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" /></p>
+<pre class="r"><code>Factors_w1 &lt;- fa(IC_df, nfactors = 4, rotate = &quot;none&quot;, fm = &quot;minres&quot;)
+Factors_w1</code></pre>
+<pre><code>## Factor Analysis using method =  minres
+## Call: fa(r = IC_df, nfactors = 4, rotate = &quot;none&quot;, fm = &quot;minres&quot;)
+## Standardized loadings (pattern matrix) based upon correlation matrix
+##              MR1   MR2   MR3 MR4   h2   u2 com
+## T1CIVICENG1 0.67 -0.23  0.05   0 0.50 0.50 1.2
+## T1CIVICENG2 0.87 -0.13 -0.03   0 0.78 0.22 1.0
+## T1CIVICENG3 0.86  0.13 -0.04   0 0.76 0.24 1.0
+## T1CIVICENG4 0.58  0.26  0.05   0 0.41 0.59 1.4
+## 
+##                        MR1  MR2  MR3  MR4
+## SS loadings           2.30 0.15 0.01 0.00
+## Proportion Var        0.57 0.04 0.00 0.00
+## Cumulative Var        0.57 0.61 0.61 0.61
+## Proportion Explained  0.93 0.06 0.00 0.00
+## Cumulative Proportion 0.93 1.00 1.00 1.00
+## 
+## Mean item complexity =  1.2
+## Test of the hypothesis that 4 factors are sufficient.
+## 
+## df null model =  6  with the objective function =  1.65 with Chi Square =  193.93
+## df of  the model are -4  and the objective function was  0 
+## 
+## The root mean square of the residuals (RMSR) is  0 
+## The df corrected root mean square of the residuals is  NA 
+## 
+## The harmonic n.obs is  108 with the empirical chi square  0  with prob &lt;  NA 
+## The total n.obs was  121  with Likelihood Chi Square =  0  with prob &lt;  NA 
+## 
+## Tucker Lewis Index of factoring reliability =  1.033
+## Fit based upon off diagonal values = 1
+## Measures of factor score adequacy             
+##                                                    MR1   MR2   MR3 MR4
+## Correlation of (regression) scores with factors   0.94  0.51  0.13   0
+## Multiple R square of scores with factors          0.89  0.26  0.02   0
+## Minimum correlation of possible factor scores     0.78 -0.47 -0.97  -1</code></pre>
+</div>
+<div id="reliability-analysis" class="section level4" number="2.1.1.2">
+<h4><span class="header-section-number">2.1.1.2</span> Reliability
+analysis</h4>
+<pre class="r"><code>reliability &lt;- psych::alpha(IC_df[, c(&quot;T1CIVICENG1&quot;,&quot;T1CIVICENG2&quot;,&quot;T1CIVICENG3&quot;,&quot;T1CIVICENG4&quot;)])
+reliability</code></pre>
+<pre><code>## 
+## Reliability analysis   
+## Call: psych::alpha(x = IC_df[, c(&quot;T1CIVICENG1&quot;, &quot;T1CIVICENG2&quot;, &quot;T1CIVICENG3&quot;, 
+##     &quot;T1CIVICENG4&quot;)])
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+##       0.81      0.82     0.8      0.54 4.7 0.029    5 0.94     0.54
+## 
+##     95% confidence boundaries 
+##          lower alpha upper
+## Feldt     0.75  0.81  0.86
+## Duhachek  0.75  0.81  0.87
+## 
+##  Reliability if an item is dropped:
+##             raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+## T1CIVICENG1      0.79      0.81    0.76      0.58 4.2    0.034 0.0192  0.53
+## T1CIVICENG2      0.72      0.73    0.66      0.47 2.7    0.045 0.0144  0.53
+## T1CIVICENG3      0.71      0.73    0.67      0.47 2.7    0.047 0.0194  0.47
+## T1CIVICENG4      0.83      0.84    0.79      0.63 5.2    0.027 0.0094  0.61
+## 
+##  Item statistics 
+##               n raw.r std.r r.cor r.drop mean   sd
+## T1CIVICENG1 109  0.77  0.77  0.65   0.57  4.8 1.23
+## T1CIVICENG2 108  0.85  0.87  0.84   0.75  5.5 0.99
+## T1CIVICENG3 108  0.86  0.87  0.84   0.74  5.2 1.10
+## T1CIVICENG4 108  0.75  0.72  0.57   0.51  4.6 1.35
+## 
+## Non missing response frequency for each item
+##                1    2    3    4    5    6    7 miss
+## T1CIVICENG1 0.02 0.02 0.07 0.29 0.31 0.21 0.07 0.10
+## T1CIVICENG2 0.00 0.00 0.02 0.17 0.30 0.38 0.14 0.11
+## T1CIVICENG3 0.00 0.00 0.05 0.26 0.32 0.23 0.14 0.11
+## T1CIVICENG4 0.00 0.07 0.11 0.28 0.27 0.18 0.09 0.11</code></pre>
+<pre class="r"><code># Raw alpha = 0.8096448
+# All r.drop are &gt; .3
+
+reliability$alpha.drop </code></pre>
+<pre><code>##             raw_alpha std.alpha   G6(smc) average_r      S/N   alpha se       var.r     med.r
+## T1CIVICENG1 0.7898278 0.8069117 0.7600961 0.5821131 4.178977 0.03376777 0.019243874 0.5341844
+## T1CIVICENG2 0.7184678 0.7282161 0.6620457 0.4717746 2.679393 0.04510940 0.014446190 0.5341844
+## T1CIVICENG3 0.7085011 0.7291575 0.6677994 0.4729614 2.692182 0.04688714 0.019424805 0.4737106
+## T1CIVICENG4 0.8294051 0.8379094 0.7883594 0.6327755 5.169390 0.02734554 0.009399533 0.6119581</code></pre>
+<pre class="r"><code># Removing T1CIVICENG4 results in a small increase of the Cronbach&#39;s alpha (0.82 instead of 0.81)</code></pre>
+</div>
+<div id="make-scale" class="section level4" number="2.1.1.3">
+<h4><span class="header-section-number">2.1.1.3</span> Make scale</h4>
+<pre class="r"><code>IC_df$missings &lt;- rowSums(is.na(IC_df))
+
+IC_df$ce_t1 &lt;- ifelse(IC_df$missings &lt;= 1, rowMeans(IC_df[,1:4]), NA)
+
+# View(IC_df)</code></pre>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="wave-2" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Wave 2</h2>
+<div id="factor-analysis-1" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Factor
+analysis</h3>
+<pre class="r"><code>IC_df2 &lt;- as.data.frame(T2civeng[[1]])
+#View(IC_df2)
+
+# Sample size = 121 (has to be &gt; 300)
+psych::KMO(IC_df2) </code></pre>
+<pre><code>## Kaiser-Meyer-Olkin factor adequacy
+## Call: psych::KMO(r = IC_df2)
+## Overall MSA =  0.81
+## MSA for each item = 
+## T2CIVICENG1 T2CIVICENG2 T2CIVICENG3 T2CIVICENG4 
+##        0.77        0.77        0.86        0.90</code></pre>
+<pre class="r"><code># KMO = .81 (has to be &gt; .5)
+det(cor(IC_df2, use = &quot;complete.obs&quot;)) </code></pre>
+<pre><code>## [1] 0.08336661</code></pre>
+<pre class="r"><code># Determinant = 0.08336661 (&gt; 0.00001)
+rcor.test(IC_df2, use = &quot;complete.obs&quot;)</code></pre>
+<pre><code>## 
+##             T2CIVICENG1 T2CIVICENG2 T2CIVICENG3 T2CIVICENG4
+## T2CIVICENG1  *****       0.818       0.718       0.575     
+## T2CIVICENG2 &lt;0.001       *****       0.707       0.604     
+## T2CIVICENG3 &lt;0.001      &lt;0.001       *****       0.600     
+## T2CIVICENG4 &lt;0.001      &lt;0.001      &lt;0.001       *****     
+## 
+## upper diagonal part contains correlation coefficient estimates 
+## lower diagonal part contains corresponding p-values</code></pre>
+<pre class="r"><code># Only positive correlations (as it should be)
+
+corrplot(cor(IC_df2, use=&quot;complete.obs&quot;), tl.col=&#39;black&#39;, tl.cex=.75) </code></pre>
+<p><img src="week5_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
+<pre class="r"><code>Factors_w2 &lt;- fa(IC_df2, nfactors = 4, rotate = &quot;none&quot;, fm = &quot;minres&quot;)
+Factors_w2</code></pre>
+<pre><code>## Factor Analysis using method =  minres
+## Call: fa(r = IC_df2, nfactors = 4, rotate = &quot;none&quot;, fm = &quot;minres&quot;)
+## Standardized loadings (pattern matrix) based upon correlation matrix
+##              MR1   MR2   MR3 MR4   h2   u2 com
+## T2CIVICENG1 0.90 -0.19 -0.06   0 0.84 0.16 1.1
+## T2CIVICENG2 0.90 -0.12  0.11   0 0.83 0.17 1.1
+## T2CIVICENG3 0.82  0.13 -0.11   0 0.71 0.29 1.1
+## T2CIVICENG4 0.70  0.24  0.07   0 0.55 0.45 1.3
+## 
+##                        MR1  MR2  MR3  MR4
+## SS loadings           2.77 0.13 0.03 0.00
+## Proportion Var        0.69 0.03 0.01 0.00
+## Cumulative Var        0.69 0.72 0.73 0.73
+## Proportion Explained  0.94 0.04 0.01 0.00
+## Cumulative Proportion 0.94 0.99 1.00 1.00
+## 
+## Mean item complexity =  1.1
+## Test of the hypothesis that 4 factors are sufficient.
+## 
+## df null model =  6  with the objective function =  2.48 with Chi Square =  292.76
+## df of  the model are -4  and the objective function was  0 
+## 
+## The root mean square of the residuals (RMSR) is  0 
+## The df corrected root mean square of the residuals is  NA 
+## 
+## The harmonic n.obs is  105 with the empirical chi square  0  with prob &lt;  NA 
+## The total n.obs was  121  with Likelihood Chi Square =  0  with prob &lt;  NA 
+## 
+## Tucker Lewis Index of factoring reliability =  1.021
+## Fit based upon off diagonal values = 1
+## Measures of factor score adequacy             
+##                                                    MR1   MR2   MR3 MR4
+## Correlation of (regression) scores with factors   0.96  0.56  0.37   0
+## Multiple R square of scores with factors          0.93  0.31  0.13   0
+## Minimum correlation of possible factor scores     0.85 -0.38 -0.73  -1</code></pre>
+<div id="reliability-analysis-1" class="section level4"
+number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> Reliability
+analysis</h4>
+<pre class="r"><code>reliability2 &lt;- psych::alpha(IC_df2[, c(&quot;T2CIVICENG1&quot;,&quot;T2CIVICENG2&quot;,&quot;T2CIVICENG3&quot;,&quot;T2CIVICENG4&quot;)])
+reliability2</code></pre>
+<pre><code>## 
+## Reliability analysis   
+## Call: psych::alpha(x = IC_df2[, c(&quot;T2CIVICENG1&quot;, &quot;T2CIVICENG2&quot;, &quot;T2CIVICENG3&quot;, 
+##     &quot;T2CIVICENG4&quot;)])
+## 
+##   raw_alpha std.alpha G6(smc) average_r S/N   ase mean   sd median_r
+##       0.88      0.89    0.87      0.67 8.1 0.017  5.1 0.99     0.66
+## 
+##     95% confidence boundaries 
+##          lower alpha upper
+## Feldt     0.85  0.88  0.92
+## Duhachek  0.85  0.88  0.92
+## 
+##  Reliability if an item is dropped:
+##             raw_alpha std.alpha G6(smc) average_r S/N alpha se  var.r med.r
+## T2CIVICENG1      0.83      0.84    0.78      0.64 5.3    0.026 0.0037  0.60
+## T2CIVICENG2      0.83      0.84    0.78      0.63 5.1    0.027 0.0058  0.60
+## T2CIVICENG3      0.85      0.86    0.82      0.67 6.0    0.025 0.0176  0.60
+## T2CIVICENG4      0.90      0.90    0.86      0.75 8.9    0.016 0.0037  0.72
+## 
+##  Item statistics 
+##               n raw.r std.r r.cor r.drop mean  sd
+## T2CIVICENG1 105  0.90  0.90  0.87   0.80  4.9 1.2
+## T2CIVICENG2 105  0.89  0.90  0.88   0.82  5.4 1.0
+## T2CIVICENG3 105  0.87  0.87  0.81   0.76  5.2 1.1
+## T2CIVICENG4 105  0.81  0.80  0.68   0.65  4.8 1.3
+## 
+## Non missing response frequency for each item
+##                1    2    3    4    5    6    7 miss
+## T2CIVICENG1 0.01 0.03 0.08 0.24 0.31 0.26 0.08 0.13
+## T2CIVICENG2 0.00 0.00 0.04 0.15 0.32 0.36 0.12 0.13
+## T2CIVICENG3 0.00 0.01 0.02 0.30 0.26 0.32 0.10 0.13
+## T2CIVICENG4 0.01 0.02 0.13 0.21 0.29 0.28 0.07 0.13</code></pre>
+<pre class="r"><code># Raw alpha = 0.8848902
+# All r.drop are &gt; .3
+
+reliability2$alpha.drop </code></pre>
+<pre><code>##             raw_alpha std.alpha   G6(smc) average_r      S/N   alpha se       var.r     med.r
+## T2CIVICENG1 0.8327506 0.8404272 0.7834358 0.6370996 5.266730 0.02635169 0.003694115 0.6040620
+## T2CIVICENG2 0.8322631 0.8370127 0.7819057 0.6312434 5.135448 0.02660464 0.005832812 0.5999946
+## T2CIVICENG3 0.8476004 0.8566874 0.8227534 0.6658407 5.977754 0.02465003 0.017571187 0.6040620
+## T2CIVICENG4 0.8957759 0.8989641 0.8619178 0.7478456 8.897474 0.01604395 0.003722723 0.7182852</code></pre>
+<pre class="r"><code># Removing T1CIVICENG4 results in a small increase of the Cronbach&#39;s alpha (0.88 instead of 0.90)</code></pre>
+</div>
+<div id="make-scale-1" class="section level4" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> Make scale</h4>
+<pre class="r"><code>IC_df2$missings &lt;- rowSums(is.na(IC_df2))
+
+IC_df2$ce_t2 &lt;- ifelse(IC_df2$missings &lt;= 1, rowMeans(IC_df2[,1:4]), NA)
+
+# View(IC_df2)</code></pre>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="data-prep-for-rsiena" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Data prep for
+RSiena</h2>
+<div id="behavioural-data-in-matrix" class="section level3"
+number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Behavioural data in
+matrix</h3>
+<pre class="r"><code>IC_df &lt;- IC_df %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) 
+
+IC_df2 &lt;- IC_df2 %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) 
+
+IC_df &lt;- left_join(IC_df, IC_df2, by=c(&quot;id&quot;))
+
+behy &lt;- IC_df %&gt;% 
+  dplyr::select(&quot;ce_t1&quot;, &quot;ce_t2&quot;) %&gt;% 
+  as.matrix()</code></pre>
+</div>
+<div id="make-rsiena-object" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Make RSiena
+object</h3>
+<pre class="r"><code>behy &lt;- sienaDependent(behy, type = c(&quot;behavior&quot;))
+
+nety &lt;- sienaDependent(array(data= c(strong_netw_t1, strong_netw_t2), dim=c(dim(strong_netw_t1),2)))
+
+# Into one (RSiena) data frame
+mydata &lt;- sienaDataCreate(behy, nety)
+
+myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;test&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file test.txt .</code></pre>
+<pre class="r"><code>print01Report(mydata, modelname = &quot;./results/test&quot;)</code></pre>
+</div>
+<div id="simple-model" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Simple model</h3>
+<pre class="r"><code>myeff &lt;- getEffects(mydata)
+ans &lt;- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)</code></pre>
+</div>
+<div id="changing-the-effects-statistics" class="section level3"
+number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Changing the
+effects/ statistics</h3>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, avAlt, name = &quot;behy&quot;, interaction1=&quot;nety&quot;) # You use nety to predict behy</code></pre>
+<pre><code>##   effectNumber effectName         shortName include fix   test  initialValue parm
+## 1 588          behy average alter avAlt     TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code>ans &lt;- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
+
+ans</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                     Estimate   Standard   Convergence 
+##                                                  Error      t-ratio   
+## Network Dynamics 
+##   1. rate basic rate parameter nety  6.6670  ( 0.5372   )    0.0042   
+##   2. eval outdegree (density)       -2.6383  ( 0.0830   )   -0.0604   
+##   3. eval reciprocity                2.2162  ( 0.1811   )   -0.0358   
+## 
+## Behavior Dynamics
+##   4. rate rate behy period 1         2.4262  ( 0.5216   )   -0.0074   
+##   5. eval behy linear shape          0.1874  ( 0.1172   )   -0.0539   
+##   6. eval behy quadratic shape      -0.2773  ( 0.0736   )    0.0690   
+##   7. eval behy average alter        -0.1057  ( 0.4521   )   -0.0267   
+## 
+## Overall maximum convergence ratio:    0.1126 
+## 
+## 
+## Total of 2750 iteration steps.</code></pre>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0KYGBge3J9DQpybShsaXN0ID0gbHMoKSkNCg0KbGlicmFyeSgibmV0d29yayIpDQpsaWJyYXJ5KCJzbmEiKQ0KDQpsb2FkKCIuL2RhdGEvSW5kaXZpZHVhbENoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvTmV0d29ya0NoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvQ2l2aWNBdHRpdHVkZXMuUkRhdGEiKQ0KDQojIHZpZXcoaGFuZ2luZ1tbMV1dKQ0KaGFuZ2luZ19kZl90MSA8LSBhcy5kYXRhLmZyYW1lKGhhbmdpbmdbWzFdXVsxXSkNCmNsYXNzKGhhbmdpbmdfZGZfdDEpDQojIHZpZXcoaGFuZ2luZ19kZl90MSkNCnN0cm9uZ19uZXR3X3QxIDwtIGRhdGEubWF0cml4KGhhbmdpbmdfZGZfdDEpDQpzdHJvbmdfbmV0d190MVtzdHJvbmdfbmV0d190MT09OV08LU5BDQpjbGFzcyhzdHJvbmdfbmV0d190MSkNCiMgdmlldyhzdHJvbmdfbmV0d190MSkNCg0KaGFuZ2luZ19kZl90MiA8LSBhcy5kYXRhLmZyYW1lKGhhbmdpbmdbWzFdXVsyXSkNCmNsYXNzKGhhbmdpbmdfZGZfdDIpDQojIHZpZXcoaGFuZ2luZ19kZl90MikNCnN0cm9uZ19uZXR3X3QyIDwtIGRhdGEubWF0cml4KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MltzdHJvbmdfbmV0d190Mj09OV08LU5BDQpjbGFzcyhzdHJvbmdfbmV0d190MikNCiMgdmlldyhzdHJvbmdfbmV0d190MikNCmBgYA0KDQo8YnI+DQoNCiMjIERlc2NyaXB0aXZlIHN0YXRpc3RpY3MNCiMjIyBEZW5zaXR5DQpgYGB7cn0NCiMgV2F2ZSAxDQpuZXR3MSA8LSBhcy5uZXR3b3JrKHN0cm9uZ19uZXR3X3QxKQ0KbmV0d29yay5kZW5zaXR5KG5ldHcxKQ0KIyAwLjAyNzIwMzg2DQoNCiMgV2F2ZSAyDQpuZXR3MiA8LSBhcy5uZXR3b3JrKHN0cm9uZ19uZXR3X3QyKQ0KbmV0d29yay5kZW5zaXR5KG5ldHcyKQ0KIyAwLjAxODU5NTA0DQpgYGANCiMjIyBSZWNpcHJvY2l0eQ0KYGBge3J9DQojV2F2ZSAxDQpoYW5naW5ndzFfbm9uYSA8LSBuYV9pZihoYW5naW5nW1sxXV1bWzFdXSwgOSkNCnJvd2hhbmdpbmd3MSA8LSByb3dTdW1zKGlzLm5hKGhhbmdpbmd3MV9ub25hKSkgPT0gbnJvdyhoYW5naW5ndzFfbm9uYSkNCmNvbGhhbmdpbmd3MSA8LSBjb2xTdW1zKGlzLm5hKGhhbmdpbmd3MV9ub25hKSkgPT0gbmNvbChoYW5naW5ndzFfbm9uYSkNCmhhbmdpbmd3MV9ub25hW3doaWNoKHJvd2hhbmdpbmd3MSkgLCBdIDwtIDANCg0KZ19zdHJvbmdfdDEgPC0gaWdyYXBoOjogZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGhhbmdpbmd3MV9ub25hLCBtb2RlID0gImRpcmVjdGVkIikNCg0KcmVjaXByb2NpdHkoZ19zdHJvbmdfdDEsIGlnbm9yZS5sb29wcyA9IFRSVUUsIG1vZGUgPSBjKCJkZWZhdWx0IiwgInJhdGlvIikpDQojIDAuNDcwODg2MQ0KDQojIFdhdmUgMg0KaGFuZ2luZ3cyX25vbmEgPC0gbmFfaWYoaGFuZ2luZ1tbMV1dW1syXV0sIDkpDQpyb3doYW5naW5ndzIgPC0gcm93U3Vtcyhpcy5uYShoYW5naW5ndzJfbm9uYSkpID09IG5yb3coaGFuZ2luZ3cyX25vbmEpDQpjb2xoYW5naW5ndzIgPC0gY29sU3Vtcyhpcy5uYShoYW5naW5ndzJfbm9uYSkpID09IG5jb2woaGFuZ2luZ3cyX25vbmEpDQpoYW5naW5ndzJfbm9uYVt3aGljaChyb3doYW5naW5ndzIpICwgXSA8LSAwDQoNCmdfc3Ryb25nX3QyIDwtIGlncmFwaDo6IGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChoYW5naW5ndzJfbm9uYSwgbW9kZSA9ICJkaXJlY3RlZCIpDQoNCnJlY2lwcm9jaXR5KGdfc3Ryb25nX3QyLCBpZ25vcmUubG9vcHMgPSBUUlVFLCBtb2RlID0gYygiZGVmYXVsdCIsICJyYXRpbyIpKQ0KIyAwLjQ0NDQ0NDQNCmBgYA0KDQojIyMgRHlhZCBjb25maWd1cmF0aW9ucw0KYGBge3J9DQojIFdhdmUgMQ0KZHlhZF9jZW5zdXMoZ19zdHJvbmdfdDEpDQojIE11dHVhbCB0aWVzOiA5Mw0KIyBBc3ltbWV0cmljYWwgdGllczogMjA5DQojIE5vIHRpZTogNjk1OA0KDQojIFdhdmUgMg0KZHlhZF9jZW5zdXMoZ19zdHJvbmdfdDIpDQojIE11dHVhbCB0aWVzOiA2MA0KIyBBc3ltbWV0cmljYWwgdGllczogMTUwDQojIE5vIHRpZTogNzA1MA0KYGBgDQojIyMgVHJpYWQgY29uZmlndXJhdGlvbnMNCmBgYHtyfQ0KIyBXYXZlIDENCnRyaWFkX2NlbnN1cyhnX3N0cm9uZ190MSkNCiMgMDAzID0gMjUzODA4DQojIDAxMiA9IDIyNTQ5DQojIDEwMiA9IDEwMTAxDQojIDAyMUQgPSAyMzUNCiMgMDIxVSA9IDI0Mw0KIyAwMjFDID0gMjE5DQojIDExMUQgPSAyNDcNCiMgMTExVSA9IDI1NA0KIyAwMzBUID0gNjENCiMgMDMwQyA9IDINCiMgMjAxID0gODANCiMgMTIwRCA9IDQwDQojIDEyMFUgPSA1NA0KIyAxMjBDID0gMg0KIyAyMTAgPSA0Ng0KIyAzMDAgPSAzOQ0KDQojIFdhdmUgMg0KdHJpYWRfY2Vuc3VzKGdfc3Ryb25nX3QyKQ0KIyAwMDMgPSAyNjM4NTMNCiMgMDEyID0gMTY2NTkNCiMgMTAyID0gNjcxMw0KIyAwMjFEID0gMTMzDQojIDAyMVUgPSAxMjUNCiMgMDIxQyA9IDEyMw0KIyAxMTFEID0gODgNCiMgMTExVSA9IDEzMg0KIyAwMzBUID0gMzANCiMgMDMwQyA9IDANCiMgMjAxID0gNDYNCiMgMTIwRCA9IDkNCiMgMTIwVSA9IDM5DQojIDEyMEMgPSAyDQojIDIxMCA9IDE5DQojIDMwMCA9IDkNCmBgYA0KIyMjIFRyYW5zaXRpdml0eQ0KYGBge3J9DQojIFdhdmUgMQ0KdHJhbnNpdGl2aXR5KGdfc3Ryb25nX3QxKQ0KIyAwLjM2NDE3OTENCg0KIyBXYXZlIDINCnRyYW5zaXRpdml0eShnX3N0cm9uZ190MikNCiMgMC4zMzM2NzY2DQpgYGANCiMjIyBQYXRoIGxlbmd0aA0KYGBge3J9DQojIFdhdmUgMQ0KbWVhbigoZWdvX3NpemUoZ19zdHJvbmdfdDEsIG9yZGVyID0gMiwgbW9kZSA9ICJvdXQiKSAtIDEpL3Zjb3VudChnX3N0cm9uZ190MSkpDQojIDAuMDc4MjA1MDQNCg0KIyBXYXZlIDINCm1lYW4oKGVnb19zaXplKGdfc3Ryb25nX3QyLCBvcmRlciA9IDIsIG1vZGUgPSAib3V0IikgLSAxKS92Y291bnQoZ19zdHJvbmdfdDIpKQ0KIyAwLjA0NTgzMDINCmBgYA0KDQojIFRyeWluZyBvbiBteSBvd24gKHdpdGggUGF1bGEpDQojIyBDcmVhdGUgY2l2aWMgZW5nYWdlbWVudCBhdHRpdHVkZXMNCiMjIyBXYXZlIDENCiMjIyMgRmFjdG9yIGFuYWx5c2lzDQpgYGB7cn0NCklDX2RmIDwtIGFzLmRhdGEuZnJhbWUoVDFjaXZlbmdbWzFdXSkNCiMgdmlldyhJQ19kZikNCg0KIyBTYW1wbGUgc2l6ZSA9IDEyMSAoaGFzIHRvIGJlID4gMzAwKQ0KcHN5Y2g6OktNTyhJQ19kZikgDQojIEtNTyA9IC43NyAoaGFzIHRvIGJlID4gLjUpDQpkZXQoY29yKElDX2RmLCB1c2UgPSAiY29tcGxldGUub2JzIikpIA0KIyBEZXRlcm1pbmFudCA9IDAuMTkyODU5MiAoPiAwLjAwMDAxKQ0KcmNvci50ZXN0KElDX2RmLCB1c2UgPSAiY29tcGxldGUub2JzIikNCiMgT25seSBwb3NpdGl2ZSBjb3JyZWxhdGlvbnMgKGFzIGl0IHNob3VsZCBiZSkNCg0KY29ycnBsb3QoY29yKElDX2RmLCB1c2U9ImNvbXBsZXRlLm9icyIpLCB0bC5jb2w9J2JsYWNrJywgdGwuY2V4PS43NSkgDQoNCkZhY3RvcnNfdzEgPC0gZmEoSUNfZGYsIG5mYWN0b3JzID0gNCwgcm90YXRlID0gIm5vbmUiLCBmbSA9ICJtaW5yZXMiKQ0KRmFjdG9yc193MQ0KYGBgDQoNCiMjIyMgUmVsaWFiaWxpdHkgYW5hbHlzaXMNCmBgYHtyfQ0KcmVsaWFiaWxpdHkgPC0gcHN5Y2g6OmFscGhhKElDX2RmWywgYygiVDFDSVZJQ0VORzEiLCJUMUNJVklDRU5HMiIsIlQxQ0lWSUNFTkczIiwiVDFDSVZJQ0VORzQiKV0pDQpyZWxpYWJpbGl0eQ0KIyBSYXcgYWxwaGEgPSAwLjgwOTY0NDgNCiMgQWxsIHIuZHJvcCBhcmUgPiAuMw0KDQpyZWxpYWJpbGl0eSRhbHBoYS5kcm9wIA0KIyBSZW1vdmluZyBUMUNJVklDRU5HNCByZXN1bHRzIGluIGEgc21hbGwgaW5jcmVhc2Ugb2YgdGhlIENyb25iYWNoJ3MgYWxwaGEgKDAuODIgaW5zdGVhZCBvZiAwLjgxKQ0KYGBgDQoNCiMjIyMgTWFrZSBzY2FsZQ0KYGBge3J9DQpJQ19kZiRtaXNzaW5ncyA8LSByb3dTdW1zKGlzLm5hKElDX2RmKSkNCg0KSUNfZGYkY2VfdDEgPC0gaWZlbHNlKElDX2RmJG1pc3NpbmdzIDw9IDEsIHJvd01lYW5zKElDX2RmWywxOjRdKSwgTkEpDQoNCiMgVmlldyhJQ19kZikNCmBgYA0KDQo8YnI+DQoNCiMjIFdhdmUgMg0KIyMjIEZhY3RvciBhbmFseXNpcw0KYGBge3J9DQpJQ19kZjIgPC0gYXMuZGF0YS5mcmFtZShUMmNpdmVuZ1tbMV1dKQ0KI1ZpZXcoSUNfZGYyKQ0KDQojIFNhbXBsZSBzaXplID0gMTIxIChoYXMgdG8gYmUgPiAzMDApDQpwc3ljaDo6S01PKElDX2RmMikgDQojIEtNTyA9IC44MSAoaGFzIHRvIGJlID4gLjUpDQpkZXQoY29yKElDX2RmMiwgdXNlID0gImNvbXBsZXRlLm9icyIpKSANCiMgRGV0ZXJtaW5hbnQgPSAwLjA4MzM2NjYxICg+IDAuMDAwMDEpDQpyY29yLnRlc3QoSUNfZGYyLCB1c2UgPSAiY29tcGxldGUub2JzIikNCiMgT25seSBwb3NpdGl2ZSBjb3JyZWxhdGlvbnMgKGFzIGl0IHNob3VsZCBiZSkNCg0KY29ycnBsb3QoY29yKElDX2RmMiwgdXNlPSJjb21wbGV0ZS5vYnMiKSwgdGwuY29sPSdibGFjaycsIHRsLmNleD0uNzUpIA0KDQpGYWN0b3JzX3cyIDwtIGZhKElDX2RmMiwgbmZhY3RvcnMgPSA0LCByb3RhdGUgPSAibm9uZSIsIGZtID0gIm1pbnJlcyIpDQpGYWN0b3JzX3cyDQpgYGANCg0KIyMjIyBSZWxpYWJpbGl0eSBhbmFseXNpcw0KYGBge3J9DQpyZWxpYWJpbGl0eTIgPC0gcHN5Y2g6OmFscGhhKElDX2RmMlssIGMoIlQyQ0lWSUNFTkcxIiwiVDJDSVZJQ0VORzIiLCJUMkNJVklDRU5HMyIsIlQyQ0lWSUNFTkc0IildKQ0KcmVsaWFiaWxpdHkyDQojIFJhdyBhbHBoYSA9IDAuODg0ODkwMg0KIyBBbGwgci5kcm9wIGFyZSA+IC4zDQoNCnJlbGlhYmlsaXR5MiRhbHBoYS5kcm9wIA0KIyBSZW1vdmluZyBUMUNJVklDRU5HNCByZXN1bHRzIGluIGEgc21hbGwgaW5jcmVhc2Ugb2YgdGhlIENyb25iYWNoJ3MgYWxwaGEgKDAuODggaW5zdGVhZCBvZiAwLjkwKQ0KYGBgDQoNCiMjIyMgTWFrZSBzY2FsZQ0KYGBge3J9DQpJQ19kZjIkbWlzc2luZ3MgPC0gcm93U3Vtcyhpcy5uYShJQ19kZjIpKQ0KDQpJQ19kZjIkY2VfdDIgPC0gaWZlbHNlKElDX2RmMiRtaXNzaW5ncyA8PSAxLCByb3dNZWFucyhJQ19kZjJbLDE6NF0pLCBOQSkNCg0KIyBWaWV3KElDX2RmMikNCmBgYA0KDQo8YnI+DQoNCiMjIERhdGEgcHJlcCBmb3IgUlNpZW5hDQojIyMgQmVoYXZpb3VyYWwgZGF0YSBpbiBtYXRyaXgNCmBgYHtyfQ0KSUNfZGYgPC0gSUNfZGYgJT4lIA0KICByb3duYW1lc190b19jb2x1bW4odmFyID0gImlkIikgDQoNCklDX2RmMiA8LSBJQ19kZjIgJT4lIA0KICByb3duYW1lc190b19jb2x1bW4odmFyID0gImlkIikgDQoNCklDX2RmIDwtIGxlZnRfam9pbihJQ19kZiwgSUNfZGYyLCBieT1jKCJpZCIpKQ0KDQpiZWh5IDwtIElDX2RmICU+JSANCiAgZHBseXI6OnNlbGVjdCgiY2VfdDEiLCAiY2VfdDIiKSAlPiUgDQogIGFzLm1hdHJpeCgpDQpgYGANCg0KIyMjIE1ha2UgUlNpZW5hIG9iamVjdA0KYGBge3J9DQpiZWh5IDwtIHNpZW5hRGVwZW5kZW50KGJlaHksIHR5cGUgPSBjKCJiZWhhdmlvciIpKQ0KDQpuZXR5IDwtIHNpZW5hRGVwZW5kZW50KGFycmF5KGRhdGE9IGMoc3Ryb25nX25ldHdfdDEsIHN0cm9uZ19uZXR3X3QyKSwgZGltPWMoZGltKHN0cm9uZ19uZXR3X3QxKSwyKSkpDQoNCiMgSW50byBvbmUgKFJTaWVuYSkgZGF0YSBmcmFtZQ0KbXlkYXRhIDwtIHNpZW5hRGF0YUNyZWF0ZShiZWh5LCBuZXR5KQ0KDQpteUFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJ0ZXN0IikNCnByaW50MDFSZXBvcnQobXlkYXRhLCBtb2RlbG5hbWUgPSAiLi9yZXN1bHRzL3Rlc3QiKQ0KYGBgDQoNCiMjIyBTaW1wbGUgbW9kZWwNCmBgYHtyfQ0KbXllZmYgPC0gZ2V0RWZmZWN0cyhteWRhdGEpDQphbnMgPC0gc2llbmEwNyhteUFsZ29yaXRobSwgZGF0YSA9IG15ZGF0YSwgZWZmZWN0cyA9IG15ZWZmLCByZXR1cm5EZXBzID0gVFJVRSkNCmBgYA0KDQojIyMgQ2hhbmdpbmcgdGhlIGVmZmVjdHMvIHN0YXRpc3RpY3MNCmBgYHtyfQ0KbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIGF2QWx0LCBuYW1lID0gImJlaHkiLCBpbnRlcmFjdGlvbjE9Im5ldHkiKSAjIFlvdSB1c2UgbmV0eSB0byBwcmVkaWN0IGJlaHkNCg0KYW5zIDwtIHNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEsIGVmZmVjdHMgPSBteWVmZiwgcmV0dXJuRGVwcyA9IFRSVUUpDQoNCmFucw0KYGBgDQoNCg0KDQo=</div>
 
 
 </div>
