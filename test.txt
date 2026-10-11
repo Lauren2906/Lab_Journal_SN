@@ -3896,3 +3896,1223 @@ covariance/correlation matrix of X can be found using
 summary(ans) within R, or by using the 'verbose' option in Siena07.
  
 Total computation time 37.5 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 09/10/2026 16:35:04
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 517407.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2647 iterations.
+Parameter estimates based on 1647 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.6620  13.8861   0.0477 
+  2.  -0.4500  14.6930  -0.0306 
+  3.   0.3780  11.1726   0.0338 
+  4.   0.0850   6.8376   0.0124 
+  5.  -0.3550   8.4263  -0.0421 
+  6.   0.5134  12.0105   0.0427 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1219 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2647 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.6472  (   0.5150)
+ 2. eval:  outdegree (density)                                    -2.6343  (   0.0824)
+ 3. eval:  reciprocity                                             2.2074  (   0.1755)
+
+Behavior Dynamics
+ 4. rate:  rate behy period 1                                      2.4651  (   0.5280)
+ 5. eval:  behy linear shape                                       0.1802  (   0.1028)
+ 6. eval:  behy quadratic shape                                   -0.2784  (   0.0720)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.265      0.005      0.005     -0.019      0.000      0.002
+     0.121      0.007     -0.008      0.004     -0.001      0.001
+     0.051     -0.585      0.031     -0.005      0.001     -0.001
+    -0.070      0.083     -0.057      0.279     -0.011     -0.006
+    -0.004     -0.078      0.053     -0.207      0.011      0.000
+     0.055      0.130     -0.112     -0.152     -0.014      0.005
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 60.53 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 09:36:23
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 714056.
+Effects object used: myeff_1 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  GWESP I -> K -> J (69)                          0.0000
+  6. eval:  network-isolate                                 0.0000
+  7. eval:  out-Jaccard similarity                          0.0000
+  8. rate:  rate behy period 1                              0.8473
+  9. eval:  behy linear shape                               0.0863
+ 10. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Number of transitive triplets                                      211.0000
+  5. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  6. Number of isolates                                                  19.0000
+  7. Out-Jaccard similarity                                              29.1476
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 10 parameters, 10 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2926 iterations.
+Parameter estimates based on 1926 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.6370  13.7141  -0.0464 
+  2. -36.7170  19.9646  -1.8391 
+  3.   2.5060  18.0169   0.1391 
+  4. -18.1010  40.0124  -0.4524 
+  5.  -9.2707  30.2729  -0.3062 
+  6.   1.9860   3.9006   0.5091 
+  7.  -0.1689   5.0142  -0.0337 
+  8.   3.3230   6.2924   0.5281 
+  9.  17.6490   6.6022   2.6732 
+ 10. -32.8793   8.2591  -3.9810 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  8.187 .
+One or more of the t-statistics are rather large.
+Convergence of the algorithm is doubtful.
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2926 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4878  (   1.2724)
+ 2. eval:  outdegree (density)                                    -5.8575  (   3.0125)
+ 3. eval:  reciprocity                                             4.9502  (   3.3956)
+ 4. eval:  transitive triplets                                    -1.8836  (   1.2977)
+ 5. eval:  GWESP I -> K -> J (69)                                  7.2491  (   4.8090)
+ 6. eval:  network-isolate                                        -5.6556  (   4.7735)
+ 7. eval:  out-Jaccard similarity                                  1.3388  (   3.0872)
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      2.3748  (   0.5919)
+ 9. eval:  behy linear shape                                       0.7057  (   0.2411)
+10. eval:  behy quadratic shape                                   -0.7947  (   0.1910)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     1.619      3.374     -3.833      1.449     -5.481      5.310      2.155      0.352     -0.041     -0.054
+     0.880      9.075    -10.174      3.736    -14.359     14.089      5.141      1.041     -0.083     -0.107
+    -0.887     -0.995     11.530     -4.206     16.154    -15.714     -6.162     -1.146      0.088      0.125
+     0.878      0.956     -0.955      1.684     -6.133      5.815      1.471      0.462     -0.052     -0.038
+    -0.896     -0.991      0.989     -0.983     23.127    -22.279     -7.551     -1.682      0.157      0.159
+     0.874      0.980     -0.969      0.939     -0.971     22.786      7.616      1.633     -0.158     -0.165
+     0.549      0.553     -0.588      0.367     -0.509      0.517      9.531      0.239      0.060     -0.113
+     0.467      0.584     -0.570      0.602     -0.591      0.578      0.131      0.350     -0.061      0.016
+    -0.133     -0.115      0.107     -0.165      0.135     -0.137      0.080     -0.427      0.058     -0.028
+    -0.221     -0.186      0.193     -0.155      0.173     -0.181     -0.191      0.139     -0.616      0.036
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 454.85 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 09:45:49
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 467860.
+Effects object used: myeff_1 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  GWESP I -> K -> J (69)                          0.0000
+  6. eval:  network-isolate                                 0.0000
+  7. eval:  out-Jaccard similarity                          0.0000
+  8. rate:  rate behy period 1                              0.8473
+  9. eval:  behy linear shape                               0.0863
+ 10. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Number of transitive triplets                                      211.0000
+  5. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  6. Number of isolates                                                  19.0000
+  7. Out-Jaccard similarity                                              29.1476
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 10 parameters, 10 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 3026 iterations.
+Parameter estimates based on 2026 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.2030  14.5592   0.0139 
+  2.   0.1190  18.7031   0.0064 
+  3.   0.4180  14.4952   0.0288 
+  4.   0.8040  37.6148   0.0214 
+  5.   1.1268  26.3447   0.0428 
+  6.  -0.2810   4.0108  -0.0701 
+  7.   0.0851   5.0485   0.0169 
+  8.  -0.0540   6.9283  -0.0078 
+  9.  -0.4220   8.6137  -0.0490 
+ 10.  -0.4316  11.8542  -0.0364 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.2154 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 3026 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               8.4823  (   0.7121)
+ 2. eval:  outdegree (density)                                    -2.9802  (   0.2255)
+ 3. eval:  reciprocity                                             1.8112  (   0.3903)
+ 4. eval:  transitive triplets                                    -0.6998  (   0.3290)
+ 5. eval:  GWESP I -> K -> J (69)                                  2.3236  (   1.0933)
+ 6. eval:  network-isolate                                         1.9507  (   2.2818)
+ 7. eval:  out-Jaccard similarity                                  5.2916  (   1.5616)
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      2.4509  (   0.5140)
+ 9. eval:  behy linear shape                                       0.1776  (   0.1155)
+10. eval:  behy quadratic shape                                   -0.2817  (   0.1069)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.507      0.009      0.012      0.007      0.020      0.096     -0.103     -0.076      0.014     -0.007
+     0.055      0.051     -0.075      0.063     -0.223      0.420      0.186      0.044     -0.004      0.013
+     0.044     -0.848      0.152     -0.101      0.366     -0.671     -0.439     -0.060      0.007     -0.022
+     0.029      0.846     -0.783      0.108     -0.347      0.540      0.187      0.056     -0.004      0.018
+     0.026     -0.905      0.857     -0.965      1.195     -1.981     -0.960     -0.197      0.017     -0.065
+     0.059      0.816     -0.753      0.719     -0.794      5.206      2.246      0.369     -0.038      0.154
+    -0.093      0.527     -0.720      0.363     -0.562      0.630      2.439      0.104     -0.021      0.075
+    -0.207      0.378     -0.300      0.329     -0.350      0.315      0.129      0.264     -0.024      0.023
+     0.176     -0.157      0.156     -0.111      0.136     -0.146     -0.114     -0.404      0.013     -0.003
+    -0.098      0.541     -0.539      0.499     -0.558      0.631      0.450      0.424     -0.251      0.011
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 73.44 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 10:04:12
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 52326.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 10:04:18
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 633410.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2669 iterations.
+Parameter estimates based on 1669 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.7510  13.9548   0.0538 
+  2.  -0.5670  15.7744  -0.0359 
+  3.  -0.0180  11.6342  -0.0015 
+  4.   0.4730   6.8421   0.0691 
+  5.  -0.0330   8.9574  -0.0037 
+  6.   0.7180  11.8299   0.0607 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1172 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2669 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.6829  (   0.5541)
+ 2. eval:  outdegree (density)                                    -2.6345  (   0.0831)
+ 3. eval:  reciprocity                                             2.2093  (   0.1845)
+
+Behavior Dynamics
+ 4. rate:  rate behy period 1                                      2.4728  (   0.5985)
+ 5. eval:  behy linear shape                                       0.1810  (   0.1017)
+ 6. eval:  behy quadratic shape                                   -0.2770  (   0.0772)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.307      0.006      0.005     -0.023      0.004     -0.001
+     0.134      0.007     -0.010      0.004     -0.001      0.000
+     0.045     -0.673      0.034     -0.011      0.001      0.000
+    -0.069      0.078     -0.101      0.358     -0.016      0.009
+     0.079     -0.062      0.032     -0.256      0.010      0.000
+    -0.024     -0.030     -0.012      0.196     -0.059      0.006
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 40.47 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 10:07:08
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 363646.
+Effects object used: myeff_1 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  GWESP I -> K -> J (69)                          0.0000
+  6. eval:  network-isolate                                 0.0000
+  7. eval:  out-Jaccard similarity                          0.0000
+  8. rate:  rate behy period 1                              0.8473
+  9. eval:  behy linear shape                               0.0863
+ 10. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Number of transitive triplets                                      211.0000
+  5. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  6. Number of isolates                                                  19.0000
+  7. Out-Jaccard similarity                                              29.1476
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 10 parameters, 10 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2926 iterations.
+Parameter estimates based on 1926 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -27.1530  13.9777  -1.9426 
+  2.   46.4970   9.5863   4.8503 
+  3.   33.6200  14.1998   2.3676 
+  4. -137.7620  14.9744  -9.1999 
+  5. -102.4212  12.8798  -7.9521 
+  6.   -1.5090   1.2229  -1.2340 
+  7.  -17.1309   2.1452  -7.9858 
+  8.  -54.9300   3.6169 -15.1869 
+  9.  -13.7920   3.6458  -3.7830 
+ 10.  -22.1630   5.4183  -4.0904 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  47.4183 .
+One or more of the t-statistics are rather large.
+Convergence of the algorithm is doubtful.
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2926 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               4.3353  (   0.3431)
+ 2. eval:  outdegree (density)                                    -8.7195  (  55.9205)
+ 3. eval:  reciprocity                                            20.9292  ( 123.7371)
+ 4. eval:  transitive triplets                                    -0.2138  (  16.3519)
+ 5. eval:  GWESP I -> K -> J (69)                                -38.0768  ( 237.4059)
+ 6. eval:  network-isolate                                       353.8070  ( 527.0083)
+ 7. eval:  out-Jaccard similarity                                102.4816  ( 586.6130)
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.3080  (   0.2555)
+ 9. eval:  behy linear shape                                      19.3324  (   3.6097)
+10. eval:  behy quadratic shape                                 -141.9135  ( 467.7702)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+      0.118       2.649      -5.641      -0.931      11.295      21.842     -27.795      -0.017       0.007      19.483
+      0.138    3127.105   -6916.285    -897.659   13262.737   28591.988  -32791.205     -13.390      -3.637   21528.472
+     -0.133      -1.000   15310.876    1985.998  -29364.140  -63357.921   72549.631      29.542       8.331  -47813.846
+     -0.166      -0.982       0.982     267.384   -3822.833   -8322.356    9378.970       3.895       1.356   -6268.999
+      0.139       0.999      -1.000      -0.985   56361.581  121571.131 -139092.889     -56.673     -16.919   92254.909
+      0.121       0.970      -0.972      -0.966       0.972  277737.749 -299696.815    -122.826     -47.040  197676.496
+     -0.138      -1.000       1.000       0.978      -0.999      -0.969  344114.845     140.390      38.461 -225762.251
+     -0.197      -0.937       0.935       0.932      -0.934      -0.912       0.937       0.065       0.027     -91.200
+      0.005      -0.018       0.019       0.023      -0.020      -0.025       0.018       0.029      13.030     168.151
+      0.121       0.823      -0.826      -0.820       0.831       0.802      -0.823      -0.763       0.100  218808.962
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 155.19 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 10:09:43
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 291913.
+Effects object used: myeff_1 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  GWESP I -> K -> J (69)                          0.0000
+  6. eval:  network-isolate                                 0.0000
+  7. eval:  out-Jaccard similarity                          0.0000
+  8. rate:  rate behy period 1                              0.8473
+  9. eval:  behy linear shape                               0.0863
+ 10. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Number of transitive triplets                                      211.0000
+  5. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  6. Number of isolates                                                  19.0000
+  7. Out-Jaccard similarity                                              29.1476
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 10 parameters, 10 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2926 iterations.
+Parameter estimates based on 1926 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.8400  14.2123   0.0591 
+  2.   0.8720  18.7639   0.0465 
+  3.   0.2340  14.0967   0.0166 
+  4.   0.8760  38.2497   0.0229 
+  5.   1.0261  26.6548   0.0385 
+  6.  -0.5270   4.0296  -0.1308 
+  7.  -0.0329   4.9975  -0.0066 
+  8.   0.0590   6.8879   0.0086 
+  9.  -0.1530   8.9194  -0.0172 
+ 10.  -2.3765  11.4751  -0.2071 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.3061 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2926 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               8.5349  (   0.9868)
+ 2. eval:  outdegree (density)                                    -2.9730  (   0.1207)
+ 3. eval:  reciprocity                                             1.8115  (   0.2332)
+ 4. eval:  transitive triplets                                    -0.6896  (   0.2352)
+ 5. eval:  GWESP I -> K -> J (69)                                  2.3030  (   0.6536)
+ 6. eval:  network-isolate                                         1.9846  (   1.7198)
+ 7. eval:  out-Jaccard similarity                                  5.2564  (   1.7189)
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      2.4454  (   0.5434)
+ 9. eval:  behy linear shape                                       0.1802  (   0.1282)
+10. eval:  behy quadratic shape                                   -0.2948  (   0.0743)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.974      0.062     -0.071      0.115     -0.335      0.679      0.173     -0.001     -0.045     -0.017
+     0.517      0.015     -0.014      0.016     -0.051      0.069      0.013      0.001     -0.006     -0.002
+    -0.307     -0.486      0.054     -0.024      0.089     -0.106     -0.200      0.025      0.012      0.003
+     0.497      0.550     -0.437      0.055     -0.139      0.052     -0.055     -0.001     -0.010     -0.003
+    -0.520     -0.645      0.582     -0.907      0.427     -0.353     -0.280      0.023      0.040      0.010
+     0.400      0.331     -0.265      0.130     -0.314      2.958      1.349     -0.011     -0.106     -0.020
+     0.102      0.062     -0.499     -0.136     -0.250      0.456      2.955     -0.215     -0.094     -0.008
+    -0.002      0.020      0.199     -0.006      0.065     -0.012     -0.230      0.295      0.004      0.000
+    -0.354     -0.374      0.413     -0.318      0.477     -0.483     -0.427      0.057      0.016      0.001
+    -0.232     -0.222      0.146     -0.185      0.215     -0.155     -0.061     -0.005      0.114      0.006
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 65.33 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 13:34:09
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 374880.
+Effects object used: myeff_1 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  gender_covar similarity                         0.0000
+  5. eval:  behy alter                                      0.0000
+  6. eval:  behy ego                                        0.0000
+  7. eval:  behy similarity                                 0.0000
+  8. rate:  rate behy period 1                              0.8473
+  9. eval:  behy linear shape                               0.0863
+ 10. eval:  behy quadratic shape                            0.0000
+ 11. eval:  behy indegree                                   0.0000
+ 12. eval:  behy outdegree                                  0.0000
+ 13. eval:  behy average alter                              0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Similarity on gender_covar                                          50.5413
+  5. Sum indegrees x behy                                               -25.3623
+  6. Sum outdegrees x behy                                              -27.7440
+  7. Similarity on behy                                                   2.6206
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy indegrees                                                      43.6246
+ 12. behy outdegrees                                                     59.9492
+ 13. behy average alters                                                  0.7884
+These were calculated from the data.
+
+ 13 parameters, 13 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 3141 iterations.
+Parameter estimates based on 2141 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -1.2020  14.6985  -0.0818 
+  2.  -0.6580  16.5292  -0.0398 
+  3.   0.0680  12.0414   0.0056 
+  4.   0.3733   7.3810   0.0506 
+  5.  -0.2780  13.0021  -0.0214 
+  6.  -0.1379  14.3161  -0.0096 
+  7.   0.0002   2.7460   0.0001 
+  8.  -0.1790   7.0922  -0.0252 
+  9.   0.1930   8.3923   0.0230 
+ 10.  -0.1707  11.9625  -0.0143 
+ 11.  -0.7270  34.6621  -0.0210 
+ 12.   1.8020  38.3851   0.0469 
+ 13.  -0.2250   6.1049  -0.0369 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.167 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 3141 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.5644  (   0.5145)
+ 2. eval:  outdegree (density)                                    -2.6993  (   0.1078)
+ 3. eval:  reciprocity                                             2.2292  (   0.1972)
+ 4. eval:  gender_covar similarity                                 0.3164  (   0.1305)
+ 5. eval:  behy alter                                             -0.0827  (   0.1114)
+ 6. eval:  behy ego                                               -0.2628  (   0.1280)
+ 7. eval:  behy similarity                                         0.4658  (   0.7440)
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      2.4293  (   0.4658)
+ 9. eval:  behy linear shape                                       0.1422  (   0.2212)
+10. eval:  behy quadratic shape                                   -0.2804  (   0.0832)
+11. eval:  behy indegree                                           0.0234  (   0.0973)
+12. eval:  behy outdegree                                         -0.0091  (   0.1074)
+13. eval:  behy average alter                                     -0.1098  (   0.3824)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.265      0.012     -0.003      0.002      0.004      0.004     -0.043      0.030     -0.005      0.009     -0.012      0.010      0.034
+     0.210      0.012     -0.013     -0.005      0.000      0.006     -0.014     -0.004      0.004      0.001      0.001     -0.002     -0.001
+    -0.030     -0.623      0.039      0.002     -0.001     -0.007      0.016     -0.002     -0.006     -0.002      0.000      0.002     -0.004
+     0.034     -0.322      0.064      0.017      0.000     -0.003      0.007      0.006     -0.002      0.000      0.000      0.000      0.000
+     0.068      0.036     -0.041     -0.011      0.012     -0.004     -0.004      0.007     -0.001      0.003      0.000      0.000      0.006
+     0.054      0.408     -0.259     -0.181     -0.278      0.016     -0.003     -0.003      0.004     -0.002      0.000     -0.001     -0.002
+    -0.113     -0.176      0.108      0.074     -0.046     -0.028      0.554      0.045     -0.001     -0.009      0.013     -0.014     -0.023
+     0.124     -0.072     -0.025      0.092      0.139     -0.048      0.131      0.217     -0.020      0.009     -0.005      0.005      0.032
+    -0.043      0.151     -0.129     -0.061     -0.030      0.137     -0.009     -0.193      0.049     -0.003     -0.002     -0.011     -0.009
+     0.204      0.078     -0.092      0.040      0.287     -0.146     -0.138      0.223     -0.159      0.007     -0.001      0.002      0.006
+    -0.248      0.066     -0.012     -0.016     -0.031      0.013      0.181     -0.104     -0.075     -0.150      0.009     -0.008     -0.006
+     0.187     -0.130      0.107      0.035     -0.001     -0.069     -0.170      0.100     -0.484      0.179     -0.777      0.012      0.008
+     0.173     -0.036     -0.057      0.005      0.150     -0.035     -0.082      0.180     -0.111      0.192     -0.149      0.196      0.146
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 59.76 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 16:39:19
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 607233.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2633 iterations.
+Parameter estimates based on 1633 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.5050  14.0204  -0.0360 
+  2.  -0.4770  14.8560  -0.0321 
+  3.  -0.8080  11.4957  -0.0703 
+  4.  -0.0750   7.0509  -0.0106 
+  5.   0.3710   8.5636   0.0433 
+  6.   0.3741  11.9230   0.0314 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1077 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2633 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.6331  (   0.4747)
+ 2. eval:  outdegree (density)                                    -2.6295  (   0.0856)
+ 3. eval:  reciprocity                                             2.1932  (   0.1904)
+
+Behavior Dynamics
+ 4. rate:  rate behy period 1                                      2.4470  (   0.6187)
+ 5. eval:  behy linear shape                                       0.1814  (   0.1157)
+ 6. eval:  behy quadratic shape                                   -0.2801  (   0.0803)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.225      0.007      0.012      0.050      0.005      0.000
+     0.181      0.007     -0.010      0.012     -0.001      0.000
+     0.135     -0.621      0.036     -0.003      0.002      0.001
+     0.171      0.230     -0.030      0.383     -0.020      0.017
+     0.084     -0.052      0.106     -0.281      0.013     -0.001
+     0.010      0.026      0.043      0.339     -0.161      0.006
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 22.75 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 11/10/2026 16:40:07
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 781449.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+  7. eval:  behy average alter                              0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+  7. behy average alters                                                  0.7884
+These were calculated from the data.
+
+ 7 parameters, 7 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2750 iterations.
+Parameter estimates based on 1750 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.2700  13.8611   0.0195 
+  2.   0.7600  14.8922   0.0510 
+  3.   0.4600  11.6101   0.0396 
+  4.   0.3530   6.9115   0.0511 
+  5.   0.1730   8.4218   0.0205 
+  6.  -0.0741  11.7551  -0.0063 
+  7.   0.5428   6.1998   0.0876 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1177 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2750 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.6346  (   0.5357)
+ 2. eval:  outdegree (density)                                    -2.6306  (   0.0809)
+ 3. eval:  reciprocity                                             2.2003  (   0.1816)
+
+Behavior Dynamics
+ 4. rate:  rate behy period 1                                      2.4757  (   0.4827)
+ 5. eval:  behy linear shape                                       0.1807  (   0.1081)
+ 6. eval:  behy quadratic shape                                   -0.2801  (   0.0747)
+ 7. eval:  behy average alter                                     -0.0682  (   0.3243)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.287      0.007      0.001      0.007     -0.004     -0.003     -0.003
+     0.155      0.007     -0.009      0.006     -0.001      0.000      0.001
+     0.008     -0.631      0.033     -0.009      0.002     -0.001      0.003
+     0.029      0.165     -0.099      0.233     -0.012      0.004      0.006
+    -0.067     -0.088      0.100     -0.230      0.012      0.000     -0.004
+    -0.065      0.056     -0.039      0.109     -0.037      0.006      0.000
+    -0.015      0.029      0.045      0.038     -0.116      0.005      0.105
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 33 seconds.

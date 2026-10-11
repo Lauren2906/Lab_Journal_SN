@@ -264,19 +264,31 @@ print01Report(mydata, modelname = "./results/test")
 ```
 
 ### Simple model
-```{r}
+```{r, eval = FALSE}
 myeff <- getEffects(mydata)
-ans <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
+model_week5 <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
+```
+
+```{r, include=FALSE}
+# saveRDS(model_week5, "model_week5.rds")
+model_week5 <- readRDS("model_week5.rds")
+```
+
+```{r}
+model_week5
 ```
 
 ### Changing the effects/ statistics
-```{r}
+```{r, eval = FALSE}
 myeff <- includeEffects(myeff, avAlt, name = "behy", interaction1="nety") # You use nety to predict behy
-
-ans <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
-
-ans
+model_week5_2 <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
 ```
 
+```{r, include=FALSE}
+# saveRDS(model_week5_2, "model_week5_2.rds")
+model_week5_2 <- readRDS("model_week5_2.rds")
+```
 
-
+```{r}
+model_week5_2
+```

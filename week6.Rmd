@@ -26,15 +26,13 @@ $$
 s_{i}^{beh}(x , z)
 $$
 
-= Similarity of the behaviour between X (dependent network variable) and Z (behavioural dependent variable (centred))
+This is the similarity of the behaviour between X (dependent network variable) and Z (behavioural dependent variable (centred))
 
 $$
 \sum j x_{ij}x_{ji}
 $$
 
 This calculates the sum of reciprocated ties for ego (\sum j), by multiplying the outgoing ties from ego (X\_{ij}), with the incoming ties (X\_{ji}). This means if there is either no outgoing or incoming tie, the tie is not being counted (as it is multiplied with 0), meaning that only the reciprocated ties are counted.
-
-<br>
 
 This sum is then multiplied by
 
@@ -147,7 +145,7 @@ IC_df <- IC_df %>%
                                         "fewer" = "yellow",
                                         "few" = "green",
                                         "moderate" = "blue",
-                                        "high" = "purple",
+                                        "high" = "orchid4",
                                         "very high" = "pink"))
 
 
@@ -162,25 +160,24 @@ IC_df$ce_t1_cat <- cut(IC_df$ce_t1,
 table(IC_df$ce_t1, IC_df$ce_t1_cat)
 #cutoff point for now completely random
 
-colour <- ifelse(IC_df$ce_t1_cat=='little', "lightpink", "purple")
+colour <- ifelse(IC_df$ce_t1_cat=='little', "lightpink", "orchid4")
 
 graph_CE <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
 graph_CE <- simplify(graph_CE)
-V(graph_CE)$size = igraph:: betweenness(graph_CE, normalized = T, directed = T) * 250 + 50
 ```
 
 
 ```{r}
-layout <- layout_with_fr(graph_CE)
+layout <- layout_with_kk(graph_CE)
+V(graph_CE)$size = igraph:: betweenness(graph_CE, normalized = T, directed = T) * 50 + 5
 plot1 <- plot(graph_CE,
      vertex.color = colour,
-     vertex.size = 5, 
      vertex.frame.color = "gray",
      edge.curved = 0.2, 
      edge.arrow.size = 0.1,
      vertex.label = NA,
      layout = layout)
-legend("topleft", c("few", "high", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "purple", "white"), pt.cex = 2,
+legend("topleft", c("few", "high", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "orchid4", "white"), pt.cex = 2,
     cex = 0.8, bty = "n", ncol = 1)
 ```
 
@@ -235,7 +232,7 @@ IC_df2$ce_t2_cat <- cut(IC_df2$ce_t2,
 table(IC_df2$ce_t2, IC_df2$ce_t2_cat)
 #cutoff point for now completely random
 
-colour <- ifelse(IC_df2$ce_t2_cat=='little', "lightpink", "purple")
+colour <- ifelse(IC_df2$ce_t2_cat=='little', "lightpink", "orchid4")
 
 graph_CE_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
 graph_CE_t2 <- simplify(graph_CE_t2)
@@ -243,17 +240,25 @@ V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed
 ```
 
 ```{r}
-V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 250 + 50
+V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 100 + 5
 plot2 <- plot(graph_CE_t2,
      vertex.color = colour,
-     vertex.size = 5, 
      vertex.frame.color = "gray",
      edge.curved = 0.2, 
      edge.arrow.size = 0.1,
      vertex.label = NA,
      layout = layout)
-legend("topleft", c("few", "high", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "purple", "white"), pt.cex = 2,
+legend("topleft", c("few", "high", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "orchid4", "white"), pt.cex = 2,
     cex = 0.8, bty = "n", ncol = 1)
 ```
 
+<br>
 
+# In class
+In class I worked with Paula on her data set, which isn't directly applicable to my research question. However, I did learn from working on the FIS data, as data is structured completely differently than the MSCR data. We also worked on Anna's research question together, which, again was useful in practicing a social network perspective. So, while there isn't much to reflect in my journal, I did learn/ practice during class. 
+
+<br> 
+
+------------------------------------------------------------------------
+
+# References

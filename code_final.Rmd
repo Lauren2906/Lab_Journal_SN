@@ -15,7 +15,9 @@ klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
 
 # Preparation
 Necessary packages
-```{r}
+```{r, warning=FALSE}
+library(ape)
+library(sna)
 library(knitr)
 library(styler)
 library(tidyverse)
@@ -40,6 +42,8 @@ load("./data/IndividualCharacteristics.RData")
 load("./data/NetworkCharacteristics.RData")
 load("./data/CivicAttitudes.RData")
 ```
+
+<br>
 
 # Create network matrices
 ```{r}
@@ -105,6 +109,18 @@ IC_df$ce_t1 <- ifelse(IC_df$missings <= 1, rowMeans(IC_df[,1:4]), NA)
 
 <br>
 
+### Dichotomise
+```{r}
+# Civic attitudes are relatively positive, overall. There is no one who scores lower than 3. For the dichotomisation, I have decided to put the cut-off point at a score of 5, as this is the direct middle of the actually observed scores, and it is the mean score. 
+
+IC_df$ce_t1_cat <- cut(IC_df$ce_t1,
+                       breaks = c(0, 5, 7),
+                       labels= c('neutral', 'positive'))
+table(IC_df$ce_t1, IC_df$ce_t1_cat)
+```
+
+<br>
+
 ## Wave 2
 ### Factor analysis
 ```{r}
@@ -147,6 +163,19 @@ IC_df2$ce_t2 <- ifelse(IC_df2$missings <= 1, rowMeans(IC_df2[,1:4]), NA)
 
 <br>
 
+### Dichotomise
+To use the scales for civic attitudes to calculate Moran's I, and to make plots showing different attitudes, the variable needs to be dichotomised.
+
+```{r}
+# Civic attitudes are relatively positive, overall. There is no one who scores lower than 3. For the dichotomisation, I have decided to put the cut-off point at a score of 5, as this is the direct middle of the actually observed scores, and it is the mean score. 
+IC_df2$ce_t2_cat <- cut(IC_df2$ce_t2,
+                       breaks = c(0, 5, 7),
+                       labels= c('neutral', 'positive'))
+table(IC_df2$ce_t2, IC_df2$ce_t2_cat)
+```
+
+<br>
+
 # Descriptive statistics
 ## Density
 ```{r}
@@ -160,6 +189,9 @@ netw2 <- as.network(strong_netw_t2)
 network.density(netw2)
 # 0.01859504
 ```
+
+<br>
+
 ## Reciprocity
 ```{r}
 #Wave 1
@@ -185,6 +217,8 @@ reciprocity(g_strong_t2, ignore.loops = TRUE, mode = c("default", "ratio"))
 # 0.4444444
 ```
 
+<br>
+
 ## Dyad configurations
 ```{r}
 # Wave 1
@@ -199,6 +233,9 @@ dyad_census(g_strong_t2)
 # Asymmetrical ties: 150
 # No tie: 7050
 ```
+
+<br>
+
 ## Triad configurations
 ```{r}
 # Wave 1
@@ -239,6 +276,9 @@ triad_census(g_strong_t2)
 # 210 = 19
 # 300 = 9
 ```
+
+<br>
+
 ## Transitivity
 ```{r}
 # Wave 1
@@ -249,6 +289,9 @@ transitivity(g_strong_t1)
 transitivity(g_strong_t2)
 # 0.3336766
 ```
+
+<br>
+
 ## Path length
 ```{r}
 # Wave 1
@@ -259,16 +302,35 @@ mean((ego_size(g_strong_t1, order = 2, mode = "out") - 1)/vcount(g_strong_t1))
 mean((ego_size(g_strong_t2, order = 2, mode = "out") - 1)/vcount(g_strong_t2))
 # 0.0458302
 ```
-## Segregation
-To be calculated when I get my dependent variable of interest :)
-```{r}
 
+<br>
+
+## Segregation
+I calculated Moran's I with row standardisation, because I assume that each node is influenced equally by its neighbourhood, as there is no theoretical reason to assume otherwise specifically for civic attitudes. 
+```{r}
+# Wave 1
+geodistances <- geodist(netw1, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights1 <- geodistances == 1 #Means that only direct ties are taken into account for segregation
+ape::Moran.I(IC_df$ce_t1, scaled = FALSE, weight = weights1, na.rm = TRUE)
+
+# Moran's I t1: -0.01401314, p-value: 0.942139
+
+# Wave 2
+geodistances <- geodist(netw2, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights1 <- geodistances == 1 #Means that only direct ties are taken into account for segregation
+ape::Moran.I(IC_df2$ce_t2, scaled = FALSE, weight = weights1, na.rm = TRUE)
+
+#Moran's I t2: -0.0178618, p-value: 0.9171138
 ```
 
 <br>
 
 # Data visualisation
-## T1
+## Wave 1
 Create an igraph object
 ```{r}
 copy_strong_netw_t1 <- strong_netw_t1
@@ -279,33 +341,34 @@ g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = 
 
 <br>
 
-### Simple representation of the network
-```{r}
-pretty_graph_t1 <- simplify(g_strong_t1)
-
-V(pretty_graph_t1)$size = betweenness(pretty_graph_t1, normalized = T, directed = T) * 250 + 50
-
-plot(pretty_graph_t1,
-     vertex.color = "pink",
-     vertex.frame.color = "gray",
-     vertex.label.color = "black",
-     vertex.label.family = "Helvetica",
-     vertex.label.cex = 0.3,
-     vertex.label.dist = 0.5, 
-     edge.curved = 0.2,
-     edge.arrow.size = 0.075,
-     margin = 0.01,
-     rescale = FALSE, ylim = c(-10,10))
-```
-
 ### Node colours based on civil service attitudes
 ```{r}
+colour <- ifelse(IC_df$ce_t1_cat=='neutral', "lightpink", "orchid4")
 
+copy_strong_netw_t1 <- strong_netw_t1
+copy_strong_netw_t1[is.na(copy_strong_netw_t1)] <- 0 
+
+graph_CE_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
+graph_CE_t1 <- simplify(graph_CE_t1)
+
+layout <- layout_with_dh(graph_CE_t1)
+# Be open about what algortithm used
+
+V(graph_CE_t1)$size = igraph:: betweenness(graph_CE_t1, normalized = T, directed = T) * 50 + 5
+plot_CE_t1 <- plot(graph_CE_t1,
+     vertex.color = colour,
+     vertex.frame.color = "gray",
+     edge.curved = 0.2, 
+     edge.arrow.size = 0.1,
+     vertex.label = NA,
+     layout = layout)
+legend("topleft", c("neutral", "positive", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "orchid4", "white"), pt.cex = 2,
+    cex = 0.8, bty = "n", ncol = 1)
 ```
 
 <br>
 
-## T2
+## Wave 2
 Create an igraph object
 ```{r}
 copy_strong_netw_t2 <- strong_netw_t2
@@ -316,26 +379,25 @@ g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = 
 
 <br>
 
-### Simple representation of the network
-```{r}
-pretty_graph_t2 <- simplify(g_strong_t2)
-
-V(pretty_graph_t2)$size = betweenness(pretty_graph_t2, normalized = T, directed = T) * 250 + 50
-
-plot(pretty_graph_t2,
-     vertex.color = "pink",
-     vertex.frame.color = "gray",
-     vertex.label.color = "black",
-     vertex.label.family = "Helvetica",
-     vertex.label.cex = 0.3,
-     vertex.label.dist = 0.5, 
-     edge.curved = 0.2,
-     edge.arrow.size = 0.075,
-     margin = 0.01,
-     rescale = FALSE, ylim = c(-9,9))
-```
-
 ### Node colours based on civil service attitudes
+```{r}
+copy_strong_netw_t2 <- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] <- 0 
+
+graph_CE_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
+graph_CE_t2 <- simplify(graph_CE_t2)
+
+V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 50 + 5
+plot_CE_t2 <- plot(graph_CE_t2,
+     vertex.color = colour,
+     vertex.frame.color = "gray",
+     edge.curved = 0.2, 
+     edge.arrow.size = 0.1,
+     vertex.label = NA,
+     layout = layout)
+legend("topleft", c("neutral", "positive", "missing"), pch = 21, col = "#777777", pt.bg = c("lightpink", "orchid4", "white"), pt.cex = 2,
+    cex = 0.8, bty = "n", ncol = 1)
+```
 
 <br>
 
@@ -355,37 +417,4 @@ behy <- IC_df %>%
   as.matrix()
 ```
 
-<br>
 
-Creating an RSiena dataframe
-```{r}
-behy <- sienaDependent(behy, type = c("behavior"))
-
-nety <- sienaDependent(array(data= c(strong_netw_t1, strong_netw_t2), dim=c(dim(strong_netw_t1),2)))
-
-# Into one (RSiena) data frame
-mydata <- sienaDataCreate(behy, nety)
-
-myAlgorithm <- sienaAlgorithmCreate(projname = "test")
-print01Report(mydata, modelname = "./results/test")
-```
-<br>
-
-## Running a simple model
-```{r}
-myeff <- getEffects(mydata)
-ans <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
-
-ans
-```
-
-<br>
-
-## Adding effects to the simple model
-```{r}
-myeff_1 <- includeEffects(myeff, recipDeg, name = "behy", interaction1="nety") 
-
-ans_1 <- siena07(myAlgorithm, data = mydata, effects = myeff_1, returnDeps = TRUE)
-
-ans_1
-```

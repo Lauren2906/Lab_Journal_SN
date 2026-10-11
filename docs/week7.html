@@ -428,11 +428,314 @@ div.tocify {
 </div>
 
 
-<div id="week-7---xxx" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Week 7 - XXX</h1>
+<div id="preparation-before-class" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Preparation before
+class</h1>
+<div id="data-preparation-for-rsiena" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Data preparation for
+RSiena</h2>
+<p>Load data</p>
+<pre class="r"><code>rm(list = ls())
+load(&quot;./data/IndividualCharacteristics.RData&quot;)
+load(&quot;./data/NetworkCharacteristics.RData&quot;)
+load(&quot;./data/CivicAttitudes.RData&quot;)</code></pre>
+<p><br></p>
+<p>Create network matrices</p>
+<pre class="r"><code># view(hanging[[1]])
+hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
+class(hanging_df_t1)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t1)
+strong_netw_t1 &lt;- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]&lt;-NA
+class(strong_netw_t1)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t1)
+
+hanging_df_t2 &lt;- as.data.frame(hanging[[1]][2])
+class(hanging_df_t2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># view(hanging_df_t2)
+strong_netw_t2 &lt;- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]&lt;-NA
+class(strong_netw_t2)</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code># view(strong_netw_t2)</code></pre>
+<p><br></p>
+<p>Make civic attitudes scale</p>
+<pre class="r"><code>#Wave 1
+IC_df &lt;- as.data.frame(T1civeng[[1]])
+IC_df$missings &lt;- rowSums(is.na(IC_df))
+IC_df$ce_t1 &lt;- ifelse(IC_df$missings &lt;= 1, rowMeans(IC_df[,1:4]), NA)
+
+#Wave 2
+IC_df2 &lt;- as.data.frame(T2civeng[[1]])
+IC_df2$missings &lt;- rowSums(is.na(IC_df2))
+IC_df2$ce_t2 &lt;- ifelse(IC_df2$missings &lt;= 1, rowMeans(IC_df2[,1:4]), NA)</code></pre>
+<p><br></p>
+<p>Putting the behavioural data in a matrix</p>
+<pre class="r"><code>IC_df &lt;- IC_df %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) 
+
+IC_df2 &lt;- IC_df2 %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) 
+
+IC_df &lt;- left_join(IC_df, IC_df2, by=c(&quot;id&quot;))
+
+behy &lt;- IC_df %&gt;% 
+  dplyr::select(&quot;ce_t1&quot;, &quot;ce_t2&quot;) %&gt;% 
+  as.matrix()</code></pre>
+<p><br></p>
+<p>Creating an RSiena data frame</p>
+<pre class="r"><code>behy &lt;- sienaDependent(behy, type = c(&quot;behavior&quot;))
+nety &lt;- sienaDependent(array(data= c(strong_netw_t1, strong_netw_t2), dim=c(dim(strong_netw_t1),2)))
+
+mydata &lt;- sienaDataCreate(behy, nety)</code></pre>
+<p><br></p>
+</div>
+<div id="simplest-model-of-rsiena" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Simplest model of
+RSiena</h2>
+<p>Run a model with no effects</p>
+<pre class="r"><code>myAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;test&quot;)
+myeff &lt;- getEffects(mydata)
+simple_model &lt;- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)</code></pre>
+<pre class="r"><code>simple_model</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                     Estimate   Standard   Convergence 
+##                                                  Error      t-ratio   
+## Network Dynamics 
+##   1. rate basic rate parameter nety  6.6472  ( 0.5150   )    0.0477   
+##   2. eval outdegree (density)       -2.6343  ( 0.0824   )   -0.0306   
+##   3. eval reciprocity                2.2074  ( 0.1755   )    0.0338   
+## 
+## Behavior Dynamics
+##   4. rate rate behy period 1         2.4651  ( 0.5280   )    0.0124   
+##   5. eval behy linear shape          0.1802  ( 0.1028   )   -0.0421   
+##   6. eval behy quadratic shape      -0.2784  ( 0.0720   )    0.0427   
+## 
+## Overall maximum convergence ratio:    0.1219 
+## 
+## 
+## Total of 2647 iteration steps.</code></pre>
+<p><br></p>
+<div id="interpretation" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Interpretation</h3>
+<ul>
+<li><p>Rate basic rate parameter nety:</p>
+<ul>
+<li><strong>Question:</strong> How do you intepret this?</li>
+</ul></li>
+<li><p>Eval outdegree (density):</p>
+<ul>
+<li><p>Indicates how dense the network is.</p></li>
+<li><p>In this case: A negative value, meaning that the chance of
+observing a tie is lower than the chance of not forming a tie</p></li>
+<li><p>Nodes, in general, form relatively few ties
+(<strong>question:</strong> Relative to whom?)</p></li>
+</ul></li>
+<li><p>Eval reciprocity:</p>
+<ul>
+<li><p>Indicated how often a tie that is formed is reciprocated</p></li>
+<li><p>In this case: A positive value, meaning that the chance of
+observing a reciprocated tie is higher than the chance of not forming a
+reciprocated tie</p></li>
+<li><p>Nodes, in general, prefer to form/ maintain ties to create a
+reciprocated relation, than start a relationship with a new
+person</p></li>
+</ul></li>
+<li><p>Rate rate behy period 1:</p>
+<ul>
+<li><strong>Question:</strong> How do you interpret this?</li>
+</ul></li>
+<li><p>Eval behy linear shape:</p>
+<ul>
+<li>About how nodes who differ from the mean tend to change their
+behaviour (in this case assumed to be linear)
+<strong>(Question?</strong>)</li>
+</ul></li>
+<li><p>Eval behy quadratic shape:</p>
+<ul>
+<li>About how nodes who differ from the mean tend to change their
+behaviour (in this case assumed to be quadratic)
+(<strong>Question?</strong>)</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="adding-effects" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Adding effects</h2>
+<p>Expected homophily effect of gender</p>
+<pre class="r"><code># Create gender variable
+gender1 &lt;- gender[[1]][,1]
+gender2 &lt;- gender[[1]][,2]
+gender &lt;- coalesce(gender1, gender2)
+head(gender)</code></pre>
+<pre><code>## 30001 30002 30003 30004 30005 30006 
+##     2     2     1     2     1     2</code></pre>
+<pre class="r"><code># Add gender as constant covariate
+gender_covar &lt;- coCovar(gender)
+mydata_1 &lt;- sienaDataCreate(nety, gender_covar, behy)
+myeff_1 &lt;- getEffects(mydata_1)
+
+myeff_1 &lt;- includeEffects(myeff_1, simX, interaction1 = &quot;gender_covar&quot;)</code></pre>
+<pre><code>##   effectNumber effectName              shortName include fix   test  initialValue parm
+## 1 324          gender_covar similarity simX      TRUE    FALSE FALSE          0   0</code></pre>
+<p>Add effects for selection and influence for civic attitudes</p>
+<pre class="r"><code># General effects
+myeff_1 &lt;- includeEffects(myeff_1, egoX, altX, simX, interaction1 = &quot;behy&quot;)</code></pre>
+<pre><code>##   effectNumber effectName      shortName include fix   test  initialValue parm
+## 1 447          behy alter      altX      TRUE    FALSE FALSE          0   0   
+## 2 462          behy ego        egoX      TRUE    FALSE FALSE          0   0   
+## 3 508          behy similarity simX      TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code># Adding influence effects for indegree, outdegree and assimilation
+myeff_1 &lt;- includeEffects(myeff_1, name = &quot;behy&quot;, avAlt, indeg, outdeg, interaction1 = &quot;nety&quot;)</code></pre>
+<pre><code>##   effectNumber effectName         shortName include fix   test  initialValue parm
+## 1 757          behy indegree      indeg     TRUE    FALSE FALSE          0   0   
+## 2 760          behy outdegree     outdeg    TRUE    FALSE FALSE          0   0   
+## 3 776          behy average alter avAlt     TRUE    FALSE FALSE          0   0</code></pre>
+<pre class="r"><code># Set algorithm
+myCoEvAlgorithm &lt;- sienaAlgorithmCreate(projname = &quot;test&quot;)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file test.txt .</code></pre>
+<p>Running the model</p>
+<pre class="r"><code>model_week7 &lt;- siena07(myCoEvAlgorithm, data = mydata_1, effects = myeff_1)</code></pre>
+<pre class="r"><code>model_week7</code></pre>
+<pre><code>## Estimates, standard errors and convergence t-ratios
+## 
+##                                      Estimate   Standard   Convergence 
+##                                                   Error      t-ratio   
+## Network Dynamics 
+##    1. rate basic rate parameter nety  6.5644  ( 0.5145   )   -0.0818   
+##    2. eval outdegree (density)       -2.6993  ( 0.1078   )   -0.0398   
+##    3. eval reciprocity                2.2292  ( 0.1972   )    0.0056   
+##    4. eval gender_covar similarity    0.3164  ( 0.1305   )    0.0506   
+##    5. eval behy alter                -0.0827  ( 0.1114   )   -0.0214   
+##    6. eval behy ego                  -0.2628  ( 0.1280   )   -0.0096   
+##    7. eval behy similarity            0.4658  ( 0.7440   )    0.0001   
+## 
+## Behavior Dynamics
+##    8. rate rate behy period 1         2.4293  ( 0.4658   )   -0.0252   
+##    9. eval behy linear shape          0.1422  ( 0.2212   )    0.0230   
+##   10. eval behy quadratic shape      -0.2804  ( 0.0832   )   -0.0143   
+##   11. eval behy indegree              0.0234  ( 0.0973   )   -0.0210   
+##   12. eval behy outdegree            -0.0091  ( 0.1074   )    0.0469   
+##   13. eval behy average alter        -0.1098  ( 0.3824   )   -0.0369   
+## 
+## Overall maximum convergence ratio:    0.1670 
+## 
+## 
+## Total of 3141 iteration steps.</code></pre>
+<pre class="r"><code># All convergence t-ratio should be &lt;.1 --&gt; is met
+# Overall max convergence ratio should be &lt;.25 --&gt; is met (ratio = 0.1670)</code></pre>
+<p><br></p>
+<div id="interpretation-1" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Interpretation</h3>
+<p>Network dynamics:</p>
+<ul>
+<li><p>Rate basic rate parameter nety:</p>
+<ul>
+<li><strong>Question:</strong> How do you intepret this?</li>
+</ul></li>
+<li><p>Eval outdegree (density):</p>
+<ul>
+<li><p>Indicates how dense the network is.</p></li>
+<li><p>In this case: A negative value, meaning that the chance of
+observing a tie is lower than the chance of not forming a tie</p></li>
+<li><p>Nodes, in general, form relatively few ties
+(<strong>question:</strong> Relative to whom?)</p></li>
+</ul></li>
+<li><p>Eval reciprocity:</p>
+<ul>
+<li><p>Indicated how often a tie that is formed is reciprocated</p></li>
+<li><p>In this case: A positive value, meaning that the chance of
+observing a reciprocated tie is higher than the chance of not forming a
+reciprocated tie</p></li>
+<li><p>Nodes, in general, prefer to form/ maintain ties to create a
+reciprocated relation, than start a relationship with a new
+person</p></li>
+</ul></li>
+<li><p>Eval gender_covar similarity:</p>
+<ul>
+<li><p>How similar are connected ties with regards to the covar (in this
+case gender)</p></li>
+<li><p>In this case: A positive value, meaning that it is more likely
+that <em>i</em> makes a tie with <em>j</em> compared to with <em>h</em>
+if <em>j</em> has the same gender as <em>i</em> (and <em>h</em>
+hasn’t)</p></li>
+</ul></li>
+<li><p>Eval behy alter</p>
+<ul>
+<li><p>About network homophily</p></li>
+<li><p>Sender homophily –&gt; Does <em>i</em> prefer to send ties to
+someone similar to themselves</p></li>
+<li><p>In this case: Negative value –&gt; <em>i</em> prefers to send a
+tie to alter <em>j</em> over alter <em>h</em>, where <em>j</em> has
+dissimilar preferences</p></li>
+</ul></li>
+<li><p>Eval behy ego</p>
+<ul>
+<li><p>About network homophily</p></li>
+<li><p>Receiver homophily –&gt; Does <em>i</em> get more ties from
+people with similar attitudes?</p></li>
+<li><p>In this case: Negative value –&gt; <em>i</em> is more likely to
+get a tie from <em>j</em> than from <em>h</em>, where <em>j</em> has
+dissimilar preferences</p></li>
+</ul></li>
+<li><p>Eval behy similarity</p>
+<ul>
+<li>About network homophily</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>Behaviour dynamics:</p>
+<ul>
+<li><p>Rate rate behy period 1:</p>
+<ul>
+<li><strong>Question:</strong> How do you interpret this?</li>
+</ul></li>
+<li><p>Eval behy linear shape:</p>
+<ul>
+<li>About how nodes who differ from the mean tend to change their
+behaviour (in this case assumed to be linear)
+(<strong>Question?</strong>)</li>
+</ul></li>
+<li><p>Eval behy quadratic shape:</p>
+<ul>
+<li><p>About how nodes who differ from the mean tend to change their
+behaviour (in this case assumed to be quadratic)
+(<strong>Question?</strong>)</p></li>
+<li><p>The attractiveness of further steps u the behaviour ladder (this
+is the mountain I think), depends on where the actor is on the
+ladder</p></li>
+</ul></li>
+<li><p>Eval behy indegree:</p>
+<ul>
+<li>Indegree tie is more likely when you have similar civic attitudes
+(positive value)</li>
+</ul></li>
+<li><p>Eval behy outdegree:</p>
+<ul>
+<li>Outdegree tie is less likely when you have similar civic attitudes
+(negative value)</li>
+</ul></li>
+<li><p>Eval behy average alter:</p>
+<ul>
+<li><p>About influence effects</p></li>
+<li><p>Average alter effect –&gt; <em>i</em> behaviour multiplied by the
+average behaviour of their alters</p></li>
+<li><p>In this case: A negative value –&gt; being friends with people
+with positive civic attitude scores, makes you more negative (??
+huh?)</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFdlZWsgNyAtIFhYWA0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIHNvY2lhbCBuZXR3b3JrcyINCmF1dGhvcjogIkxhdXJlbiBEaXJpeCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQojIFByZXBhcmF0aW9uIGJlZm9yZSBjbGFzcw0KDQpgYGB7ciwgaW5jbHVkZT1GQUxTRX0NCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KHN0eWxlcikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShpbnN0YWxscikNCmxpYnJhcnkoZm9yZWlnbikNCmxpYnJhcnkobmV0d29yaykNCmxpYnJhcnkoUlNpZW5hKQ0KbGlicmFyeShSc2llbmFUd29TdGVwKQ0KbGlicmFyeShpZ3JhcGgpDQpsaWJyYXJ5KGRldnRvb2xzKQ0KYGBgDQoNCiMjIERhdGEgcHJlcGFyYXRpb24gZm9yIFJTaWVuYQ0KDQpMb2FkIGRhdGENCg0KYGBge3J9DQpybShsaXN0ID0gbHMoKSkNCmxvYWQoIi4vZGF0YS9JbmRpdmlkdWFsQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9OZXR3b3JrQ2hhcmFjdGVyaXN0aWNzLlJEYXRhIikNCmxvYWQoIi4vZGF0YS9DaXZpY0F0dGl0dWRlcy5SRGF0YSIpDQpgYGANCg0KPGJyPg0KDQpDcmVhdGUgbmV0d29yayBtYXRyaWNlcw0KDQpgYGB7cn0NCiMgdmlldyhoYW5naW5nW1sxXV0pDQpoYW5naW5nX2RmX3QxIDwtIGFzLmRhdGEuZnJhbWUoaGFuZ2luZ1tbMV1dWzFdKQ0KY2xhc3MoaGFuZ2luZ19kZl90MSkNCiMgdmlldyhoYW5naW5nX2RmX3QxKQ0Kc3Ryb25nX25ldHdfdDEgPC0gZGF0YS5tYXRyaXgoaGFuZ2luZ19kZl90MSkNCnN0cm9uZ19uZXR3X3QxW3N0cm9uZ19uZXR3X3QxPT05XTwtTkENCmNsYXNzKHN0cm9uZ19uZXR3X3QxKQ0KIyB2aWV3KHN0cm9uZ19uZXR3X3QxKQ0KDQpoYW5naW5nX2RmX3QyIDwtIGFzLmRhdGEuZnJhbWUoaGFuZ2luZ1tbMV1dWzJdKQ0KY2xhc3MoaGFuZ2luZ19kZl90MikNCiMgdmlldyhoYW5naW5nX2RmX3QyKQ0Kc3Ryb25nX25ldHdfdDIgPC0gZGF0YS5tYXRyaXgoaGFuZ2luZ19kZl90MikNCnN0cm9uZ19uZXR3X3QyW3N0cm9uZ19uZXR3X3QyPT05XTwtTkENCmNsYXNzKHN0cm9uZ19uZXR3X3QyKQ0KIyB2aWV3KHN0cm9uZ19uZXR3X3QyKQ0KYGBgDQoNCjxicj4NCg0KTWFrZSBjaXZpYyBhdHRpdHVkZXMgc2NhbGUNCg0KYGBge3J9DQojV2F2ZSAxDQpJQ19kZiA8LSBhcy5kYXRhLmZyYW1lKFQxY2l2ZW5nW1sxXV0pDQpJQ19kZiRtaXNzaW5ncyA8LSByb3dTdW1zKGlzLm5hKElDX2RmKSkNCklDX2RmJGNlX3QxIDwtIGlmZWxzZShJQ19kZiRtaXNzaW5ncyA8PSAxLCByb3dNZWFucyhJQ19kZlssMTo0XSksIE5BKQ0KDQojV2F2ZSAyDQpJQ19kZjIgPC0gYXMuZGF0YS5mcmFtZShUMmNpdmVuZ1tbMV1dKQ0KSUNfZGYyJG1pc3NpbmdzIDwtIHJvd1N1bXMoaXMubmEoSUNfZGYyKSkNCklDX2RmMiRjZV90MiA8LSBpZmVsc2UoSUNfZGYyJG1pc3NpbmdzIDw9IDEsIHJvd01lYW5zKElDX2RmMlssMTo0XSksIE5BKQ0KYGBgDQoNCjxicj4NCg0KUHV0dGluZyB0aGUgYmVoYXZpb3VyYWwgZGF0YSBpbiBhIG1hdHJpeA0KDQpgYGB7cn0NCklDX2RmIDwtIElDX2RmICU+JSANCiAgcm93bmFtZXNfdG9fY29sdW1uKHZhciA9ICJpZCIpIA0KDQpJQ19kZjIgPC0gSUNfZGYyICU+JSANCiAgcm93bmFtZXNfdG9fY29sdW1uKHZhciA9ICJpZCIpIA0KDQpJQ19kZiA8LSBsZWZ0X2pvaW4oSUNfZGYsIElDX2RmMiwgYnk9YygiaWQiKSkNCg0KYmVoeSA8LSBJQ19kZiAlPiUgDQogIGRwbHlyOjpzZWxlY3QoImNlX3QxIiwgImNlX3QyIikgJT4lIA0KICBhcy5tYXRyaXgoKQ0KYGBgDQoNCjxicj4NCg0KQ3JlYXRpbmcgYW4gUlNpZW5hIGRhdGEgZnJhbWUNCg0KYGBge3J9DQpiZWh5IDwtIHNpZW5hRGVwZW5kZW50KGJlaHksIHR5cGUgPSBjKCJiZWhhdmlvciIpKQ0KbmV0eSA8LSBzaWVuYURlcGVuZGVudChhcnJheShkYXRhPSBjKHN0cm9uZ19uZXR3X3QxLCBzdHJvbmdfbmV0d190MiksIGRpbT1jKGRpbShzdHJvbmdfbmV0d190MSksMikpKQ0KDQpteWRhdGEgPC0gc2llbmFEYXRhQ3JlYXRlKGJlaHksIG5ldHkpDQpgYGANCg0KPGJyPg0KDQojIyBTaW1wbGVzdCBtb2RlbCBvZiBSU2llbmENCg0KUnVuIGEgbW9kZWwgd2l0aCBubyBlZmZlY3RzDQoNCmBgYHtyLCBldmFsPUZBTFNFfQ0KbXlBbGdvcml0aG0gPC0gc2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAidGVzdCIpDQpteWVmZiA8LSBnZXRFZmZlY3RzKG15ZGF0YSkNCnNpbXBsZV9tb2RlbCA8LSBzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhLCBlZmZlY3RzID0gbXllZmYsIHJldHVybkRlcHMgPSBUUlVFKQ0KYGBgDQoNCmBgYHtyLCBpbmNsdWRlID0gRkFMU0V9DQojIHNhdmVSRFMoc2ltcGxlX21vZGVsLCAic2ltcGxlX21vZGVsLnJkcyIpDQpzaW1wbGVfbW9kZWwgPC0gcmVhZFJEUygic2ltcGxlX21vZGVsLnJkcyIpDQpgYGANCg0KYGBge3J9DQpzaW1wbGVfbW9kZWwNCmBgYA0KDQo8YnI+DQoNCiMjIyBJbnRlcnByZXRhdGlvbg0KDQotIFJhdGUgYmFzaWMgcmF0ZSBwYXJhbWV0ZXIgbmV0eToNCg0KICAtICoqUXVlc3Rpb246KiogSG93IGRvIHlvdSBpbnRlcHJldCB0aGlzPw0KDQotIEV2YWwgb3V0ZGVncmVlIChkZW5zaXR5KToNCg0KICAtIEluZGljYXRlcyBob3cgZGVuc2UgdGhlIG5ldHdvcmsgaXMuDQoNCiAgLSBJbiB0aGlzIGNhc2U6IEEgbmVnYXRpdmUgdmFsdWUsIG1lYW5pbmcgdGhhdCB0aGUgY2hhbmNlIG9mIG9ic2VydmluZyBhIHRpZSBpcyBsb3dlciB0aGFuIHRoZSBjaGFuY2Ugb2Ygbm90IGZvcm1pbmcgYSB0aWUNCg0KICAtIE5vZGVzLCBpbiBnZW5lcmFsLCBmb3JtIHJlbGF0aXZlbHkgZmV3IHRpZXMgKCoqcXVlc3Rpb246KiogUmVsYXRpdmUgdG8gd2hvbT8pDQoNCi0gRXZhbCByZWNpcHJvY2l0eToNCg0KICAtIEluZGljYXRlZCBob3cgb2Z0ZW4gYSB0aWUgdGhhdCBpcyBmb3JtZWQgaXMgcmVjaXByb2NhdGVkDQoNCiAgLSBJbiB0aGlzIGNhc2U6IEEgcG9zaXRpdmUgdmFsdWUsIG1lYW5pbmcgdGhhdCB0aGUgY2hhbmNlIG9mIG9ic2VydmluZyBhIHJlY2lwcm9jYXRlZCB0aWUgaXMgaGlnaGVyIHRoYW4gdGhlIGNoYW5jZSBvZiBub3QgZm9ybWluZyBhIHJlY2lwcm9jYXRlZCB0aWUNCg0KICAtIE5vZGVzLCBpbiBnZW5lcmFsLCBwcmVmZXIgdG8gZm9ybS8gbWFpbnRhaW4gdGllcyB0byBjcmVhdGUgYSByZWNpcHJvY2F0ZWQgcmVsYXRpb24sIHRoYW4gc3RhcnQgYSByZWxhdGlvbnNoaXAgd2l0aCBhIG5ldyBwZXJzb24NCg0KLSBSYXRlIHJhdGUgYmVoeSBwZXJpb2QgMToNCg0KICAtICoqUXVlc3Rpb246KiogSG93IGRvIHlvdSBpbnRlcnByZXQgdGhpcz8NCg0KLSBFdmFsIGJlaHkgbGluZWFyIHNoYXBlOg0KDQogIC0gQWJvdXQgaG93IG5vZGVzIHdobyBkaWZmZXIgZnJvbSB0aGUgbWVhbiB0ZW5kIHRvIGNoYW5nZSB0aGVpciBiZWhhdmlvdXIgKGluIHRoaXMgY2FzZSBhc3N1bWVkIHRvIGJlIGxpbmVhcikgKiooUXVlc3Rpb24/KiopDQoNCi0gRXZhbCBiZWh5IHF1YWRyYXRpYyBzaGFwZToNCg0KICAtIEFib3V0IGhvdyBub2RlcyB3aG8gZGlmZmVyIGZyb20gdGhlIG1lYW4gdGVuZCB0byBjaGFuZ2UgdGhlaXIgYmVoYXZpb3VyIChpbiB0aGlzIGNhc2UgYXNzdW1lZCB0byBiZSBxdWFkcmF0aWMpICgqKlF1ZXN0aW9uPyoqKQ0KDQo8YnI+DQoNCiMjIEFkZGluZyBlZmZlY3RzDQoNCkV4cGVjdGVkIGhvbW9waGlseSBlZmZlY3Qgb2YgZ2VuZGVyDQoNCmBgYHtyfQ0KIyBDcmVhdGUgZ2VuZGVyIHZhcmlhYmxlDQpnZW5kZXIxIDwtIGdlbmRlcltbMV1dWywxXQ0KZ2VuZGVyMiA8LSBnZW5kZXJbWzFdXVssMl0NCmdlbmRlciA8LSBjb2FsZXNjZShnZW5kZXIxLCBnZW5kZXIyKQ0KaGVhZChnZW5kZXIpDQoNCiMgQWRkIGdlbmRlciBhcyBjb25zdGFudCBjb3ZhcmlhdGUNCmdlbmRlcl9jb3ZhciA8LSBjb0NvdmFyKGdlbmRlcikNCm15ZGF0YV8xIDwtIHNpZW5hRGF0YUNyZWF0ZShuZXR5LCBnZW5kZXJfY292YXIsIGJlaHkpDQpteWVmZl8xIDwtIGdldEVmZmVjdHMobXlkYXRhXzEpDQoNCm15ZWZmXzEgPC0gaW5jbHVkZUVmZmVjdHMobXllZmZfMSwgc2ltWCwgaW50ZXJhY3Rpb24xID0gImdlbmRlcl9jb3ZhciIpDQpgYGANCg0KQWRkIGVmZmVjdHMgZm9yIHNlbGVjdGlvbiBhbmQgaW5mbHVlbmNlIGZvciBjaXZpYyBhdHRpdHVkZXMNCg0KYGBge3J9DQojIEdlbmVyYWwgZWZmZWN0cw0KbXllZmZfMSA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZl8xLCBlZ29YLCBhbHRYLCBzaW1YLCBpbnRlcmFjdGlvbjEgPSAiYmVoeSIpDQoNCiMgQWRkaW5nIGluZmx1ZW5jZSBlZmZlY3RzIGZvciBpbmRlZ3JlZSwgb3V0ZGVncmVlIGFuZCBhc3NpbWlsYXRpb24NCm15ZWZmXzEgPC0gaW5jbHVkZUVmZmVjdHMobXllZmZfMSwgbmFtZSA9ICJiZWh5IiwgYXZBbHQsIGluZGVnLCBvdXRkZWcsIGludGVyYWN0aW9uMSA9ICJuZXR5IikNCg0KIyBTZXQgYWxnb3JpdGhtDQpteUNvRXZBbGdvcml0aG0gPC0gc2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAidGVzdCIpDQpgYGANCg0KUnVubmluZyB0aGUgbW9kZWwNCg0KYGBge3IsIGV2YWw9RkFMU0V9DQptb2RlbF93ZWVrNyA8LSBzaWVuYTA3KG15Q29FdkFsZ29yaXRobSwgZGF0YSA9IG15ZGF0YV8xLCBlZmZlY3RzID0gbXllZmZfMSkNCmBgYA0KDQpgYGB7ciwgaW5jbHVkZSA9IEZBTFNFfQ0KIyBzYXZlUkRTKG1vZGVsX3dlZWs3LCAibW9kZWxfd2VlazcucmRzIikNCm1vZGVsX3dlZWs3IDwtIHJlYWRSRFMoIm1vZGVsX3dlZWs3LnJkcyIpDQpgYGANCg0KYGBge3J9DQptb2RlbF93ZWVrNw0KDQojIEFsbCBjb252ZXJnZW5jZSB0LXJhdGlvIHNob3VsZCBiZSA8LjEgLS0+IGlzIG1ldA0KIyBPdmVyYWxsIG1heCBjb252ZXJnZW5jZSByYXRpbyBzaG91bGQgYmUgPC4yNSAtLT4gaXMgbWV0IChyYXRpbyA9IDAuMTY3MCkNCmBgYA0KDQo8YnI+DQoNCiMjIyBJbnRlcnByZXRhdGlvbg0KDQpOZXR3b3JrIGR5bmFtaWNzOg0KDQotIFJhdGUgYmFzaWMgcmF0ZSBwYXJhbWV0ZXIgbmV0eToNCg0KICAtICoqUXVlc3Rpb246KiogSG93IGRvIHlvdSBpbnRlcHJldCB0aGlzPw0KDQotIEV2YWwgb3V0ZGVncmVlIChkZW5zaXR5KToNCg0KICAtIEluZGljYXRlcyBob3cgZGVuc2UgdGhlIG5ldHdvcmsgaXMuDQoNCiAgLSBJbiB0aGlzIGNhc2U6IEEgbmVnYXRpdmUgdmFsdWUsIG1lYW5pbmcgdGhhdCB0aGUgY2hhbmNlIG9mIG9ic2VydmluZyBhIHRpZSBpcyBsb3dlciB0aGFuIHRoZSBjaGFuY2Ugb2Ygbm90IGZvcm1pbmcgYSB0aWUNCg0KICAtIE5vZGVzLCBpbiBnZW5lcmFsLCBmb3JtIHJlbGF0aXZlbHkgZmV3IHRpZXMgKCoqcXVlc3Rpb246KiogUmVsYXRpdmUgdG8gd2hvbT8pDQoNCi0gRXZhbCByZWNpcHJvY2l0eToNCg0KICAtIEluZGljYXRlZCBob3cgb2Z0ZW4gYSB0aWUgdGhhdCBpcyBmb3JtZWQgaXMgcmVjaXByb2NhdGVkDQoNCiAgLSBJbiB0aGlzIGNhc2U6IEEgcG9zaXRpdmUgdmFsdWUsIG1lYW5pbmcgdGhhdCB0aGUgY2hhbmNlIG9mIG9ic2VydmluZyBhIHJlY2lwcm9jYXRlZCB0aWUgaXMgaGlnaGVyIHRoYW4gdGhlIGNoYW5jZSBvZiBub3QgZm9ybWluZyBhIHJlY2lwcm9jYXRlZCB0aWUNCg0KICAtIE5vZGVzLCBpbiBnZW5lcmFsLCBwcmVmZXIgdG8gZm9ybS8gbWFpbnRhaW4gdGllcyB0byBjcmVhdGUgYSByZWNpcHJvY2F0ZWQgcmVsYXRpb24sIHRoYW4gc3RhcnQgYSByZWxhdGlvbnNoaXAgd2l0aCBhIG5ldyBwZXJzb24NCg0KLSBFdmFsIGdlbmRlcl9jb3ZhciBzaW1pbGFyaXR5Og0KDQogIC0gSG93IHNpbWlsYXIgYXJlIGNvbm5lY3RlZCB0aWVzIHdpdGggcmVnYXJkcyB0byB0aGUgY292YXIgKGluIHRoaXMgY2FzZSBnZW5kZXIpDQoNCiAgLSBJbiB0aGlzIGNhc2U6IEEgcG9zaXRpdmUgdmFsdWUsIG1lYW5pbmcgdGhhdCBpdCBpcyBtb3JlIGxpa2VseSB0aGF0ICppKiBtYWtlcyBhIHRpZSB3aXRoICpqKiBjb21wYXJlZCB0byB3aXRoICpoKiBpZiAqaiogaGFzIHRoZSBzYW1lIGdlbmRlciBhcyAqaSogKGFuZCAqaCogaGFzbid0KQ0KDQotIEV2YWwgYmVoeSBhbHRlcg0KDQogIC0gQWJvdXQgbmV0d29yayBob21vcGhpbHkNCg0KICAtIFNlbmRlciBob21vcGhpbHkgLS1cPiBEb2VzICppKiBwcmVmZXIgdG8gc2VuZCB0aWVzIHRvIHNvbWVvbmUgc2ltaWxhciB0byB0aGVtc2VsdmVzDQoNCiAgLSBJbiB0aGlzIGNhc2U6IE5lZ2F0aXZlIHZhbHVlIC0tXD4gKmkqIHByZWZlcnMgdG8gc2VuZCBhIHRpZSB0byBhbHRlciAqaiogb3ZlciBhbHRlciAqaCosIHdoZXJlICpqKiBoYXMgZGlzc2ltaWxhciBwcmVmZXJlbmNlcw0KDQotIEV2YWwgYmVoeSBlZ28NCg0KICAtIEFib3V0IG5ldHdvcmsgaG9tb3BoaWx5DQoNCiAgLSBSZWNlaXZlciBob21vcGhpbHkgLS1cPiBEb2VzICppKiBnZXQgbW9yZSB0aWVzIGZyb20gcGVvcGxlIHdpdGggc2ltaWxhciBhdHRpdHVkZXM/DQoNCiAgLSBJbiB0aGlzIGNhc2U6IE5lZ2F0aXZlIHZhbHVlIC0tXD4gKmkqIGlzIG1vcmUgbGlrZWx5IHRvIGdldCBhIHRpZSBmcm9tICpqKiB0aGFuIGZyb20gKmgqLCB3aGVyZSAqaiogaGFzIGRpc3NpbWlsYXIgcHJlZmVyZW5jZXMNCg0KLSBFdmFsIGJlaHkgc2ltaWxhcml0eQ0KDQogIC0gQWJvdXQgbmV0d29yayBob21vcGhpbHkNCg0KPGJyPg0KDQpCZWhhdmlvdXIgZHluYW1pY3M6DQoNCi0gUmF0ZSByYXRlIGJlaHkgcGVyaW9kIDE6DQoNCiAgLSAqKlF1ZXN0aW9uOioqIEhvdyBkbyB5b3UgaW50ZXJwcmV0IHRoaXM/DQoNCi0gRXZhbCBiZWh5IGxpbmVhciBzaGFwZToNCg0KICAtIEFib3V0IGhvdyBub2RlcyB3aG8gZGlmZmVyIGZyb20gdGhlIG1lYW4gdGVuZCB0byBjaGFuZ2UgdGhlaXIgYmVoYXZpb3VyIChpbiB0aGlzIGNhc2UgYXNzdW1lZCB0byBiZSBsaW5lYXIpICgqKlF1ZXN0aW9uPyoqKQ0KDQotIEV2YWwgYmVoeSBxdWFkcmF0aWMgc2hhcGU6DQoNCiAgLSBBYm91dCBob3cgbm9kZXMgd2hvIGRpZmZlciBmcm9tIHRoZSBtZWFuIHRlbmQgdG8gY2hhbmdlIHRoZWlyIGJlaGF2aW91ciAoaW4gdGhpcyBjYXNlIGFzc3VtZWQgdG8gYmUgcXVhZHJhdGljKSAoKipRdWVzdGlvbj8qKikNCg0KICAtIFRoZSBhdHRyYWN0aXZlbmVzcyBvZiBmdXJ0aGVyIHN0ZXBzIHUgdGhlIGJlaGF2aW91ciBsYWRkZXIgKHRoaXMgaXMgdGhlIG1vdW50YWluIEkgdGhpbmspLCBkZXBlbmRzIG9uIHdoZXJlIHRoZSBhY3RvciBpcyBvbiB0aGUgbGFkZGVyDQoNCi0gRXZhbCBiZWh5IGluZGVncmVlOg0KDQogIC0gSW5kZWdyZWUgdGllIGlzIG1vcmUgbGlrZWx5IHdoZW4geW91IGhhdmUgc2ltaWxhciBjaXZpYyBhdHRpdHVkZXMgKHBvc2l0aXZlIHZhbHVlKQ0KDQotIEV2YWwgYmVoeSBvdXRkZWdyZWU6DQoNCiAgLSBPdXRkZWdyZWUgdGllIGlzIGxlc3MgbGlrZWx5IHdoZW4geW91IGhhdmUgc2ltaWxhciBjaXZpYyBhdHRpdHVkZXMgKG5lZ2F0aXZlIHZhbHVlKQ0KDQotIEV2YWwgYmVoeSBhdmVyYWdlIGFsdGVyOg0KDQogIC0gQWJvdXQgaW5mbHVlbmNlIGVmZmVjdHMNCg0KICAtIEF2ZXJhZ2UgYWx0ZXIgZWZmZWN0IC0tXD4gKmkqIGJlaGF2aW91ciBtdWx0aXBsaWVkIGJ5IHRoZSBhdmVyYWdlIGJlaGF2aW91ciBvZiB0aGVpciBhbHRlcnMNCg0KICAtIEluIHRoaXMgY2FzZTogQSBuZWdhdGl2ZSB2YWx1ZSAtLVw+IGJlaW5nIGZyaWVuZHMgd2l0aCBwZW9wbGUgd2l0aCBwb3NpdGl2ZSBjaXZpYyBhdHRpdHVkZSBzY29yZXMsIG1ha2VzIHlvdSBtb3JlIG5lZ2F0aXZlICg/PyBodWg/KQ0K</div>
 
 
 </div>
