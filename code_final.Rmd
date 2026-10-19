@@ -15,7 +15,7 @@ klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
 
 # Preparation
 Necessary packages
-```{r, warning=FALSE}
+```{r, warning=FALSE, message = FALSE}
 library(ape)
 library(sna)
 library(knitr)
@@ -175,6 +175,9 @@ table(IC_df2$ce_t2, IC_df2$ce_t2_cat)
 ```
 
 <br>
+
+# Create gender
+
 
 # Descriptive statistics
 ## Density
@@ -344,15 +347,10 @@ g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = 
 ### Node colours based on civil service attitudes
 ```{r}
 colour <- ifelse(IC_df$ce_t1_cat=='neutral', "lightpink", "orchid4")
+graph_CE_t1 <- simplify(g_strong_t1)
 
-copy_strong_netw_t1 <- strong_netw_t1
-copy_strong_netw_t1[is.na(copy_strong_netw_t1)] <- 0 
-
-graph_CE_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
-graph_CE_t1 <- simplify(graph_CE_t1)
-
-layout <- layout_with_dh(graph_CE_t1)
-# Be open about what algortithm used
+# layout <- layout_with_dh(graph_CE_t1)
+layout <- readRDS("layout.rds")
 
 V(graph_CE_t1)$size = igraph:: betweenness(graph_CE_t1, normalized = T, directed = T) * 50 + 5
 plot_CE_t1 <- plot(graph_CE_t1,
@@ -381,12 +379,9 @@ g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = 
 
 ### Node colours based on civil service attitudes
 ```{r}
-copy_strong_netw_t2 <- strong_netw_t2
-copy_strong_netw_t2[is.na(copy_strong_netw_t2)] <- 0 
+graph_CE_t2 <- simplify(g_strong_t2)
 
-graph_CE_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
-graph_CE_t2 <- simplify(graph_CE_t2)
-
+colour <- ifelse(IC_df$ce_t2_cat=='neutral', "lightpink", "orchid4")
 V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 50 + 5
 plot_CE_t2 <- plot(graph_CE_t2,
      vertex.color = colour,

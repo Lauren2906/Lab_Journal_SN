@@ -71,6 +71,28 @@ if (window.hljs) {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -383,10 +405,10 @@ div.tocify {
       <a href="theory.html">Theory</a>
     </li>
     <li>
-      <a href="data.html">Data</a>
+      <a href="data.html">Data and Methods</a>
     </li>
     <li>
-      <a href="methods.html">Methods</a>
+      <a href="results.html">Results</a>
     </li>
     <li>
       <a href="conclusion_discussion.html">Conclusion and discussion</a>
@@ -434,67 +456,78 @@ div.tocify {
 <h1><span class="header-section-number">1</span> Theory</h1>
 <p>Clustering in social networks is characterised by individuals having
 ties with similar others, and having fewer ties with dissimilar others
-(SOURCE). That there is clustering within social networks, is a well
-established fact (SOURCE), networks cluster around gender (SOURCE),
-ethnicity (SOURCE), political preference (SOURCE), and social economic
-status (SOURCE), to name a few. Clustering can thus be the result of
-both visible, and invisible personal characteristics. In the following
-chapter, an overview of mechanisms of network clustering will be
-presented, focussing on civic attitudes, specifically focussing on
-homophily/ preference and social learning/ influence effects.</p>
+<span class="citation">(Azizifard 2014)</span>. That there is clustering
+within social networks, is a well established fact, networks cluster
+around gender <span class="citation">(e.g. Suurna and Leibbrandt
+2022)</span>, ethnicity <span class="citation">(e.g. Leszczensky and
+Pink 2019)</span>, political preference <span class="citation">(e.g.
+Oosterhoff et al. 2022)</span>, and social economic status <span
+class="citation">(e.g. Chabot 2024)</span>, to name a few. Clustering
+can thus be the result of both visible, and invisible personal
+characteristics. In the following chapter, an overview of mechanisms of
+network clustering will be presented specifically focussing on
+homophily/ preference and social learning/ influence effects, with
+regards to civic engagement.</p>
+<p><br></p>
 <div id="homophily" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Homophily</h2>
 <p>The core principle of homophily is that similar people prefer each
-others’ company over the company of dissimilar others (SOURCE). This
-process is visualised in Figure 1. Concretely, this means that people
-with behavioural attitude A (pink in Figure 1) prefer to make ties with
-other people with attitude A, rather than with people with attitude B
+others’ company over the company of dissimilar others <span
+class="citation">(McPherson et al. 2001)</span>. This process is
+visualised in Figure 1. Concretely, this means that people with
+behavioural attitude A (pink in Figure 1) prefer to make ties with other
+people with attitude A, rather than with people with attitude B
 (purple). Because actor <em>i</em> and <em>h</em> hold similar
 attitudes, they are more likely to create a tie, than actor <em>i</em>
 and <em>j</em> (Figure 1, A). However, homophily does not just take
 place when making a tie with another person, it also has an effect on
-what ties remain (SOURCE). Dissimilar people are more likely to break
-their tie, than people who hold similar opinions (Figure 1, B).</p>
+what ties remain <span class="citation">(McPherson et al. 2001)</span>.
+Dissimilar people are more likely to break their tie, than people who
+hold similar opinions (Figure 1, B).</p>
 <p><br></p>
 <p><strong>Figure 1.</strong></p>
 <p><em>Visualisation of homophily</em></p>
 <p><img src="images/clipboard-1955713809.png" width="466" /></p>
 <p><br></p>
-<p>People prefer to interact with similar others for multiple reasons.
-Creating a tie with a similar other, can be easier, simply because you
-exist in the same social context as each other (SOURCE). In order to
-make a tie with someone, we need to meet that person, and the people we
-are able to meet are often similar to ourselves. For example, we meet
-people at our work or school, but the people we meet there are often
-similarly educated as we are. This leads to clustering in social
-networks, even if ego themselves may not be aware of this, nor are they
-actively choosing to make ties with similar people.</p>
-<p>A second reason for homophily is that there can be less conflict
-between similar people. People with the same attitudes, are easier to
-befriend, because there are fewer opportunities of conflict, after all,
-you will not have to fight about the things you already agree on. This
-can also explain why ties between dissimilar others are broken more
-often. If there is a lot of conflict between two people, their tie may
-become weaker and weaker until it breaks. Thus, solely based on
-selection effects, it can be expected that people have more ties with
-similar others, than with dissimilar others.</p>
-<p>Applied to civic attitudes, this means that people who have
-relatively disengaged civic attitudes, are more likely to meet and
-connect with other people who are civilly disengaged, and vice
-versa.</p>
+<p>People tend to interact with similar others for multiple reasons. One
+simple explanation is geography <span class="citation">(McPherson et al.
+2001)</span>, meaning that tie creation is dependent on existing in the
+same social context. Oftentimes, our contexts consist of people who are
+relatively similar to ourselves. For example, we meet people at our work
+or school, but the people we meet there are often of a similar social-
+and cultural background as ourselves. This leads to clustering in social
+networks, simply because ego mostly meets similar alters. Homophily in
+civic attitudes can manifest through geography, simply because some
+universities may encourage these attitudes more strongly than other
+universities, leading to differences in civic attitudes between
+universities.</p>
+<p>However, just context cannot explain homophily, as homophily is also
+found in mixed environments <span class="citation">(e.g. Leszczensky and
+Pink 2019)</span>. People tend to prefer to interact with similar others
+for a myriad of reasons, for example, ease of communication and a shared
+culture <span class="citation">(McPherson et al. 2001)</span>. Holding
+differing attitudes, can be reason for conflict and miscommunication,
+decreasing the likeliness of initiating and maintaining ties. For civic
+engagement, this may show through preferences to have ties with other’s
+who have the same outlook on what a citizen’s role should look like in
+civil society. Thus, solely based on selection effects, it can be
+expected that people have more ties with similar others, than with
+dissimilar others.</p>
 <p><br></p>
 </div>
 <div id="social-learning" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Social learning</h2>
-<p>Clustering in social networks can not be explained solely through
-selection effects. Even if our social contexts exist of relatively
-similar others, there is still a variation of attitudes and behaviours
-within this context. Secondly, people can differ from their ties on some
-aspects, without a breaking tie being inevitable. A second explanation
-for clustering within social networks is influence effects (SOURCE).
-This effect assumes that ego makes ties with other regardless of their
-similarity to the alter. Once the tie is made, ego and alter become more
-similar to each other. This process is represented in Figure 2.</p>
+<p>However, it is, of course, not the case that people <em>only</em>
+make ties with people who are exactly like themselves. When considering
+a tie with another person, there are incountable factors that contribute
+to whether that tie is actually made. Thus, preferences cannot solely
+explain clustering in social networks. Another factor is social
+learning, which considers that people learn from their friends, which
+can change their attitudes and behaviours <span
+class="citation">(Marsden and Friedkin 1993)</span>. This means, that
+people can make a tie with another person, regardless of their
+attitudinal differences, but after the tie is made, ego and alter become
+more similar to each other. This process is represented in Figure 2.</p>
 <p><br></p>
 <p><strong>Figure 2.</strong></p>
 <p><em>Visualisation of influence</em></p>
@@ -502,10 +535,11 @@ similar to each other. This process is represented in Figure 2.</p>
 <p><br></p>
 <p>Influence effects can take place for many reasons. Due to our
 connection with other people we may come to new insights, and change our
-attitudes accordingly (SOURCE). Influence effects can also take place,
-because ego wants to minimise the amount of social disapproval they get
-from their alters. By changing their attitude or behaviour to match
-their network’s, ego minimises the chances of social conflict.</p>
+attitudes accordingly <span class="citation">(Marsden and Friedkin
+1993)</span>. Influence effects can also take place, because ego wants
+to minimise the amount of social disapproval they get from their alters.
+By changing their attitude or behaviour to match their network’s, ego
+minimises the chances of social conflict.</p>
 <p>For civic attitudes this means that a civilly disengaged ego can make
 a tie with a civilly engaged alter. When these two have a connection,
 their attitudinal characteristics become more similar to each other.
@@ -547,30 +581,77 @@ can now break the tie, something that would be likely according to the
 homophily principle, or keep the tie, allowing for influence effects to
 take place. This paper argues that people are unlikely to break a tie
 based on differences in civic attitudes. Civic attitudes are often not
-at the core of a person’s identity (SOURCE), making it a less important
+at the core of a person’s identity, making it a less important
 characteristic when deciding with whom to make and maintain ties. Once
 people already have a tie, and then find out that they differ in this
 aspect, ego and alter have already established a relationship, which is
 likely to remain despite differences in some attitudes. The created tie
 does open the way for influence effects to take place. Despite civic
 attitudes not being a core part of their identity, ego can still learn
-and develop through interactions with alter, thereby changing their
-attitudes.</p>
+through interactions with alter, thereby changing their attitudes.</p>
 <p>Thus, taking both preference and influence effects together, for
 civic attitudes, this paper expects that influence effects are stronger
 than preference effects for explaining clustering in social networks.
 This leads to the following hypothesis:</p>
 <p>H2: <em>The influence effect is stronger than the selection effect
 for civic engagement attitudes, for students in Michigan learning
-communities</em></p>
+communities.</em></p>
+<p><br></p>
 <hr />
 </div>
 </div>
-<div id="references" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> References</h1>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-azizifard2014" class="csl-entry">
+Azizifard, Narges. 2014. <span>“Social Network Clustering.”</span>
+<em>International Journal of Information Technology and Computer
+Science</em> 6 (1): 76–81. <a
+href="https://doi.org/10.5815/ijitcs.2014.01.09">https://doi.org/10.5815/ijitcs.2014.01.09</a>.
+</div>
+<div id="ref-chabot2024" class="csl-entry">
+Chabot, Timothée. 2024. <span>“How Does Socioeconomic Homophily Emerge?
+Testing for the Contribution of Different Processes to Socioeconomic
+Segregation in Adolescent Friendships.”</span> <em>Social Networks</em>
+76 (January): 160–73. <a
+href="https://doi.org/10.1016/j.socnet.2023.09.002">https://doi.org/10.1016/j.socnet.2023.09.002</a>.
+</div>
+<div id="ref-leszczensky2019" class="csl-entry">
+Leszczensky, Lars, and Sebastian Pink. 2019. <span>“What Drives Ethnic
+Homophily? A Relational Approach on How Ethnic Identification Moderates
+Preferences for Same-Ethnic Friends.”</span> <em>American Sociological
+Review</em> 84 (3): 394–419. <a
+href="https://doi.org/10.1177/0003122419846849">https://doi.org/10.1177/0003122419846849</a>.
+</div>
+<div id="ref-marsden1993" class="csl-entry">
+Marsden, Peter V., and Noah E. Friedkin. 1993. <span>“Network Studies of
+Social Influence.”</span> <em>Sociological Methods &amp; Research</em>
+22 (1): 127–51. <a
+href="https://doi.org/10.1177/0049124193022001006">https://doi.org/10.1177/0049124193022001006</a>.
+</div>
+<div id="ref-mcpherson2001" class="csl-entry">
+McPherson, Miller, Lynn Smith-Lovin, and James M Cook. 2001.
+<span>“Birds of a Feather: Homophily in Social Networks.”</span>
+<em>Annual Review of Sociology</em> 27 (1): 415–44. <a
+href="https://doi.org/10.1146/annurev.soc.27.1.415">https://doi.org/10.1146/annurev.soc.27.1.415</a>.
+</div>
+<div id="ref-oosterhoff2022" class="csl-entry">
+Oosterhoff, Benjamin, Ashleigh Poppler, and Cara A. Palmer. 2022.
+<span>“Early Adolescents Demonstrate Peer-Network Homophily in Political
+Attitudes and Values.”</span> <em>Psychological Science</em> 33 (6):
+874–88. <a
+href="https://doi.org/10.1177/09567976211063912">https://doi.org/10.1177/09567976211063912</a>.
+</div>
+<div id="ref-suurna2022" class="csl-entry">
+Suurna, Maria V., and Andreas Leibbrandt. 2022. <span>“Underrepresented
+Women Leaders: Lasting Impact of Gender Homophily in Surgical Faculty
+Networks.”</span> <em>The Laryngoscope</em> 132 (1): 20–25. <a
+href="https://doi.org/10.1002/lary.29681">https://doi.org/10.1002/lary.29681</a>.
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRoZW9yeSINCmF1dGhvcjogIkxhdXJlbiINCmRhdGU6ICIyMDI2LTA5LTExIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KIyBUaGVvcnkNCg0KQ2x1c3RlcmluZyBpbiBzb2NpYWwgbmV0d29ya3MgaXMgY2hhcmFjdGVyaXNlZCBieSBpbmRpdmlkdWFscyBoYXZpbmcgdGllcyB3aXRoIHNpbWlsYXIgb3RoZXJzLCBhbmQgaGF2aW5nIGZld2VyIHRpZXMgd2l0aCBkaXNzaW1pbGFyIG90aGVycyAoU09VUkNFKS4gVGhhdCB0aGVyZSBpcyBjbHVzdGVyaW5nIHdpdGhpbiBzb2NpYWwgbmV0d29ya3MsIGlzIGEgd2VsbCBlc3RhYmxpc2hlZCBmYWN0IChTT1VSQ0UpLCBuZXR3b3JrcyBjbHVzdGVyIGFyb3VuZCBnZW5kZXIgKFNPVVJDRSksIGV0aG5pY2l0eSAoU09VUkNFKSwgcG9saXRpY2FsIHByZWZlcmVuY2UgKFNPVVJDRSksIGFuZCBzb2NpYWwgZWNvbm9taWMgc3RhdHVzIChTT1VSQ0UpLCB0byBuYW1lIGEgZmV3LiBDbHVzdGVyaW5nIGNhbiB0aHVzIGJlIHRoZSByZXN1bHQgb2YgYm90aCB2aXNpYmxlLCBhbmQgaW52aXNpYmxlIHBlcnNvbmFsIGNoYXJhY3RlcmlzdGljcy4gSW4gdGhlIGZvbGxvd2luZyBjaGFwdGVyLCBhbiBvdmVydmlldyBvZiBtZWNoYW5pc21zIG9mIG5ldHdvcmsgY2x1c3RlcmluZyB3aWxsIGJlIHByZXNlbnRlZCwgZm9jdXNzaW5nIG9uIGNpdmljIGF0dGl0dWRlcywgc3BlY2lmaWNhbGx5IGZvY3Vzc2luZyBvbiBob21vcGhpbHkvIHByZWZlcmVuY2UgYW5kIHNvY2lhbCBsZWFybmluZy8gaW5mbHVlbmNlIGVmZmVjdHMuDQoNCiMjIEhvbW9waGlseQ0KDQpUaGUgY29yZSBwcmluY2lwbGUgb2YgaG9tb3BoaWx5IGlzIHRoYXQgc2ltaWxhciBwZW9wbGUgcHJlZmVyIGVhY2ggb3RoZXJzJyBjb21wYW55IG92ZXIgdGhlIGNvbXBhbnkgb2YgZGlzc2ltaWxhciBvdGhlcnMgKFNPVVJDRSkuIFRoaXMgcHJvY2VzcyBpcyB2aXN1YWxpc2VkIGluIEZpZ3VyZSAxLiBDb25jcmV0ZWx5LCB0aGlzIG1lYW5zIHRoYXQgcGVvcGxlIHdpdGggYmVoYXZpb3VyYWwgYXR0aXR1ZGUgQSAocGluayBpbiBGaWd1cmUgMSkgcHJlZmVyIHRvIG1ha2UgdGllcyB3aXRoIG90aGVyIHBlb3BsZSB3aXRoIGF0dGl0dWRlIEEsIHJhdGhlciB0aGFuIHdpdGggcGVvcGxlIHdpdGggYXR0aXR1ZGUgQiAocHVycGxlKS4gQmVjYXVzZSBhY3RvciAqaSogYW5kICpoKiBob2xkIHNpbWlsYXIgYXR0aXR1ZGVzLCB0aGV5IGFyZSBtb3JlIGxpa2VseSB0byBjcmVhdGUgYSB0aWUsIHRoYW4gYWN0b3IgKmkqIGFuZCAqaiogKEZpZ3VyZSAxLCBBKS4gSG93ZXZlciwgaG9tb3BoaWx5IGRvZXMgbm90IGp1c3QgdGFrZSBwbGFjZSB3aGVuIG1ha2luZyBhIHRpZSB3aXRoIGFub3RoZXIgcGVyc29uLCBpdCBhbHNvIGhhcyBhbiBlZmZlY3Qgb24gd2hhdCB0aWVzIHJlbWFpbiAoU09VUkNFKS4gRGlzc2ltaWxhciBwZW9wbGUgYXJlIG1vcmUgbGlrZWx5IHRvIGJyZWFrIHRoZWlyIHRpZSwgdGhhbiBwZW9wbGUgd2hvIGhvbGQgc2ltaWxhciBvcGluaW9ucyAoRmlndXJlIDEsIEIpLg0KDQo8YnI+DQoNCioqRmlndXJlIDEuKioNCg0KKlZpc3VhbGlzYXRpb24gb2YgaG9tb3BoaWx5Kg0KDQohW10oaW1hZ2VzL2NsaXBib2FyZC0xOTU1NzEzODA5LnBuZyl7d2lkdGg9IjQ2NiJ9DQoNCjxicj4NCg0KUGVvcGxlIHByZWZlciB0byBpbnRlcmFjdCB3aXRoIHNpbWlsYXIgb3RoZXJzIGZvciBtdWx0aXBsZSByZWFzb25zLiBDcmVhdGluZyBhIHRpZSB3aXRoIGEgc2ltaWxhciBvdGhlciwgY2FuIGJlIGVhc2llciwgc2ltcGx5IGJlY2F1c2UgeW91IGV4aXN0IGluIHRoZSBzYW1lIHNvY2lhbCBjb250ZXh0IGFzIGVhY2ggb3RoZXIgKFNPVVJDRSkuIEluIG9yZGVyIHRvIG1ha2UgYSB0aWUgd2l0aCBzb21lb25lLCB3ZSBuZWVkIHRvIG1lZXQgdGhhdCBwZXJzb24sIGFuZCB0aGUgcGVvcGxlIHdlIGFyZSBhYmxlIHRvIG1lZXQgYXJlIG9mdGVuIHNpbWlsYXIgdG8gb3Vyc2VsdmVzLiBGb3IgZXhhbXBsZSwgd2UgbWVldCBwZW9wbGUgYXQgb3VyIHdvcmsgb3Igc2Nob29sLCBidXQgdGhlIHBlb3BsZSB3ZSBtZWV0IHRoZXJlIGFyZSBvZnRlbiBzaW1pbGFybHkgZWR1Y2F0ZWQgYXMgd2UgYXJlLiBUaGlzIGxlYWRzIHRvIGNsdXN0ZXJpbmcgaW4gc29jaWFsIG5ldHdvcmtzLCBldmVuIGlmIGVnbyB0aGVtc2VsdmVzIG1heSBub3QgYmUgYXdhcmUgb2YgdGhpcywgbm9yIGFyZSB0aGV5IGFjdGl2ZWx5IGNob29zaW5nIHRvIG1ha2UgdGllcyB3aXRoIHNpbWlsYXIgcGVvcGxlLg0KDQpBIHNlY29uZCByZWFzb24gZm9yIGhvbW9waGlseSBpcyB0aGF0IHRoZXJlIGNhbiBiZSBsZXNzIGNvbmZsaWN0IGJldHdlZW4gc2ltaWxhciBwZW9wbGUuIFBlb3BsZSB3aXRoIHRoZSBzYW1lIGF0dGl0dWRlcywgYXJlIGVhc2llciB0byBiZWZyaWVuZCwgYmVjYXVzZSB0aGVyZSBhcmUgZmV3ZXIgb3Bwb3J0dW5pdGllcyBvZiBjb25mbGljdCwgYWZ0ZXIgYWxsLCB5b3Ugd2lsbCBub3QgaGF2ZSB0byBmaWdodCBhYm91dCB0aGUgdGhpbmdzIHlvdSBhbHJlYWR5IGFncmVlIG9uLiBUaGlzIGNhbiBhbHNvIGV4cGxhaW4gd2h5IHRpZXMgYmV0d2VlbiBkaXNzaW1pbGFyIG90aGVycyBhcmUgYnJva2VuIG1vcmUgb2Z0ZW4uIElmIHRoZXJlIGlzIGEgbG90IG9mIGNvbmZsaWN0IGJldHdlZW4gdHdvIHBlb3BsZSwgdGhlaXIgdGllIG1heSBiZWNvbWUgd2Vha2VyIGFuZCB3ZWFrZXIgdW50aWwgaXQgYnJlYWtzLiBUaHVzLCBzb2xlbHkgYmFzZWQgb24gc2VsZWN0aW9uIGVmZmVjdHMsIGl0IGNhbiBiZSBleHBlY3RlZCB0aGF0IHBlb3BsZSBoYXZlIG1vcmUgdGllcyB3aXRoIHNpbWlsYXIgb3RoZXJzLCB0aGFuIHdpdGggZGlzc2ltaWxhciBvdGhlcnMuDQoNCkFwcGxpZWQgdG8gY2l2aWMgYXR0aXR1ZGVzLCB0aGlzIG1lYW5zIHRoYXQgcGVvcGxlIHdobyBoYXZlIHJlbGF0aXZlbHkgZGlzZW5nYWdlZCBjaXZpYyBhdHRpdHVkZXMsIGFyZSBtb3JlIGxpa2VseSB0byBtZWV0IGFuZCBjb25uZWN0IHdpdGggb3RoZXIgcGVvcGxlIHdobyBhcmUgY2l2aWxseSBkaXNlbmdhZ2VkLCBhbmQgdmljZSB2ZXJzYS4NCg0KPGJyPg0KDQojIyBTb2NpYWwgbGVhcm5pbmcNCg0KQ2x1c3RlcmluZyBpbiBzb2NpYWwgbmV0d29ya3MgY2FuIG5vdCBiZSBleHBsYWluZWQgc29sZWx5IHRocm91Z2ggc2VsZWN0aW9uIGVmZmVjdHMuIEV2ZW4gaWYgb3VyIHNvY2lhbCBjb250ZXh0cyBleGlzdCBvZiByZWxhdGl2ZWx5IHNpbWlsYXIgb3RoZXJzLCB0aGVyZSBpcyBzdGlsbCBhIHZhcmlhdGlvbiBvZiBhdHRpdHVkZXMgYW5kIGJlaGF2aW91cnMgd2l0aGluIHRoaXMgY29udGV4dC4gU2Vjb25kbHksIHBlb3BsZSBjYW4gZGlmZmVyIGZyb20gdGhlaXIgdGllcyBvbiBzb21lIGFzcGVjdHMsIHdpdGhvdXQgYSBicmVha2luZyB0aWUgYmVpbmcgaW5ldml0YWJsZS4gQSBzZWNvbmQgZXhwbGFuYXRpb24gZm9yIGNsdXN0ZXJpbmcgd2l0aGluIHNvY2lhbCBuZXR3b3JrcyBpcyBpbmZsdWVuY2UgZWZmZWN0cyAoU09VUkNFKS4gVGhpcyBlZmZlY3QgYXNzdW1lcyB0aGF0IGVnbyBtYWtlcyB0aWVzIHdpdGggb3RoZXIgcmVnYXJkbGVzcyBvZiB0aGVpciBzaW1pbGFyaXR5IHRvIHRoZSBhbHRlci4gT25jZSB0aGUgdGllIGlzIG1hZGUsIGVnbyBhbmQgYWx0ZXIgYmVjb21lIG1vcmUgc2ltaWxhciB0byBlYWNoIG90aGVyLiBUaGlzIHByb2Nlc3MgaXMgcmVwcmVzZW50ZWQgaW4gRmlndXJlIDIuDQoNCjxicj4NCg0KKipGaWd1cmUgMi4qKg0KDQoqVmlzdWFsaXNhdGlvbiBvZiBpbmZsdWVuY2UqDQoNCiFbXShpbWFnZXMvY2xpcGJvYXJkLTE2MjAwMDQyMTQucG5nKQ0KDQo8YnI+DQoNCkluZmx1ZW5jZSBlZmZlY3RzIGNhbiB0YWtlIHBsYWNlIGZvciBtYW55IHJlYXNvbnMuIER1ZSB0byBvdXIgY29ubmVjdGlvbiB3aXRoIG90aGVyIHBlb3BsZSB3ZSBtYXkgY29tZSB0byBuZXcgaW5zaWdodHMsIGFuZCBjaGFuZ2Ugb3VyIGF0dGl0dWRlcyBhY2NvcmRpbmdseSAoU09VUkNFKS4gSW5mbHVlbmNlIGVmZmVjdHMgY2FuIGFsc28gdGFrZSBwbGFjZSwgYmVjYXVzZSBlZ28gd2FudHMgdG8gbWluaW1pc2UgdGhlIGFtb3VudCBvZiBzb2NpYWwgZGlzYXBwcm92YWwgdGhleSBnZXQgZnJvbSB0aGVpciBhbHRlcnMuIEJ5IGNoYW5naW5nIHRoZWlyIGF0dGl0dWRlIG9yIGJlaGF2aW91ciB0byBtYXRjaCB0aGVpciBuZXR3b3JrJ3MsIGVnbyBtaW5pbWlzZXMgdGhlIGNoYW5jZXMgb2Ygc29jaWFsIGNvbmZsaWN0Lg0KDQpGb3IgY2l2aWMgYXR0aXR1ZGVzIHRoaXMgbWVhbnMgdGhhdCBhIGNpdmlsbHkgZGlzZW5nYWdlZCBlZ28gY2FuIG1ha2UgYSB0aWUgd2l0aCBhIGNpdmlsbHkgZW5nYWdlZCBhbHRlci4gV2hlbiB0aGVzZSB0d28gaGF2ZSBhIGNvbm5lY3Rpb24sIHRoZWlyIGF0dGl0dWRpbmFsIGNoYXJhY3RlcmlzdGljcyBiZWNvbWUgbW9yZSBzaW1pbGFyIHRvIGVhY2ggb3RoZXIuIEVnbywgd2hvIGlzIGhhcyBkaXNlbmdhZ2VkIGNpdmljIGF0dGl0dWRlcywgd2lsbCBiZWNvbWUgbW9yZSBlbmdhZ2VkLCBiZWNhdXNlIHRoZXkgd2FudCB0byBmaXQgaW4gd2l0aCB0aGUgYWx0ZXIgd2hvIGlzIGNpdmlsbHkgZW5nYWdlZC4gVGhpcyBwcm9jZXNzIGNhbiBhbHNvIHdvcmsgdGhlIG90aGVyIHdheSBhcm91bmQuDQoNCkNvbWJpbmluZyB0aGUgcHJvY2Vzc2VzIG9mIGhvbW9waGlseSBhbmQgaW5mbHVlbmNlLCBsZWFkIHRvIHRoZSBleHBlY3RhdGlvbiBvZiBuZXR3b3JrcyBiZWluZyBjbHVzdGVyZWQgYXJvdW5kIGNpdmljIGF0dGl0dWRlcy4gQWNjb3JkaW5nIHRvIHRoZSBob21vcGhpbHkgcHJpbmNpcGxlLCBzdHVkZW50cyB3b3VsZCBiZSBtb3JlIGxpa2VseSB0byBtYWtlIGFuZCBrZWVwIHRpZXMgd2l0aCBzaW1pbGFyIG90aGVycywgYW5kIGV2ZW4gaWYgdGhleSBtYWtlIHRpZXMgd2l0aCBkaXNzaW1pbGFyIG90aGVycywgaW5mbHVlbmNlIGVmZmVjdHMgd2lsbCBlbnN1cmUgY2x1c3RlcmluZyBpbiB0aGUgbmV0d29yay4gVGh1cywgdGhlc2UgdHdvIHByaW5jaXBsZXMgY29tYmluZWQgbGVhZCB0byB0aGUgZm9sbG93aW5nIGh5cG90aGVzaXM6DQoNCkgxOiAqU3R1ZGVudHMgaW4gTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXRpZXMsIHdobyBhcmUgbW9yZSBzaW1pbGFyIGluIHRoZWlyIGNpdmljIGVuZ2FnZW1lbnQgYXR0aXR1ZGVzIGFyZSBtb3JlIGxpa2VseSB0byBoYXZlIHRpZXMgd2l0aCBvbmUgYW5vdGhlciB0aGFuIHdpdGggcGVvcGxlIHdobyBkaWZmZXIgZnJvbSB0aGVtIGluIHRoZWlyIGF0dGl0dWRlcy4qDQoNCjxicj4NCg0KQ2l2aWMgYXR0aXR1ZGVzIGZvcm0gYW4gaW50ZXJlc3RpbmcgYmVoYXZpb3VyYWwgY2hhcmFjdGVyaXN0aWMgdG8gbG9vayBhdCBpbiBsaWdodCBvZiBuZXR3b3JrIGNsdXN0ZXJpbmcsIGJlY2F1c2UgaXQgaXMgYSBjaGFyYWN0ZXJpc3RpYyB0aGF0IHRlbmRzIHRvIGJlIGludmlzaWJsZSB0byB1bnRpbCB5b3UgZ2V0IHRvIGtub3cgc29tZW9uZS4gQ2l2aWMgZW5nYWdlbWVudCBhdHRpdHVkZXMgaXMgbm90IG5lY2Vzc2FyaWx5IGFuIGF0dGl0dWRlIHRoYXQgY2FuIGJlIGNsZWFybHkgc2VlbiBpbiBvdGhlcnMsIGJlZm9yZSBtYWtpbmcgYSBjb25uZWN0aW9uIHdpdGggdGhlbS4gRmlndXJlIDMgcmVwcmVzZW50cyB0aGlzIHVuY2VydGFpbnR5LCBieSBzaG93aW5nIGJvdGggYWx0ZXJzIGJlaW5nIGdyZXksIGFzIGVnbyBjYW5ub3Qga25vdyB0aGVpciBhdHRpdHVkZXMuIFdoZW4gbWFraW5nIGEgdGllLCBlZ28gdGh1cyBjaG9vc2VzICdibGluZGx5JyB3aXRoIHdob20gdGhleSB3YW50IHRvIG1ha2UgYSB0aWUuIFRoaXMgZGlyZWN0bHkgdW5kZXJtaW5lcyB0aGUgaWRlYSBvZiBzZWxlY3Rpb24gZWZmZWN0cywgYXMgZWdvIGNhbm5vdCBzZWxlY3Qgb24gY2l2aWMgYXR0aXR1ZGVzIHdoZW4gbWFraW5nIGEgdGllLCB3aGlsZSBpdCBzdHJlbmd0aGVucyB0aGUgcG90ZW50aWFsIGVmZmVjdHMgb2YgaW5mbHVlbmNlLg0KDQo8YnI+DQoNCioqRmlndXJlIDMuKioNCg0KKlZpc3VhbGlzYXRpb24gb2YgdGllLW1ha2luZyBpbiB1bmNlcnRhaW4gc2l0dWF0aW9ucywgd2l0aCBhbiBpbmZsdWVuY2UgZWZmZWN0Kg0KDQohW10oaW1hZ2VzL2NsaXBib2FyZC0xODI2MTYwNDQ4LnBuZykNCg0KPGJyPg0KDQpPbmNlIGVnbyBhbmQgYWx0ZXIgbWFrZSBhIHRpZSwgYW5kIHRoZXkgZ2V0IHRvIGtub3cgZWFjaCBvdGhlciBiZXR0ZXIsIGl0IGJlY29tZXMgY2xlYXIgdGhhdCB0aGV5IGRpZmZlciBpbiB0aGVpciBjaXZpYyBhdHRpdHVkZXMuIEVnbyBjYW4gbm93IGJyZWFrIHRoZSB0aWUsIHNvbWV0aGluZyB0aGF0IHdvdWxkIGJlIGxpa2VseSBhY2NvcmRpbmcgdG8gdGhlIGhvbW9waGlseSBwcmluY2lwbGUsIG9yIGtlZXAgdGhlIHRpZSwgYWxsb3dpbmcgZm9yIGluZmx1ZW5jZSBlZmZlY3RzIHRvIHRha2UgcGxhY2UuIFRoaXMgcGFwZXIgYXJndWVzIHRoYXQgcGVvcGxlIGFyZSB1bmxpa2VseSB0byBicmVhayBhIHRpZSBiYXNlZCBvbiBkaWZmZXJlbmNlcyBpbiBjaXZpYyBhdHRpdHVkZXMuIENpdmljIGF0dGl0dWRlcyBhcmUgb2Z0ZW4gbm90IGF0IHRoZSBjb3JlIG9mIGEgcGVyc29uJ3MgaWRlbnRpdHkgKFNPVVJDRSksIG1ha2luZyBpdCBhIGxlc3MgaW1wb3J0YW50IGNoYXJhY3RlcmlzdGljIHdoZW4gZGVjaWRpbmcgd2l0aCB3aG9tIHRvIG1ha2UgYW5kIG1haW50YWluIHRpZXMuIE9uY2UgcGVvcGxlIGFscmVhZHkgaGF2ZSBhIHRpZSwgYW5kIHRoZW4gZmluZCBvdXQgdGhhdCB0aGV5IGRpZmZlciBpbiB0aGlzIGFzcGVjdCwgZWdvIGFuZCBhbHRlciBoYXZlIGFscmVhZHkgZXN0YWJsaXNoZWQgYSByZWxhdGlvbnNoaXAsIHdoaWNoIGlzIGxpa2VseSB0byByZW1haW4gZGVzcGl0ZSBkaWZmZXJlbmNlcyBpbiBzb21lIGF0dGl0dWRlcy4gVGhlIGNyZWF0ZWQgdGllIGRvZXMgb3BlbiB0aGUgd2F5IGZvciBpbmZsdWVuY2UgZWZmZWN0cyB0byB0YWtlIHBsYWNlLiBEZXNwaXRlIGNpdmljIGF0dGl0dWRlcyBub3QgYmVpbmcgYSBjb3JlIHBhcnQgb2YgdGhlaXIgaWRlbnRpdHksIGVnbyBjYW4gc3RpbGwgbGVhcm4gYW5kIGRldmVsb3AgdGhyb3VnaCBpbnRlcmFjdGlvbnMgd2l0aCBhbHRlciwgdGhlcmVieSBjaGFuZ2luZyB0aGVpciBhdHRpdHVkZXMuDQoNClRodXMsIHRha2luZyBib3RoIHByZWZlcmVuY2UgYW5kIGluZmx1ZW5jZSBlZmZlY3RzIHRvZ2V0aGVyLCBmb3IgY2l2aWMgYXR0aXR1ZGVzLCB0aGlzIHBhcGVyIGV4cGVjdHMgdGhhdCBpbmZsdWVuY2UgZWZmZWN0cyBhcmUgc3Ryb25nZXIgdGhhbiBwcmVmZXJlbmNlIGVmZmVjdHMgZm9yIGV4cGxhaW5pbmcgY2x1c3RlcmluZyBpbiBzb2NpYWwgbmV0d29ya3MuIFRoaXMgbGVhZHMgdG8gdGhlIGZvbGxvd2luZyBoeXBvdGhlc2lzOg0KDQpIMjogKlRoZSBpbmZsdWVuY2UgZWZmZWN0IGlzIHN0cm9uZ2VyIHRoYW4gdGhlIHNlbGVjdGlvbiBlZmZlY3QgZm9yIGNpdmljIGVuZ2FnZW1lbnQgYXR0aXR1ZGVzLCBmb3Igc3R1ZGVudHMgaW4gTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXRpZXMqDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQojIFJlZmVyZW5jZXMNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRoZW9yeSINCmF1dGhvcjogIkxhdXJlbiINCmRhdGU6ICIyMDI2LTA5LTExIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQotLS0NCg0KIyBUaGVvcnkNCg0KQ2x1c3RlcmluZyBpbiBzb2NpYWwgbmV0d29ya3MgaXMgY2hhcmFjdGVyaXNlZCBieSBpbmRpdmlkdWFscyBoYXZpbmcgdGllcyB3aXRoIHNpbWlsYXIgb3RoZXJzLCBhbmQgaGF2aW5nIGZld2VyIHRpZXMgd2l0aCBkaXNzaW1pbGFyIG90aGVycyBbQGF6aXppZmFyZDIwMTRdLiBUaGF0IHRoZXJlIGlzIGNsdXN0ZXJpbmcgd2l0aGluIHNvY2lhbCBuZXR3b3JrcywgaXMgYSB3ZWxsIGVzdGFibGlzaGVkIGZhY3QsIG5ldHdvcmtzIGNsdXN0ZXIgYXJvdW5kIGdlbmRlciBbZS5nLiBAc3V1cm5hMjAyMl0sIGV0aG5pY2l0eSBbZS5nLiBAbGVzemN6ZW5za3kyMDE5XSwgcG9saXRpY2FsIHByZWZlcmVuY2UgW2UuZy4gQG9vc3RlcmhvZmYyMDIyXSwgYW5kIHNvY2lhbCBlY29ub21pYyBzdGF0dXMgW2UuZy4gQGNoYWJvdDIwMjRdLCB0byBuYW1lIGEgZmV3LiBDbHVzdGVyaW5nIGNhbiB0aHVzIGJlIHRoZSByZXN1bHQgb2YgYm90aCB2aXNpYmxlLCBhbmQgaW52aXNpYmxlIHBlcnNvbmFsIGNoYXJhY3RlcmlzdGljcy4gSW4gdGhlIGZvbGxvd2luZyBjaGFwdGVyLCBhbiBvdmVydmlldyBvZiBtZWNoYW5pc21zIG9mIG5ldHdvcmsgY2x1c3RlcmluZyB3aWxsIGJlIHByZXNlbnRlZCBzcGVjaWZpY2FsbHkgZm9jdXNzaW5nIG9uIGhvbW9waGlseS8gcHJlZmVyZW5jZSBhbmQgc29jaWFsIGxlYXJuaW5nLyBpbmZsdWVuY2UgZWZmZWN0cywgd2l0aCByZWdhcmRzIHRvIGNpdmljIGVuZ2FnZW1lbnQuDQoNCjxicj4NCg0KIyMgSG9tb3BoaWx5DQoNClRoZSBjb3JlIHByaW5jaXBsZSBvZiBob21vcGhpbHkgaXMgdGhhdCBzaW1pbGFyIHBlb3BsZSBwcmVmZXIgZWFjaCBvdGhlcnMnIGNvbXBhbnkgb3ZlciB0aGUgY29tcGFueSBvZiBkaXNzaW1pbGFyIG90aGVycyBbQG1jcGhlcnNvbjIwMDFdLiBUaGlzIHByb2Nlc3MgaXMgdmlzdWFsaXNlZCBpbiBGaWd1cmUgMS4gQ29uY3JldGVseSwgdGhpcyBtZWFucyB0aGF0IHBlb3BsZSB3aXRoIGJlaGF2aW91cmFsIGF0dGl0dWRlIEEgKHBpbmsgaW4gRmlndXJlIDEpIHByZWZlciB0byBtYWtlIHRpZXMgd2l0aCBvdGhlciBwZW9wbGUgd2l0aCBhdHRpdHVkZSBBLCByYXRoZXIgdGhhbiB3aXRoIHBlb3BsZSB3aXRoIGF0dGl0dWRlIEIgKHB1cnBsZSkuIEJlY2F1c2UgYWN0b3IgKmkqIGFuZCAqaCogaG9sZCBzaW1pbGFyIGF0dGl0dWRlcywgdGhleSBhcmUgbW9yZSBsaWtlbHkgdG8gY3JlYXRlIGEgdGllLCB0aGFuIGFjdG9yICppKiBhbmQgKmoqIChGaWd1cmUgMSwgQSkuIEhvd2V2ZXIsIGhvbW9waGlseSBkb2VzIG5vdCBqdXN0IHRha2UgcGxhY2Ugd2hlbiBtYWtpbmcgYSB0aWUgd2l0aCBhbm90aGVyIHBlcnNvbiwgaXQgYWxzbyBoYXMgYW4gZWZmZWN0IG9uIHdoYXQgdGllcyByZW1haW4gW0BtY3BoZXJzb24yMDAxXS4gRGlzc2ltaWxhciBwZW9wbGUgYXJlIG1vcmUgbGlrZWx5IHRvIGJyZWFrIHRoZWlyIHRpZSwgdGhhbiBwZW9wbGUgd2hvIGhvbGQgc2ltaWxhciBvcGluaW9ucyAoRmlndXJlIDEsIEIpLg0KDQo8YnI+DQoNCioqRmlndXJlIDEuKioNCg0KKlZpc3VhbGlzYXRpb24gb2YgaG9tb3BoaWx5Kg0KDQohW10oaW1hZ2VzL2NsaXBib2FyZC0xOTU1NzEzODA5LnBuZyl7d2lkdGg9IjQ2NiJ9DQoNCjxicj4NCg0KUGVvcGxlIHRlbmQgdG8gaW50ZXJhY3Qgd2l0aCBzaW1pbGFyIG90aGVycyBmb3IgbXVsdGlwbGUgcmVhc29ucy4gT25lIHNpbXBsZSBleHBsYW5hdGlvbiBpcyBnZW9ncmFwaHkgW0BtY3BoZXJzb24yMDAxXSwgbWVhbmluZyB0aGF0IHRpZSBjcmVhdGlvbiBpcyBkZXBlbmRlbnQgb24gZXhpc3RpbmcgaW4gdGhlIHNhbWUgc29jaWFsIGNvbnRleHQuIE9mdGVudGltZXMsIG91ciBjb250ZXh0cyBjb25zaXN0IG9mIHBlb3BsZSB3aG8gYXJlIHJlbGF0aXZlbHkgc2ltaWxhciB0byBvdXJzZWx2ZXMuIEZvciBleGFtcGxlLCB3ZSBtZWV0IHBlb3BsZSBhdCBvdXIgd29yayBvciBzY2hvb2wsIGJ1dCB0aGUgcGVvcGxlIHdlIG1lZXQgdGhlcmUgYXJlIG9mdGVuIG9mIGEgc2ltaWxhciBzb2NpYWwtIGFuZCBjdWx0dXJhbCBiYWNrZ3JvdW5kIGFzIG91cnNlbHZlcy4gVGhpcyBsZWFkcyB0byBjbHVzdGVyaW5nIGluIHNvY2lhbCBuZXR3b3Jrcywgc2ltcGx5IGJlY2F1c2UgZWdvIG1vc3RseSBtZWV0cyBzaW1pbGFyIGFsdGVycy4gSG9tb3BoaWx5IGluIGNpdmljIGF0dGl0dWRlcyBjYW4gbWFuaWZlc3QgdGhyb3VnaCBnZW9ncmFwaHksIHNpbXBseSBiZWNhdXNlIHNvbWUgdW5pdmVyc2l0aWVzIG1heSBlbmNvdXJhZ2UgdGhlc2UgYXR0aXR1ZGVzIG1vcmUgc3Ryb25nbHkgdGhhbiBvdGhlciB1bml2ZXJzaXRpZXMsIGxlYWRpbmcgdG8gZGlmZmVyZW5jZXMgaW4gY2l2aWMgYXR0aXR1ZGVzIGJldHdlZW4gdW5pdmVyc2l0aWVzLg0KDQpIb3dldmVyLCBqdXN0IGNvbnRleHQgY2Fubm90IGV4cGxhaW4gaG9tb3BoaWx5LCBhcyBob21vcGhpbHkgaXMgYWxzbyBmb3VuZCBpbiBtaXhlZCBlbnZpcm9ubWVudHMgW2UuZy4gQGxlc3pjemVuc2t5MjAxOV0uIFBlb3BsZSB0ZW5kIHRvIHByZWZlciB0byBpbnRlcmFjdCB3aXRoIHNpbWlsYXIgb3RoZXJzIGZvciBhIG15cmlhZCBvZiByZWFzb25zLCBmb3IgZXhhbXBsZSwgZWFzZSBvZiBjb21tdW5pY2F0aW9uIGFuZCBhIHNoYXJlZCBjdWx0dXJlIFtAbWNwaGVyc29uMjAwMV0uIEhvbGRpbmcgZGlmZmVyaW5nIGF0dGl0dWRlcywgY2FuIGJlIHJlYXNvbiBmb3IgY29uZmxpY3QgYW5kIG1pc2NvbW11bmljYXRpb24sIGRlY3JlYXNpbmcgdGhlIGxpa2VsaW5lc3Mgb2YgaW5pdGlhdGluZyBhbmQgbWFpbnRhaW5pbmcgdGllcy4gRm9yIGNpdmljIGVuZ2FnZW1lbnQsIHRoaXMgbWF5IHNob3cgdGhyb3VnaCBwcmVmZXJlbmNlcyB0byBoYXZlIHRpZXMgd2l0aCBvdGhlcidzIHdobyBoYXZlIHRoZSBzYW1lIG91dGxvb2sgb24gd2hhdCBhIGNpdGl6ZW4ncyByb2xlIHNob3VsZCBsb29rIGxpa2UgaW4gY2l2aWwgc29jaWV0eS4gVGh1cywgc29sZWx5IGJhc2VkIG9uIHNlbGVjdGlvbiBlZmZlY3RzLCBpdCBjYW4gYmUgZXhwZWN0ZWQgdGhhdCBwZW9wbGUgaGF2ZSBtb3JlIHRpZXMgd2l0aCBzaW1pbGFyIG90aGVycywgdGhhbiB3aXRoIGRpc3NpbWlsYXIgb3RoZXJzLg0KDQo8YnI+DQoNCiMjIFNvY2lhbCBsZWFybmluZw0KDQpIb3dldmVyLCBpdCBpcywgb2YgY291cnNlLCBub3QgdGhlIGNhc2UgdGhhdCBwZW9wbGUgKm9ubHkqIG1ha2UgdGllcyB3aXRoIHBlb3BsZSB3aG8gYXJlIGV4YWN0bHkgbGlrZSB0aGVtc2VsdmVzLiBXaGVuIGNvbnNpZGVyaW5nIGEgdGllIHdpdGggYW5vdGhlciBwZXJzb24sIHRoZXJlIGFyZSBpbmNvdW50YWJsZSBmYWN0b3JzIHRoYXQgY29udHJpYnV0ZSB0byB3aGV0aGVyIHRoYXQgdGllIGlzIGFjdHVhbGx5IG1hZGUuIFRodXMsIHByZWZlcmVuY2VzIGNhbm5vdCBzb2xlbHkgZXhwbGFpbiBjbHVzdGVyaW5nIGluIHNvY2lhbCBuZXR3b3Jrcy4gQW5vdGhlciBmYWN0b3IgaXMgc29jaWFsIGxlYXJuaW5nLCB3aGljaCBjb25zaWRlcnMgdGhhdCBwZW9wbGUgbGVhcm4gZnJvbSB0aGVpciBmcmllbmRzLCB3aGljaCBjYW4gY2hhbmdlIHRoZWlyIGF0dGl0dWRlcyBhbmQgYmVoYXZpb3VycyBbQG1hcnNkZW4xOTkzXS4gVGhpcyBtZWFucywgdGhhdCBwZW9wbGUgY2FuIG1ha2UgYSB0aWUgd2l0aCBhbm90aGVyIHBlcnNvbiwgcmVnYXJkbGVzcyBvZiB0aGVpciBhdHRpdHVkaW5hbCBkaWZmZXJlbmNlcywgYnV0IGFmdGVyIHRoZSB0aWUgaXMgbWFkZSwgZWdvIGFuZCBhbHRlciBiZWNvbWUgbW9yZSBzaW1pbGFyIHRvIGVhY2ggb3RoZXIuIFRoaXMgcHJvY2VzcyBpcyByZXByZXNlbnRlZCBpbiBGaWd1cmUgMi4NCg0KPGJyPg0KDQoqKkZpZ3VyZSAyLioqDQoNCipWaXN1YWxpc2F0aW9uIG9mIGluZmx1ZW5jZSoNCg0KIVtdKGltYWdlcy9jbGlwYm9hcmQtMTYyMDAwNDIxNC5wbmcpDQoNCjxicj4NCg0KSW5mbHVlbmNlIGVmZmVjdHMgY2FuIHRha2UgcGxhY2UgZm9yIG1hbnkgcmVhc29ucy4gRHVlIHRvIG91ciBjb25uZWN0aW9uIHdpdGggb3RoZXIgcGVvcGxlIHdlIG1heSBjb21lIHRvIG5ldyBpbnNpZ2h0cywgYW5kIGNoYW5nZSBvdXIgYXR0aXR1ZGVzIGFjY29yZGluZ2x5IFtAbWFyc2RlbjE5OTNdLiBJbmZsdWVuY2UgZWZmZWN0cyBjYW4gYWxzbyB0YWtlIHBsYWNlLCBiZWNhdXNlIGVnbyB3YW50cyB0byBtaW5pbWlzZSB0aGUgYW1vdW50IG9mIHNvY2lhbCBkaXNhcHByb3ZhbCB0aGV5IGdldCBmcm9tIHRoZWlyIGFsdGVycy4gQnkgY2hhbmdpbmcgdGhlaXIgYXR0aXR1ZGUgb3IgYmVoYXZpb3VyIHRvIG1hdGNoIHRoZWlyIG5ldHdvcmsncywgZWdvIG1pbmltaXNlcyB0aGUgY2hhbmNlcyBvZiBzb2NpYWwgY29uZmxpY3QuDQoNCkZvciBjaXZpYyBhdHRpdHVkZXMgdGhpcyBtZWFucyB0aGF0IGEgY2l2aWxseSBkaXNlbmdhZ2VkIGVnbyBjYW4gbWFrZSBhIHRpZSB3aXRoIGEgY2l2aWxseSBlbmdhZ2VkIGFsdGVyLiBXaGVuIHRoZXNlIHR3byBoYXZlIGEgY29ubmVjdGlvbiwgdGhlaXIgYXR0aXR1ZGluYWwgY2hhcmFjdGVyaXN0aWNzIGJlY29tZSBtb3JlIHNpbWlsYXIgdG8gZWFjaCBvdGhlci4gRWdvLCB3aG8gaXMgaGFzIGRpc2VuZ2FnZWQgY2l2aWMgYXR0aXR1ZGVzLCB3aWxsIGJlY29tZSBtb3JlIGVuZ2FnZWQsIGJlY2F1c2UgdGhleSB3YW50IHRvIGZpdCBpbiB3aXRoIHRoZSBhbHRlciB3aG8gaXMgY2l2aWxseSBlbmdhZ2VkLiBUaGlzIHByb2Nlc3MgY2FuIGFsc28gd29yayB0aGUgb3RoZXIgd2F5IGFyb3VuZC4NCg0KQ29tYmluaW5nIHRoZSBwcm9jZXNzZXMgb2YgaG9tb3BoaWx5IGFuZCBpbmZsdWVuY2UsIGxlYWQgdG8gdGhlIGV4cGVjdGF0aW9uIG9mIG5ldHdvcmtzIGJlaW5nIGNsdXN0ZXJlZCBhcm91bmQgY2l2aWMgYXR0aXR1ZGVzLiBBY2NvcmRpbmcgdG8gdGhlIGhvbW9waGlseSBwcmluY2lwbGUsIHN0dWRlbnRzIHdvdWxkIGJlIG1vcmUgbGlrZWx5IHRvIG1ha2UgYW5kIGtlZXAgdGllcyB3aXRoIHNpbWlsYXIgb3RoZXJzLCBhbmQgZXZlbiBpZiB0aGV5IG1ha2UgdGllcyB3aXRoIGRpc3NpbWlsYXIgb3RoZXJzLCBpbmZsdWVuY2UgZWZmZWN0cyB3aWxsIGVuc3VyZSBjbHVzdGVyaW5nIGluIHRoZSBuZXR3b3JrLiBUaHVzLCB0aGVzZSB0d28gcHJpbmNpcGxlcyBjb21iaW5lZCBsZWFkIHRvIHRoZSBmb2xsb3dpbmcgaHlwb3RoZXNpczoNCg0KSDE6ICpTdHVkZW50cyBpbiBNaWNoaWdhbiBsZWFybmluZyBjb21tdW5pdGllcywgd2hvIGFyZSBtb3JlIHNpbWlsYXIgaW4gdGhlaXIgY2l2aWMgZW5nYWdlbWVudCBhdHRpdHVkZXMgYXJlIG1vcmUgbGlrZWx5IHRvIGhhdmUgdGllcyB3aXRoIG9uZSBhbm90aGVyIHRoYW4gd2l0aCBwZW9wbGUgd2hvIGRpZmZlciBmcm9tIHRoZW0gaW4gdGhlaXIgYXR0aXR1ZGVzLioNCg0KPGJyPg0KDQpDaXZpYyBhdHRpdHVkZXMgZm9ybSBhbiBpbnRlcmVzdGluZyBiZWhhdmlvdXJhbCBjaGFyYWN0ZXJpc3RpYyB0byBsb29rIGF0IGluIGxpZ2h0IG9mIG5ldHdvcmsgY2x1c3RlcmluZywgYmVjYXVzZSBpdCBpcyBhIGNoYXJhY3RlcmlzdGljIHRoYXQgdGVuZHMgdG8gYmUgaW52aXNpYmxlIHRvIHVudGlsIHlvdSBnZXQgdG8ga25vdyBzb21lb25lLiBDaXZpYyBlbmdhZ2VtZW50IGF0dGl0dWRlcyBpcyBub3QgbmVjZXNzYXJpbHkgYW4gYXR0aXR1ZGUgdGhhdCBjYW4gYmUgY2xlYXJseSBzZWVuIGluIG90aGVycywgYmVmb3JlIG1ha2luZyBhIGNvbm5lY3Rpb24gd2l0aCB0aGVtLiBGaWd1cmUgMyByZXByZXNlbnRzIHRoaXMgdW5jZXJ0YWludHksIGJ5IHNob3dpbmcgYm90aCBhbHRlcnMgYmVpbmcgZ3JleSwgYXMgZWdvIGNhbm5vdCBrbm93IHRoZWlyIGF0dGl0dWRlcy4gV2hlbiBtYWtpbmcgYSB0aWUsIGVnbyB0aHVzIGNob29zZXMgJ2JsaW5kbHknIHdpdGggd2hvbSB0aGV5IHdhbnQgdG8gbWFrZSBhIHRpZS4gVGhpcyBkaXJlY3RseSB1bmRlcm1pbmVzIHRoZSBpZGVhIG9mIHNlbGVjdGlvbiBlZmZlY3RzLCBhcyBlZ28gY2Fubm90IHNlbGVjdCBvbiBjaXZpYyBhdHRpdHVkZXMgd2hlbiBtYWtpbmcgYSB0aWUsIHdoaWxlIGl0IHN0cmVuZ3RoZW5zIHRoZSBwb3RlbnRpYWwgZWZmZWN0cyBvZiBpbmZsdWVuY2UuDQoNCjxicj4NCg0KKipGaWd1cmUgMy4qKg0KDQoqVmlzdWFsaXNhdGlvbiBvZiB0aWUtbWFraW5nIGluIHVuY2VydGFpbiBzaXR1YXRpb25zLCB3aXRoIGFuIGluZmx1ZW5jZSBlZmZlY3QqDQoNCiFbXShpbWFnZXMvY2xpcGJvYXJkLTE4MjYxNjA0NDgucG5nKQ0KDQo8YnI+DQoNCk9uY2UgZWdvIGFuZCBhbHRlciBtYWtlIGEgdGllLCBhbmQgdGhleSBnZXQgdG8ga25vdyBlYWNoIG90aGVyIGJldHRlciwgaXQgYmVjb21lcyBjbGVhciB0aGF0IHRoZXkgZGlmZmVyIGluIHRoZWlyIGNpdmljIGF0dGl0dWRlcy4gRWdvIGNhbiBub3cgYnJlYWsgdGhlIHRpZSwgc29tZXRoaW5nIHRoYXQgd291bGQgYmUgbGlrZWx5IGFjY29yZGluZyB0byB0aGUgaG9tb3BoaWx5IHByaW5jaXBsZSwgb3Iga2VlcCB0aGUgdGllLCBhbGxvd2luZyBmb3IgaW5mbHVlbmNlIGVmZmVjdHMgdG8gdGFrZSBwbGFjZS4gVGhpcyBwYXBlciBhcmd1ZXMgdGhhdCBwZW9wbGUgYXJlIHVubGlrZWx5IHRvIGJyZWFrIGEgdGllIGJhc2VkIG9uIGRpZmZlcmVuY2VzIGluIGNpdmljIGF0dGl0dWRlcy4gQ2l2aWMgYXR0aXR1ZGVzIGFyZSBvZnRlbiBub3QgYXQgdGhlIGNvcmUgb2YgYSBwZXJzb24ncyBpZGVudGl0eSwgbWFraW5nIGl0IGEgbGVzcyBpbXBvcnRhbnQgY2hhcmFjdGVyaXN0aWMgd2hlbiBkZWNpZGluZyB3aXRoIHdob20gdG8gbWFrZSBhbmQgbWFpbnRhaW4gdGllcy4gT25jZSBwZW9wbGUgYWxyZWFkeSBoYXZlIGEgdGllLCBhbmQgdGhlbiBmaW5kIG91dCB0aGF0IHRoZXkgZGlmZmVyIGluIHRoaXMgYXNwZWN0LCBlZ28gYW5kIGFsdGVyIGhhdmUgYWxyZWFkeSBlc3RhYmxpc2hlZCBhIHJlbGF0aW9uc2hpcCwgd2hpY2ggaXMgbGlrZWx5IHRvIHJlbWFpbiBkZXNwaXRlIGRpZmZlcmVuY2VzIGluIHNvbWUgYXR0aXR1ZGVzLiBUaGUgY3JlYXRlZCB0aWUgZG9lcyBvcGVuIHRoZSB3YXkgZm9yIGluZmx1ZW5jZSBlZmZlY3RzIHRvIHRha2UgcGxhY2UuIERlc3BpdGUgY2l2aWMgYXR0aXR1ZGVzIG5vdCBiZWluZyBhIGNvcmUgcGFydCBvZiB0aGVpciBpZGVudGl0eSwgZWdvIGNhbiBzdGlsbCBsZWFybiB0aHJvdWdoIGludGVyYWN0aW9ucyB3aXRoIGFsdGVyLCB0aGVyZWJ5IGNoYW5naW5nIHRoZWlyIGF0dGl0dWRlcy4NCg0KVGh1cywgdGFraW5nIGJvdGggcHJlZmVyZW5jZSBhbmQgaW5mbHVlbmNlIGVmZmVjdHMgdG9nZXRoZXIsIGZvciBjaXZpYyBhdHRpdHVkZXMsIHRoaXMgcGFwZXIgZXhwZWN0cyB0aGF0IGluZmx1ZW5jZSBlZmZlY3RzIGFyZSBzdHJvbmdlciB0aGFuIHByZWZlcmVuY2UgZWZmZWN0cyBmb3IgZXhwbGFpbmluZyBjbHVzdGVyaW5nIGluIHNvY2lhbCBuZXR3b3Jrcy4gVGhpcyBsZWFkcyB0byB0aGUgZm9sbG93aW5nIGh5cG90aGVzaXM6DQoNCkgyOiAqVGhlIGluZmx1ZW5jZSBlZmZlY3QgaXMgc3Ryb25nZXIgdGhhbiB0aGUgc2VsZWN0aW9uIGVmZmVjdCBmb3IgY2l2aWMgZW5nYWdlbWVudCBhdHRpdHVkZXMsIGZvciBzdHVkZW50cyBpbiBNaWNoaWdhbiBsZWFybmluZyBjb21tdW5pdGllcy4qDQoNCjxicj4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMgUmVmZXJlbmNlcw0K</div>
 
 
 </div>

@@ -6,7 +6,7 @@ bibliography: references.bib
 
 # Preparation before class
 
-```{r, include=FALSE}
+```{r, include=FALSE, message = FALSE}
 library(knitr)
 library(styler)
 library(tidyverse)
@@ -292,3 +292,250 @@ Behaviour dynamics:
   - Average alter effect --\> *i* behaviour multiplied by the average behaviour of their alters
 
   - In this case: A negative value --\> being friends with people with positive civic attitude scores, makes you more negative (?? huh?)
+  
+  - But it is not significant, so no effect
+
+# In class
+## Step 1: Base model
+```{r}
+gender_covar <- coCovar(gender)
+mydata_1 <- sienaDataCreate(nety, gender_covar, behy)
+myeff_2 <- getEffects(mydata_1)
+
+# Start with a covariate for gender, with same-ego, same-alter, and same-x
+
+myeff_2 <- includeEffects(myeff_2, egoX, altX, sameX, interaction1 = "gender_covar")
+
+# Behavioural effects: egoX, AltX, and absDiffX
+myeff_2 <- includeEffects(myeff_2, egoX, altX, absDiffX, interaction1 = "behy")
+
+# Adding influence effects for indegree, outdegree and assimilation
+# AvAlt_CC because that one updates its mean everytime, rather than using the grand mean
+myeff_2 <- includeEffects(myeff_2, name = "behy", avAlt_CC, indeg, outdeg, interaction1 = "nety")
+
+# maxAlt
+
+# Set algorithm
+myCoEvAlgorithm <- sienaAlgorithmCreate(projname = "test", MaxDegree = c(nety = 10))
+```
+
+Running the model
+```{r, eval=FALSE}
+model_week7_2 <- siena07(myCoEvAlgorithm, data = mydata_1, effects = myeff_2, returnDeps = TRUE)
+```
+
+```{r, include = FALSE}
+# saveRDS(model_week7_2, "model_week7_2.rds")
+model_week7_2 <- readRDS("model_week7_2.rds")
+```
+
+```{r}
+model_week7_2
+
+options(scipen = 50)
+
+results <- data.frame(
+  effect = model_week7_2$effects$effectName,
+  b = model_week7_2$theta,
+  se = model_week7_2$se,
+  t = model_week7_2$theta / model_week7_2$se,
+  p = 2 * pnorm(-abs(model_week7_2$theta / model_week7_2$se)))
+
+results
+```
+
+## Step 2: Changing the effects 
+Behy ego, behy alter and behy abs. difference zijn allemaal zeer niet significant. Behy ego en behy alter kunnen verwwijderd worden.
+
+```{r}
+myeff_3 <- getEffects(mydata_1)
+
+# Start with a covariate for gender, with same-ego, same-alter, and same-x
+myeff_3 <- includeEffects(myeff_3, sameX, interaction1 = "gender_covar")
+
+# Behavioural effects: egoX, AltX, and absDiffX
+myeff_3 <- includeEffects(myeff_3, egoX, altX, absDiffX, interaction1 = "behy")
+
+# Adding influence effects for indegree, outdegree and assimilation
+# AvAlt_CC because that one updates its mean everytime, rather than using the grand mean
+myeff_3 <- includeEffects(myeff_3, name = "behy", avAlt_CC, indeg, outdeg, interaction1 = "nety")
+
+# maxAlt
+
+# Set algorithm
+myCoEvAlgorithm <- sienaAlgorithmCreate(projname = "test", MaxDegree = c(nety = 10))
+```
+
+Running the model
+```{r, eval=FALSE}
+model_week7_3 <- siena07(myCoEvAlgorithm, data = mydata_1, effects = myeff_3, returnDeps = TRUE)
+```
+
+```{r, include = FALSE}
+# saveRDS(model_week7_3, "model_week7_3.rds")
+model_week7_3 <- readRDS("model_week7_3.rds")
+```
+
+```{r}
+model_week7_3
+
+options(scipen = 50)
+
+results <- data.frame(
+  effect = model_week7_3$effects$effectName,
+  b = model_week7_3$theta,
+  se = model_week7_3$se,
+  t = model_week7_3$theta / model_week7_3$se,
+  p = 2 * pnorm(-abs(model_week7_3$theta / model_week7_3$se)))
+
+results
+```
+
+## Step 3: Changing the effects
+Adding maxAlt
+```{r}
+myeff_4 <- getEffects(mydata_1)
+
+# Start with a covariate for gender, with same-ego, same-alter, and same-x
+myeff_4 <- includeEffects(myeff_4, sameX, interaction1 = "gender_covar")
+
+# Behavioural effects: egoX, AltX, and absDiffX
+myeff_4 <- includeEffects(myeff_4, egoX, altX, absDiffX, interaction1 = "behy")
+
+# Adding influence effects for indegree, outdegree and assimilation
+# AvAlt_CC because that one updates its mean everytime, rather than using the grand mean
+myeff_4 <- includeEffects(myeff_4, name = "behy", avAlt_CC, indeg, outdeg, maxAlt, interaction1 = "nety")
+
+# Set algorithm
+myCoEvAlgorithm <- sienaAlgorithmCreate(projname = "test", MaxDegree = c(nety = 10))
+```
+
+Running the model
+```{r, eval=FALSE}
+model_week7_4 <- siena07(myCoEvAlgorithm, data = mydata_1, effects = myeff_4, returnDeps = TRUE)
+```
+
+```{r, include = FALSE}
+# saveRDS(model_week7_4, "model_week7_4.rds")
+model_week7_4 <- readRDS("model_week7_4.rds")
+```
+
+```{r}
+model_week7_4
+
+options(scipen = 50)
+
+results <- data.frame(
+  effect = model_week7_4$effects$effectName,
+  b = model_week7_4$theta,
+  se = model_week7_4$se,
+  t = model_week7_4$theta / model_week7_4$se,
+  p = 2 * pnorm(-abs(model_week7_4$theta / model_week7_4$se)))
+
+results
+```
+
+
+## Goodness of fit
+```{r}
+gofi0 <- RSiena::sienaGOF(model_week7_4, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "nety")
+
+gofo0 <- RSiena:: sienaGOF(model_week7_4, OutdegreeDistribution, verbose = FALSE, join = TRUE, levls = c(0:10, 15, 20), varName = "nety")
+
+GeodesicDistribution <- function (i, data, sims, period, groupName,
+  varName, levls=c(1:5,Inf), cumulative=TRUE, ...) {
+  x <- networkExtraction(i, data, sims, period, groupName, varName)
+  require(network)
+  require(sna)
+  a <- sna::geodist(symmetrize(x))$gdist
+  if (cumulative)
+  {
+    gdi <- sapply(levls, function(i){ sum(a<=i) })
+  }
+  else
+  {
+    gdi <- sapply(levls, function(i){ sum(a==i) })
+  }
+  names(gdi) <- as.character(levls)
+  gdi
+}
+
+gof0.gd <- RSiena:: sienaGOF(model_week7_4, GeodesicDistribution, cumulative = FALSE, verbose = FALSE, join = TRUE, varName = "nety")
+```
+
+```{r}
+plot(gofi0)
+plot(gofo0)
+plot(gof0.gd)
+```
+
+Stappen die we genomen hebben (nav GoF):
+1. Max aantal nominaties naar 10 (niet echt een spannend effect, maar toch)
+2. Outdegree isolates meenemen 
+
+```{r}
+gender_covar <- coCovar(gender)
+mydata_1 <- sienaDataCreate(nety, gender_covar, behy)
+myeff_3 <- getEffects(mydata_1)
+
+myeff_3 <- includeEffects(myeff_3, egoX, altX, sameX, interaction1 = "gender_covar")
+
+# General effects
+myeff_3 <- includeEffects(myeff_3, egoX, altX, absDiffX, interaction1 = "behy")
+
+# Adding influence effects for indegree, outdegree and assimilation
+myeff_3 <- includeEffects(myeff_3, name = "behy", avAlt, indeg, outdeg, outIso, interaction1 = "nety")
+
+
+#avAlt_cc vonden we leuk en maxAlt
+
+# Set algorithm
+myCoEvAlgorithm <- sienaAlgorithmCreate(projname = "test", MaxDegree = c(nety = 10))
+```
+
+Running the model
+
+```{r, eval=FALSE}
+model_week7_3 <- siena07(myCoEvAlgorithm, data = mydata_1, effects = myeff_3, returnDeps = TRUE)
+```
+
+```{r, include = FALSE}
+# saveRDS(model_week7_3, "model_week7_3.rds")
+model_week7_3 <- readRDS("model_week7_3.rds")
+```
+
+```{r}
+model_week7_3
+
+options(scipen = 50)
+
+results <- data.frame(
+  effect = model_week7_3$effects$effectName,
+  b = model_week7_3$theta,
+  se = model_week7_3$se,
+  t = model_week7_3$theta / model_week7_3$se,
+  p = 2 * pnorm(-abs(model_week7_3$theta / model_week7_3$se)))
+
+results
+```
+
+```{r}
+gofi0 <- RSiena::sienaGOF(model_week7_3, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "nety")
+
+gofo0 <- RSiena:: sienaGOF(model_week7_3, OutdegreeDistribution, verbose = FALSE, join = TRUE, levls = c(0:10, 15, 20), varName = "nety")
+
+gof0.gd <- RSiena:: sienaGOF(model_week7_3, GeodesicDistribution, cumulative = FALSE, verbose = FALSE, join = TRUE, varName = "nety")
+```
+
+```{r}
+plot(gofi0)
+plot(gofo0)
+plot(gof0.gd)
+```
+
+# Ideas about model build:
+1. Model with nothing (just the basics, no additional effects)
+2. Model with my expected effects
+  2.1. Do GoF check --> outisolate effect is zeer matig
+3. Model with outisolate effect
+  3.1. Do GoF check --> 

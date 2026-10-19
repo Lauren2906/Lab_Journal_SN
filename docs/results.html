@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Lauren" />
+
+<meta name="date" content="2026-09-11" />
+
+<title>Methods</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Lab journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="week3.html">Week 3</a>
+    </li>
+    <li>
+      <a href="week4.html">Week 4</a>
+    </li>
+    <li>
+      <a href="week5.html">Week 5</a>
+    </li>
+    <li>
+      <a href="week6.html">Week 6</a>
+    </li>
+    <li>
+      <a href="week7.html">Week 7</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final assignment
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li>
+      <a href="data.html">Data and Methods</a>
+    </li>
+    <li>
+      <a href="results.html">Results</a>
+    </li>
+    <li>
+      <a href="conclusion_discussion.html">Conclusion and discussion</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="code_final.html">Code final assignment</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://lauren2906.github.io/Lab_Journal_SN/">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Methods</h1>
+<h4 class="author">Lauren</h4>
+<h4 class="date">2026-09-11</h4>
+
+</div>
+
+
+<div id="results" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Results</h1>
+<div id="descriptive-analyses" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Descriptive
+analyses</h2>
+<p>For the descriptive analyses, patterns in the networks of students in
+Michigan learning communities will be examined. Before calculating
+segregation measures, this paper will first look into some other
+descriptive statistics for the networks, to get a better feel for the
+data. To this end, this chapter starts with visualisations of the data,
+after which ‘classic’ network statistics will be calculated, for example
+about the density and reciprocity of the network. This all builds up to
+a better understanding of the final measure for segregation with regards
+to civic engagement, which will be used to answer RQ1.</p>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', '#A020F0', '1', 'Copy code', 'Copied!');
+</script>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('left', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<pre class="r"><code>rm(list = ls())
+load(&quot;./data/IndividualCharacteristics.RData&quot;)
+load(&quot;./data/NetworkCharacteristics.RData&quot;)
+load(&quot;./data/CivicAttitudes.RData&quot;)</code></pre>
+<p><br></p>
+<div id="data-visualisation" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Data
+visualisation</h3>
+<p>For the data visualisation, the variables were constructed as
+described in the ‘data’ chapter. However, additionally, the variable for
+civic attitudes was dichotomised, to create a clear distinction between
+people who hold neutral and people who hold positive attitudes. This
+allowed me to more easily spot potential clustering in the network. The
+cut-off point for neutral vs. positive attitudes was based on the mean
+score on the civic attitudes scale. For both waves, the average value
+was around 5, thus 5 was chosen as a cut-off point.</p>
+<pre class="r"><code>hanging_df_t1 &lt;- as.data.frame(hanging[[1]][1])
+strong_netw_t1 &lt;- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]&lt;-NA
+
+hanging_df_t2 &lt;- as.data.frame(hanging[[1]][2])
+strong_netw_t2 &lt;- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]&lt;-NA
+
+IC_df &lt;- as.data.frame(T1civeng[[1]])
+IC_df$missings &lt;- rowSums(is.na(IC_df))
+IC_df$ce_t1 &lt;- ifelse(IC_df$missings &lt;= 1, rowMeans(IC_df[,1:4]), NA)
+
+IC_df2 &lt;- as.data.frame(T2civeng[[1]])
+IC_df2$missings &lt;- rowSums(is.na(IC_df2))
+IC_df2$ce_t2 &lt;- ifelse(IC_df2$missings &lt;= 1, rowMeans(IC_df2[,1:4]), NA)</code></pre>
+<pre class="r"><code>IC_df$ce_t1_cat &lt;- cut(IC_df$ce_t1,
+                       breaks = c(0, 5, 7),
+                       labels= c(&#39;neutral&#39;, &#39;positive&#39;))
+IC_df2$ce_t2_cat &lt;- cut(IC_df2$ce_t2,
+                        breaks = c(0, 5, 7),
+                        labels= c(&#39;neutral&#39;, &#39;positive&#39;))</code></pre>
+<p>For the data visualisation, the R-package igraph was used, in
+combination with the base-function ‘plot’. As the data contained
+information on directed relationships, these were modeled as such. For
+both graphs, the position of the nodes were kept stable, to show the
+changes in ties. To accomplish this, the Davidson-Harel layout algorithm
+was used. This algorithm puts closely connected nodes close to each
+other, while pushing the lesser connected nodes to the outside <span
+class="citation">(Stulp, n.d.)</span>. Importantly, this algorithm does
+keep isolated nodes within the network, rather than creating a ring
+outside of it. As I used the same layout for both Wave 1 and Wave 2,
+this ensured that there are no unreasonably long ties, when isolates in
+Wave 1 get ties in Wave 2. This algorithm also minimises the amount of
+overlap between the nodes. Furthermore, the graphs represent nodes with
+neutral attitudes as ‘pink’ and people with positive attitudes as
+‘purple.’ Lastly, the size of the nodes is dependent on density. This
+was done to examine whether people with more positive attitudes may have
+more ties than others.</p>
+<pre class="r"><code>copy_strong_netw_t1 &lt;- strong_netw_t1
+copy_strong_netw_t1[is.na(copy_strong_netw_t1)] &lt;- 0 
+
+g_strong_t1 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = &quot;directed&quot;)
+graph_CE_t1 &lt;- simplify(g_strong_t1)</code></pre>
+<pre class="r"><code>layout &lt;- igraph:: layout_with_dh(graph_CE_t1)</code></pre>
+<p>Figure 4 shows the visualisation of the network in Wave 1. Visually,
+the network does not seem very segregated with regards to civic
+attitudes, as the pink and purple nodes are mixed throughout the
+network. There are no clear clusters of only (or mostly) pink nodes or
+only (or mostly) purple nodes. This is an indication that people do not
+tend to interact with others with similar civic attitudes. This graph
+also showcases the betweenness of the different nodes. Most nodes with a
+relatively high betweenness (bigger node size) have neutral civic
+attitudes, with one exception, where the node with the highest
+betweenness has positive civic attitudes.</p>
+<p><br></p>
+<p><strong>Figure 4.</strong></p>
+<p><em>Visualisation of the network of a Michigan learning community in
+Wave 1</em></p>
+<pre class="r"><code>colour &lt;- ifelse(IC_df$ce_t1_cat==&#39;neutral&#39;, &quot;lightpink&quot;, &quot;orchid4&quot;)
+V(graph_CE_t1)$size = igraph:: betweenness(graph_CE_t1, normalized = T, directed = T) * 50 + 5
+plot_CE_t1 &lt;- plot(graph_CE_t1,
+                   vertex.color = colour,
+                   vertex.frame.color = &quot;gray&quot;,
+                   edge.curved = 0.2, 
+                   edge.arrow.size = 0.1,
+                   vertex.label = NA,
+                   layout = layout)
+legend(&quot;topleft&quot;, c(&quot;neutral&quot;, &quot;positive&quot;, &quot;missing&quot;), pch = 21, col = &quot;#777777&quot;, pt.bg = c(&quot;lightpink&quot;, &quot;orchid4&quot;, &quot;white&quot;), pt.cex = 2,
+       cex = 0.8, bty = &quot;n&quot;, ncol = 1)</code></pre>
+<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
+<p><br></p>
+<pre class="r"><code>copy_strong_netw_t2 &lt;- strong_netw_t2
+copy_strong_netw_t2[is.na(copy_strong_netw_t2)] &lt;- 0 
+
+g_strong_t2 &lt;- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = &quot;directed&quot;)
+graph_CE_t2 &lt;- simplify(g_strong_t2)</code></pre>
+<p>Figure 5 shows the same network, but a few months later in Wave 2.
+Seemingly, the density has decreased between Wave 1 and Wave 2, as the
+amount of ties has visually decreased, and the amount of nodes with a
+high degree of betweenness has also decreased, because there are fewer
+big nodes. With regards to the degree of segregation of civic attitudes,
+Wave 2 may give the indication of a slightly higher degree of
+segregation, with small ‘clusters’ of purple appearing in the middle
+left and bottom right. However, this is not immediately apparent, and
+the network seems to be mostly very mixed with regards to civic
+attitudes. Especially the cluster on the bottom right is dubious, as the
+nodes’ attitudes have remained the same between Waves 1 and 2, the only
+thing that has changed is that nodes who were neutral in Wave 1, did not
+have a valid score in Wave 2. This can therefore not be seen as proof of
+segregation.</p>
+<p><br></p>
+<p><strong>Figure 5.</strong></p>
+<p><em>Visualisation of the network of a Michigan learning community in
+Wave 2</em></p>
+<pre class="r"><code>colour &lt;- ifelse(IC_df2$ce_t2_cat==&#39;neutral&#39;, &quot;lightpink&quot;, &quot;orchid4&quot;)
+V(graph_CE_t2)$size = igraph:: betweenness(graph_CE_t2, normalized = T, directed = T) * 50 + 5
+plot_CE_t2 &lt;- plot(graph_CE_t2,
+                   vertex.color = colour,
+                   vertex.frame.color = &quot;gray&quot;,
+                   edge.curved = 0.2, 
+                   edge.arrow.size = 0.1,
+                   vertex.label = NA,
+                   layout = layout)
+legend(&quot;topleft&quot;, c(&quot;neutral&quot;, &quot;positive&quot;, &quot;missing&quot;), pch = 21, col = &quot;#777777&quot;, pt.bg = c(&quot;lightpink&quot;, &quot;orchid4&quot;, &quot;white&quot;), pt.cex = 2,
+       cex = 0.8, bty = &quot;n&quot;, ncol = 1)</code></pre>
+<p><img src="results_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
+<p><br></p>
+<p>Comparing the two graphs does not immediately indicate a clear
+conclusion with regards to the degree of segregation in the networks. It
+seems limited in both waves, however, the network did go through a lot
+of changes in between the two waves. A lot of new ties seemed to have
+been created, and a lot have seem to be broken. [PLACE SOMEWHERE ELSE]
+–&gt; therefore, it is still possible that micro-processes based on
+civic attitudes have taken place, without them being visible on a macro
+scale.</p>
+<p><br></p>
+</div>
+<div id="numeric-descriptions" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Numeric
+descriptions</h3>
+<p><br></p>
+</div>
+</div>
+<div id="explanatory-analyses" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Explanatory
+analyses</h2>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-stulp" class="csl-entry">
+Stulp, Gert. n.d. <em>Chapter 5 Layouts | Network Data Visualisation in
+r <span></span> the Patio</em>. <a
+href="https://stulp.gmw.rug.nl/patio/layoutt.html">https://stulp.gmw.rug.nl/patio/layoutt.html</a>.
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1ldGhvZHMiDQphdXRob3I6ICJMYXVyZW4iDQpkYXRlOiAiMjAyNi0wOS0xMSINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYg0KLS0tDQoNCiMgUmVzdWx0cw0KDQojIyBEZXNjcmlwdGl2ZSBhbmFseXNlcw0KDQpGb3IgdGhlIGRlc2NyaXB0aXZlIGFuYWx5c2VzLCBwYXR0ZXJucyBpbiB0aGUgbmV0d29ya3Mgb2Ygc3R1ZGVudHMgaW4gTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXRpZXMgd2lsbCBiZSBleGFtaW5lZC4gQmVmb3JlIGNhbGN1bGF0aW5nIHNlZ3JlZ2F0aW9uIG1lYXN1cmVzLCB0aGlzIHBhcGVyIHdpbGwgZmlyc3QgbG9vayBpbnRvIHNvbWUgb3RoZXIgZGVzY3JpcHRpdmUgc3RhdGlzdGljcyBmb3IgdGhlIG5ldHdvcmtzLCB0byBnZXQgYSBiZXR0ZXIgZmVlbCBmb3IgdGhlIGRhdGEuIFRvIHRoaXMgZW5kLCB0aGlzIGNoYXB0ZXIgc3RhcnRzIHdpdGggdmlzdWFsaXNhdGlvbnMgb2YgdGhlIGRhdGEsIGFmdGVyIHdoaWNoICdjbGFzc2ljJyBuZXR3b3JrIHN0YXRpc3RpY3Mgd2lsbCBiZSBjYWxjdWxhdGVkLCBmb3IgZXhhbXBsZSBhYm91dCB0aGUgZGVuc2l0eSBhbmQgcmVjaXByb2NpdHkgb2YgdGhlIG5ldHdvcmsuIFRoaXMgYWxsIGJ1aWxkcyB1cCB0byBhIGJldHRlciB1bmRlcnN0YW5kaW5nIG9mIHRoZSBmaW5hbCBtZWFzdXJlIGZvciBzZWdyZWdhdGlvbiB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMgZW5nYWdlbWVudCwgd2hpY2ggd2lsbCBiZSB1c2VkIHRvIGFuc3dlciBSUTEuDQoNCmBgYHtyLCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9DQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQ0Ka2xpcHB5OjprbGlwcHkoY29sb3IgPSAncHVycGxlJykNCmtsaXBweTo6a2xpcHB5KHRvb2x0aXBfbWVzc2FnZSA9ICdDbGljayB0byBjb3B5JywgdG9vbHRpcF9zdWNjZXNzID0gJ0RvbmUnKQ0KYGBgDQoNCmBgYHtyfQ0Kcm0obGlzdCA9IGxzKCkpDQpsb2FkKCIuL2RhdGEvSW5kaXZpZHVhbENoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvTmV0d29ya0NoYXJhY3RlcmlzdGljcy5SRGF0YSIpDQpsb2FkKCIuL2RhdGEvQ2l2aWNBdHRpdHVkZXMuUkRhdGEiKQ0KYGBgDQoNCjxicj4NCg0KIyMjIERhdGEgdmlzdWFsaXNhdGlvbg0KDQpGb3IgdGhlIGRhdGEgdmlzdWFsaXNhdGlvbiwgdGhlIHZhcmlhYmxlcyB3ZXJlIGNvbnN0cnVjdGVkIGFzIGRlc2NyaWJlZCBpbiB0aGUgJ2RhdGEnIGNoYXB0ZXIuIEhvd2V2ZXIsIGFkZGl0aW9uYWxseSwgdGhlIHZhcmlhYmxlIGZvciBjaXZpYyBhdHRpdHVkZXMgd2FzIGRpY2hvdG9taXNlZCwgdG8gY3JlYXRlIGEgY2xlYXIgZGlzdGluY3Rpb24gYmV0d2VlbiBwZW9wbGUgd2hvIGhvbGQgbmV1dHJhbCBhbmQgcGVvcGxlIHdobyBob2xkIHBvc2l0aXZlIGF0dGl0dWRlcy4gVGhpcyBhbGxvd2VkIG1lIHRvIG1vcmUgZWFzaWx5IHNwb3QgcG90ZW50aWFsIGNsdXN0ZXJpbmcgaW4gdGhlIG5ldHdvcmsuIFRoZSBjdXQtb2ZmIHBvaW50IGZvciBuZXV0cmFsIHZzLiBwb3NpdGl2ZSBhdHRpdHVkZXMgd2FzIGJhc2VkIG9uIHRoZSBtZWFuIHNjb3JlIG9uIHRoZSBjaXZpYyBhdHRpdHVkZXMgc2NhbGUuIEZvciBib3RoIHdhdmVzLCB0aGUgYXZlcmFnZSB2YWx1ZSB3YXMgYXJvdW5kIDUsIHRodXMgNSB3YXMgY2hvc2VuIGFzIGEgY3V0LW9mZiBwb2ludC4NCg0KYGBge3J9DQpoYW5naW5nX2RmX3QxIDwtIGFzLmRhdGEuZnJhbWUoaGFuZ2luZ1tbMV1dWzFdKQ0Kc3Ryb25nX25ldHdfdDEgPC0gZGF0YS5tYXRyaXgoaGFuZ2luZ19kZl90MSkNCnN0cm9uZ19uZXR3X3QxW3N0cm9uZ19uZXR3X3QxPT05XTwtTkENCg0KaGFuZ2luZ19kZl90MiA8LSBhcy5kYXRhLmZyYW1lKGhhbmdpbmdbWzFdXVsyXSkNCnN0cm9uZ19uZXR3X3QyIDwtIGRhdGEubWF0cml4KGhhbmdpbmdfZGZfdDIpDQpzdHJvbmdfbmV0d190MltzdHJvbmdfbmV0d190Mj09OV08LU5BDQoNCklDX2RmIDwtIGFzLmRhdGEuZnJhbWUoVDFjaXZlbmdbWzFdXSkNCklDX2RmJG1pc3NpbmdzIDwtIHJvd1N1bXMoaXMubmEoSUNfZGYpKQ0KSUNfZGYkY2VfdDEgPC0gaWZlbHNlKElDX2RmJG1pc3NpbmdzIDw9IDEsIHJvd01lYW5zKElDX2RmWywxOjRdKSwgTkEpDQoNCklDX2RmMiA8LSBhcy5kYXRhLmZyYW1lKFQyY2l2ZW5nW1sxXV0pDQpJQ19kZjIkbWlzc2luZ3MgPC0gcm93U3Vtcyhpcy5uYShJQ19kZjIpKQ0KSUNfZGYyJGNlX3QyIDwtIGlmZWxzZShJQ19kZjIkbWlzc2luZ3MgPD0gMSwgcm93TWVhbnMoSUNfZGYyWywxOjRdKSwgTkEpDQoNCmBgYA0KDQpgYGB7cn0NCklDX2RmJGNlX3QxX2NhdCA8LSBjdXQoSUNfZGYkY2VfdDEsDQogICAgICAgICAgICAgICAgICAgICAgIGJyZWFrcyA9IGMoMCwgNSwgNyksDQogICAgICAgICAgICAgICAgICAgICAgIGxhYmVscz0gYygnbmV1dHJhbCcsICdwb3NpdGl2ZScpKQ0KSUNfZGYyJGNlX3QyX2NhdCA8LSBjdXQoSUNfZGYyJGNlX3QyLA0KICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWtzID0gYygwLCA1LCA3KSwNCiAgICAgICAgICAgICAgICAgICAgICAgIGxhYmVscz0gYygnbmV1dHJhbCcsICdwb3NpdGl2ZScpKQ0KYGBgDQoNCkZvciB0aGUgZGF0YSB2aXN1YWxpc2F0aW9uLCB0aGUgUi1wYWNrYWdlIGlncmFwaCB3YXMgdXNlZCwgaW4gY29tYmluYXRpb24gd2l0aCB0aGUgYmFzZS1mdW5jdGlvbiAncGxvdCcuIEFzIHRoZSBkYXRhIGNvbnRhaW5lZCBpbmZvcm1hdGlvbiBvbiBkaXJlY3RlZCByZWxhdGlvbnNoaXBzLCB0aGVzZSB3ZXJlIG1vZGVsZWQgYXMgc3VjaC4gRm9yIGJvdGggZ3JhcGhzLCB0aGUgcG9zaXRpb24gb2YgdGhlIG5vZGVzIHdlcmUga2VwdCBzdGFibGUsIHRvIHNob3cgdGhlIGNoYW5nZXMgaW4gdGllcy4gVG8gYWNjb21wbGlzaCB0aGlzLCB0aGUgRGF2aWRzb24tSGFyZWwgbGF5b3V0IGFsZ29yaXRobSB3YXMgdXNlZC4gVGhpcyBhbGdvcml0aG0gcHV0cyBjbG9zZWx5IGNvbm5lY3RlZCBub2RlcyBjbG9zZSB0byBlYWNoIG90aGVyLCB3aGlsZSBwdXNoaW5nIHRoZSBsZXNzZXIgY29ubmVjdGVkIG5vZGVzIHRvIHRoZSBvdXRzaWRlIFtAc3R1bHBdLiBJbXBvcnRhbnRseSwgdGhpcyBhbGdvcml0aG0gZG9lcyBrZWVwIGlzb2xhdGVkIG5vZGVzIHdpdGhpbiB0aGUgbmV0d29yaywgcmF0aGVyIHRoYW4gY3JlYXRpbmcgYSByaW5nIG91dHNpZGUgb2YgaXQuIEFzIEkgdXNlZCB0aGUgc2FtZSBsYXlvdXQgZm9yIGJvdGggV2F2ZSAxIGFuZCBXYXZlIDIsIHRoaXMgZW5zdXJlZCB0aGF0IHRoZXJlIGFyZSBubyB1bnJlYXNvbmFibHkgbG9uZyB0aWVzLCB3aGVuIGlzb2xhdGVzIGluIFdhdmUgMSBnZXQgdGllcyBpbiBXYXZlIDIuIFRoaXMgYWxnb3JpdGhtIGFsc28gbWluaW1pc2VzIHRoZSBhbW91bnQgb2Ygb3ZlcmxhcCBiZXR3ZWVuIHRoZSBub2Rlcy4gRnVydGhlcm1vcmUsIHRoZSBncmFwaHMgcmVwcmVzZW50IG5vZGVzIHdpdGggbmV1dHJhbCBhdHRpdHVkZXMgYXMgJ3BpbmsnIGFuZCBwZW9wbGUgd2l0aCBwb3NpdGl2ZSBhdHRpdHVkZXMgYXMgJ3B1cnBsZS4nIExhc3RseSwgdGhlIHNpemUgb2YgdGhlIG5vZGVzIGlzIGRlcGVuZGVudCBvbiBkZW5zaXR5LiBUaGlzIHdhcyBkb25lIHRvIGV4YW1pbmUgd2hldGhlciBwZW9wbGUgd2l0aCBtb3JlIHBvc2l0aXZlIGF0dGl0dWRlcyBtYXkgaGF2ZSBtb3JlIHRpZXMgdGhhbiBvdGhlcnMuDQoNCmBgYHtyfQ0KY29weV9zdHJvbmdfbmV0d190MSA8LSBzdHJvbmdfbmV0d190MQ0KY29weV9zdHJvbmdfbmV0d190MVtpcy5uYShjb3B5X3N0cm9uZ19uZXR3X3QxKV0gPC0gMCANCg0KZ19zdHJvbmdfdDEgPC0gaWdyYXBoOjogZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGNvcHlfc3Ryb25nX25ldHdfdDEsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KZ3JhcGhfQ0VfdDEgPC0gc2ltcGxpZnkoZ19zdHJvbmdfdDEpDQpgYGANCg0KYGBge3IsIHdhcm5pbmc9RkFMU0UsIGVjaG89RkFMU0V9DQpsaWJyYXJ5KGlncmFwaCkNCmBgYA0KDQpgYGB7ciwgZXZhbD1GQUxTRX0NCmxheW91dCA8LSBpZ3JhcGg6OiBsYXlvdXRfd2l0aF9kaChncmFwaF9DRV90MSkNCmBgYA0KDQpgYGB7ciwgaW5jbHVkZT1GQUxTRX0NCiMgc2F2ZVJEUyhsYXlvdXQsICJsYXlvdXQucmRzIikNCmxheW91dCA8LSByZWFkUkRTKCJsYXlvdXQucmRzIikNCmBgYA0KDQpGaWd1cmUgNCBzaG93cyB0aGUgdmlzdWFsaXNhdGlvbiBvZiB0aGUgbmV0d29yayBpbiBXYXZlIDEuIFZpc3VhbGx5LCB0aGUgbmV0d29yayBkb2VzIG5vdCBzZWVtIHZlcnkgc2VncmVnYXRlZCB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMgYXR0aXR1ZGVzLCBhcyB0aGUgcGluayBhbmQgcHVycGxlIG5vZGVzIGFyZSBtaXhlZCB0aHJvdWdob3V0IHRoZSBuZXR3b3JrLiBUaGVyZSBhcmUgbm8gY2xlYXIgY2x1c3RlcnMgb2Ygb25seSAob3IgbW9zdGx5KSBwaW5rIG5vZGVzIG9yIG9ubHkgKG9yIG1vc3RseSkgcHVycGxlIG5vZGVzLiBUaGlzIGlzIGFuIGluZGljYXRpb24gdGhhdCBwZW9wbGUgZG8gbm90IHRlbmQgdG8gaW50ZXJhY3Qgd2l0aCBvdGhlcnMgd2l0aCBzaW1pbGFyIGNpdmljIGF0dGl0dWRlcy4gVGhpcyBncmFwaCBhbHNvIHNob3djYXNlcyB0aGUgYmV0d2Vlbm5lc3Mgb2YgdGhlIGRpZmZlcmVudCBub2Rlcy4gTW9zdCBub2RlcyB3aXRoIGEgcmVsYXRpdmVseSBoaWdoIGJldHdlZW5uZXNzIChiaWdnZXIgbm9kZSBzaXplKSBoYXZlIG5ldXRyYWwgY2l2aWMgYXR0aXR1ZGVzLCB3aXRoIG9uZSBleGNlcHRpb24sIHdoZXJlIHRoZSBub2RlIHdpdGggdGhlIGhpZ2hlc3QgYmV0d2Vlbm5lc3MgaGFzIHBvc2l0aXZlIGNpdmljIGF0dGl0dWRlcy4NCg0KPGJyPg0KDQoqKkZpZ3VyZSA0LioqDQoNCipWaXN1YWxpc2F0aW9uIG9mIHRoZSBuZXR3b3JrIG9mIGEgTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXR5IGluIFdhdmUgMSoNCg0KYGBge3J9DQpjb2xvdXIgPC0gaWZlbHNlKElDX2RmJGNlX3QxX2NhdD09J25ldXRyYWwnLCAibGlnaHRwaW5rIiwgIm9yY2hpZDQiKQ0KVihncmFwaF9DRV90MSkkc2l6ZSA9IGlncmFwaDo6IGJldHdlZW5uZXNzKGdyYXBoX0NFX3QxLCBub3JtYWxpemVkID0gVCwgZGlyZWN0ZWQgPSBUKSAqIDUwICsgNQ0KcGxvdF9DRV90MSA8LSBwbG90KGdyYXBoX0NFX3QxLA0KICAgICAgICAgICAgICAgICAgIHZlcnRleC5jb2xvciA9IGNvbG91ciwNCiAgICAgICAgICAgICAgICAgICB2ZXJ0ZXguZnJhbWUuY29sb3IgPSAiZ3JheSIsDQogICAgICAgICAgICAgICAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsIA0KICAgICAgICAgICAgICAgICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMSwNCiAgICAgICAgICAgICAgICAgICB2ZXJ0ZXgubGFiZWwgPSBOQSwNCiAgICAgICAgICAgICAgICAgICBsYXlvdXQgPSBsYXlvdXQpDQpsZWdlbmQoInRvcGxlZnQiLCBjKCJuZXV0cmFsIiwgInBvc2l0aXZlIiwgIm1pc3NpbmciKSwgcGNoID0gMjEsIGNvbCA9ICIjNzc3Nzc3IiwgcHQuYmcgPSBjKCJsaWdodHBpbmsiLCAib3JjaGlkNCIsICJ3aGl0ZSIpLCBwdC5jZXggPSAyLA0KICAgICAgIGNleCA9IDAuOCwgYnR5ID0gIm4iLCBuY29sID0gMSkNCmBgYA0KDQo8YnI+DQoNCmBgYHtyfQ0KY29weV9zdHJvbmdfbmV0d190MiA8LSBzdHJvbmdfbmV0d190Mg0KY29weV9zdHJvbmdfbmV0d190Mltpcy5uYShjb3B5X3N0cm9uZ19uZXR3X3QyKV0gPC0gMCANCg0KZ19zdHJvbmdfdDIgPC0gaWdyYXBoOjogZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KGNvcHlfc3Ryb25nX25ldHdfdDIsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KZ3JhcGhfQ0VfdDIgPC0gc2ltcGxpZnkoZ19zdHJvbmdfdDIpDQpgYGANCg0KRmlndXJlIDUgc2hvd3MgdGhlIHNhbWUgbmV0d29yaywgYnV0IGEgZmV3IG1vbnRocyBsYXRlciBpbiBXYXZlIDIuIFNlZW1pbmdseSwgdGhlIGRlbnNpdHkgaGFzIGRlY3JlYXNlZCBiZXR3ZWVuIFdhdmUgMSBhbmQgV2F2ZSAyLCBhcyB0aGUgYW1vdW50IG9mIHRpZXMgaGFzIHZpc3VhbGx5IGRlY3JlYXNlZCwgYW5kIHRoZSBhbW91bnQgb2Ygbm9kZXMgd2l0aCBhIGhpZ2ggZGVncmVlIG9mIGJldHdlZW5uZXNzIGhhcyBhbHNvIGRlY3JlYXNlZCwgYmVjYXVzZSB0aGVyZSBhcmUgZmV3ZXIgYmlnIG5vZGVzLiBXaXRoIHJlZ2FyZHMgdG8gdGhlIGRlZ3JlZSBvZiBzZWdyZWdhdGlvbiBvZiBjaXZpYyBhdHRpdHVkZXMsIFdhdmUgMiBtYXkgZ2l2ZSB0aGUgaW5kaWNhdGlvbiBvZiBhIHNsaWdodGx5IGhpZ2hlciBkZWdyZWUgb2Ygc2VncmVnYXRpb24sIHdpdGggc21hbGwgJ2NsdXN0ZXJzJyBvZiBwdXJwbGUgYXBwZWFyaW5nIGluIHRoZSBtaWRkbGUgbGVmdCBhbmQgYm90dG9tIHJpZ2h0LiBIb3dldmVyLCB0aGlzIGlzIG5vdCBpbW1lZGlhdGVseSBhcHBhcmVudCwgYW5kIHRoZSBuZXR3b3JrIHNlZW1zIHRvIGJlIG1vc3RseSB2ZXJ5IG1peGVkIHdpdGggcmVnYXJkcyB0byBjaXZpYyBhdHRpdHVkZXMuIEVzcGVjaWFsbHkgdGhlIGNsdXN0ZXIgb24gdGhlIGJvdHRvbSByaWdodCBpcyBkdWJpb3VzLCBhcyB0aGUgbm9kZXMnIGF0dGl0dWRlcyBoYXZlIHJlbWFpbmVkIHRoZSBzYW1lIGJldHdlZW4gV2F2ZXMgMSBhbmQgMiwgdGhlIG9ubHkgdGhpbmcgdGhhdCBoYXMgY2hhbmdlZCBpcyB0aGF0IG5vZGVzIHdobyB3ZXJlIG5ldXRyYWwgaW4gV2F2ZSAxLCBkaWQgbm90IGhhdmUgYSB2YWxpZCBzY29yZSBpbiBXYXZlIDIuIFRoaXMgY2FuIHRoZXJlZm9yZSBub3QgYmUgc2VlbiBhcyBwcm9vZiBvZiBzZWdyZWdhdGlvbi4NCg0KPGJyPg0KDQoqKkZpZ3VyZSA1LioqDQoNCipWaXN1YWxpc2F0aW9uIG9mIHRoZSBuZXR3b3JrIG9mIGEgTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXR5IGluIFdhdmUgMioNCg0KYGBge3J9DQpjb2xvdXIgPC0gaWZlbHNlKElDX2RmMiRjZV90Ml9jYXQ9PSduZXV0cmFsJywgImxpZ2h0cGluayIsICJvcmNoaWQ0IikNClYoZ3JhcGhfQ0VfdDIpJHNpemUgPSBpZ3JhcGg6OiBiZXR3ZWVubmVzcyhncmFwaF9DRV90Miwgbm9ybWFsaXplZCA9IFQsIGRpcmVjdGVkID0gVCkgKiA1MCArIDUNCnBsb3RfQ0VfdDIgPC0gcGxvdChncmFwaF9DRV90MiwNCiAgICAgICAgICAgICAgICAgICB2ZXJ0ZXguY29sb3IgPSBjb2xvdXIsDQogICAgICAgICAgICAgICAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImdyYXkiLA0KICAgICAgICAgICAgICAgICAgIGVkZ2UuY3VydmVkID0gMC4yLCANCiAgICAgICAgICAgICAgICAgICBlZGdlLmFycm93LnNpemUgPSAwLjEsDQogICAgICAgICAgICAgICAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgICAgICAgICAgICAgICAgbGF5b3V0ID0gbGF5b3V0KQ0KbGVnZW5kKCJ0b3BsZWZ0IiwgYygibmV1dHJhbCIsICJwb3NpdGl2ZSIsICJtaXNzaW5nIiksIHBjaCA9IDIxLCBjb2wgPSAiIzc3Nzc3NyIsIHB0LmJnID0gYygibGlnaHRwaW5rIiwgIm9yY2hpZDQiLCAid2hpdGUiKSwgcHQuY2V4ID0gMiwNCiAgICAgICBjZXggPSAwLjgsIGJ0eSA9ICJuIiwgbmNvbCA9IDEpDQpgYGANCg0KPGJyPg0KDQpDb21wYXJpbmcgdGhlIHR3byBncmFwaHMgZG9lcyBub3QgaW1tZWRpYXRlbHkgaW5kaWNhdGUgYSBjbGVhciBjb25jbHVzaW9uIHdpdGggcmVnYXJkcyB0byB0aGUgZGVncmVlIG9mIHNlZ3JlZ2F0aW9uIGluIHRoZSBuZXR3b3Jrcy4gSXQgc2VlbXMgbGltaXRlZCBpbiBib3RoIHdhdmVzLCBob3dldmVyLCB0aGUgbmV0d29yayBkaWQgZ28gdGhyb3VnaCBhIGxvdCBvZiBjaGFuZ2VzIGluIGJldHdlZW4gdGhlIHR3byB3YXZlcy4gQSBsb3Qgb2YgbmV3IHRpZXMgc2VlbWVkIHRvIGhhdmUgYmVlbiBjcmVhdGVkLCBhbmQgYSBsb3QgaGF2ZSBzZWVtIHRvIGJlIGJyb2tlbi4gW1BMQUNFIFNPTUVXSEVSRSBFTFNFXSDigJNcPiB0aGVyZWZvcmUsIGl0IGlzIHN0aWxsIHBvc3NpYmxlIHRoYXQgbWljcm8tcHJvY2Vzc2VzIGJhc2VkIG9uIGNpdmljIGF0dGl0dWRlcyBoYXZlIHRha2VuIHBsYWNlLCB3aXRob3V0IHRoZW0gYmVpbmcgdmlzaWJsZSBvbiBhIG1hY3JvIHNjYWxlLg0KDQo8YnI+DQoNCiMjIyBOdW1lcmljIGRlc2NyaXB0aW9ucw0KDQo8YnI+DQoNCiMjIEV4cGxhbmF0b3J5IGFuYWx5c2VzDQoNCjxicj4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMgUmVmZXJlbmNlcw0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("results.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

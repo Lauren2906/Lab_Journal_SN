@@ -3,9 +3,131 @@ title: "Data"
 author: "Lauren"
 date: "2026-09-11"
 output: html_document
+bibliography: references.bib
 ---
 
-# Data
+# Data and methods
+
+```{r, include = FALSE, echo = FALSE}
+library("tidyverse")
+```
+
+## Data
+
+To answer the research questions, this paper utilises data from the Michigan Residential Community Survey [@rambaran2025]. This survey is administered under students from the University of Michigan, who live in learning communities. In total eleven learning communities participated in this study, ten of which took the survey in two different waves. For this paper, the data from both waves of one of the learning communities is used. This learning community consisted of 121 first year students. For both waves, the response rate was more than 90%. In this chapter, the measurements for the most important variables will be discussed.
+
+<br>
+
+### Social network
+
+Students were asked which other students within the learning community they hang around with and talk to the most [@rambaran2025]. Students could nominate up to ten other students. As everyone in the learning community was asked to fill out the survey, and the response rate was relatively high, a socionet was created. This means that (almost) everyone in the sample was questioned, creating a full overview of all the nodes and ties within this specific network. Students who did not fill out the survey could still be nominated by other students, but were coded to not have any outgoing ties.
+
+<br>
+
+### Civic attitudes
+
+To measure civic attitudes, a validated scale of four items was used [@doolittle2013]. This scale measures whether students (1) feel responsible for their community, (2) believe that they should make a difference in their community, (3) are committed to their community and (4) know how to give back to their community [@rambaran2025]. Before constructing the scale, factor analyses were carried out for both Wave 1 and Wave 2, as shown below.
+
+```{r, include = FALSE}
+rm(list = ls())
+load("./data/IndividualCharacteristics.RData")
+load("./data/NetworkCharacteristics.RData")
+load("./data/CivicAttitudes.RData")
+```
+
+```{r}
+IC_df <- as.data.frame(T1civeng[[1]])
+
+psych::KMO(IC_df) 
+
+corrplot:: corrplot(cor(IC_df, use="complete.obs"), tl.col='black', tl.cex=.75) 
+
+Factors_w1 <- psych:: fa(IC_df, nfactors = 4, rotate = "none", fm = "minres")
+Factors_w1
+```
+
+```{r}
+IC_df2 <- as.data.frame(T2civeng[[1]])
+
+psych::KMO(IC_df2) 
+
+corrplot:: corrplot(cor(IC_df2, use="complete.obs"), tl.col='black', tl.cex=.75)
+
+Factors_w2 <- psych:: fa(IC_df2, nfactors = 4, rotate = "none", fm = "minres")
+Factors_w2
+```
+
+The KMO scores were .77 and .81 for Wave 1 and Wave 2 respectively. This means that the data is suitable for conducting a factor analysis. Secondly, all correlations were positive, and seemed visually strongly present, thus a factor analysis was conducted. As expected, the four items loaded on one factor together, with all factor loadings being larger than XXX. Based on this, the scales for civic attitudes were created by taking a students' average score on the four items, if they answered three or more of the items. If students answered fewer than three items, they were coded as missing (XXX%).
+
+```{r}
+reliability <- psych::alpha(IC_df[, c("T1CIVICENG1","T1CIVICENG2","T1CIVICENG3","T1CIVICENG4")])
+reliability
+
+reliability$alpha.drop 
+```
+
+```{r}
+reliability2 <- psych::alpha(IC_df2[, c("T2CIVICENG1","T2CIVICENG2","T2CIVICENG3","T2CIVICENG4")])
+reliability2
+
+reliability2$alpha.drop 
+```
+
+Based on this construction of the variable, a trustworthy scale was constructed, with a Cronbach's Alpha of .810 and .885 for Wave 1 and Wave 2 respectively. Dropping one of the items would not have led to a significant increase in the Cronbach's Alpha score, and thus it was decided to keep all four items, to have as much theoretical breadth while keeping a trustworthy score. A frequency table for this variable is shown in Table 1 below.
+
+```{r}
+IC_df$missings <- rowSums(is.na(IC_df))
+IC_df$ce_t1 <- ifelse(IC_df$missings <= 1, rowMeans(IC_df[,1:4]), NA)
+
+IC_df2$missings <- rowSums(is.na(IC_df2))
+IC_df2$ce_t2 <- ifelse(IC_df2$missings <= 1, rowMeans(IC_df2[,1:4]), NA)
+```
+
+<br>
+
+**Table 1.** Descriptive statistics for civic attitudes
+
+```{r}
+pander:: pander(table(IC_df$ce_t1))
+pander:: pander(table(IC_df2$ce_t2))
+```
+
+<br>
+
+### Gender
+
+This paper will use gender as a covariate, as clustering in civic attitudes may actually be explained by clustering due to gender. Students were asked what their gender was, where they chose from a pre-set list of gender-identities, and with the opportunity to describe their identity themselves, if none of to options fit their identity [@rambaran2025]. The descriptive statistics for gender are shown in Table 2 below.
+
+```{r}
+gender1 <- gender[[1]][,1]
+gender2 <- gender[[1]][,2]
+gender <- coalesce(gender1, gender2)
+
+gender <- factor(as.numeric(gender),
+                 levels = c('1',
+                            '2'),
+                 labels = c(
+                   'Cis-woman',
+                   'Cis-man'))
+```
+
+<br>
+
+**Table 2.** Descriptive statistics for gender
+
+```{r}
+pander:: pander(table(gender))
+```
+
+<br>
+
+## Methodology
+
+This paper aims to answer both a descriptive and an explanatory question, necessitating the use of different methods. For answering the question of whether there is segregation with regards to civic attitudes in the Michigan Learning Community, Moran's I was used. This is a measure that quantifies the degree of segregation in a network [@SNASS], making it suited for answering the question on segregation. A variety of other descriptive statistics will also be reported on, to get a comprehensive view of the data.
+
+To answer whether there are selection and influence effects with regards to civic attitudes, RSiena was used [@ripley2026]. RSiena models social networks in a stochastic actor-oriented model, where the actors take sequential and probabilistic mini-steps. In this way, RSiena models how networks change based on user-chosen network statistics. This paper will describe the process of building up to a complete model in RSiena, starting with a null-model, where no additional network statistics are included. The specific steps taken towards a final model will be described in the 'results' section.
+
+<br>
 
 ------------------------------------------------------------------------
 

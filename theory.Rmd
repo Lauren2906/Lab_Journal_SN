@@ -3,15 +3,18 @@ title: "Theory"
 author: "Lauren"
 date: "2026-09-11"
 output: html_document
+bibliography: references.bib
 ---
 
 # Theory
 
-Clustering in social networks is characterised by individuals having ties with similar others, and having fewer ties with dissimilar others (SOURCE). That there is clustering within social networks, is a well established fact (SOURCE), networks cluster around gender (SOURCE), ethnicity (SOURCE), political preference (SOURCE), and social economic status (SOURCE), to name a few. Clustering can thus be the result of both visible, and invisible personal characteristics. In the following chapter, an overview of mechanisms of network clustering will be presented, focussing on civic attitudes, specifically focussing on homophily/ preference and social learning/ influence effects.
+Clustering in social networks is characterised by individuals having ties with similar others, and having fewer ties with dissimilar others [@azizifard2014]. That there is clustering within social networks, is a well established fact, networks cluster around gender [e.g. @suurna2022], ethnicity [e.g. @leszczensky2019], political preference [e.g. @oosterhoff2022], and social economic status [e.g. @chabot2024], to name a few. Clustering can thus be the result of both visible, and invisible personal characteristics. In the following chapter, an overview of mechanisms of network clustering will be presented specifically focussing on homophily/ preference and social learning/ influence effects, with regards to civic engagement.
+
+<br>
 
 ## Homophily
 
-The core principle of homophily is that similar people prefer each others' company over the company of dissimilar others (SOURCE). This process is visualised in Figure 1. Concretely, this means that people with behavioural attitude A (pink in Figure 1) prefer to make ties with other people with attitude A, rather than with people with attitude B (purple). Because actor *i* and *h* hold similar attitudes, they are more likely to create a tie, than actor *i* and *j* (Figure 1, A). However, homophily does not just take place when making a tie with another person, it also has an effect on what ties remain (SOURCE). Dissimilar people are more likely to break their tie, than people who hold similar opinions (Figure 1, B).
+The core principle of homophily is that similar people prefer each others' company over the company of dissimilar others [@mcpherson2001]. This process is visualised in Figure 1. Concretely, this means that people with behavioural attitude A (pink in Figure 1) prefer to make ties with other people with attitude A, rather than with people with attitude B (purple). Because actor *i* and *h* hold similar attitudes, they are more likely to create a tie, than actor *i* and *j* (Figure 1, A). However, homophily does not just take place when making a tie with another person, it also has an effect on what ties remain [@mcpherson2001]. Dissimilar people are more likely to break their tie, than people who hold similar opinions (Figure 1, B).
 
 <br>
 
@@ -23,17 +26,15 @@ The core principle of homophily is that similar people prefer each others' compa
 
 <br>
 
-People prefer to interact with similar others for multiple reasons. Creating a tie with a similar other, can be easier, simply because you exist in the same social context as each other (SOURCE). In order to make a tie with someone, we need to meet that person, and the people we are able to meet are often similar to ourselves. For example, we meet people at our work or school, but the people we meet there are often similarly educated as we are. This leads to clustering in social networks, even if ego themselves may not be aware of this, nor are they actively choosing to make ties with similar people.
+People tend to interact with similar others for multiple reasons. One simple explanation is geography [@mcpherson2001], meaning that tie creation is dependent on existing in the same social context. Oftentimes, our contexts consist of people who are relatively similar to ourselves. For example, we meet people at our work or school, but the people we meet there are often of a similar social- and cultural background as ourselves. This leads to clustering in social networks, simply because ego mostly meets similar alters. Homophily in civic attitudes can manifest through geography, simply because some universities may encourage these attitudes more strongly than other universities, leading to differences in civic attitudes between universities.
 
-A second reason for homophily is that there can be less conflict between similar people. People with the same attitudes, are easier to befriend, because there are fewer opportunities of conflict, after all, you will not have to fight about the things you already agree on. This can also explain why ties between dissimilar others are broken more often. If there is a lot of conflict between two people, their tie may become weaker and weaker until it breaks. Thus, solely based on selection effects, it can be expected that people have more ties with similar others, than with dissimilar others.
-
-Applied to civic attitudes, this means that people who have relatively disengaged civic attitudes, are more likely to meet and connect with other people who are civilly disengaged, and vice versa.
+However, just context cannot explain homophily, as homophily is also found in mixed environments [e.g. @leszczensky2019]. People tend to prefer to interact with similar others for a myriad of reasons, for example, ease of communication and a shared culture [@mcpherson2001]. Holding differing attitudes, can be reason for conflict and miscommunication, decreasing the likeliness of initiating and maintaining ties. For civic engagement, this may show through preferences to have ties with other's who have the same outlook on what a citizen's role should look like in civil society. Thus, solely based on selection effects, it can be expected that people have more ties with similar others, than with dissimilar others.
 
 <br>
 
 ## Social learning
 
-Clustering in social networks can not be explained solely through selection effects. Even if our social contexts exist of relatively similar others, there is still a variation of attitudes and behaviours within this context. Secondly, people can differ from their ties on some aspects, without a breaking tie being inevitable. A second explanation for clustering within social networks is influence effects (SOURCE). This effect assumes that ego makes ties with other regardless of their similarity to the alter. Once the tie is made, ego and alter become more similar to each other. This process is represented in Figure 2.
+However, it is, of course, not the case that people *only* make ties with people who are exactly like themselves. When considering a tie with another person, there are incountable factors that contribute to whether that tie is actually made. Thus, preferences cannot solely explain clustering in social networks. Another factor is social learning, which considers that people learn from their friends, which can change their attitudes and behaviours [@marsden1993]. This means, that people can make a tie with another person, regardless of their attitudinal differences, but after the tie is made, ego and alter become more similar to each other. This process is represented in Figure 2.
 
 <br>
 
@@ -45,7 +46,7 @@ Clustering in social networks can not be explained solely through selection effe
 
 <br>
 
-Influence effects can take place for many reasons. Due to our connection with other people we may come to new insights, and change our attitudes accordingly (SOURCE). Influence effects can also take place, because ego wants to minimise the amount of social disapproval they get from their alters. By changing their attitude or behaviour to match their network's, ego minimises the chances of social conflict.
+Influence effects can take place for many reasons. Due to our connection with other people we may come to new insights, and change our attitudes accordingly [@marsden1993]. Influence effects can also take place, because ego wants to minimise the amount of social disapproval they get from their alters. By changing their attitude or behaviour to match their network's, ego minimises the chances of social conflict.
 
 For civic attitudes this means that a civilly disengaged ego can make a tie with a civilly engaged alter. When these two have a connection, their attitudinal characteristics become more similar to each other. Ego, who is has disengaged civic attitudes, will become more engaged, because they want to fit in with the alter who is civilly engaged. This process can also work the other way around.
 
@@ -67,11 +68,13 @@ Civic attitudes form an interesting behavioural characteristic to look at in lig
 
 <br>
 
-Once ego and alter make a tie, and they get to know each other better, it becomes clear that they differ in their civic attitudes. Ego can now break the tie, something that would be likely according to the homophily principle, or keep the tie, allowing for influence effects to take place. This paper argues that people are unlikely to break a tie based on differences in civic attitudes. Civic attitudes are often not at the core of a person's identity (SOURCE), making it a less important characteristic when deciding with whom to make and maintain ties. Once people already have a tie, and then find out that they differ in this aspect, ego and alter have already established a relationship, which is likely to remain despite differences in some attitudes. The created tie does open the way for influence effects to take place. Despite civic attitudes not being a core part of their identity, ego can still learn and develop through interactions with alter, thereby changing their attitudes.
+Once ego and alter make a tie, and they get to know each other better, it becomes clear that they differ in their civic attitudes. Ego can now break the tie, something that would be likely according to the homophily principle, or keep the tie, allowing for influence effects to take place. This paper argues that people are unlikely to break a tie based on differences in civic attitudes. Civic attitudes are often not at the core of a person's identity, making it a less important characteristic when deciding with whom to make and maintain ties. Once people already have a tie, and then find out that they differ in this aspect, ego and alter have already established a relationship, which is likely to remain despite differences in some attitudes. The created tie does open the way for influence effects to take place. Despite civic attitudes not being a core part of their identity, ego can still learn through interactions with alter, thereby changing their attitudes.
 
 Thus, taking both preference and influence effects together, for civic attitudes, this paper expects that influence effects are stronger than preference effects for explaining clustering in social networks. This leads to the following hypothesis:
 
-H2: *The influence effect is stronger than the selection effect for civic engagement attitudes, for students in Michigan learning communities*
+H2: *The influence effect is stronger than the selection effect for civic engagement attitudes, for students in Michigan learning communities.*
+
+<br>
 
 ------------------------------------------------------------------------
 

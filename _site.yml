@@ -32,10 +32,10 @@ navbar:
         href: introduction.html
       - text: "Theory"
         href: theory.html
-      - text: "Data"
+      - text: "Data and Methods"
         href: data.html
-      - text: "Methods"
-        href: methods.html
+      - text: "Results"
+        href: results.html
       - text: "Conclusion and discussion"
         href: conclusion_discussion.html
     - text: "Code final assignment"
