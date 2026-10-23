@@ -1,0 +1,168 @@
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 23/10/2026 11:30:40
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 373093.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 23/10/2026 11:31:07
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 656069.
+Effects object used: myeff 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864
+  2. eval:  outdegree (density)                            -1.7006
+  3. eval:  reciprocity                                     0.0000
+  4. rate:  rate behy period 1                              0.8473
+  5. eval:  behy linear shape                               0.0863
+  6. eval:  behy quadratic shape                            0.0000
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Amount of behavioral change                                         73.0000
+  5. behy centered sum                                                   13.5905
+  6. behy sum of cent. squares                                           94.5802
+These were calculated from the data.
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2538 iterations.
+Parameter estimates based on 1538 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.2410  13.7383  -0.0175 
+  2.  -0.1010  14.8438  -0.0068 
+  3.   0.4100  11.1553   0.0368 
+  4.  -0.5140   6.9803  -0.0736 
+  5.   0.0920   8.6565   0.0106 
+  6.   0.2713  11.8535   0.0229 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.1025 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2538 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.6369  (   0.5514)
+ 2. eval:  outdegree (density)                                    -2.6338  (   0.0798)
+ 3. eval:  reciprocity                                             2.2078  (   0.1723)
+
+Behavior Dynamics
+ 4. rate:  rate behy period 1                                      2.4163  (   0.5224)
+ 5. eval:  behy linear shape                                       0.1817  (   0.1058)
+ 6. eval:  behy quadratic shape                                   -0.2794  (   0.0739)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.304      0.011     -0.004     -0.003      0.006      0.002
+     0.255      0.006     -0.008      0.006      0.000      0.000
+    -0.044     -0.574      0.030     -0.004      0.001      0.001
+    -0.011      0.138     -0.048      0.273     -0.015      0.005
+     0.108     -0.031      0.076     -0.266      0.011      0.000
+     0.055      0.053      0.046      0.125      0.013      0.005
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 20.35 seconds.

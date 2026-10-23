@@ -25,6 +25,17 @@ load("./data/NetworkCharacteristics.RData")
 load("./data/CivicAttitudes.RData")
 ```
 
+```{r, warning=FALSE, echo=FALSE}
+library(igraph)
+library(network)
+library(RSiena)
+library(RsienaTwoStep)
+library(ape)
+library(sna)
+library(tibble)
+library(dplyr)
+```
+
 <br>
 
 ### Data visualisation
@@ -67,10 +78,6 @@ copy_strong_netw_t1[is.na(copy_strong_netw_t1)] <- 0
 
 g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
 graph_CE_t1 <- simplify(g_strong_t1)
-```
-
-```{r, warning=FALSE, echo=FALSE}
-library(igraph)
 ```
 
 ```{r, eval=FALSE}
@@ -138,15 +145,286 @@ legend("topleft", c("neutral", "positive", "missing"), pch = 21, col = "#777777"
 
 <br>
 
-Comparing the two graphs does not immediately indicate a clear conclusion with regards to the degree of segregation in the networks. It seems limited in both waves, however, the network did go through a lot of changes in between the two waves. A lot of new ties seemed to have been created, and a lot have seem to be broken. [PLACE SOMEWHERE ELSE] –\> therefore, it is still possible that micro-processes based on civic attitudes have taken place, without them being visible on a macro scale.
+Comparing the two graphs does not immediately indicate a clear conclusion with regards to the degree of segregation in the networks. However, there do seem to be changes in the network. To further clarify these changes, and the network composition, I will be reporting on numeric descriptions of the networks below.
 
 <br>
 
 ### Numeric descriptions
 
+#### Nodes and ties
+
+In both Wave 1 and Wave 2 121 students were included in the network. In Wave 1 there were a total of 395 directed ties, and in Wave 2 this was 270. Thus, the amount of ties decreased between the two waves, making the network sparser.
+
+```{r}
+# Wave 1
+g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
+vcount(g_strong_t1)
+ecount(g_strong_t1)
+
+# Wave 2
+g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
+vcount(g_strong_t2)
+ecount(g_strong_t2)
+
+```
+
 <br>
 
-## Explanatory analyses
+#### Density
+
+As shown above, the networks in both Wave 1 and Wave 2 seem relatively sparse. This is also reflected when calculating their density. To calculate the density of a network, the function "as.network" from the network package was used. This function automatically replaces all missing values with 0, meaning that everyone who did not answer the question about who they hang out with, is seen as having no out-going ties. Concretely, the density of the network shows how many of the possible network ties are actually realised in a network [@SNASS]. Thus, a density of 1, means that 100% of all possible ties are actually made, where a density of 0 means that 0% of all possible ties are observered. For the networks in the Michigan learning community the density was .027 and .019, in Wave 1 and Wave 2 respectively. Thus, only 2.7% of all possible ties were actually present in Wave 1, which decreased even further in Wave 2, to only 1.9%. This is a very low density for network, especially when comparing it to friendship networks in classrooms, which are usually between .2 and .4 [@SNASS]. Of course, a Michigan learning community is not the same as classroom, as an average classroom is smaller than the learning community, and the students in Michigan do not take all their classes together. However, even comparing the Michigan learning community to a small world network shows that the learning community has a very low density.
+
+```{r}
+# Wave 1
+netw1 <- network:: as.network(strong_netw_t1)
+network:: network.density(netw1)
+# 0.02720386
+
+# Wave 2
+netw2 <- network:: as.network(strong_netw_t2)
+network:: network.density(netw2)
+# 0.01859504
+```
+
+<br>
+
+#### In and out degree
+
+To calculate the in- and outdegree of the nodes in the network, the package igraph was used. In Wave 1, students, on average, received 3.264 friendship nominations, however, most students received 3. The most popular node received 13 ties. As it is a closed network, the average received ties, is also the average sent ties. Thus the average for indegree is the same as the average for outdegree. However, most people sent just 2 outgoing friendship nominations, with a maximum of 10 nominations. This maximum was established beforehand, rather than reflecting the full scope of people's friendship networks.
+
+For Wave 2, as expected based on the density, the mean in- and outdegree decreased to 2.231, with a median of 2 for both as well. The most popular node got nominated 10 times, and the node with the most outdegrees nominated 9 others. Thus, comparing Wave 1 and 2, both the indegrees and the outdegrees have decreased, indicating a sparser network.
+
+```{r}
+# Wave 1
+indeg <- igraph::degree(g_strong_t1, mode = "in")
+summary(indeg)
+
+outdeg <- igraph::degree(g_strong_t1, mode = "out")
+summary(outdeg)
+
+# Wave 2
+indeg <- igraph::degree(g_strong_t2, mode = "in")
+summary(indeg)
+
+outdeg <- igraph::degree(g_strong_t2, mode = "out")
+summary(outdeg)
+```
+
+<br>
+
+#### Reciprocity
+
+Secondly, I calculated the reciprocity of the network. This was done by using the "reciprocity" function in the igraph package. This function calculates the probability of an out-going tie from ego being returned by alter. Similar to density, a value of 1 for reciprocity means that 100% of all out-going ties are reciprocated, and a value of 0 means that none of the out-going ties are met with in-coming ties. The reciprocity in Wave 1 for the Michigan learning community is .471 and in Wave 2 this is .444. This means that, overall, about 45% of all out-going ties are reciprocated. As this paper looks into friendship networks, by asking who people hang out with, it makes sense that a large portion of the ties are reciprocated. If ego hangs out with alter, alter also hangs out with ego. However, more than half of the ties are not reciprocated, which can mean that ego and alter have different ideas about who they hang out with, or what the threshold is for nominating someone as a friend. The reciprocity measure will be slightly skewed by replacing the missing values with 0, as all in-coming ties for those ego's are automatically not reciprocated, even if in reality they may be.
+
+```{r}
+# Wave 1
+reciprocity(g_strong_t1, ignore.loops = TRUE, mode = c("default", "ratio"))
+# 0.4708861
+
+# Wave 2
+g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
+reciprocity(g_strong_t2, ignore.loops = TRUE, mode = c("default", "ratio"))
+# 0.4444444
+```
+
+<br>
+
+Path length and average reach
+
+[QUESTION FOR JOCHEM?]
+
+To gain further insight into potential clustering of civic attitudes in the networks, I calculated the average path length and average reach for both Wave 1 and Wave 2. Average shortest path length refers to the the average lowest number of steps for all pairs of nodes in a network [@SNASS]. Concretely, what this means is that for every node the shortest path (through the least other nodes) is calculated for every other node. In these calculations, only connected nodes are taken into account, as isolates cannot be reached. The average for all nodes is then calculated. In Wave 1, the average shortest path is 4.841, meaning that the average connected ego has to go through 4.841 nodes to get to every other alter. This number slightly decreases in Wave 2, leading to an average of 4.592. Thus, connected nodes have to go through slightly fewer other nodes to reach every other alter.
+
+Based on this average shortest path length, the average reach was calculated. This measure indicates what degree of other nodes ego can reach within the network, through the existing ties [@SNASS]. This number is then averaged for all nodes in a network. In Wave 1, the average reach was .218%, meaning that the average node can reach .218% of other nodes. Again, this number decreases for Wave 2, to .171%.
+
+Combining the decreasing average path length with the decreasing density, indicates that there are more isolates in Wave 2, as the amount of ties decreases, while the nodes that are connected can more easily reach each other. This is also reflected in the average reach, as this decreases between Wave 1 and 2. As isolates have an average reach of 0, an increase in isolates will also lead to a lower average reach.
+
+```{r}
+# Wave 1
+print(mean_dis <- mean_distance(g_strong_t1))
+# 4.840779
+mean((ego_size(g_strong_t1, order = mean_dis, mode = "out") - 1)/vcount(g_strong_t1))
+# 0.2180862
+
+# Wave 2
+print(mean_dis <- mean_distance(g_strong_t2))
+# 4.591732
+mean((ego_size(g_strong_t2, order = 7, mode = "out") - 1)/vcount(g_strong_t2))
+# 0.1705485
+```
+
+<br>
+
+#### Segregation
+
+Finally, after gaining more insight in the networks, I calculated Moran's I segregation index. As was to be expected based on visual inspection, there is not much segregation in the network. I calculated Moran's I using the ape package, which automatically row standardises. This means that the calculation assumes that each node is influenced equally by its neighbourhood, regardless of how large its neighbourhood is [@SNASS]. Thus, it is tested whether nodes are similar to the average of their neighbours. As there is no clear segregation in the network, I went through a few steps to see whether there is *any* degree of segregation.
+
+Firstly, I just looked at segregation based on direct ties. This returned the expected result: Neither in Wave 1 nor in Wave 2 is there evidence of segregation. In Wave 1, Moran's I is -0.014 (*p* = 0.942) and in Wave 2 it is -0.018 (*p* = 0.917). This means that the observed network does not differ significantly from the expected network, when there is no segregation. In fact, for both waves the observed and expected networks get very similar values, indicating that civic attitudes are spread throughout the network, rather than being clustered.
+
+```{r}
+# Wave 1
+geodistances <- geodist(netw1, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights1 <- geodistances == 1
+ape::Moran.I(IC_df$ce_t1, scaled = FALSE, weight = weights1, na.rm = TRUE)
+
+# Wave 2
+geodistances <- geodist(netw2, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights1 <- geodistances == 1
+ape::Moran.I(IC_df2$ce_t2, scaled = FALSE, weight = weights1, na.rm = TRUE)
+```
+
+<br>
+
+Thus, when looking at students' direct networks there is no segregation with regards to civic attitudes. However, it is possible that there is some degree of segregation when taking indirect ties into account. I calculated Moran's I again, this time using a decaying weigh function, which takes into account the path length to reach another node. The further the path length, the less weight is placed on that alter. When looking at the segregation within indirect networks, there is an indication of segregation. In Wave 1 Moran's I is .329, which significantly deviates from the expected network without any segregation (*p* \< .001). Moran's I also significantly deviates from the expected network in Wave 2, with a value of .531 (*p* \<.001).
+
+[QUESTION FOR JOCHEM?]
+
+Comparing the results from Moran's I based on direct ties, and based on a decaying weight function shows an interesting pattern. While nodes are not necessarily more similar to their direct ties, they are more similar to their indirect ties. !!! Thus, if ego has neutral civic attitudes, their direct ties are just as likely to hold positive or neutral attitudes, but ego's paths to alters with similar attitudes are on average shorter than the paths to alters with dissimilar attitudes.!!!
+
+```{r}
+options(scipen = 999)
+# Wave 1
+geodistances <- geodist(netw1, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights2 <- exp(-geodistances)
+ape::Moran.I(IC_df$ce_t1, scaled = FALSE, weight = weights2, na.rm = TRUE)
+
+# Wave 2
+geodistances <- geodist(netw2, count.paths = TRUE)
+geodistances <- geodistances$gdist
+
+weights2 <- exp(-geodistances)
+ape::Moran.I(IC_df2$ce_t2, scaled = FALSE, weight = weights2, na.rm = TRUE)
+```
+
+<br>
+
+These results do not support Hypothesis 1, as I expected there to be segregation with regards to direct ties. However, despite the limited amount of segregation in both waves, there is some indication of either preference or influence in broader, indirect networks. The network also changed visibly between Wave 1 and Wave 2, with new ties being created, and existing ties being broken. Therefore, there is some indication that micro-processes based on civic attitudes can have taken place, without them being visible on a macro, descriptive, scale.
+
+<br>
+
+## Exploratory analyses
+
+In the following section I will be looking into whether there are influence and selection effects with regards to civic attitudes within the network, which could explain the changes between Wave 1 and Wave 2. To examine this, I will be using RSiena and building my model iteratively. To start I will be describing the null-model (Model 1), where I do not add any additional statistics to my RSiena model. This model will be expanded based on theoretical considerations in Model 2, to test whether there are influence effects with regards to civic attitudes. In Model 3, I will add the statistics to test for selection effects. After building my theoretical model, I will use Goodness of Fit (GoF) measures, to improve how well the model can predict the actual observations. Before describing the models, I will firstly show how I prepared my variables for analysis.
+
+<br>
+
+### Data preparation
+
+```{r}
+# Starting with a clean workspace
+rm(list = ls())
+load("./data/IndividualCharacteristics.RData")
+load("./data/NetworkCharacteristics.RData")
+load("./data/CivicAttitudes.RData")
+```
+
+```{r}
+#Create network matrices
+hanging_df_t1 <- as.data.frame(hanging[[1]][1])
+strong_netw_t1 <- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]<-NA
+
+hanging_df_t2 <- as.data.frame(hanging[[1]][2])
+strong_netw_t2 <- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]<-NA
+```
+
+```{r}
+# Make civic attitudes scale
+IC_df <- as.data.frame(T1civeng[[1]])
+IC_df$missings <- rowSums(is.na(IC_df))
+IC_df$ce_t1 <- ifelse(IC_df$missings <= 1, rowMeans(IC_df[,1:4]), NA)
+
+IC_df2 <- as.data.frame(T2civeng[[1]])
+IC_df2$missings <- rowSums(is.na(IC_df2))
+IC_df2$ce_t2 <- ifelse(IC_df2$missings <= 1, rowMeans(IC_df2[,1:4]), NA)
+
+# Put civic attitudes in matrix
+IC_df <- IC_df %>% 
+  rownames_to_column(var = "id") 
+IC_df2 <- IC_df2 %>% 
+  rownames_to_column(var = "id") 
+IC_df <- left_join(IC_df, IC_df2, by=c("id"))
+behy <- IC_df %>% 
+  dplyr::select("ce_t1", "ce_t2") %>% 
+  as.matrix()
+```
+
+```{r}
+# Make gender variable (independent variable)
+gender1 <- gender[[1]][,1]
+gender2 <- gender[[1]][,2]
+gender <- coalesce(gender1, gender2)
+```
+
+```{r}
+# Create Siena dependent variables
+# Network
+nety <- sienaDependent(array(data= c(strong_netw_t1, strong_netw_t2), dim=c(dim(strong_netw_t1),2)))
+
+# Civic attitudes
+behy <- sienaDependent(behy, type = c("behavior"))
+
+
+# Create Siena covariate
+# Gender
+gender_covar <- coCovar(gender)
+```
+
+```{r}
+# Create Siena dataframe
+mydata <- sienaDataCreate(nety, gender_covar, behy)
+
+# Create algorithm
+myAlgorithm <- sienaAlgorithmCreate(projname = "civic_attitudes")
+
+# Create effect (with no additional effects)
+myeff <- getEffects(mydata)
+```
+
+<br>
+
+### Model 1: Null model
+
+The following model only includes density and reciprocity, as network statistics and the behavioural evolution as a linear and quadratic shape, as these are automatically included when running an RSiena model.
+
+```{r, eval=FALSE}
+model_1 <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
+```
+
+```{r, include = FALSE}
+# saveRDS(model_1, "model_1.rds")
+model_1 <- readRDS("model_1.rds")
+```
+
+```{r}
+# Model results
+model_1
+
+# Significance
+options(scipen = 500)
+
+results_model1 <- data.frame(
+  effect = model_1$effects$effectName,
+  b = model_1$theta,
+  se = model_1$se,
+  t = model_1$theta / model_1$se,
+  p = 2 * pnorm(-abs(model_1$theta / model_1$se)))
+
+results_model1
+```
+
+#### Interpretation
+
+The results show that this model converges well, as the overall maximum convergence ratio (.103) is smaller than .25, and all the convergence t-ratio's are smaller than .1. As this is the simplest possible model, it makes sense that it converges well.
+
+For the network dynamics the simple model shows that the network is not very dense, which matches with the findings in the descriptive section. There is a significant outdegree effect (*b* = -2.634, *SE* =.080), meaning that the chances of observing an outgoing tie are significantly lower than observing an incoming tie. Overall, nodes create relatively few ties with others. When a tie is formed, it is likely to be reciprocated, as is evident from the value for reciprocity, which is positive and significant (*b* = 2.208, *SE* = .172).
 
 <br>
 

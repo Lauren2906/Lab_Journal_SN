@@ -298,12 +298,14 @@ transitivity(g_strong_t2)
 ## Path length
 ```{r}
 # Wave 1
-mean((ego_size(g_strong_t1, order = 2, mode = "out") - 1)/vcount(g_strong_t1))
-# 0.07820504
+print(mean_dis <- mean_distance(g_strong_t1))
+mean((ego_size(g_strong_t1, order = mean_dis, mode = "out") - 1)/vcount(g_strong_t1))
+# 0.2180862
 
+print(mean_dis <- mean_distance(g_strong_t2))
 # Wave 2
-mean((ego_size(g_strong_t2, order = 2, mode = "out") - 1)/vcount(g_strong_t2))
-# 0.0458302
+mean((ego_size(g_strong_t2, order = 7, mode = "out") - 1)/vcount(g_strong_t2))
+# 0.1705485
 ```
 
 <br>

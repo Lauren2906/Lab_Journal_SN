@@ -14,19 +14,13 @@ library("tidyverse")
 
 ## Data
 
-To answer the research questions, this paper utilises data from the Michigan Residential Community Survey [@rambaran2025]. This survey is administered under students from the University of Michigan, who live in learning communities. In total eleven learning communities participated in this study, ten of which took the survey in two different waves. For this paper, the data from both waves of one of the learning communities is used. This learning community consisted of 121 first year students. For both waves, the response rate was more than 90%. In this chapter, the measurements for the most important variables will be discussed.
+To answer the research questions, this paper utilises data from the Michigan Residential Community Survey [@rambaran2025]. This survey is administered under students from the University of Michigan, who live in learning communities. In total eleven learning communities participated in this study, ten of which took the survey in two different waves. For this paper, the data from both waves of one of the learning communities is used. The survey for Wave 1 was administered in october and november, the second Wave was administered in march and april. This learning community consisted of 121 first year students. For both waves, the response rate was more than 90%. In this chapter, the measurements for the most important variables will be discussed.
 
 <br>
 
 ### Social network
 
-Students were asked which other students within the learning community they hang around with and talk to the most [@rambaran2025]. Students could nominate up to ten other students. As everyone in the learning community was asked to fill out the survey, and the response rate was relatively high, a socionet was created. This means that (almost) everyone in the sample was questioned, creating a full overview of all the nodes and ties within this specific network. Students who did not fill out the survey could still be nominated by other students, but were coded to not have any outgoing ties.
-
-<br>
-
-### Civic attitudes
-
-To measure civic attitudes, a validated scale of four items was used [@doolittle2013]. This scale measures whether students (1) feel responsible for their community, (2) believe that they should make a difference in their community, (3) are committed to their community and (4) know how to give back to their community [@rambaran2025]. Before constructing the scale, factor analyses were carried out for both Wave 1 and Wave 2, as shown below.
+Students were asked which other students within the learning community they hang around with and talk to the most [@rambaran2025]. Students could nominate up to ten other students. As everyone in the learning community was asked to fill out the survey, and the response rate was relatively high, a socionet was created. This means that (almost) everyone in the sample was questioned, creating a full overview of all the nodes and ties within this specific network. Students who did not fill out the survey did not consent to having their data used in that particular wave, and thus were set to 0, thereby not receiving any incoming or outgoing ties. In Wave 1 9.09% of the students did not fill out the question on who they hang out with, in Wave 2 this was 7.44%.
 
 ```{r, include = FALSE}
 rm(list = ls())
@@ -34,6 +28,27 @@ load("./data/IndividualCharacteristics.RData")
 load("./data/NetworkCharacteristics.RData")
 load("./data/CivicAttitudes.RData")
 ```
+
+```{r}
+hanging_df_t1 <- as.data.frame(hanging[[1]][1])
+strong_netw_t1 <- data.matrix(hanging_df_t1)
+strong_netw_t1[strong_netw_t1==9]<-NA
+
+hanging_df_t2 <- as.data.frame(hanging[[1]][2])
+strong_netw_t2 <- data.matrix(hanging_df_t2)
+strong_netw_t2[strong_netw_t2==9]<-NA
+
+mean(is.na(strong_netw_t1))
+# 0.09090909
+mean(is.na(strong_netw_t2))
+# 0.07438017
+```
+
+<br>
+
+### Civic attitudes
+
+To measure civic attitudes, a validated scale of four items was used [@doolittle2013]. This scale measures whether students (1) feel responsible for their community, (2) believe that they should make a difference in their community, (3) are committed to their community and (4) know how to give back to their community [@rambaran2025]. Before constructing the scale, factor analyses were carried out for both Wave 1 and Wave 2, as shown below.
 
 ```{r}
 IC_df <- as.data.frame(T1civeng[[1]])
