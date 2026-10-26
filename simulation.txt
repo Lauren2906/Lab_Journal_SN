@@ -1,0 +1,1805 @@
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 24/10/2026 16:49:00
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 24/10/2026 16:49:23
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.155   13.360   0.3871
+  2. Number of ties                                           276.716   19.474   0.4391
+  3. Number of reciprocated ties                              116.451   13.170   0.2771
+  4. Numb. edgew. shrd prtns.by two path (69)                 195.677   26.610   0.6276
+  5. Number of out-isolates                                    45.441    4.056   0.1209
+  6. Same values on gender_covar                              203.983   15.463   0.3364
+  7. Sum_ties abs.diff behy                                   239.841   22.655   0.6154
+  8. Amount of behavioral change                               41.270    5.820   0.1568
+  9. behy centered sum                                         -2.982    7.267   0.1294
+ 10. behy sum of cent. squares                                129.654   13.303   0.2908
+ 11. behy average alters                                        1.699    6.717   0.1983
+ 12. behy av. alters dist. 2                                    4.406    4.227   0.1279
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 19.32 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 24/10/2026 16:49:49
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_no 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                            0.0000  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                    0.0000  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 326.629   17.989   0.5086
+  2. Number of ties                                           482.759   23.426   0.4032
+  3. Number of reciprocated ties                              198.305   15.635   0.2922
+  4. Numb. edgew. shrd prtns.by two path (69)                 407.195   34.190   0.6873
+  5. Number of out-isolates                                    30.369    2.899   0.0832
+  6. Same values on gender_covar                              351.201   18.923   0.3005
+  7. Sum_ties abs.diff behy                                   515.194   29.302   0.6435
+  8. Amount of behavioral change                               41.748    6.032   0.1618
+  9. behy centered sum                                         -2.803    7.406   0.1302
+ 10. behy sum of cent. squares                                133.776   14.422   0.3056
+ 11. behy average alters                                       -0.654    6.655   0.1930
+ 12. behy av. alters dist. 2                                    3.806    4.376   0.1335
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 20.83 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 24/10/2026 16:50:13
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_high 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -1.0570  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -1.0570  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 301.756   13.120   0.3726
+  2. Number of ties                                           182.567   17.728   0.4613
+  3. Number of reciprocated ties                               67.418   12.029   0.2907
+  4. Numb. edgew. shrd prtns.by two path (69)                  95.215   21.200   0.5602
+  5. Number of out-isolates                                    56.715    4.502   0.1358
+  6. Same values on gender_covar                              134.601   14.064   0.3623
+  7. Sum_ties abs.diff behy                                   124.957   18.935   0.5603
+  8. Amount of behavioral change                               41.079    5.850   0.1585
+  9. behy centered sum                                         -2.789    7.066   0.1269
+ 10. behy sum of cent. squares                                129.204   13.564   0.2954
+ 11. behy average alters                                        2.973    6.769   0.2012
+ 12. behy av. alters dist. 2                                    4.614    4.251   0.1301
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 19.44 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 09:52:07
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.155   13.360   0.3871
+  2. Number of ties                                           276.716   19.474   0.4391
+  3. Number of reciprocated ties                              116.451   13.170   0.2771
+  4. Numb. edgew. shrd prtns.by two path (69)                 195.677   26.610   0.6276
+  5. Number of out-isolates                                    45.441    4.056   0.1209
+  6. Same values on gender_covar                              203.983   15.463   0.3364
+  7. Sum_ties abs.diff behy                                   239.841   22.655   0.6154
+  8. Amount of behavioral change                               41.270    5.820   0.1568
+  9. behy centered sum                                         -2.982    7.267   0.1294
+ 10. behy sum of cent. squares                                129.654   13.303   0.2908
+ 11. behy average alters                                        1.699    6.717   0.1983
+ 12. behy av. alters dist. 2                                    4.406    4.227   0.1279
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 17.94 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 09:52:24
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_no 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                            0.0000  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                    0.0000  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 326.629   17.989   0.5086
+  2. Number of ties                                           482.759   23.426   0.4032
+  3. Number of reciprocated ties                              198.305   15.635   0.2922
+  4. Numb. edgew. shrd prtns.by two path (69)                 407.195   34.190   0.6873
+  5. Number of out-isolates                                    30.369    2.899   0.0832
+  6. Same values on gender_covar                              351.201   18.923   0.3005
+  7. Sum_ties abs.diff behy                                   515.194   29.302   0.6435
+  8. Amount of behavioral change                               41.748    6.032   0.1618
+  9. behy centered sum                                         -2.803    7.406   0.1302
+ 10. behy sum of cent. squares                                133.776   14.422   0.3056
+ 11. behy average alters                                       -0.654    6.655   0.1930
+ 12. behy av. alters dist. 2                                    3.806    4.376   0.1335
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 16.44 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 09:52:40
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_high 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -1.0570  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -1.0570  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 301.756   13.120   0.3726
+  2. Number of ties                                           182.567   17.728   0.4613
+  3. Number of reciprocated ties                               67.418   12.029   0.2907
+  4. Numb. edgew. shrd prtns.by two path (69)                  95.215   21.200   0.5602
+  5. Number of out-isolates                                    56.715    4.502   0.1358
+  6. Same values on gender_covar                              134.601   14.064   0.3623
+  7. Sum_ties abs.diff behy                                   124.957   18.935   0.5603
+  8. Amount of behavioral change                               41.079    5.850   0.1585
+  9. behy centered sum                                         -2.789    7.066   0.1269
+ 10. behy sum of cent. squares                                129.204   13.564   0.2954
+ 11. behy average alters                                        2.973    6.769   0.2012
+ 12. behy av. alters dist. 2                                    4.614    4.251   0.1301
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 15.11 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:04:26
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.155   13.360   0.3871
+  2. Number of ties                                           276.716   19.474   0.4391
+  3. Number of reciprocated ties                              116.451   13.170   0.2771
+  4. Numb. edgew. shrd prtns.by two path (69)                 195.677   26.610   0.6276
+  5. Number of out-isolates                                    45.441    4.056   0.1209
+  6. Same values on gender_covar                              203.983   15.463   0.3364
+  7. Sum_ties abs.diff behy                                   239.841   22.655   0.6154
+  8. Amount of behavioral change                               41.270    5.820   0.1568
+  9. behy centered sum                                         -2.982    7.267   0.1294
+ 10. behy sum of cent. squares                                129.654   13.303   0.2908
+ 11. behy average alters                                        1.699    6.717   0.1983
+ 12. behy av. alters dist. 2                                    4.406    4.227   0.1279
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 19.69 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:04:46
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_no 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                            0.0000  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                    0.0000  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 326.629   17.989   0.5086
+  2. Number of ties                                           482.759   23.426   0.4032
+  3. Number of reciprocated ties                              198.305   15.635   0.2922
+  4. Numb. edgew. shrd prtns.by two path (69)                 407.195   34.190   0.6873
+  5. Number of out-isolates                                    30.369    2.899   0.0832
+  6. Same values on gender_covar                              351.201   18.923   0.3005
+  7. Sum_ties abs.diff behy                                   515.194   29.302   0.6435
+  8. Amount of behavioral change                               41.748    6.032   0.1618
+  9. behy centered sum                                         -2.803    7.406   0.1302
+ 10. behy sum of cent. squares                                133.776   14.422   0.3056
+ 11. behy average alters                                       -0.654    6.655   0.1930
+ 12. behy av. alters dist. 2                                    3.806    4.376   0.1335
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 17.1 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:05:03
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_high 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -1.0570  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -1.0570  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 301.756   13.120   0.3726
+  2. Number of ties                                           182.567   17.728   0.4613
+  3. Number of reciprocated ties                               67.418   12.029   0.2907
+  4. Numb. edgew. shrd prtns.by two path (69)                  95.215   21.200   0.5602
+  5. Number of out-isolates                                    56.715    4.502   0.1358
+  6. Same values on gender_covar                              134.601   14.064   0.3623
+  7. Sum_ties abs.diff behy                                   124.957   18.935   0.5603
+  8. Amount of behavioral change                               41.079    5.850   0.1585
+  9. behy centered sum                                         -2.789    7.066   0.1269
+ 10. behy sum of cent. squares                                129.204   13.564   0.2954
+ 11. behy average alters                                        2.973    6.769   0.2012
+ 12. behy av. alters dist. 2                                    4.614    4.251   0.1301
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 17.32 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:28:36
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.155   13.360   0.3871
+  2. Number of ties                                           276.716   19.474   0.4391
+  3. Number of reciprocated ties                              116.451   13.170   0.2771
+  4. Numb. edgew. shrd prtns.by two path (69)                 195.677   26.610   0.6276
+  5. Number of out-isolates                                    45.441    4.056   0.1209
+  6. Same values on gender_covar                              203.983   15.463   0.3364
+  7. Sum_ties abs.diff behy                                   239.841   22.655   0.6154
+  8. Amount of behavioral change                               41.270    5.820   0.1568
+  9. behy centered sum                                         -2.982    7.267   0.1294
+ 10. behy sum of cent. squares                                129.654   13.303   0.2908
+ 11. behy average alters                                        1.699    6.717   0.1983
+ 12. behy av. alters dist. 2                                    4.406    4.227   0.1279
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 18.64 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:28:55
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_no 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                              0.0000  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                      0.0000  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 282.314   13.431   0.3911
+  2. Number of ties                                           276.441   19.666   0.4350
+  3. Number of reciprocated ties                              116.889   13.229   0.2827
+  4. Numb. edgew. shrd prtns.by two path (69)                 196.477   26.844   0.6200
+  5. Number of out-isolates                                    45.507    4.053   0.1207
+  6. Same values on gender_covar                              203.827   15.540   0.3295
+  7. Sum_ties abs.diff behy                                   239.670   22.618   0.6058
+  8. Amount of behavioral change                               41.768    5.966   0.1589
+  9. behy centered sum                                         -6.243    8.109   0.1456
+ 10. behy sum of cent. squares                                139.237   15.558   0.3338
+ 11. behy average alters                                        9.817    7.798   0.2275
+ 12. behy av. alters dist. 2                                    7.860    4.983   0.1497
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 21.4 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:29:16
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_high 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -1.1433  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -1.1433  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.719   13.746   0.3961
+  2. Number of ties                                           275.937   20.460   0.4448
+  3. Number of reciprocated ties                              115.242   13.900   0.2875
+  4. Numb. edgew. shrd prtns.by two path (69)                 194.413   28.319   0.6276
+  5. Number of out-isolates                                    45.516    3.967   0.1200
+  6. Same values on gender_covar                              202.982   16.163   0.3422
+  7. Sum_ties abs.diff behy                                   239.825   22.735   0.6006
+  8. Amount of behavioral change                               42.540    5.764   0.1557
+  9. behy centered sum                                         -0.544    6.850   0.1332
+ 10. behy sum of cent. squares                                125.201   13.316   0.3013
+ 11. behy average alters                                       -4.106    6.361   0.1919
+ 12. behy av. alters dist. 2                                    1.961    3.743   0.1130
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 18.14 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:38:39
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_obs 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          1.0632  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  1.0632  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.155   13.360   0.3871
+  2. Number of ties                                           276.716   19.474   0.4391
+  3. Number of reciprocated ties                              116.451   13.170   0.2771
+  4. Numb. edgew. shrd prtns.by two path (69)                 195.677   26.610   0.6276
+  5. Number of out-isolates                                    45.441    4.056   0.1209
+  6. Same values on gender_covar                              203.983   15.463   0.3364
+  7. Sum_ties abs.diff behy                                   239.841   22.655   0.6154
+  8. Amount of behavioral change                               41.270    5.820   0.1568
+  9. behy centered sum                                         -2.982    7.267   0.1294
+ 10. behy sum of cent. squares                                129.654   13.303   0.2908
+ 11. behy average alters                                        1.699    6.717   0.1983
+ 12. behy av. alters dist. 2                                    4.406    4.227   0.1279
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 19.72 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:38:59
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_no 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          0.0000  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  0.0000  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 283.639   13.882   0.4061
+  2. Number of ties                                           275.990   19.598   0.4277
+  3. Number of reciprocated ties                              115.651   13.100   0.2750
+  4. Numb. edgew. shrd prtns.by two path (69)                 193.652   26.751   0.6092
+  5. Number of out-isolates                                    45.522    4.001   0.1190
+  6. Same values on gender_covar                              202.967   15.762   0.3327
+  7. Sum_ties abs.diff behy                                   239.136   22.196   0.5907
+  8. Amount of behavioral change                               41.188    5.894   0.1599
+  9. behy centered sum                                          1.333    6.396   0.1184
+ 10. behy sum of cent. squares                                124.637   12.659   0.2690
+ 11. behy average alters                                       -2.913    5.972   0.1798
+ 12. behy av. alters dist. 2                                    0.736    3.636   0.1116
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 20.14 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 25/10/2026 10:39:19
+New results follow.
+-----------------------------------
+
+RSiena version 1.6.6 (20 apr 26)
+
+
+@1
+Simulations.
+============
+
+Current random number seed is 242452.
+Effects object used: myeff_high 
+Model Type:
+ Standard actor-oriented model 
+Behavioral Model Type:
+ Standard behavior actor-oriented model ('restrict')
+Estimation method: unconditional moment estimation
+.
+
+Time duration for simulations is 1.0.
+Derivatives are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Parameter values are 
+  1. rate:  basic rate parameter nety                       6.4864  (fixed) 
+  2. eval:  outdegree (density)                            -2.3588  (fixed) 
+  3. eval:  reciprocity                                     1.9156  (fixed) 
+  4. eval:  GWESP I -> K -> J (69)                          1.0505  (fixed) 
+  5. eval:  out-isolate                                     1.9009  (fixed) 
+  6. eval:  same gender_covar                               0.3288  (fixed) 
+  7. eval:  behy abs. difference                           -0.5285  (fixed) 
+  8. rate:  rate behy period 1                              0.8473  (fixed) 
+  9. eval:  behy linear shape                               0.0863  (fixed) 
+ 10. eval:  behy quadratic shape                            0.0000  (fixed) 
+ 11. eval:  behy average alter                             -0.5717  (fixed) 
+ 12. eval:  behy av. alter dist. 2                          2.1264  (fixed) 
+
+
+Values of target statistics are
+  1. Amount of network change                                           328.0000
+  2. Number of ties                                                     255.0000
+  3. Number of reciprocated ties                                        108.0000
+  4. Numb. edgew. shrd prtns.by two path (69)                           171.8363
+  5. Number of out-isolates                                              48.0000
+  6. Same values on gender_covar                                        189.0000
+  7. Sum_ties abs.diff behy                                             243.0000
+  8. Amount of behavioral change                                         73.0000
+  9. behy centered sum                                                   13.5905
+ 10. behy sum of cent. squares                                           94.5802
+ 11. behy average alters                                                  0.7884
+ 12. behy av. alters dist. 2                                              2.5283
+These were calculated from the data.
+
+ 12 parameters, 12 statistics
+
+All parameters are fixed.
+Therefore the estimation phase is skipped
+ and the program passes on immediately to phase 3
+ for checking the current parameter values and calculating standard errors.
+Estimation of derivatives by the LR method (type 1).
+
+
+
+
+@2
+Simulation Results.
+-------------------
+
+Regular end of simulation algorithm.
+Total of 1000 iteration steps.
+
+
+@3
+Parameter values
+                
+Network Dynamics
+ 1. rate:  basic rate parameter nety                               6.4864  
+ 2. eval:  outdegree (density)                                    -2.3588  
+ 3. eval:  reciprocity                                             1.9156  
+ 4. eval:  GWESP I -> K -> J (69)                                  1.0505  
+ 5. eval:  out-isolate                                             1.9009  
+ 6. eval:  same gender_covar                                       0.3288  
+ 7. eval:  behy abs. difference                                   -0.5285  
+
+Behavior Dynamics
+ 8. rate:  rate behy period 1                                      0.8473  
+ 9. eval:  behy linear shape                                       0.0863  
+10. eval:  behy quadratic shape                                    0.0000  
+11. eval:  behy average alter                                     -0.5717  
+12. eval:  behy av. alter dist. 2                                  2.1264  
+
+
+@3
+Simulated statistics
+                    
+Estimated means and standard deviations, standard errors of the mean 
+  1. Amount of network change                                 282.350   13.269   0.3873
+  2. Number of ties                                           276.220   19.492   0.4367
+  3. Number of reciprocated ties                              116.534   13.118   0.2774
+  4. Numb. edgew. shrd prtns.by two path (69)                 197.339   26.769   0.6140
+  5. Number of out-isolates                                    45.602    4.125   0.1231
+  6. Same values on gender_covar                              203.546   15.201   0.3302
+  7. Sum_ties abs.diff behy                                   241.096   22.851   0.6084
+  8. Amount of behavioral change                               43.390    6.101   0.1604
+  9. behy centered sum                                         -8.476    8.833   0.1846
+ 10. behy sum of cent. squares                                139.679   15.268   0.3683
+ 11. behy average alters                                        8.237    8.003   0.2381
+ 12. behy av. alters dist. 2                                    8.787    5.390   0.1625
+
+Standard errors of the mean are less than s.d./sqrt(n) 
+because of regression on scores (Dolby option). 
+Total computation time 19.71 seconds.

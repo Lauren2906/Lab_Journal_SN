@@ -48,17 +48,13 @@ see here: https://bookdown.org/yihui/rmarkdown-cookbook/multi-column.html
 But please note, we are not here to make a beautiful website, our intention is just to have a quick lab journal up and running --->
 ```
 
+![](images/clipboard-458685469.png)
+
 :::: columns
 ::: {.column width="50%"}
 # My Lab Journal
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
-
-<br>
-
-![](images/clipboard-912340700.png)
-
-<br>
 
 This website was made by Lauren Dirix (s1084242), as part of the course Social Networks (SOW-SCS211), and showcases both my progress (under tab "Lab journal") and my final assignment (under tab "Final assignment"). There is also a tab for all code that was used for the final assignment ("Code final assignment").
 

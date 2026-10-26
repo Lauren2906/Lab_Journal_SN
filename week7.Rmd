@@ -275,7 +275,7 @@ Behaviour dynamics:
 
   - About how nodes who differ from the mean tend to change their behaviour (in this case assumed to be quadratic) (**Question?**)
 
-  - The attractiveness of further steps u the behaviour ladder (this is the mountain I think), depends on where the actor is on the ladder
+  - The attractiveness of further steps up the behaviour ladder (this is the mountain I think), depends on where the actor is on the ladder
 
 - Eval behy indegree:
 
