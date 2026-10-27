@@ -369,7 +369,6 @@ nety <- sienaDependent(array(data= c(strong_netw_t1, strong_netw_t2), dim=c(dim(
 # Civic attitudes
 behy <- sienaDependent(behy, type = c("behavior"))
 
-
 # Create Siena covariate
 # Gender
 gender_covar <- coCovar(gender)
@@ -600,7 +599,7 @@ pander::pander(results_model4)
 
 <br>
 
-The model converged well (.151), with a maximum convergence t-ratio of -.084. Most statistics remain stable between Model 3 and Model 4, only the behavioural quadratic shape is not significant anymore (*b* = -.298, *SE* = .141). The added statistic gwespFF is significant, meaning that *i* and *j* having common friends significantly affects the probability that *i* and *j* will create a tie as well.
+The model converged well (.151), with a maximum convergence t-ratio of -.084. Most statistics remain stable between Model 3 and Model 4, only the behavioural quadratic shape is not significant anymore (*b* = -.298, *SE* = .141). The added statistic gwespFF is significant, meaning that *i* and *j* having common friends significantly affects the probability that *i* and *j* will create a tie as well.
 
 <br>
 
