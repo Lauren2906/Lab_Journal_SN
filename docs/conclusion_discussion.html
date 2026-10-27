@@ -71,6 +71,28 @@ if (window.hljs) {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -430,12 +452,144 @@ div.tocify {
 </div>
 
 
-<div id="conclusion-and-discussion" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Conclusion and
-discussion</h1>
+<div id="conclusion" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Conclusion</h1>
+<p>This paper looks into the social network effects of civic attitudes.
+The way that youth is interacting with civic life is changing <span
+class="citation">(Shearer et al. 2026)</span>, making it interesting to
+study civic attitudes. People’s civic attitudes do not change in vacuum,
+we are affected by our friends, and may choose our friends based on
+attitudinal similarity. This shows the importance of using a social
+network perspective when researching civic attitudes.</p>
+<p>I aimed to answer whether the network of students in a Michigan
+learning community are segregated with regards to civic attitudes.
+Hypothesis 1 expected students’ networks to cluster with regards to
+civic attitudes, where people with more similar attitudes are more
+likely to be connected in a netwokr than people who are dissimilar. To
+answer the question on segregation, I used Moran’s I. Using a decaying
+weight function, I found that there is segregation in the network. This
+finding, however, is not robust, as I do not find any indication of
+segregation when using a weight function of one. Therefore, this paper
+rejects Hypothesis 1, as it was expected that student’s direct ties held
+similar attitudes to themselves. No certain evidence was found for this
+effect.</p>
+<p>The difference in results between the two weight functions is
+puzzling, as both functions weigh direct ties the heaviest. Therefore,
+the big difference between the two functions is surprising. Potentially,
+nodes are more similar to their indirect ties, however, visual
+inspection of the data did not provide clear evidence for this.</p>
+<p>Secondly, I looked into whether the signs of segregation could be
+explained better by influence effects or by selection effects. The
+expectation in Hypothesis 2 was that students’ civic attitudes would be
+more strongly affected by influence effects, as civic attitudes are not
+an immediately visible characteristic, hindering the possibility of
+selecting friends based on this attitude. Using RSiena <span
+class="citation">(Ripley et al. 2026)</span>, network processes were
+modeled to determine the different effects of selection (homophily) and
+influence. A model was created which was able to most accurately
+simulate the observed values. This model showed the opposite from the
+expected effect: network segregation on civic attitudes is affected by
+selection effects, while influence effects were not found to be
+significant. Thus, students in Michigan learning communities prefer to
+make and maintain ties with others who hold similar civic attitudes, but
+if they become friends with others with different attitudes, they do not
+change their own attitudes.</p>
+<p>A possible explanation for the found selection effect is that civic
+attitudes correlate with other, more visible, personality traits, based
+on which they befriend people. For example, civic engagement has been
+found to be related to gender <span class="citation">(Miles and Naumann
+2023)</span> and social economic background <span class="citation">(Fenn
+et al. 2023)</span>. These are (potentially) more visible
+characteristics, which affect friendship preferences. Another
+explanation is that civic attitudes are more visible than assumed,
+meaning that students can deliberately pick their friends based on civic
+attitudes. This paper looks at friendship nominations, meaning that
+students potentially already know the people they are nominating as a
+friend, before the actual nomination. It is possible that students are
+weakly connected, before moving on to actual friendship ties. When they
+are weakly connected, they could gain insight in the civic attitudes of
+the others and decide whether to make a friendship tie based on
+that.</p>
+<p><br></p>
+</div>
+<div id="discussion" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Discussion</h1>
+<p>This paper has a few limitations. Firstly, I was not successful in
+creating a model with an adequate model fit. The final model, which was
+used to calculate the micro-macro link and to test the hypotheses, was
+unable to accurately model the outdegree distribution and the triad
+census. While this model did show improvements compared to earlier
+variants, it is likely that the model does not accurately reflect
+reality. The effects may have been under- or overestimated, meaning that
+caution is necessary in interpreting the results.</p>
+<p>Secondly, the micro-macro link for civic attitudes remains unclear.
+While my analyses found that people prefer to befriend others who hold
+similar civic attitudes, this did not seem to have an effect on a macro
+scale. I did not find that this selection effect, affects the indegree
+distribution on the macro level. Therefore, it appears that there is no
+simple aggregation from micro level preferences to macro level outcomes,
+rather complex processes are happening which inhibit the micro
+preferences from leading to macro outcomes. This paper was not able to
+delve into these complex aggregation mechanisms. Future research could
+look into whether the behavioural preferences do affect different
+macro-phenomena. It would be especially interesting to see whether the
+selection effects affect the segregation in a network.</p>
+<p>Lastly, it should be noted that the distribution of civic attitudes
+in the sample is likely skewed. The sample contained only students in a
+Michigan learning community. It can be expected that students in these
+communities are relatively engaged, for example because on the website’s
+first page it mentions ‘interests [in] community service’ <span
+class="citation">(<em>Michigan Learning Communities (MLC) | u-m LSA
+Michigan Learning Communities</em>, n.d.)</span>. This is also reflected
+in the values that are scored on the civic attitudes scale, where no one
+scores below a three out of seven. This limited range in attitudes, may
+have concealed potential selection and influence effects, as no one in
+the network is decidedly negative with regards to civic attitudes.</p>
+<p><br></p>
+<p>In conclusion, this paper looked at students’ civic attitudes using a
+social network perspective. Despite some limitations, it showed the
+importance of employing a social network perspective when researching
+attitudes. Our attitudes do not just affect how we think, they affect
+who we befriend, and who is likely to befriend us.</p>
+<p><br></p>
+<hr />
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fenn2023" class="csl-entry">
+Fenn, Natalie, Manshu Yang, Shanna Pearson-Merkowitz, and Mark Robbins.
+2023. <span>“CIVIC ENGAGEMENT AND WELL-BEING AMONG NON-COLLEGE YOUNG
+ADULTS: INVESTIGATING a MEDIATION MODEL.”</span> <em>Journal of
+Community Psychology</em> 51 (7): 2667–85. <a
+href="https://doi.org/10.1002/jcop.23033">https://doi.org/10.1002/jcop.23033</a>.
+</div>
+<div id="ref-michigan" class="csl-entry">
+<em>Michigan Learning Communities (MLC) | u-m LSA Michigan Learning
+Communities</em>. n.d. <a
+href="https://lsa.umich.edu/mlc">https://lsa.umich.edu/mlc</a>.
+</div>
+<div id="ref-miles2023" class="csl-entry">
+Miles, Jeffrey A., and Stefanie E. Naumann. 2023. <span>“Gender, Civic
+Engagement, and the Importance of Integrating Spirituality.”</span>
+<em>Journal of Beliefs &amp; Values</em> 44 (2): 203–14. <a
+href="https://doi.org/10.1080/13617672.2022.2076456">https://doi.org/10.1080/13617672.2022.2076456</a>.
+</div>
+<div id="ref-ripley2026" class="csl-entry">
+Ripley, Ruth M., Tom A. B. Snijders, Zsófia Boda, and András Vörös.
+2026. <em>RSiena Manual</em>. <a
+href="https://www.stats.ox.ac.uk/~snijders/siena/RSiena_Manual.pdf">https://www.stats.ox.ac.uk/~snijders/siena/RSiena_Manual.pdf</a>.
+</div>
+<div id="ref-shearer2026" class="csl-entry">
+Shearer, Elisa, Luxuan Wang, Katerina Eva Matsa, Michael Lipka, Benjamin
+Toff, and Kirsten Eddy. 2026. <em>Younger and Older Americans Engage in
+Public Life in Different Ways</em>. <a
+href="https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/">https://www.pewresearch.org/journalism/2026/07/16/younger-and-older-americans-engage-in-public-life-in-different-ways/</a>.
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvbmNsdXNpb24gYW5kIGRpc2N1c3Npb24iDQphdXRob3I6ICJMYXVyZW4iDQpkYXRlOiAiMjAyNi0wOS0xMSINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KLS0tDQoNCiMgQ29uY2x1c2lvbiBhbmQgZGlzY3Vzc2lvbg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNvbmNsdXNpb24gYW5kIGRpc2N1c3Npb24iDQphdXRob3I6ICJMYXVyZW4iDQpkYXRlOiAiMjAyNi0wOS0xMSINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYg0KLS0tDQoNCiMgQ29uY2x1c2lvbg0KDQpUaGlzIHBhcGVyIGxvb2tzIGludG8gdGhlIHNvY2lhbCBuZXR3b3JrIGVmZmVjdHMgb2YgY2l2aWMgYXR0aXR1ZGVzLiBUaGUgd2F5IHRoYXQgeW91dGggaXMgaW50ZXJhY3Rpbmcgd2l0aCBjaXZpYyBsaWZlIGlzIGNoYW5naW5nIFtAc2hlYXJlcjIwMjZdLCBtYWtpbmcgaXQgaW50ZXJlc3RpbmcgdG8gc3R1ZHkgY2l2aWMgYXR0aXR1ZGVzLiBQZW9wbGUncyBjaXZpYyBhdHRpdHVkZXMgZG8gbm90IGNoYW5nZSBpbiB2YWN1dW0sIHdlIGFyZSBhZmZlY3RlZCBieSBvdXIgZnJpZW5kcywgYW5kIG1heSBjaG9vc2Ugb3VyIGZyaWVuZHMgYmFzZWQgb24gYXR0aXR1ZGluYWwgc2ltaWxhcml0eS4gVGhpcyBzaG93cyB0aGUgaW1wb3J0YW5jZSBvZiB1c2luZyBhIHNvY2lhbCBuZXR3b3JrIHBlcnNwZWN0aXZlIHdoZW4gcmVzZWFyY2hpbmcgY2l2aWMgYXR0aXR1ZGVzLg0KDQpJIGFpbWVkIHRvIGFuc3dlciB3aGV0aGVyIHRoZSBuZXR3b3JrIG9mIHN0dWRlbnRzIGluIGEgTWljaGlnYW4gbGVhcm5pbmcgY29tbXVuaXR5IGFyZSBzZWdyZWdhdGVkIHdpdGggcmVnYXJkcyB0byBjaXZpYyBhdHRpdHVkZXMuIEh5cG90aGVzaXMgMSBleHBlY3RlZCBzdHVkZW50cycgbmV0d29ya3MgdG8gY2x1c3RlciB3aXRoIHJlZ2FyZHMgdG8gY2l2aWMgYXR0aXR1ZGVzLCB3aGVyZSBwZW9wbGUgd2l0aCBtb3JlIHNpbWlsYXIgYXR0aXR1ZGVzIGFyZSBtb3JlIGxpa2VseSB0byBiZSBjb25uZWN0ZWQgaW4gYSBuZXR3b2tyIHRoYW4gcGVvcGxlIHdobyBhcmUgZGlzc2ltaWxhci4gVG8gYW5zd2VyIHRoZSBxdWVzdGlvbiBvbiBzZWdyZWdhdGlvbiwgSSB1c2VkIE1vcmFuJ3MgSS4gVXNpbmcgYSBkZWNheWluZyB3ZWlnaHQgZnVuY3Rpb24sIEkgZm91bmQgdGhhdCB0aGVyZSBpcyBzZWdyZWdhdGlvbiBpbiB0aGUgbmV0d29yay4gVGhpcyBmaW5kaW5nLCBob3dldmVyLCBpcyBub3Qgcm9idXN0LCBhcyBJIGRvIG5vdCBmaW5kIGFueSBpbmRpY2F0aW9uIG9mIHNlZ3JlZ2F0aW9uIHdoZW4gdXNpbmcgYSB3ZWlnaHQgZnVuY3Rpb24gb2Ygb25lLiBUaGVyZWZvcmUsIHRoaXMgcGFwZXIgcmVqZWN0cyBIeXBvdGhlc2lzIDEsIGFzIGl0IHdhcyBleHBlY3RlZCB0aGF0IHN0dWRlbnQncyBkaXJlY3QgdGllcyBoZWxkIHNpbWlsYXIgYXR0aXR1ZGVzIHRvIHRoZW1zZWx2ZXMuIE5vIGNlcnRhaW4gZXZpZGVuY2Ugd2FzIGZvdW5kIGZvciB0aGlzIGVmZmVjdC4NCg0KVGhlIGRpZmZlcmVuY2UgaW4gcmVzdWx0cyBiZXR3ZWVuIHRoZSB0d28gd2VpZ2h0IGZ1bmN0aW9ucyBpcyBwdXp6bGluZywgYXMgYm90aCBmdW5jdGlvbnMgd2VpZ2ggZGlyZWN0IHRpZXMgdGhlIGhlYXZpZXN0LiBUaGVyZWZvcmUsIHRoZSBiaWcgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSB0d28gZnVuY3Rpb25zIGlzIHN1cnByaXNpbmcuIFBvdGVudGlhbGx5LCBub2RlcyBhcmUgbW9yZSBzaW1pbGFyIHRvIHRoZWlyIGluZGlyZWN0IHRpZXMsIGhvd2V2ZXIsIHZpc3VhbCBpbnNwZWN0aW9uIG9mIHRoZSBkYXRhIGRpZCBub3QgcHJvdmlkZSBjbGVhciBldmlkZW5jZSBmb3IgdGhpcy4NCg0KU2Vjb25kbHksIEkgbG9va2VkIGludG8gd2hldGhlciB0aGUgc2lnbnMgb2Ygc2VncmVnYXRpb24gY291bGQgYmUgZXhwbGFpbmVkIGJldHRlciBieSBpbmZsdWVuY2UgZWZmZWN0cyBvciBieSBzZWxlY3Rpb24gZWZmZWN0cy4gVGhlIGV4cGVjdGF0aW9uIGluIEh5cG90aGVzaXMgMiB3YXMgdGhhdCBzdHVkZW50cycgY2l2aWMgYXR0aXR1ZGVzIHdvdWxkIGJlIG1vcmUgc3Ryb25nbHkgYWZmZWN0ZWQgYnkgaW5mbHVlbmNlIGVmZmVjdHMsIGFzIGNpdmljIGF0dGl0dWRlcyBhcmUgbm90IGFuIGltbWVkaWF0ZWx5IHZpc2libGUgY2hhcmFjdGVyaXN0aWMsIGhpbmRlcmluZyB0aGUgcG9zc2liaWxpdHkgb2Ygc2VsZWN0aW5nIGZyaWVuZHMgYmFzZWQgb24gdGhpcyBhdHRpdHVkZS4gVXNpbmcgUlNpZW5hIFtAcmlwbGV5MjAyNl0sIG5ldHdvcmsgcHJvY2Vzc2VzIHdlcmUgbW9kZWxlZCB0byBkZXRlcm1pbmUgdGhlIGRpZmZlcmVudCBlZmZlY3RzIG9mIHNlbGVjdGlvbiAoaG9tb3BoaWx5KSBhbmQgaW5mbHVlbmNlLiBBIG1vZGVsIHdhcyBjcmVhdGVkIHdoaWNoIHdhcyBhYmxlIHRvIG1vc3QgYWNjdXJhdGVseSBzaW11bGF0ZSB0aGUgb2JzZXJ2ZWQgdmFsdWVzLiBUaGlzIG1vZGVsIHNob3dlZCB0aGUgb3Bwb3NpdGUgZnJvbSB0aGUgZXhwZWN0ZWQgZWZmZWN0OiBuZXR3b3JrIHNlZ3JlZ2F0aW9uIG9uIGNpdmljIGF0dGl0dWRlcyBpcyBhZmZlY3RlZCBieSBzZWxlY3Rpb24gZWZmZWN0cywgd2hpbGUgaW5mbHVlbmNlIGVmZmVjdHMgd2VyZSBub3QgZm91bmQgdG8gYmUgc2lnbmlmaWNhbnQuIFRodXMsIHN0dWRlbnRzIGluIE1pY2hpZ2FuIGxlYXJuaW5nIGNvbW11bml0aWVzIHByZWZlciB0byBtYWtlIGFuZCBtYWludGFpbiB0aWVzIHdpdGggb3RoZXJzIHdobyBob2xkIHNpbWlsYXIgY2l2aWMgYXR0aXR1ZGVzLCBidXQgaWYgdGhleSBiZWNvbWUgZnJpZW5kcyB3aXRoIG90aGVycyB3aXRoIGRpZmZlcmVudCBhdHRpdHVkZXMsIHRoZXkgZG8gbm90IGNoYW5nZSB0aGVpciBvd24gYXR0aXR1ZGVzLg0KDQpBIHBvc3NpYmxlIGV4cGxhbmF0aW9uIGZvciB0aGUgZm91bmQgc2VsZWN0aW9uIGVmZmVjdCBpcyB0aGF0IGNpdmljIGF0dGl0dWRlcyBjb3JyZWxhdGUgd2l0aCBvdGhlciwgbW9yZSB2aXNpYmxlLCBwZXJzb25hbGl0eSB0cmFpdHMsIGJhc2VkIG9uIHdoaWNoIHRoZXkgYmVmcmllbmQgcGVvcGxlLiBGb3IgZXhhbXBsZSwgY2l2aWMgZW5nYWdlbWVudCBoYXMgYmVlbiBmb3VuZCB0byBiZSByZWxhdGVkIHRvIGdlbmRlciBbQG1pbGVzMjAyM10gYW5kIHNvY2lhbCBlY29ub21pYyBiYWNrZ3JvdW5kIFtAZmVubjIwMjNdLiBUaGVzZSBhcmUgKHBvdGVudGlhbGx5KSBtb3JlIHZpc2libGUgY2hhcmFjdGVyaXN0aWNzLCB3aGljaCBhZmZlY3QgZnJpZW5kc2hpcCBwcmVmZXJlbmNlcy4gQW5vdGhlciBleHBsYW5hdGlvbiBpcyB0aGF0IGNpdmljIGF0dGl0dWRlcyBhcmUgbW9yZSB2aXNpYmxlIHRoYW4gYXNzdW1lZCwgbWVhbmluZyB0aGF0IHN0dWRlbnRzIGNhbiBkZWxpYmVyYXRlbHkgcGljayB0aGVpciBmcmllbmRzIGJhc2VkIG9uIGNpdmljIGF0dGl0dWRlcy4gVGhpcyBwYXBlciBsb29rcyBhdCBmcmllbmRzaGlwIG5vbWluYXRpb25zLCBtZWFuaW5nIHRoYXQgc3R1ZGVudHMgcG90ZW50aWFsbHkgYWxyZWFkeSBrbm93IHRoZSBwZW9wbGUgdGhleSBhcmUgbm9taW5hdGluZyBhcyBhIGZyaWVuZCwgYmVmb3JlIHRoZSBhY3R1YWwgbm9taW5hdGlvbi4gSXQgaXMgcG9zc2libGUgdGhhdCBzdHVkZW50cyBhcmUgd2Vha2x5IGNvbm5lY3RlZCwgYmVmb3JlIG1vdmluZyBvbiB0byBhY3R1YWwgZnJpZW5kc2hpcCB0aWVzLiBXaGVuIHRoZXkgYXJlIHdlYWtseSBjb25uZWN0ZWQsIHRoZXkgY291bGQgZ2FpbiBpbnNpZ2h0IGluIHRoZSBjaXZpYyBhdHRpdHVkZXMgb2YgdGhlIG90aGVycyBhbmQgZGVjaWRlIHdoZXRoZXIgdG8gbWFrZSBhIGZyaWVuZHNoaXAgdGllIGJhc2VkIG9uIHRoYXQuDQoNCjxicj4NCg0KIyBEaXNjdXNzaW9uDQoNClRoaXMgcGFwZXIgaGFzIGEgZmV3IGxpbWl0YXRpb25zLiBGaXJzdGx5LCBJIHdhcyBub3Qgc3VjY2Vzc2Z1bCBpbiBjcmVhdGluZyBhIG1vZGVsIHdpdGggYW4gYWRlcXVhdGUgbW9kZWwgZml0LiBUaGUgZmluYWwgbW9kZWwsIHdoaWNoIHdhcyB1c2VkIHRvIGNhbGN1bGF0ZSB0aGUgbWljcm8tbWFjcm8gbGluayBhbmQgdG8gdGVzdCB0aGUgaHlwb3RoZXNlcywgd2FzIHVuYWJsZSB0byBhY2N1cmF0ZWx5IG1vZGVsIHRoZSBvdXRkZWdyZWUgZGlzdHJpYnV0aW9uIGFuZCB0aGUgdHJpYWQgY2Vuc3VzLiBXaGlsZSB0aGlzIG1vZGVsIGRpZCBzaG93IGltcHJvdmVtZW50cyBjb21wYXJlZCB0byBlYXJsaWVyIHZhcmlhbnRzLCBpdCBpcyBsaWtlbHkgdGhhdCB0aGUgbW9kZWwgZG9lcyBub3QgYWNjdXJhdGVseSByZWZsZWN0IHJlYWxpdHkuIFRoZSBlZmZlY3RzIG1heSBoYXZlIGJlZW4gdW5kZXItIG9yIG92ZXJlc3RpbWF0ZWQsIG1lYW5pbmcgdGhhdCBjYXV0aW9uIGlzIG5lY2Vzc2FyeSBpbiBpbnRlcnByZXRpbmcgdGhlIHJlc3VsdHMuDQoNClNlY29uZGx5LCB0aGUgbWljcm8tbWFjcm8gbGluayBmb3IgY2l2aWMgYXR0aXR1ZGVzIHJlbWFpbnMgdW5jbGVhci4gV2hpbGUgbXkgYW5hbHlzZXMgZm91bmQgdGhhdCBwZW9wbGUgcHJlZmVyIHRvIGJlZnJpZW5kIG90aGVycyB3aG8gaG9sZCBzaW1pbGFyIGNpdmljIGF0dGl0dWRlcywgdGhpcyBkaWQgbm90IHNlZW0gdG8gaGF2ZSBhbiBlZmZlY3Qgb24gYSBtYWNybyBzY2FsZS4gSSBkaWQgbm90IGZpbmQgdGhhdCB0aGlzIHNlbGVjdGlvbiBlZmZlY3QsIGFmZmVjdHMgdGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBvbiB0aGUgbWFjcm8gbGV2ZWwuIFRoZXJlZm9yZSwgaXQgYXBwZWFycyB0aGF0IHRoZXJlIGlzIG5vIHNpbXBsZSBhZ2dyZWdhdGlvbiBmcm9tIG1pY3JvIGxldmVsIHByZWZlcmVuY2VzIHRvIG1hY3JvIGxldmVsIG91dGNvbWVzLCByYXRoZXIgY29tcGxleCBwcm9jZXNzZXMgYXJlIGhhcHBlbmluZyB3aGljaCBpbmhpYml0IHRoZSBtaWNybyBwcmVmZXJlbmNlcyBmcm9tIGxlYWRpbmcgdG8gbWFjcm8gb3V0Y29tZXMuIFRoaXMgcGFwZXIgd2FzIG5vdCBhYmxlIHRvIGRlbHZlIGludG8gdGhlc2UgY29tcGxleCBhZ2dyZWdhdGlvbiBtZWNoYW5pc21zLiBGdXR1cmUgcmVzZWFyY2ggY291bGQgbG9vayBpbnRvIHdoZXRoZXIgdGhlIGJlaGF2aW91cmFsIHByZWZlcmVuY2VzIGRvIGFmZmVjdCBkaWZmZXJlbnQgbWFjcm8tcGhlbm9tZW5hLiBJdCB3b3VsZCBiZSBlc3BlY2lhbGx5IGludGVyZXN0aW5nIHRvIHNlZSB3aGV0aGVyIHRoZSBzZWxlY3Rpb24gZWZmZWN0cyBhZmZlY3QgdGhlIHNlZ3JlZ2F0aW9uIGluIGEgbmV0d29yay4NCg0KTGFzdGx5LCBpdCBzaG91bGQgYmUgbm90ZWQgdGhhdCB0aGUgZGlzdHJpYnV0aW9uIG9mIGNpdmljIGF0dGl0dWRlcyBpbiB0aGUgc2FtcGxlIGlzIGxpa2VseSBza2V3ZWQuIFRoZSBzYW1wbGUgY29udGFpbmVkIG9ubHkgc3R1ZGVudHMgaW4gYSBNaWNoaWdhbiBsZWFybmluZyBjb21tdW5pdHkuIEl0IGNhbiBiZSBleHBlY3RlZCB0aGF0IHN0dWRlbnRzIGluIHRoZXNlIGNvbW11bml0aWVzIGFyZSByZWxhdGl2ZWx5IGVuZ2FnZWQsIGZvciBleGFtcGxlIGJlY2F1c2Ugb24gdGhlIHdlYnNpdGUncyBmaXJzdCBwYWdlIGl0IG1lbnRpb25zICdpbnRlcmVzdHMgW2luXSBjb21tdW5pdHkgc2VydmljZScgW0BtaWNoaWdhbl0uIFRoaXMgaXMgYWxzbyByZWZsZWN0ZWQgaW4gdGhlIHZhbHVlcyB0aGF0IGFyZSBzY29yZWQgb24gdGhlIGNpdmljIGF0dGl0dWRlcyBzY2FsZSwgd2hlcmUgbm8gb25lIHNjb3JlcyBiZWxvdyBhIHRocmVlIG91dCBvZiBzZXZlbi4gVGhpcyBsaW1pdGVkIHJhbmdlIGluIGF0dGl0dWRlcywgbWF5IGhhdmUgY29uY2VhbGVkIHBvdGVudGlhbCBzZWxlY3Rpb24gYW5kIGluZmx1ZW5jZSBlZmZlY3RzLCBhcyBubyBvbmUgaW4gdGhlIG5ldHdvcmsgaXMgZGVjaWRlZGx5IG5lZ2F0aXZlIHdpdGggcmVnYXJkcyB0byBjaXZpYyBhdHRpdHVkZXMuDQoNCjxicj4NCg0KSW4gY29uY2x1c2lvbiwgdGhpcyBwYXBlciBsb29rZWQgYXQgc3R1ZGVudHMnIGNpdmljIGF0dGl0dWRlcyB1c2luZyBhIHNvY2lhbCBuZXR3b3JrIHBlcnNwZWN0aXZlLiBEZXNwaXRlIHNvbWUgbGltaXRhdGlvbnMsIGl0IHNob3dlZCB0aGUgaW1wb3J0YW5jZSBvZiBlbXBsb3lpbmcgYSBzb2NpYWwgbmV0d29yayBwZXJzcGVjdGl2ZSB3aGVuIHJlc2VhcmNoaW5nIGF0dGl0dWRlcy4gT3VyIGF0dGl0dWRlcyBkbyBub3QganVzdCBhZmZlY3QgaG93IHdlIHRoaW5rLCB0aGV5IGFmZmVjdCB3aG8gd2UgYmVmcmllbmQsIGFuZCB3aG8gaXMgbGlrZWx5IHRvIGJlZnJpZW5kIHVzLg0KDQo8YnI+DQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQojIFJlZmVyZW5jZXMNCg==</div>
 
 
 </div>

@@ -3,6 +3,37 @@ title: "Conclusion and discussion"
 author: "Lauren"
 date: "2026-09-11"
 output: html_document
+bibliography: references.bib
 ---
 
-# Conclusion and discussion
+# Conclusion
+
+This paper looks into the social network effects of civic attitudes. The way that youth is interacting with civic life is changing [@shearer2026], making it interesting to study civic attitudes. People's civic attitudes do not change in vacuum, we are affected by our friends, and may choose our friends based on attitudinal similarity. This shows the importance of using a social network perspective when researching civic attitudes.
+
+I aimed to answer whether the network of students in a Michigan learning community are segregated with regards to civic attitudes. Hypothesis 1 expected students' networks to cluster with regards to civic attitudes, where people with more similar attitudes are more likely to be connected in a netwokr than people who are dissimilar. To answer the question on segregation, I used Moran's I. Using a decaying weight function, I found that there is segregation in the network. This finding, however, is not robust, as I do not find any indication of segregation when using a weight function of one. Therefore, this paper rejects Hypothesis 1, as it was expected that student's direct ties held similar attitudes to themselves. No certain evidence was found for this effect.
+
+The difference in results between the two weight functions is puzzling, as both functions weigh direct ties the heaviest. Therefore, the big difference between the two functions is surprising. Potentially, nodes are more similar to their indirect ties, however, visual inspection of the data did not provide clear evidence for this.
+
+Secondly, I looked into whether the signs of segregation could be explained better by influence effects or by selection effects. The expectation in Hypothesis 2 was that students' civic attitudes would be more strongly affected by influence effects, as civic attitudes are not an immediately visible characteristic, hindering the possibility of selecting friends based on this attitude. Using RSiena [@ripley2026], network processes were modeled to determine the different effects of selection (homophily) and influence. A model was created which was able to most accurately simulate the observed values. This model showed the opposite from the expected effect: network segregation on civic attitudes is affected by selection effects, while influence effects were not found to be significant. Thus, students in Michigan learning communities prefer to make and maintain ties with others who hold similar civic attitudes, but if they become friends with others with different attitudes, they do not change their own attitudes.
+
+A possible explanation for the found selection effect is that civic attitudes correlate with other, more visible, personality traits, based on which they befriend people. For example, civic engagement has been found to be related to gender [@miles2023] and social economic background [@fenn2023]. These are (potentially) more visible characteristics, which affect friendship preferences. Another explanation is that civic attitudes are more visible than assumed, meaning that students can deliberately pick their friends based on civic attitudes. This paper looks at friendship nominations, meaning that students potentially already know the people they are nominating as a friend, before the actual nomination. It is possible that students are weakly connected, before moving on to actual friendship ties. When they are weakly connected, they could gain insight in the civic attitudes of the others and decide whether to make a friendship tie based on that.
+
+<br>
+
+# Discussion
+
+This paper has a few limitations. Firstly, I was not successful in creating a model with an adequate model fit. The final model, which was used to calculate the micro-macro link and to test the hypotheses, was unable to accurately model the outdegree distribution and the triad census. While this model did show improvements compared to earlier variants, it is likely that the model does not accurately reflect reality. The effects may have been under- or overestimated, meaning that caution is necessary in interpreting the results.
+
+Secondly, the micro-macro link for civic attitudes remains unclear. While my analyses found that people prefer to befriend others who hold similar civic attitudes, this did not seem to have an effect on a macro scale. I did not find that this selection effect, affects the indegree distribution on the macro level. Therefore, it appears that there is no simple aggregation from micro level preferences to macro level outcomes, rather complex processes are happening which inhibit the micro preferences from leading to macro outcomes. This paper was not able to delve into these complex aggregation mechanisms. Future research could look into whether the behavioural preferences do affect different macro-phenomena. It would be especially interesting to see whether the selection effects affect the segregation in a network.
+
+Lastly, it should be noted that the distribution of civic attitudes in the sample is likely skewed. The sample contained only students in a Michigan learning community. It can be expected that students in these communities are relatively engaged, for example because on the website's first page it mentions 'interests [in] community service' [@michigan]. This is also reflected in the values that are scored on the civic attitudes scale, where no one scores below a three out of seven. This limited range in attitudes, may have concealed potential selection and influence effects, as no one in the network is decidedly negative with regards to civic attitudes.
+
+<br>
+
+In conclusion, this paper looked at students' civic attitudes using a social network perspective. Despite some limitations, it showed the importance of employing a social network perspective when researching attitudes. Our attitudes do not just affect how we think, they affect who we befriend, and who is likely to befriend us.
+
+<br>
+
+------------------------------------------------------------------------
+
+# References
