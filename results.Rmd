@@ -45,7 +45,7 @@ options(scipen = 5)
 
 For the data visualisation, the variables were constructed as described in the 'data' chapter. However, additionally, the variable for civic attitudes was dichotomised, to create a clear distinction between people who hold neutral and people who hold positive attitudes. This allowed me to more easily spot potential clustering in the network. The cut-off point for neutral vs. positive attitudes was based on the mean score on the civic attitudes scale. For both waves, the average value was around 5, thus 5 was chosen as a cut-off point.
 
-```{r}
+```{r, include = FALSE}
 hanging_df_t1 <- as.data.frame(hanging[[1]][1])
 strong_netw_t1 <- data.matrix(hanging_df_t1)
 strong_netw_t1[strong_netw_t1==9]<-NA
@@ -73,7 +73,9 @@ IC_df2$ce_t2_cat <- cut(IC_df2$ce_t2,
                         labels= c('neutral', 'positive'))
 ```
 
-For the data visualisation, the R-package igraph was used, in combination with the base-function 'plot'. As the data contained information on directed relationships, these were modeled as such. For both graphs, the position of the nodes were kept stable, to show the changes in ties. To accomplish this, the Davidson-Harel layout algorithm was used. This algorithm puts closely connected nodes close to each other, while pushing the lesser connected nodes to the outside [@stulp]. Importantly, this algorithm does keep isolated nodes within the network, rather than creating a ring outside of it. As I used the same layout for both Wave 1 and Wave 2, this ensured that there are no unreasonably long ties, when isolates in Wave 1 get ties in Wave 2. This algorithm also minimises the amount of overlap between the nodes. Furthermore, the graphs represent nodes with neutral attitudes as 'pink' and people with positive attitudes as 'purple.' Lastly, the size of the nodes is dependent on density. This was done to examine whether people with more positive attitudes may have more ties than others.
+<br>
+
+For the data visualisation, the R-package igraph was used, in combination with the base-function 'plot'. As the data contained information on directed relationships, these were modeled as such. For both graphs, the position of the nodes were kept stable, to show the changes in ties. To accomplish this, the Davidson-Harel layout algorithm was used. This algorithm puts closely connected nodes close to each other, while pushing the lesser connected nodes to the outside [@stulp]. Importantly, this algorithm does keep isolated nodes within the network, rather than creating a ring outside of it. As I used the same layout for both Wave 1 and Wave 2, this ensured that there are no unreasonably long ties, when isolates in Wave 1 get ties in Wave 2. This algorithm also minimises the amount of overlap between the nodes. The graphs represent nodes with neutral attitudes as 'pink' and people with positive attitudes as 'purple.' Lastly, the size of the nodes is dependent on density. This was done to examine whether people with more positive attitudes may have more ties than others.
 
 ```{r}
 copy_strong_netw_t1 <- strong_netw_t1
@@ -92,7 +94,9 @@ layout <- igraph:: layout_with_dh(graph_CE_t1)
 layout <- readRDS("layout.rds")
 ```
 
-Figure 4 shows the visualisation of the network in Wave 1. Visually, the network does not seem very segregated with regards to civic attitudes, as the pink and purple nodes are mixed throughout the network. There are no clear clusters of only (or mostly) pink nodes or only (or mostly) purple nodes. This is an indication that people do not tend to interact with others with similar civic attitudes. This graph also showcases the betweenness of the different nodes. Most nodes with a relatively high betweenness (bigger node size) have neutral civic attitudes, with one exception, where the node with the highest betweenness has positive civic attitudes.
+<br>
+
+Figure 4 shows the visualisation of the network in Wave 1. Visually, the network does not seem very segregated with regards to civic attitudes, as the pink and purple nodes are mixed throughout the network. There are no clear clusters of only (or mostly) pink nodes or only (or mostly) purple nodes. This is an indication that people do not tend to interact more with others with similar civic attitudes than with others with dissimilar attitudes. This graph also showcases the betweenness of the different nodes. Most nodes with a relatively high betweenness (bigger node size) have neutral civic attitudes, with one exception, where the node with the highest betweenness has positive civic attitudes.
 
 <br>
 
@@ -123,6 +127,8 @@ copy_strong_netw_t2[is.na(copy_strong_netw_t2)] <- 0
 g_strong_t2 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t2, mode = "directed")
 graph_CE_t2 <- simplify(g_strong_t2)
 ```
+
+<br>
 
 Figure 5 shows the same network, but a few months later in Wave 2. Seemingly, the density has decreased between Wave 1 and Wave 2, as the amount of ties has visually decreased, and the amount of nodes with a high degree of betweenness has also decreased, because there are fewer big nodes. With regards to the degree of segregation of civic attitudes, Wave 2 may give the indication of a slightly higher degree of segregation, with small 'clusters' of purple appearing in the middle left and bottom right. However, this is not immediately apparent, and the network seems to be mostly very mixed with regards to civic attitudes. Especially the cluster on the bottom right is dubious, as the nodes' attitudes have remained the same between Waves 1 and 2, the only thing that has changed is that nodes who were neutral in Wave 1, did not have a valid score in Wave 2. This can therefore not be seen as proof of segregation.
 
@@ -158,6 +164,8 @@ Comparing the two graphs does not immediately indicate a clear conclusion with r
 
 In both Wave 1 and Wave 2 121 students were included in the network. In Wave 1 there were a total of 395 directed ties, and in Wave 2 this was 270. Thus, the amount of ties decreased between the two waves, making the network sparser.
 
+<br>
+
 ```{r}
 # Wave 1
 g_strong_t1 <- igraph:: graph_from_adjacency_matrix(copy_strong_netw_t1, mode = "directed")
@@ -175,7 +183,11 @@ ecount(g_strong_t2)
 
 #### Density
 
-As shown above, the networks in both Wave 1 and Wave 2 seem relatively sparse. This is also reflected when calculating their density. To calculate the density of a network, the function "as.network" from the network package was used. This function automatically replaces all missing values with 0, meaning that everyone who did not answer the question about who they hang out with, is seen as having no out-going ties. Concretely, the density of the network shows how many of the possible network ties are actually realised in a network [@SNASS]. Thus, a density of 1, means that 100% of all possible ties are actually made, where a density of 0 means that 0% of all possible ties are observered. For the networks in the Michigan learning community the density was .027 and .019, in Wave 1 and Wave 2 respectively. Thus, only 2.7% of all possible ties were actually present in Wave 1, which decreased even further in Wave 2, to only 1.9%. This is a very low density for network, especially when comparing it to friendship networks in classrooms, which are usually between .2 and .4 [@SNASS]. Of course, a Michigan learning community is not the same as classroom, as an average classroom is smaller than the learning community, and the students in Michigan do not take all their classes together. However, even comparing the Michigan learning community to a small world network shows that the learning community has a very low density.
+As shown above, the networks in both Wave 1 and Wave 2 seem relatively sparse. This is also reflected when calculating their density. To calculate the density of a network, the function "as.network" from the network package was used. This function automatically replaces all missing values with 0, meaning that everyone who did not answer the question about who they hang out with, is seen as having no out-going ties.
+
+The density of a network shows how many of the possible network ties are actually realised in a network [@SNASS]. Thus, a density of 1, means that 100% of all possible ties are actually made, whereas a density of 0 means that 0% of all possible ties are observed. For the networks in the Michigan learning community the density was .027 and .019, in Wave 1 and Wave 2 respectively. Thus, only 2.7% of all possible ties were actually present in Wave 1, which decreased even further in Wave 2, to only 1.9%. This is a very low density for network, especially when comparing it to friendship networks in classrooms, which are usually between .2 and .4 [@SNASS]. Of course, a learning community is not the same as classroom, as an average classroom is smaller than the learning community, and the students in Michigan do not take all their classes together. However, even comparing the Michigan learning community to a small world network shows that the learning community has a very low density.
+
+<br>
 
 ```{r}
 # Wave 1
@@ -197,6 +209,8 @@ To calculate the in- and outdegree of the nodes in the network, the package igra
 
 For Wave 2, as expected based on the density, the mean in- and outdegree decreased to 2.231, with a median of 2 for both as well. The most popular node got nominated 10 times, and the node with the most outdegrees nominated 9 others. Thus, comparing Wave 1 and 2, both the indegrees and the outdegrees have decreased, indicating a sparser network.
 
+<br>
+
 ```{r}
 # Wave 1
 indeg <- igraph::degree(g_strong_t1, mode = "in")
@@ -217,7 +231,9 @@ summary(outdeg)
 
 #### Reciprocity
 
-Furthermore, I calculated the reciprocity of the network. This was done by using the "reciprocity" function in the igraph package. This function calculates the probability of an out-going tie from ego being returned by alter. Similar to density, a value of 1 for reciprocity means that 100% of all out-going ties are reciprocated, and a value of 0 means that none of the out-going ties are met with in-coming ties. The reciprocity in Wave 1 for the Michigan learning community is .471 and in Wave 2 this is .444. This means that, overall, about 45% of all out-going ties are reciprocated. As this paper looks into friendship networks, by asking who people hang out with, it makes sense that a large portion of the ties are reciprocated. If ego hangs out with alter, alter also hangs out with ego. However, more than half of the ties are not reciprocated, which can mean that ego and alter have different ideas about who they hang out with, or what the threshold is for nominating someone as a friend. The reciprocity measure will be slightly skewed by replacing the missing values with 0, as all in-coming ties for those ego's are automatically not reciprocated, even if in reality they may be.
+Furthermore, I calculated the reciprocity of the network. This was done by using the "reciprocity" function in the igraph package. This function calculates the probability of an out-going tie from ego being returned by alter. Similar to density, a value of 1 for reciprocity means that 100% of all out-going ties are reciprocated, and a value of 0 means that none of the out-going ties are met with in-coming ties. The reciprocity in Wave 1 for the Michigan learning community is .471 and in Wave 2 this is .444. This means that, overall, about 45% of all out-going ties are reciprocated. As this paper looks into friendship networks, by asking who people hang out with, it makes sense that a large portion of the ties are reciprocated. If ego hangs out with alter, alter also hangs out with ego. However, more than half of the ties are not reciprocated, which can mean that ego and alter have different ideas about who they hang out with, or what they consider the threshold to be for nominating someone as a friend. The reciprocity measure will be slightly skewed by replacing the missing values with 0, as all in-coming ties for those ego's are automatically not reciprocated, even if in reality they may be.
+
+<br>
 
 ```{r}
 # Wave 1
@@ -240,6 +256,8 @@ Based on this average shortest path length, the average reach was calculated. Th
 
 Combining the decreasing average path length with the decreasing density, indicates that there are more isolates in Wave 2, as the amount of ties decreases, while the nodes that are connected can more easily reach each other. This is also reflected in the average reach, as this decreases between Wave 1 and 2. As isolates have an average reach of 0, an increase in isolates will also lead to a lower average reach.
 
+<br>
+
 ```{r}
 # Wave 1
 print(mean_dis <- mean_distance(g_strong_t1))
@@ -258,9 +276,11 @@ mean((ego_size(g_strong_t2, order = 7, mode = "out") - 1)/vcount(g_strong_t2))
 
 #### Segregation
 
-Finally, after gaining more insight in the networks, I calculated Moran's I segregation index. As was to be expected based on visual inspection, there is not much segregation in the network. I calculated Moran's I using the ape package, which automatically row standardises. This means that the calculation assumes that each node is influenced equally by its neighbourhood, regardless of how large its neighbourhood is [@SNASS]. Thus, it is tested whether nodes are similar to the average of their neighbours. As there is no clear segregation in the network, I went through a few steps to see whether there is *any* degree of segregation.
+Finally, after gaining more insight in the networks, I calculated Moran's I segregation index. I calculated Moran's I using the ape package, which automatically row standardises. This means that the calculation assumes that each node is influenced equally by its neighbourhood, regardless of the size of its neighbourhood is [@SNASS]. Thus, it is tested whether nodes are similar to the average of their neighbours. As there is no clear segregation in the network, I went through a few steps to see whether there is *any* degree of segregation.
 
 Firstly, I just looked at segregation based on direct ties. This returned the expected result: Neither in Wave 1 nor in Wave 2 is there evidence of segregation. In Wave 1, Moran's I is -0.014 (*p* = 0.942) and in Wave 2 it is -0.018 (*p* = 0.917). This means that the observed network does not differ significantly from the expected network, when there is no segregation. In fact, for both waves the observed and expected networks get very similar values, indicating that civic attitudes are spread throughout the network, rather than being clustered.
+
+<br>
 
 ```{r}
 # Wave 1
@@ -284,6 +304,8 @@ Thus, when looking at students' direct networks there is no segregation with reg
 
 Comparing the results from Moran's I based on direct ties, and based on a decaying weight function shows an interesting pattern. When solely taking direct ties into account, there does not seem to be segregation. However, when taking ties at a further distance into account, while still weighing the direct ties the most strongly, there is segregation with regards to civic attitudes. Seemingly, nodes are not necessarily more similar to their direct ties, but they are more similar to their indirect ties. This disparity in significance could also be due to differences in power, however the coefficients are substantially different, indicating that there is something going on in the data.
 
+<br>
+
 ```{r}
 # Wave 1
 geodistances <- geodist(netw1, count.paths = TRUE)
@@ -302,7 +324,7 @@ ape::Moran.I(IC_df2$ce_t2, scaled = FALSE, weight = weights2, na.rm = TRUE)
 
 <br>
 
-These results do not support Hypothesis 1, as I expected there to be segregation with regards to direct ties. However, despite the limited amount of segregation in both waves, there is some indication of either preference or influence in broader, indirect networks. The network also changed visibly between Wave 1 and Wave 2, with new ties being created, and existing ties being broken. Therefore, there is some indication that micro-processes based on civic attitudes can have taken place, without them being visible on a macro, descriptive, scale.
+These results do not support Hypothesis 1, as I expected there to be segregation with regards to direct ties. However, despite the limited amount of segregation in both waves, there is some indication of either preference or influence in broader, indirect networks. The network also changed visibly between Wave 1 and Wave 2, with new ties being created, and existing ties being broken. Therefore, there is some indication that micro-processes, potentially based on civic attitudes, have taken place, without them necessarily being visible on a macro, descriptive, scale.
 
 <br>
 
@@ -391,6 +413,8 @@ myeff <- getEffects(mydata)
 
 The following model only includes density and reciprocity, as network statistics and the behavioural evolution as a linear and quadratic shape, as these are automatically included when running an RSiena model.
 
+<br>
+
 ```{r, eval=FALSE}
 model_1 <- siena07(myAlgorithm, data = mydata, effects = myeff, returnDeps = TRUE)
 ```
@@ -417,9 +441,9 @@ pander:: pander(results_model1)
 
 <br>
 
-The results show that this model converges well, as the overall maximum convergence ratio (.103) is smaller than .25, and all the convergence t-ratio's are smaller than .1. As this is the simplest possible model, it makes sense that it converges well.
+The results show that this model converges well, as the overall maximum convergence ratio (.103) is smaller than .25, and and the maximum convergence t-ratio (.074) is smaller than .1. As this is the simplest possible model, it makes sense that it converges well.
 
-For the network dynamics the simple model shows that the network is not very dense, which matches with the findings in the descriptive section. There is a significant outdegree effect (*b* = -2.627, *SE* =.081), meaning that the chances of observing an outgoing tie are significantly lower than observing an incoming tie. Overall, nodes create relatively few ties with others. When a tie is formed, it is likely to be reciprocated, as is evident from the value for reciprocity, which is positive and significant (*b* = 2.204, *SE* = .178).
+For the network dynamics the simple model shows that the network is not very dense, which matches with the findings in the descriptive section. There is a significant outdegree effect (*b* = -2.627, *SE* =.081). As this is a negative value, this means that the chances of observing a tie are significantly lower than the chances of not observing a tie. Overall, nodes thus create relatively few ties with others. When a tie is formed, it is likely to be reciprocated, as is evident from the value for reciprocity, which is positive and significant (*b* = 2.204, *SE* = .178).
 
 As for behaviour, the simple model does not find a significant linear effect (*b* = .177, *SE* = .103). This means that nodes do not linearly converge to the mean. When ego changes their civic attitudes they do not move towards the group-mean in a linear way. Model 1 does find the quadratic shape to be significant (*b* = -.281, *SE* = .074). This means that nodes' evaluation score for going up or down on civic attitudes follows a quadratic shape.
 
@@ -427,7 +451,9 @@ As for behaviour, the simple model does not find a significant linear effect (*b
 
 ### Model 2: Selection effects
 
-For Model 2 I will add effects to test whether there are influence effects with regards to civic attitudes. Here I also added a covariate for gender, as it can be expected that gender and civic attitudes correlate. Thus, this model should show whether there are any influence effects happening, where nodes become more similar to their ties, with regards to civic attitudes.
+For Model 2 I will add effects to test whether there are influence effects with regards to civic attitudes. Here I also add a covariate for gender, as it can be expected that gender and civic attitudes correlate [e.g. @miles2023]. Thus, this model should show whether there are any influence effects happening, where nodes become more similar to their ties, with regards to civic attitudes.
+
+<br>
 
 ```{r}
 myeff_model2 <- includeEffects(myeff, sameX, interaction1 = "gender_covar")
@@ -471,7 +497,9 @@ As for the selection effects with regards to civic attitudes, none of the includ
 
 ### Model 3: Influence effects
 
-For Model 3, I added statistics that measure the influence effects. In this model I chose not to include egoX and altX effects for the selection effects, as Model 2 showed these to be insignificant. They, therefore, would not add to the fit of the model. AbsDiffx was kept in the model, as it is a relevant statistic for testing Hypothesis 2. The covariate for gender was added again.
+For Model 3, I added statistics that measure the influence effects. In this model I chose not to include egoX and altX effects for the selection effects, as Model 2 showed these to be insignificant. They, therefore, would not add to the fit of the model. AbsDiffx was kept in the model, as it is a relevant statistic for testing Hypothesis 2. The covariate for gender was kept in the model.
+
+<br>
 
 ```{r}
 myeff_model3 <- includeEffects(myeff, sameX, interaction1 = "gender_covar")
@@ -509,7 +537,7 @@ pander:: pander(results_model3)
 
 <br>
 
-The maximum convergence ratio is sufficient with .148, and the highest convergence t-ratio is .083. The direction and significance of the outdegree, reciprocity, same gender and quadratic shape remain stable. As opposed to Model 2, the absDiffx statistic is significant (*b* = -.344, *SE* = .204). Thus, when controlling for influence effects, nodes do tend to make and keep ties with people who are similar to them on civic , attitudes. Therefore, there seems to be a selection effect on civic attitudes when choosing who to befriend.
+The maximum convergence ratio is sufficient with .148, as is the highest convergence t-ratio (.083). The direction and significance of the outdegree, reciprocity, same gender and quadratic shape remain stable. As opposed to Model 2, the absDiffx statistic is significant (*b* = -.344, *SE* = .204). Thus, when controlling for influence effects, nodes do tend to make and keep ties with people who are similar to them on civic attitudes. Therefore, there seems to be a selection effect on civic attitudes when choosing who to befriend.
 
 To measure influence effects of civic attitudes four measures were added. Firstly, I looked at the indegree effect, or whether ego becomes more similar to alter when alter has sent a tie to ego. This effect is not significant (*b* = .032, *SE* = .142). Secondly, the outdegree effect is also not significant (*b* = -.020, *SE* = .108), meaning that ego also does not become more similar to alter when ego has nominated alter as a friend. Third, I looked at the average alter effect, which examines whether people become more similar in their civic attitudes to the mean of the sample. This is also not found (b= -.301, *SE* = 1.058). Lastly, an average alter effect was added for alters at a distance 2. This was done, as Moran's I indicated that there is more segregation when taking people's indirect ties into account. This, however, was also not found to be significant (*b* = .549, *SE* = 2.201). Thus, there does not seem to be an influence effect, rejecting Hypothesis 2.
 
@@ -518,6 +546,8 @@ To measure influence effects of civic attitudes four measures were added. Firstl
 #### Goodness of Fit
 
 Theoretically speaking, I have now added all the statistics that are of interest for me to answer my research question and test my hypothesis. However, it is unclear how well my model actually predicts the data. To that end, I will be performing a GoF, and if necessary adjusting my Model by adding more statistics/ deleting insignificant ones.
+
+<br>
 
 ```{r}
 gof_indeg_model3 <- RSiena::sienaGOF(model_3, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "nety")
@@ -553,7 +583,7 @@ plot(gof_triad_model3, center=TRUE, scale=TRUE)
 
 The graph for GoF indicates how well the model reflects the observed data. It tests whether the model's predication deviate significantly from the observations. For Model 3, the GoF for the indegree looks good, there is no significant difference between the Model's predictions and the observered data. This means that Model 3 can accurately predict how the indegree distribution works in the network of students in a Michigan learning community.
 
-There are significant deviations for the outdegree and the triad census. This is also visually apparent, as the red dots (the observed values) lay outside or on the edge of the boxplots. For the outdegree distribution, Model 3 struggles especially to predict how many nodes there are with zero out going ties. The triad census tests for which triad configurations the model accurately predicts how often they exist in the network. For most triad configurations Model 3 is an accurate prediction, however, for a few the model deviates a lot. This is especially evident for triads 030T and 120U, where the observed value lies way beyond the predicted values. 030C is a triad in which every node has a tie with the person on their right (or left), it is thus a circular pattern. This configuration is relatively common in the observed networks. This is an interesting pattern, as there are no reciprocated ties, despite all nodes filling out the question (they all have outgoing ties). Triad configuration 120U is a triad in which two nodes have a reciprocated tie, and these ties both have an outgoing tie to the same, other, node. This third node does not have any outgoing ties. Again, this configuration occurs more in the observations than in the predictions. This configuration could be explained by people who did not fill out the question on hanging out, as they would not have any outgoing ties.
+There are significant deviations for the outdegree and the triad census. This is also visually apparent, as the red dots (the observed values) lay outside or on the edge of the boxplots. For the outdegree distribution, Model 3 struggles especially to predict how many nodes there are with zero out going ties. The triad census tests for which triad configurations the model accurately predicts how often they exist in the network. For most triad configurations Model 3 is an accurate prediction, however, for a few the model deviates a lot. This is especially evident for triads 030T and 120U, where the observed value lies way beyond the predicted values. 030C is a triad in which every node has a tie with the person on their right (or left), it is thus a circular pattern. This configuration is relatively common in the observed networks. This is an interesting pattern, as there are no reciprocated ties, despite all nodes filling out the questionnaire (they all have outgoing ties). Triad configuration 120U is a triad in which two nodes have a reciprocated tie, and these ties both have an outgoing tie to the same, other, node. This third node does not have any outgoing ties. Again, this configuration occurs more in the observations than in the predictions. This configuration could be explained by people who did not fill out the question on hanging out, as they would not have any outgoing ties.
 
 To improve the GoF, I will first be focusing on the triad census. By adding a statistic that explicitly takes triads into account, I hope to improve the fit.
 
@@ -562,6 +592,8 @@ To improve the GoF, I will first be focusing on the triad census. By adding a st
 ### Model 4: Triads
 
 For improving the model fit with regards to the triad census, I will be adding the GWESP statistic. Specifically, I will be adding "gwespFF," as a measure for transitivity. Secondly, I will be removing the behavioural in- and outdegree, as these were not significant, and are potentially captured with the average alter measures.
+
+<br>
 
 ```{r}
 myeff_model4 <- includeEffects(myeff, sameX, interaction1 = "gender_covar")
@@ -637,15 +669,17 @@ plot(gof_triad_model4, center=TRUE, scale=TRUE)
 
 <br>
 
-The GoF for the indegree distribution remains adequate. The GoF for both the outdegree distribution and the triad census has improved by adding the "gwespFF" statistic, however, for both the model still deviates significantly from the observed values. For both it is also the case that none of the observed values fall completely outside of the predicted values anymore.
+The GoF for the indegree distribution remains adequate. The GoF for both the outdegree distribution and the triad census has improved by adding the "gwespFF" statistic, however, for both the model still deviates significantly from the observed values. For both it is now also the case that none of the observed values fall completely outside of the predicted values anymore.
 
-The next step in improving the model fit will be adding a statistic for isolates, as this is something the model still struggles to predict. As is evident from the outdegree distribution, the prediction of zero outdegrees is lower than the observed.
+The next step in improving the model fit will be adding a statistic for isolates, as this is something the model still struggles to predict. This is evident from the outdegree distribution, where the prediction of zero outdegrees is lower than the observed.
 
 <br>
 
 ### Model 5: Isolates
 
 To account for the isolates I added the "outIso" statistic. This statistic should take into account the desire for nodes to have no outgoing ties.
+
+<br>
 
 ```{r}
 myeff_model5 <- includeEffects(myeff, sameX, interaction1 = "gender_covar")
@@ -682,6 +716,8 @@ results_model5 <- data.frame(
 
 pander:: pander(results_model5)
 ```
+
+<br>
 
 The model convergence is still satisfactory (.151), and the maximum convergence t-ratio is -.089. The basic rate parameter, density, reciprocity, GWESP and same gender remain significant, however, interestingly, the measure for behavioural difference (absDiffX) becomes significant for the first time (*b* = -.529, *SE* = .201). This is a measure for selection processes on civic attitudes, the more two nodes differ in their civic attitudes, the less likely they are to make or maintain a tie. As this effect concerns outgoing ties, it appears that it was weakened by not properly handling isolates who do not have any outgoing ties regardless of their or their alters' civic attitudes. Like in every model but Model 4, quadratic shape is significant (*b* = -.297, *SE* = .145). As expected, the average alter effects remain insignificant, as these are less affected by isolates.
 
@@ -727,9 +763,15 @@ Visually the GoF seems to have improved, at least for the outgoing isolates, whe
 
 <br>
 
+I have decided to move on using Model 5, as the model fit has improved by adding some statistics. If I continue adding statistics, I would just be choosing them to improve fit, without much theoretical considerations. This could lead to overfitting the model, and it would mean fitting the model to the data. As this is undesirable, and I have created a model which sort of reflects the observed data, I have decided to continue using Model 5.
+
+<br>
+
 ## Micro-macro link
 
-In the following section I will be using RSiena as an Agent Based Model (ABM), to get insight into the micro-macro link, of whether individually changing civic attitudes will also change the composition of the network on a macro scale. Specifically I am looking at the indegree distribution on the macro scale, which I will be modelling for different weights of the absDiffX effect. As the absDiffX effect is about selection preferences of nodes, and it is a significant effect, it can be expected that it affects the amount of ties that nodes make, thus affecting the indegree distribution.
+In the following section I will be using RSiena as an Agent Based Model, to get insight into the micro-macro link, of whether individual selection preferences affect the network on a macro scale. Specifically I am looking at the indegree distribution on the macro scale, which I will be modelling for different weights of the absDiffX effect. As the absDiffX effect is about selection preferences of nodes, and it is a significant effect, it can be expected that it affects the amount of ties that nodes make, thus affecting the indegree distribution.
+
+<br>
 
 ```{r}
 myeff_obs <- myeff_model5
