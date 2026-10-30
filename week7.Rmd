@@ -533,9 +533,78 @@ plot(gofo0)
 plot(gof0.gd)
 ```
 
-# Ideas about model build:
-1. Model with nothing (just the basics, no additional effects)
-2. Model with my expected effects
-  2.1. Do GoF check --> outisolate effect is zeer matig
-3. Model with outisolate effect
-  3.1. Do GoF check --> 
+# Trying to use RSiena as ABM with Moran's I
+```{r, eval = FALSE}
+model_5 <- readRDS("model_5.rds")
+```
+
+Custum functions
+```{r, eval = FALSE}
+fsave <- function(x, file, location = "./data/processed/", ...) {
+    if (!dir.exists(location))
+        dir.create(location)
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, datename, file, sep = "")
+    print(paste("SAVED: ", totalname, sep = ""))
+    save(x, file = totalname)
+}
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+colorize <- function(x, color) {
+    sprintf("<span style='color: %s;'>%s</span>", color, x)
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 3, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "600px")
+}
+
+ts_rsienanets <- function(model_5) {
+   n <- dim(model_5$f$Data1$depvars[[1]][, , 1])[1]
+   sims <- foreach(i = 1:length(model_5$sims)) %dopar% {
+     edges <- model_5$sims[[i]][[1]][[1]][[1]]
+     # create empty adjacency matrix
+     adj <- matrix(0, n, n)
+     # put edge values in desired places
+     adj[edges[, 1:2]] <- edges[, 3]
+     adj
+   }
+   return(sims)
+ }
+```
+
+```{r, eval = FALSE}
+packages = c("RsienaTwoStep", "RSiena", "ggplot2", "tidyverse", "kableExtra")
+
+fpackage.check(packages)
+```
+```{r, eval = FALSE}
+nets <- ts_rsienanets(model_5)
+
+beh <- list()
+for (i in 1:1000) {
+beh[[i]] <- behaviorExtraction(i, model_5$f, model_5$sims, period=1, groupName="mydata",
+  varName="civic engagement")
+}
+
+MoranI <- NA
+
+View(model_5)
+
+# Couldnt get it to work
+#for (i in 1:1000) {
+# MoranI[i] <- sna::nacf(nets[[i]], beh[[i]], type = "moran", neighborhood.type = "out", demean = TRUE)[2]
+# }
+
+#and the target in original data
+target <- sna::nacf(mydata, s50a[,2], type = "moran", neighborhood.type = "out", demean = TRUE)[2]
+```

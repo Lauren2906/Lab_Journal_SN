@@ -793,10 +793,6 @@ myeff_obs <- setEffect(myeff_obs, avAlt, interaction1 = "nety", name = "behy", i
 myeff_obs <- setEffect(myeff_obs, avAltDist2, interaction1 = "nety", name = "behy", initialValue = model_5$theta[which(model_5$effects$shortName == "avAltDist2")])
 ```
 
-<br>
-
-### Selection effect
-
 ```{r}
 myeff_obs$fix[myeff_obs$include == TRUE] <- TRUE
 myeff_no <- myeff_high <- myeff_obs
